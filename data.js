@@ -1,0 +1,23 @@
+// Replace these sample records with real details. Prices are in Indian rupees.
+// Categories must match a label in foodCategories; types must match placeTypes.
+const foodCategories = [
+  { name: 'Gujarati Food', icon: '🥘' }, { name: 'South Indian', icon: '🥞' },
+  { name: 'Punjabi', icon: '🍛' }, { name: 'Chinese', icon: '🥡' },
+  { name: 'Pizza', icon: '🍕' }, { name: 'Burger', icon: '🍔' },
+  { name: 'Street Food', icon: '🌮' }, { name: 'Cafe & Bakery', icon: '☕' },
+  { name: 'Fast Food', icon: '🍟' }, { name: 'Desserts', icon: '🍨' }
+];
+const placeTypes = [
+  { name: 'Restaurants', icon: '♧', description: 'A table full of possibilities' },
+  { name: 'Cafes', icon: '☕', description: 'Coffee, conversations & more' },
+  { name: 'Street Food / Laris', icon: '♨', description: 'Small stalls, big flavours' },
+  { name: 'Food Trucks', icon: '🚚', description: 'Fresh flavours on wheels' },
+  { name: 'Fast Food', icon: '🍔', description: 'Quick bites, happy days' },
+  { name: 'Family Dining', icon: '♧', description: 'Good food, together' }
+];
+const restaurants = [
+  { id: 'sainath-nasta-centre', name: 'Sainath Nasta Centre', isSample: false, category: 'Street Food', categories: ['Street Food', 'Fast Food'], types: ['Street Food / Laris', 'Fast Food'], area: 'Surat · Address coming soon', description: 'Vada pav, cheese vada pav, pakoda and a cup of tea.', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80', imageAlt: 'Representative street food photo, not the actual stall', menu: [ { section: 'Snacks', name: 'Vada Pav', description: '', price: 30 }, { section: 'Snacks', name: 'Cheese Vada Pav', description: '', price: 50 }, { section: 'Snacks', name: 'Pakoda', description: '', price: 30 }, { section: 'Tea', name: 'Cutting Tea', description: '', price: 10 }, { section: 'Tea', name: 'Full Tea', description: '', price: 20 } ] },
+  { id: 'surati-kitchen', name: 'The Surati Kitchen', category: 'Gujarati Food', categories: ['Gujarati Food', 'Punjabi', 'South Indian'], types: ['Restaurants', 'Family Dining'], area: 'Adajan, Surat', description: 'Comforting thalis, homestyle curries, and a little taste of tradition.', image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80', imageAlt: 'Indian meal with curries and breads', menu: [ { section: 'Signature plates', name: 'Gujarati Thali', description: 'Rotli, dal, rice, seasonal shaak and a sweet.', price: 220 }, { section: 'Signature plates', name: 'Paneer Butter Masala', description: 'Paneer in a creamy tomato gravy with two rotis.', price: 240 }, { section: 'Breakfast favourites', name: 'Masala Dosa', description: 'Crisp dosa with potato filling, sambar and chutney.', price: 120 } ] },
+  { id: 'crumb-cup', name: 'Crumb & Cup Café', category: 'Cafe & Bakery', categories: ['Cafe & Bakery', 'Pizza', 'Burger', 'Desserts'], types: ['Cafes', 'Fast Food'], area: 'Vesu, Surat', description: 'Freshly brewed coffee, oven-fresh bites, and your favourite corner.', image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80', imageAlt: 'Warm cafe interior with a coffee counter and seating', menu: [ { section: 'From the oven', name: 'Margherita Pizza', description: 'Tomato, mozzarella and fresh basil.', price: 249 }, { section: 'From the oven', name: 'Garden Veggie Burger', description: 'Crisp vegetable patty, lettuce and house sauce.', price: 159 }, { section: 'Coffee & treats', name: 'Cappuccino', description: 'Espresso topped with steamed milk.', price: 130 }, { section: 'Coffee & treats', name: 'Chocolate Brownie', description: 'Warm chocolate brownie with vanilla ice cream.', price: 160 } ] },
+  { id: 'gully-bites', name: 'Gully Bites', category: 'Street Food', categories: ['Street Food', 'Fast Food', 'Chinese'], types: ['Street Food / Laris', 'Food Trucks', 'Fast Food'], area: 'Piplod, Surat', description: 'A food truck serving street-side favourites, sizzling snacks, and full-on Surati flavour.', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80', imageAlt: 'Golden samosas served with chutney', menu: [ { section: 'Street favourites', name: 'Cheese Locho', description: 'Steamed gram flour snack with cheese and chutney.', price: 90 }, { section: 'Street favourites', name: 'Pav Bhaji', description: 'Spiced vegetable mash with buttery pav.', price: 120 }, { section: 'Street favourites', name: 'Samosa Chaat', description: 'Crisp samosa with chickpeas and tangy chutneys.', price: 80 }, { section: 'From the wok', name: 'Veg Hakka Noodles', description: 'Wok-tossed noodles with crunchy vegetables.', price: 140 } ] }
+];

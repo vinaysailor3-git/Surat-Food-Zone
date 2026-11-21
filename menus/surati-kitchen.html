@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Surati Kitchen | Gujarati Food Menu</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 14px 110px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+    header {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 22px 18px;
+      margin-bottom: 22px;
+    }
+    header h1 { margin: 0 0 6px; font-size: 28px; }
+    header p { margin: 0; color: #666; font-size: 14px; }
+    h2 { font-size: 19px; margin: 22px 0 12px; }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 13px 14px;
+      margin-bottom: 9px;
+    }
+    .item-name { font-weight: 600; font-size: 14px; }
+    .item-price { color: #666; font-size: 13px; margin-top: 5px; }
+    .quantity { display: flex; align-items: center; gap: 10px; }
+    .quantity button {
+      width: 30px; height: 30px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      background: #fafafa;
+      font-size: 19px;
+      cursor: pointer;
+    }
+    .quantity button:hover { background: #eee; }
+    .quantity span { min-width: 16px; text-align: center; font-weight: 600; }
+    .order-box {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    #order-list { padding-left: 20px; margin: 8px 0 14px; }
+    #order-list li { margin: 7px 0; font-size: 14px; }
+    .total-row {
+      display: flex; justify-content: space-between;
+      border-top: 1px solid #eee; padding-top: 13px;
+      font-size: 17px; font-weight: 700;
+    }
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+      background: #fff; border-top: 1px solid #e5e5e5;
+    }
+    .bottom-inner {
+      max-width: 680px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .bottom-total small { display: block; color: #777; font-size: 12px; margin-bottom: 3px; }
+    .bottom-total strong { font-size: 19px; }
+    .order-actions { display: flex; gap: 8px; width: 100%; }
+    .order-actions button {
+      flex: 1; border: 0; border-radius: 8px; padding: 12px 10px;
+      color: white; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    #send-order { background: #168548; }
+    #copy-order { background: #374151; }
+    .order-actions button:disabled { opacity: .45; cursor: not-allowed; }
+    .hint { color: #777; font-size: 12px; margin-top: 12px; }
+    #copy-order { background: #374151; }
+    .image-modal { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.65); padding:16px; overflow:auto; }
+    .image-modal.open { display:flex; align-items:center; justify-content:center; }
+    .modal-card { background:#fff; width:min(100%,520px); border-radius:14px; padding:16px; max-height:95vh; overflow:auto; }
+    .modal-card h3 { margin:0 0 12px; }
+    #order-image-preview { display:block; max-width:100%; height:auto; border:1px solid #eee; border-radius:10px; margin:0 auto 12px; }
+    .image-modal-actions { display:flex; gap:8px; }
+    .image-modal-actions button { flex:1; border:0; border-radius:8px; padding:12px; font-weight:700; color:#fff; cursor:pointer; }
+    #share-order-image { background:#168548; }
+    #download-order-image { background:#374151; }
+    #close-image-modal { width:100%; margin-top:8px; border:1px solid #ddd; border-radius:8px; padding:10px; background:#fff; cursor:pointer; }
+    @media (max-width:380px) { .image-modal-actions button { padding:10px 6px; font-size:12px; } }
+    .pay-now { display: inline-flex; margin-top: 10px; padding: 12px 16px; border-radius: 8px; background: #1769aa; color: #fff; text-decoration: none; font-weight: 700; pointer-events: none; opacity: .45; }
+    .pay-now.enabled { pointer-events: auto; opacity: 1; }
+    @media (max-width: 380px) {
+      header h1 { font-size: 24px; }
+      .menu-item { padding: 11px; }
+      .order-actions { gap: 6px; }
+      .order-actions button { padding: 11px 7px; font-size: 12px; }
+    }
+  
+    :root { --gradient: linear-gradient(115deg,#cc4509,#c9252d); }
+    body { background: linear-gradient(115deg,#fffaf6,#fff7f8); font-size:16px; }
+    header { background:var(--gradient); color:white; border:0; margin-top:18px; }
+    header p, header .menu-note { color:white; line-height:1.6; }
+    header .menu-note { font-size:13px; margin-top:12px; }
+    .back-link { color:#ad2530; font-size:14px; }
+    .item-name { font-size:16px; } .item-price { font-size:14px; }
+    .quantity button { width:40px; height:40px; }
+    #copy-order, #share-order-image, #download-order-image { background:var(--gradient); }
+    button:focus-visible, a:focus-visible { outline:3px solid #c9252d; outline-offset:3px; }
+    .image-modal { border:0; background:white; padding:0; width:min(520px,calc(100% - 32px)); height:fit-content; max-height:90vh; border-radius:14px; }
+    .image-modal[open] { display:block; }
+    .image-modal::backdrop { background:#0009; }
+    .modal-card { max-height:none; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .order-actions { width:auto; flex:1; }
+    @media(max-width:480px) { .bottom-inner { flex-wrap:wrap; } .bottom-total { width:100%; display:flex; justify-content:space-between; align-items:center; } body { padding-bottom:160px; } }
+    </style>
+</head>
+<body>
+  <main class="container"><a class="back-link" href="../index.html#restaurants">Back to Surat Food Zone</a>
+    <header>
+      <h1>The Surati Kitchen</h1>
+      <p>Gujarati Food Menu · Select your favourite items</p><p class="menu-note">Sample restaurant and illustrative menu prices.</p>
+    </header>
+
+    <h2>Gujarati Food Menu</h2>
+    <section id="menu" aria-label="Menu items"></section>
+
+    <h2>Your Order</h2>
+    <section class="order-box">
+      <ul id="order-list"><li>No items selected yet.</li></ul>
+      <div class="total-row">
+        <span>Total</span>
+        <span>₹<span id="total">0</span></span>
+      </div>
+      <p class="hint">Check your selection, then open WhatsApp to review and send your order. You can also save or share it as an image.</p>
+
+    </section>
+  </main>
+
+  <div class="bottom-bar">
+    <div class="bottom-inner">
+      <div class="bottom-total">
+        <small id="item-count">0 items selected</small>
+        <strong>₹<span id="bottom-total">0</span></strong>
+      </div>
+      <div class="order-actions">
+        <button id="send-order" type="button" disabled>Place Order on WhatsApp</button>
+        <button id="copy-order" type="button" disabled>Generate Order Image</button>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="image-modal" id="image-modal" aria-labelledby="image-modal-title">
+    <div class="modal-card">
+      <h3 id="image-modal-title">Order Image</h3>
+      <img id="order-image-preview" alt="Generated order summary image preview">
+      <div class="image-modal-actions">
+        <button id="share-order-image" type="button">Send Image</button>
+        <button id="download-order-image" type="button">Download Image</button>
+      </div>
+      <button id="close-image-modal" type="button">Close</button>
+    </div>
+  </dialog>
+
+
+  <script>
+    // Sample menu and prices. Replace with the restaurant's actual menu.
+    const menuItems = [{"name":"Gujarati Thali","price":220},{"name":"Paneer Butter Masala","price":240},{"name":"Masala Dosa","price":120}];
+
+    const quantities = menuItems.map(() => 0);
+    const menu = document.getElementById("menu");
+
+    menuItems.forEach((item, index) => {
+      const row = document.createElement("article");
+      row.className = "menu-item";
+      row.innerHTML = `
+        <div>
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">₹${item.price}</div>
+        </div>
+        <div class="quantity">
+          <button type="button" aria-label="Decrease ${item.name}">−</button>
+          <span>0</span>
+          <button type="button" aria-label="Increase ${item.name}">+</button>
+        </div>
+      `;
+      const buttons = row.querySelectorAll("button");
+      const count = row.querySelector(".quantity span");
+
+      buttons[0].addEventListener("click", () => {
+        quantities[index] = Math.max(0, quantities[index] - 1);
+        count.textContent = quantities[index];
+        updateOrder();
+      });
+      buttons[1].addEventListener("click", () => {
+        quantities[index] += 1;
+        count.textContent = quantities[index];
+        updateOrder();
+      });
+      menu.appendChild(row);
+    });
+
+    function getSelectedItems() {
+      return menuItems
+        .map((item, index) => ({ ...item, qty: quantities[index] }))
+        .filter(item => item.qty > 0);
+    }
+
+    function updateOrder() {
+      const selected = getSelectedItems();
+      const total = selected.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const list = document.getElementById("order-list");
+      list.innerHTML = "";
+
+      if (selected.length === 0) {
+        list.innerHTML = "<li>No items selected yet.</li>";
+      } else {
+        selected.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} × ${item.qty} = ₹${item.price * item.qty}`;
+          list.appendChild(li);
+        });
+      }
+
+      document.getElementById("total").textContent = total;
+      document.getElementById("bottom-total").textContent = total;
+      const totalQty = selected.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById("item-count").textContent =
+        `${totalQty} item${totalQty === 1 ? "" : "s"} selected`;
+      document.getElementById("send-order").disabled = selected.length === 0;
+      document.getElementById("copy-order").disabled = selected.length === 0;
+    }
+
+    function buildOrderMessage() {
+      const selected = getSelectedItems();
+      if (!selected.length) return "";
+      const total = selected.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const lines = selected.map(item =>
+        `${item.name} x ${item.qty} = Rs. ${item.price * item.qty}`
+      );
+      return [
+        "Hello The Surati Kitchen, I would like to place an order:",
+        "",
+        ...lines,
+        "",
+        `Total: Rs. ${total}`
+      ].join("\n");
+    }
+
+    document.getElementById("send-order").addEventListener("click", () => {
+      const message = buildOrderMessage();
+      if (!message) return;
+      const phoneNumber = "919106197737"; // Replace with restaurant WhatsApp number
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    let generatedOrderBlob = null;
+    let generatedOrderFile = null;
+
+    function createOrderImage() {
+      const selected = getSelectedItems();
+      if (!selected.length) return null;
+      const total = selected.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const canvas = document.createElement("canvas");
+      const width = 900;
+      const padding = 56;
+      const rowHeight = 84;
+      const headerHeight = 210;
+      const footerHeight = 150;
+      canvas.width = width;
+      canvas.height = headerHeight + selected.length * rowHeight + footerHeight + padding * 2;
+      const ctx = canvas.getContext("2d");
+
+      // Clean order-card design; intentionally no GST, date, or time.
+      ctx.fillStyle = "#fffaf4";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#b94719";
+      ctx.fillRect(0, 0, width, 18);
+      ctx.fillStyle = "#252525";
+      ctx.font = "bold 40px Arial";
+      ctx.fillText("THE SURATI KITCHEN", padding, 105);
+      ctx.fillStyle = "#777";
+      ctx.font = "30px Arial";
+      ctx.fillText("ORDER SUMMARY", padding, 155);
+      ctx.strokeStyle = "#e4d8cb";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(padding, headerHeight - 15);
+      ctx.lineTo(width - padding, headerHeight - 15);
+      ctx.stroke();
+
+      let y = headerHeight + 35;
+      selected.forEach(item => {
+        ctx.fillStyle = "#242424";
+        ctx.font = "bold 30px Arial";
+        ctx.fillText(item.name, padding, y);
+        ctx.fillStyle = "#666";
+        ctx.font = "28px Arial";
+        ctx.fillText(`${item.qty} × ₹${item.price}`, padding, y + 36);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#242424";
+        ctx.font = "bold 30px Arial";
+        ctx.fillText(`₹${item.price * item.qty}`, width - padding, y + 12);
+        ctx.textAlign = "left";
+        y += rowHeight;
+      });
+
+      y += 18;
+      ctx.strokeStyle = "#e4d8cb";
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(width - padding, y);
+      ctx.stroke();
+      y += 70;
+      ctx.fillStyle = "#252525";
+      ctx.font = "bold 42px Arial";
+      ctx.fillText("TOTAL", padding, y);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#b94719";
+      ctx.font = "bold 48px Arial";
+      ctx.fillText(`₹${total}`, width - padding, y);
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#888";
+      ctx.font = "24px Arial";
+      ctx.fillText("Thank you!", padding, y + 65);
+
+      return canvas;
+    }
+
+
+    document.getElementById("copy-order").addEventListener("click", () => {
+      const canvas = createOrderImage();
+      if (!canvas) return;
+      const preview = document.getElementById("order-image-preview");
+      preview.src = canvas.toDataURL("image/png");
+      generatedOrderBlob = null;
+      generatedOrderFile = null;
+      document.getElementById("share-order-image").disabled = true;
+      document.getElementById("download-order-image").disabled = true;
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        generatedOrderBlob = blob;
+        document.getElementById("share-order-image").disabled = false;
+        document.getElementById("download-order-image").disabled = false;
+        generatedOrderFile = new File([blob], "surati-kitchen-order.png", { type: "image/png" });
+      }, "image/png");
+      document.getElementById("image-modal").showModal();
+    });
+
+    document.getElementById("share-order-image").addEventListener("click", async () => {
+      if (!generatedOrderFile || !generatedOrderBlob) return;
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [generatedOrderFile] }) && navigator.share) {
+          await navigator.share({ files: [generatedOrderFile], title: "The Surati Kitchen Order" });
+        } else {
+          alert("Image sharing is not supported in this browser. Please download the image and attach it manually.");
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") alert("Sharing failed. Please download the image and share it manually.");
+      }
+    });
+
+    document.getElementById("download-order-image").addEventListener("click", () => {
+      if (!generatedOrderBlob) return;
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(generatedOrderBlob);
+      link.download = "surati-kitchen-order.png";
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    });
+
+    document.getElementById("close-image-modal").addEventListener("click", () => {
+      document.getElementById("image-modal").close();
+    });
+    document.getElementById("image-modal").addEventListener("click", (event) => {
+      if (event.target.id === "image-modal") event.currentTarget.close();
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover your next delicious stop in Surat. Explore food categories, sample restaurants, cafes and street food menus.">
+  <meta name="theme-color" content="#ef511d"><title>Surat Food Zone — A city full of flavour</title>
+  <link rel="stylesheet" href="styles.css"><script src="data.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+  <header class="header"><div class="container header-inner">
+    <a class="brand" href="#home" aria-label="Surat Food Zone home"><span class="brand-icon">sf<span>z</span></span><span>Surat<span class="brand-second">Food Zone<span class="orange">.</span></span></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Toggle navigation">☰</button>
+    <nav id="navigation" aria-label="Main navigation"><a href="#home">Home</a><a href="#categories">Explore Food</a><a href="#restaurants">Restaurants</a><a href="#search" class="nav-search">⌕ <span>Search</span></a></nav>
+    <span class="city">⌖ &nbsp; Surat, Gujarat</span>
+  </div></header>
+  <main>
+    <section class="hero container" id="home">
+      <div class="hero-copy"><p class="eyebrow"><span></span> A CITY FULL OF FLAVOUR</p><h1>Discover the<br>Best Food<br>in <span>Surat.</span></h1><p class="hero-description">Explore restaurants, cafes, food trucks, street food, and your favourite food spots in Surat.</p>
+        <form class="search-form" id="search" role="search"><label class="sr-only" for="search-input">Search restaurants, food, or dishes</label><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Search restaurants, food, or dishes..." autocomplete="off"><button class="button" type="submit">Explore</button></form>
+        <div class="popular">Popular cravings: <button data-query="Gujarati">Gujarati</button><button data-query="Pizza">Pizza</button><button data-query="Street Food">Street food</button></div>
+      </div>
+      <div class="hero-visual"><img class="hero-photo" src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=85" alt="A colourful spread of Indian curries, rice and breads" fetchpriority="high"><div class="photo-shade"></div><span class="photo-label">GOOD FOOD. GREAT CITY.</span><div class="hero-note"><span class="note-icon">♡</span><div><strong>A little local. A lot delicious.</strong><span>Your next favourite is right here.</span></div></div></div>
+    </section>
+    <section class="categories section container" id="categories"><div class="section-heading"><div><p class="eyebrow">FOLLOW YOUR CRAVINGS</p><h2>What’s on your mind?</h2></div><p>Something delicious for every mood.</p></div><div class="category-grid" id="category-grid"></div></section>
+    <section class="featured section" id="restaurants"><div class="container"><div class="section-heading"><div><p class="eyebrow">YOUR NEXT FOOD STOP</p><h2>Featured restaurants</h2></div><span class="sample-pill">Local spots & samples</span></div><div class="results-toolbar"><p id="result-count" role="status" aria-live="polite"></p><button id="clear-filters" class="text-button" hidden>Clear filters</button></div><div class="restaurant-grid" id="restaurant-grid"></div><div id="empty-state" class="empty-state" hidden><span>⌕</span><h3>No matches just yet</h3><p>Try another craving or browse all food places.</p><button class="button" id="reset-search">Show all restaurants</button></div></div></section>
+    <section class="explore section container" id="explore"><div class="section-heading"><div><p class="eyebrow">HOW DO YOU LIKE TO DINE?</p><h2>Explore food in Surat</h2></div><p>From a quick bite to a long catch-up.</p></div><div id="place-types" class="place-grid"></div></section>
+    <section class="local-banner container"><div class="banner-icon">♡</div><div><p class="eyebrow">MADE FOR THE LOVE OF LOCAL</p><h2>A taste of Surat, one discovery at a time.</h2><p>Big flavours. Little streets. Endless reasons to explore.</p></div><a class="button" href="#categories">Find your next bite</a></section>
+  </main>
+  <footer><div class="container footer-grid"><div><a class="brand" href="#home"><span class="brand-icon">sf<span>z</span></span><span>Surat<span class="brand-second">Food Zone.</span></span></a><p>Your guide to the flavours of Surat.<br>Find a place. Pick a dish. Make a memory.</p></div><div><h3>Explore</h3><a href="#home">Home</a><a href="#categories">Explore Food</a><a href="#restaurants">Restaurants</a></div><div><h3>Get in touch</h3><p>Surat, Gujarat, India</p><p>Contact details coming soon.</p></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Surat Food Zone</span><span>Prototype · Sample listings are labeled. Photos are illustrative.</span></div></footer>
+  <dialog id="menu-dialog" aria-labelledby="menu-title"><button class="close-dialog" aria-label="Close menu">×</button><div id="menu-content"></div></dialog>
+</body>
+</html>

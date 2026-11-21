@@ -1,0 +1,10 @@
+# Local backups of the previous hosting project (never publish).
+.local-backup/
+.openai/
+*.tar.gz
+
+# Generated deployment output and local dependencies.
+_site/
+node_modules/
+.DS_Store
+Thumbs.db
