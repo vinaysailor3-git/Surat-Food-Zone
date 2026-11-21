@@ -66,3 +66,7 @@ depends on browser support, with download as the fallback. No payments are taken
 
 This change prepares deployment files; it does not push the repository, enable
 GitHub Pages remotely, or remove an already published site from another host.
+
+## Main website logo
+Replace the root logo.png with your new PNG (keep the same filename). The homepage header and footer use this file, and the GitHub Pages build copies it automatically. Commit and push the replacement to update it online.
+

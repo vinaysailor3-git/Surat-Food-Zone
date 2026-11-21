@@ -14,7 +14,7 @@ if (fs.existsSync(output) && fs.lstatSync(output).isSymbolicLink()) {
 }
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
-for (const file of ['index.html', 'styles.css', 'app.js', 'data.js', '.nojekyll']) {
+for (const file of ['index.html', 'styles.css', 'app.js', 'data.js', 'logo.png', '.nojekyll']) {
   fs.copyFileSync(path.join(root, file), path.join(output, file));
 }
 const restaurants = vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8') + '\nrestaurants');

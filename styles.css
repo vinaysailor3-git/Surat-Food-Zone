@@ -107,3 +107,7 @@ dialog { max-height:85dvh; overflow:auto; }
   .hero-note .note-icon { display:none; }
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Replace root logo.png to update the homepage header and footer logo. */
+.brand-logo { width:64px; height:64px; object-fit:contain; flex-shrink:0; }
+@media(max-width:480px) { .brand-logo { width:52px; height:52px; } }
