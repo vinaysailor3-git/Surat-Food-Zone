@@ -45,8 +45,7 @@ All menus use `site-config.json`'s `defaultWhatsAppNumber` (currently `919106197
 Use international format with digits only, without `+` or spaces.
 
 After editing, run `node scripts/build-site.cjs` to regenerate menus and validate
-locally. GitHub Actions also does this on every push. Do not edit generated menu
-HTML directly; change `data.js` or `templates/menu.html` instead.
+locally. GitHub Actions also does this on every push. For generated menus, edit data.js or templates/menu.html. Sainath is currently a hand-edited exception: edit menus/sainath-nasta-centre.html directly; the build preserves it.
 
 ## Local preview
 

@@ -10,6 +10,8 @@ const template = fs.readFileSync(path.join(root, 'templates/menu.html'), 'utf8')
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 fs.mkdirSync(path.join(root, 'menus'), { recursive: true });
 for (const restaurant of restaurants) {
+  // Sainath is being edited directly while its individual design is finalized.
+  if (restaurant.id === 'sainath-nasta-centre' && fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) continue;
   const items = JSON.stringify(restaurant.menu.map(({ name, price }) => ({ name, price }))).replace(/</g, '\\u003c');
   let html = template.replace(/const menuItems = \[[\s\S]*?\];/, `const menuItems = ${items};`)
     .replaceAll('City Tadka', escape(restaurant.name))
@@ -50,6 +52,7 @@ for (const restaurant of restaurants) {
     .order-actions { width:auto; flex:1; }
     @media(max-width:480px) { .bottom-inner { flex-wrap:wrap; } .bottom-total { width:100%; display:flex; justify-content:space-between; align-items:center; } body { padding-bottom:160px; } }
     </style>`);
+  html = html.replace('</style>', fs.readFileSync(path.join(root, 'templates/menu-responsive.css'), 'utf8') + '\n</style>');
   fs.writeFileSync(path.join(root, `menus/${restaurant.id}.html`), html);
 }
 console.log(`Generated ${restaurants.length} individual menu pages.`);
