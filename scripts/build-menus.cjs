@@ -10,6 +10,16 @@ const template = fs.readFileSync(path.join(root, 'templates/menu.html'), 'utf8')
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 fs.mkdirSync(path.join(root, 'menus'), { recursive: true });
 for (const restaurant of restaurants) {
+  // Preserve supplied standalone restaurant pages.
+  if (['zaam-chinins', 'quite-momo'].includes(restaurant.id)) {
+    if (!fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) throw new Error(`Missing landing page: ${restaurant.id}`);
+    continue;
+  }
+  // Suzu has an independent presentation page, without ordering controls.
+  if (restaurant.id === 'suzu-chinese') {
+    if (!fs.existsSync(path.join(root, 'menus', 'suzu-chinese.html'))) throw new Error('Missing Suzu landing page');
+    continue;
+  }
   // Sainath is being edited directly while its individual design is finalized.
   if (restaurant.id === 'sainath-nasta-centre' && fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) continue;
   const items = JSON.stringify(restaurant.menu.map(({ name, price }) => ({ name, price }))).replace(/</g, '\\u003c');

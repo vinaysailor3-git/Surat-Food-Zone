@@ -23,8 +23,12 @@ for (const restaurant of restaurants) {
   const file = `${restaurant.id}.html`;
   const html = fs.readFileSync(path.join(root, 'menus', file), 'utf8');
   const script = html.match(/<script>([\s\S]*?)<\/script>/);
-  if (!script) throw new Error(`Missing menu script: ${file}`);
-  new vm.Script(script[1], { filename: file });
+  if (restaurant.id === 'suzu-chinese') {
+    const assets = path.join(root, 'menus', 'suzu-chinese');
+    new vm.Script(fs.readFileSync(path.join(assets, 'script.js'), 'utf8'), { filename: 'suzu-chinese/script.js' });
+    fs.cpSync(assets, path.join(output, 'menus', 'suzu-chinese'), { recursive: true });
+  } else if (!script) throw new Error(`Missing menu script: ${file}`);
+  if (script) new vm.Script(script[1], { filename: file });
   fs.writeFileSync(path.join(output, 'menus', file), html);
 }
 for (const file of ['app.js', 'data.js']) {

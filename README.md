@@ -70,3 +70,28 @@ GitHub Pages remotely, or remove an already published site from another host.
 ## Main website logo
 Replace the root logo.png with your new PNG (keep the same filename). The homepage header and footer use this file, and the GitHub Pages build copies it automatically. Commit and push the replacement to update it online.
 
+
+## Suzu Chinese landing page
+
+`menus/suzu-chinese.html` is the independent, presentation-only Suzu Chinese demo.
+Its CSS and JavaScript live in `menus/suzu-chinese/`. The homepage listing lives
+in `data.js`, including the full menu for search. Keep that data and the page
+menu in sync when changing prices. The build preserves the custom page and
+copies its assets. No ordering or WhatsApp features are included on Suzu.
+All prices, contact details, hours and the address are fictional demo content.
+Food images are representative online photographs.
+
+## ZAAM CHININS
+
+`menus/zaam-chinins.html` is the supplied single-file landing page, with its
+branding changed to ZAAM CHININS. Edit this file directly; the menu build
+preserves it. Its searchable homepage listing and menu data are in `data.js`.
+Keep the listing menu data in sync with the page when changing dishes or prices.
+
+## Quite Momo and featured restaurants
+
+`menus/quite-momo.html` is the supplied standalone QUITE MOMO page, preserved
+by the build. Edit its inline MENU data directly and keep `data.js` in sync.
+Set `featured: true` on a restaurant in `data.js` to show it in the homepage
+spotlight below the hero. Quite Momo, ZAAM CHININS and Suzu Chinese are featured;
+all listings remain available in the searchable restaurant section.

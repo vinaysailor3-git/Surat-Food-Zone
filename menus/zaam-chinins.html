@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZAAM CHININS | Street-Style Chinese in Surat</title>
+<meta name="description" content="ZAAM CHININS – Indo-Chinese street food in Surat, Gujarat. Noodles, Manchurian, fried rice and paneer specials. (Demo website)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141414; --char:#1c1c1c; --char2:#262626; --cream:#f7efe2; --cream2:#efe4d1;
+  --accent:#ff4b1f; --accent2:#e23a10; --green:#1f9d4c; --muted:#8a8378;
+  --hh:64px; --r:14px;
+  --display:'Anton','Impact',sans-serif; --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hh)}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.container{width:min(1180px,100% - 40px);margin-inline:auto}
+.narrow{max-width:760px}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;height:var(--hh);display:flex;align-items:center;background:rgba(20,20,20,.92);backdrop-filter:blur(10px);color:var(--cream);transition:height .3s,box-shadow .3s,background .3s}
+.site-header.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.35);background:rgba(20,20,20,.98)}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--display);font-size:1.6rem;letter-spacing:.06em;line-height:1;display:inline-flex;align-items:baseline;gap:.35em}
+.logo span{color:var(--accent);font-size:.8em}
+.main-nav{display:flex;gap:28px}
+.main-nav a{font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 0;position:relative;opacity:.85;transition:opacity .2s}
+.main-nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .25s}
+.main-nav a:hover,.main-nav a.active{opacity:1}
+.main-nav a:hover::after,.main-nav a.active::after{width:100%}
+.nav-toggle{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.nav-toggle span{width:24px;height:2px;background:var(--cream);transition:transform .3s,opacity .3s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;border-radius:999px;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border:2px solid transparent;transition:transform .2s,background .2s,color .2s,border-color .2s,box-shadow .2s;cursor:pointer}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(255,75,31,.35)}
+.btn-primary:hover{background:var(--accent2);box-shadow:0 12px 28px rgba(255,75,31,.5)}
+.btn-ghost{border-color:rgba(247,239,226,.6);color:var(--cream)}
+.btn-ghost:hover{background:var(--cream);color:var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+
+/* Image placeholders: illustrated fallback sits under the photo */
+.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#3a1d12,#7a2a12 55%,#c2410c);color:rgba(255,230,200,.22)}
+.ph-manchurian{background:linear-gradient(135deg,#2a1710,#5a2410 60%,#8b3a14)}
+.ph-paneer{background:linear-gradient(135deg,#3a1208,#a3260f 70%,#ff4b1f)}
+.ph-rice{background:linear-gradient(135deg,#3a2a10,#8a6320 60%,#d9a441)}
+.ph-art{position:absolute;inset:0;margin:auto;width:min(60%,320px);height:min(60%,320px)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Hero */
+.hero{position:relative;min-height:calc(100svh - var(--hh));display:flex;align-items:center;color:var(--cream);background:var(--ink);overflow:hidden;padding:60px 0 110px}
+.hero-bg{position:absolute;inset:0;transform:scale(1.05);animation:slowzoom 18s ease-out forwards}
+@keyframes slowzoom{to{transform:scale(1)}}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,20,20,.92) 0%,rgba(20,20,20,.65) 55%,rgba(20,20,20,.3) 100%),linear-gradient(0deg,rgba(20,20,20,.9),transparent 40%)}
+.hero-content{position:relative;z-index:2}
+.eyebrow{font-weight:700;letter-spacing:.22em;font-size:.78rem;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,13vw,9rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:clamp(1.05rem,2.6vw,1.45rem);margin-top:22px;max-width:520px;font-weight:500}
+.hero-tag{margin-top:8px;opacity:.7;font-size:.95rem}
+.hero-loc{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:.9rem;opacity:.85}
+.ticker{position:absolute;bottom:0;left:0;right:0;background:var(--accent);color:#fff;overflow:hidden;white-space:nowrap;z-index:3}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker span{font-family:var(--display);letter-spacing:.12em;padding:12px 26px;font-size:1.05rem}
+.ticker span::after{content:"\2605";margin-left:52px;opacity:.6}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Sections */
+.section{padding:clamp(60px,9vw,110px) 0}
+.kicker{color:var(--accent);font-weight:700;letter-spacing:.2em;font-size:.78rem;text-transform:uppercase;margin-bottom:10px}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;letter-spacing:.01em}
+.lead{font-size:clamp(1.05rem,2.2vw,1.3rem);margin-top:22px;color:#3a352e}
+.intro{text-align:center}
+.intro .narrow{margin-inline:auto}
+.section-head{margin-bottom:34px}
+.demo-note{color:var(--muted);font-size:.85rem;margin-top:10px}
+
+/* Gallery */
+.gallery-section{padding-top:0}
+.gallery{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+.g{border-radius:18px;margin:0}
+.g img{transition:transform .6s}
+.g:hover img{transform:scale(1.06)}
+.g figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-family:var(--display);letter-spacing:.08em;text-transform:uppercase;font-size:1.2rem;z-index:2}
+.g-noodles{grid-column:span 2;grid-row:span 2}
+.g-rice{grid-column:span 2}
+
+/* Menu */
+.menu-section{background:var(--char);color:var(--cream)}
+.menu-section .demo-note{color:#9a9285}
+.cat-nav{position:sticky;top:var(--hh);z-index:40;background:rgba(28,28,28,.96);backdrop-filter:blur(8px);border-block:1px solid #333}
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-tab{flex:none;background:transparent;border:1.5px solid #444;color:var(--cream);padding:8px 18px;border-radius:999px;font:600 .78rem var(--body);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.cat-tab:hover{border-color:var(--accent)}
+.cat-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.legend{display:flex;align-items:center;gap:8px;font-size:.8rem;color:#9a9285;margin:26px 0 6px}
+.veg{display:inline-block;width:14px;height:14px;border:2px solid var(--green);border-radius:3px;position:relative;flex:none}
+.veg::after{content:"";position:absolute;inset:2px;border-radius:50%;background:var(--green)}
+.menu-cat{padding-top:34px;scroll-margin-top:calc(var(--hh) + 64px)}
+.menu-cat h3{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:16px;color:var(--cream)}
+.menu-cat h3::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+.menu-list{display:grid;grid-template-columns:1fr;column-gap:56px;margin-top:10px}
+.menu-item{display:flex;align-items:baseline;gap:10px;padding:13px 0;border-bottom:1px dashed #3d3d3d;transition:padding .2s,color .2s}
+.menu-item:hover{padding-left:8px;color:#fff}
+.menu-item .veg{transform:translateY(2px)}
+.menu-item .name{font-weight:500;font-size:1.02rem}
+.menu-item .dots{flex:1;border-bottom:2px dotted #4a4a4a;transform:translateY(-4px);min-width:16px}
+.menu-item .price{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* Location */
+.location{background:var(--cream)}
+.loc-grid{display:grid;gap:36px;align-items:center}
+.loc-grid>*{min-width:0}
+.loc-card{background:#fff;border-radius:var(--r);padding:28px;margin-top:22px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.loc-card h3{font-family:var(--display);font-weight:400;letter-spacing:.06em;font-size:1.6rem}
+.info-list{margin:16px 0 22px;display:grid;gap:14px}
+.info-list li{display:flex;gap:12px;align-items:flex-start}
+.info-list .ico{color:var(--accent);margin-top:2px}
+.fine{font-size:.78rem;color:var(--muted);margin-top:14px}
+.map-ph{position:relative;border-radius:18px;overflow:hidden;height:300px;width:100%;background:#262626}
+@media(min-width:700px){.map-ph{height:auto;min-height:340px}}
+.map-ph svg:first-child{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;left:46%;top:44%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;animation:bob 2.2s ease-in-out infinite}
+.pin svg{width:46px;height:46px;fill:var(--accent);filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.pin span{background:var(--cream);color:var(--ink);font:700 .7rem var(--body);letter-spacing:.08em;padding:4px 10px;border-radius:999px;white-space:nowrap}
+@keyframes bob{50%{transform:translate(-50%,-108%)}}
+.map-tag{position:absolute;right:12px;bottom:12px;font-size:.68rem;color:#aaa;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:999px}
+
+/* Contact */
+.contact{background:var(--cream2)}
+.contact-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+.c-card{background:var(--char);color:var(--cream);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;gap:4px;transition:transform .25s,background .25s}
+a.c-card:hover{transform:translateY(-5px);background:#000}
+.c-card .ico{width:30px;height:30px;color:var(--accent);margin-bottom:10px}
+.c-card h3{font-family:var(--display);font-weight:400;letter-spacing:.08em;font-size:1.3rem;text-transform:uppercase}
+.c-card p{font-weight:600}
+.c-card small{color:#8d867a;font-size:.72rem}
+
+/* Footer */
+.site-footer{background:var(--ink);color:var(--cream);padding:56px 0 24px}
+.foot-grid{display:grid;gap:30px}
+.foot-tag{margin-top:10px;opacity:.6;font-size:.92rem}
+.foot-nav{display:flex;flex-wrap:wrap;gap:10px 22px}
+.foot-nav a{font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.75;transition:opacity .2s,color .2s}
+.foot-nav a:hover{opacity:1;color:var(--accent)}
+.foot-contact{font-size:.92rem;opacity:.85;display:grid;gap:6px}
+.foot-contact a{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:600}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:40px;padding-top:20px;border-top:1px solid #2e2e2e;font-size:.75rem;opacity:.55}
+.attr{letter-spacing:.1em;text-transform:uppercase;font-size:.68rem}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.no-js .reveal{opacity:1;transform:none}
+
+/* Tablet+ */
+@media(min-width:700px){
+  .menu-list{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:repeat(4,1fr)}
+  .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:210px}
+  .g-noodles{grid-column:span 2;grid-row:span 2}
+  .g-manchurian,.g-paneer{grid-column:span 1;grid-row:span 1}
+  .g-rice{grid-column:span 2;grid-row:span 1}
+  .loc-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1.2fr 1fr 1.2fr}
+}
+
+/* Mobile nav */
+@media(max-width:780px){
+  .nav-toggle{display:flex}
+  .main-nav{position:absolute;top:var(--hh);left:0;right:0;flex-direction:column;gap:0;background:var(--ink);padding:8px 20px 18px;border-top:1px solid #2e2e2e;transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+  .main-nav.open{opacity:1;transform:none;pointer-events:auto}
+  .main-nav a{padding:14px 0;border-bottom:1px solid #2a2a2a;font-size:.95rem}
+  .main-nav a::after{display:none}
+  .main-nav a.active{color:var(--accent)}
+  .hero-shade{background:linear-gradient(0deg,rgba(20,20,20,.95),rgba(20,20,20,.55))}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Fallback food illustration (shown if a remote photo fails to load) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bowl" viewBox="0 0 200 200">
+    <path d="M100 30c10 14-8 22 0 36M80 36c8 10-6 18 0 28M120 36c8 10-6 18 0 28" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    <path d="M30 90h140c0 44-28 76-70 76S30 134 30 90z" fill="currentColor"/>
+    <path d="M46 90c10-16 24-22 34-14 8-12 26-12 34 0 10-10 28-4 40 14z" fill="currentColor" opacity=".55"/>
+    <rect x="70" y="170" width="60" height="8" rx="4" fill="currentColor" opacity=".6"/>
+    <path d="M150 40l-44 60M162 48l-44 60" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#home" class="logo" aria-label="ZAAM CHININS home">ZAAM<span>CHININS</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#location">Location</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg ph ph-noodles">
+    <svg class="ph-art"><use href="#bowl"/></svg>
+    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=1800&q=70" alt="Spicy Chinese noodles in a bowl" fetchpriority="high">
+  </div>
+  <div class="hero-shade"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">ZAAM CHININS &middot; Surat, Gujarat</p>
+    <h1>CRAVINGS<br>FOR <em>CHINESE?</em></h1>
+    <p class="hero-sub">Street-style Chinese flavours, freshly served in Surat.</p>
+    <p class="hero-tag">Hot wok. Bold sauces. Zero compromise.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#menu">Explore Menu</a>
+      <a class="btn btn-ghost" href="#location">Find Us</a>
+    </div>
+    <p class="hero-loc"><svg class="ico" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> Surat, Gujarat</p>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>NOODLES</span><span>MANCHURIAN</span><span>FRIED RICE</span><span>PANEER CHILLI</span><span>SCHEZWAN</span><span>HOT &amp; SOUR</span>
+      <span>NOODLES</span><span>MANCHURIAN</span><span>FRIED RICE</span><span>PANEER CHILLI</span><span>SCHEZWAN</span><span>HOT &amp; SOUR</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section intro" id="about">
+  <div class="container narrow reveal">
+    <p class="kicker">About Zaam</p>
+    <h2>A Little Chinese.<br>A Lot of Flavour.</h2>
+    <p class="lead">From spicy noodles to crispy starters and flavour-packed rice, enjoy your favourite Indo-Chinese street food made for every craving.</p>
+  </div>
+</section>
+
+<!-- FOOD HIGHLIGHTS -->
+<section class="section gallery-section" aria-label="Food highlights">
+  <div class="container">
+    <div class="gallery">
+      <figure class="g g-noodles ph ph-noodles reveal">
+        <svg class="ph-art"><use href="#bowl"/></svg>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1000&q=70" alt="Hakka noodles">
+        <figcaption>Noodles</figcaption>
+      </figure>
+      <figure class="g g-manchurian ph ph-manchurian reveal">
+        <svg class="ph-art"><use href="#bowl"/></svg>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=800&q=70" alt="Manchurian balls in sauce">
+        <figcaption>Manchurian</figcaption>
+      </figure>
+      <figure class="g g-paneer ph ph-paneer reveal">
+        <svg class="ph-art"><use href="#bowl"/></svg>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=70" alt="Paneer chilli">
+        <figcaption>Paneer Chilli</figcaption>
+      </figure>
+      <figure class="g g-rice ph ph-rice reveal">
+        <svg class="ph-art"><use href="#bowl"/></svg>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1000&q=70" alt="Veg fried rice">
+        <figcaption>Fried Rice</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section menu-section" id="menu">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">Our Menu</p>
+      <h2>Pick Your Craving</h2>
+      <p class="demo-note">Demo menu &amp; prices &ndash; sample content only.</p>
+    </div>
+  </div>
+  <div class="cat-nav" id="catNav">
+    <div class="container"><div class="cat-scroll" id="catTabs" role="tablist" aria-label="Menu categories"></div></div>
+  </div>
+  <div class="container">
+    <div class="legend"><span class="veg" aria-hidden="true"></span> Vegetarian</div>
+    <div id="menuRoot"></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section location" id="location">
+  <div class="container loc-grid">
+    <div class="loc-info reveal">
+      <p class="kicker">Find Us</p>
+      <h2>Come Hungry.</h2>
+      <div class="loc-card">
+        <h3>ZAAM CHININS</h3>
+        <ul class="info-list">
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Near Vesu Main Road, Vesu,<br>Surat, Gujarat</span></li>
+          <li><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Open daily &middot; 5:00 PM &ndash; 11:00 PM</span></li>
+        </ul>
+        <a class="btn btn-primary" href="https://maps.google.com/?q=Vesu+Surat" target="_blank" rel="noopener">Google Maps</a>
+        <p class="fine">Sample address &ndash; fictional demo data.</p>
+      </div>
+    </div>
+    <div class="map-ph reveal" role="img" aria-label="Placeholder map showing the outlet location">
+      <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="320" fill="#262626"/>
+        <g stroke="#3a3a3a" stroke-width="10" fill="none" stroke-linecap="round">
+          <path d="M-10 90L410 60"/><path d="M-10 230L410 250"/><path d="M90 -10L120 330"/><path d="M290 -10L260 330"/><path d="M-10 160L410 150" stroke-width="16"/>
+        </g>
+        <g fill="#2f2f2f"><rect x="130" y="100" width="70" height="40" rx="6"/><rect x="300" y="170" width="70" height="50" rx="6"/><rect x="20" y="170" width="60" height="50" rx="6"/><rect x="140" y="180" width="100" height="40" rx="6"/></g>
+        <text x="20" y="150" fill="#6b6b6b" font-size="11" font-family="Inter,sans-serif" letter-spacing="2">VESU MAIN ROAD</text>
+      </svg>
+      <div class="pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.6" fill="#fff"/></svg><span>ZAAM CHININS</span></div>
+      <span class="map-tag">Placeholder map</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="kicker">Contact</p>
+      <h2>Say Hello</h2>
+    </div>
+    <div class="contact-grid">
+      <a class="c-card reveal" href="tel:+910000000000">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
+        <h3>Call</h3><p>+91 00000 00000</p><small>Sample number</small>
+      </a>
+      <a class="c-card reveal" href="https://instagram.com/zaam.chinins.demo" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        <h3>Instagram</h3><p>@zaam.chinins.demo</p><small>Placeholder profile</small>
+      </a>
+      <a class="c-card reveal" href="#location">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h3>Visit</h3><p>Vesu, Surat</p><small>Demo address</small>
+      </a>
+      <div class="c-card reveal">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <h3>Hours</h3><p>5:00 PM &ndash; 11:00 PM</p><small>Every day</small>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container foot-grid">
+    <div>
+      <a href="#home" class="logo">ZAAM<span>CHININS</span></a>
+      <p class="foot-tag">A little Chinese. A lot of flavour.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#location">Location</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="foot-contact">
+      <p>Near Vesu Main Road, Vesu, Surat</p>
+      <p>+91 00000 00000</p>
+      <a href="https://instagram.com/zaam.chinins.demo" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> Instagram</a>
+    </div>
+  </div>
+  <div class="container foot-bottom">
+    <span>&copy; 2026 ZAAM CHININS &middot; Demo content</span>
+    <span class="attr">Digital Menu Website</span>
+  </div>
+</footer>
+
+<script>
+/* ZAAM CHININS – demo menu data & interactions. Edit MENU to change items/prices. */
+(function () {
+  'use strict';
+
+  var MENU = [
+    { id: 'soups', name: 'Soups', items: [
+      ['Veg Manchow Soup', 90], ['Hot & Sour Soup', 90], ['Sweet Corn Soup', 90],
+      ['Veg Clear Soup', 80], ['Lemon Coriander Soup', 100], ['Chinese Noodle Soup', 110]
+    ]},
+    { id: 'starters', name: 'Chinese Starters', items: [
+      ['Veg Manchurian Dry', 120], ['Veg Crispy', 140], ['Crispy Corn', 130], ['Veg 65', 140],
+      ['Chinese Bhel', 100], ['Spring Roll', 120], ['Chilli Potato', 130]
+    ]},
+    { id: 'paneer', name: 'Paneer Special', items: [
+      ['Paneer Chilli Dry', 180], ['Paneer Chilli Gravy', 190], ['Paneer 65', 180],
+      ['Schezwan Paneer', 190], ['Dragon Paneer', 200], ['Paneer Manchurian', 180]
+    ]},
+    { id: 'manchurian', name: 'Manchurian', items: [
+      ['Veg Manchurian Dry', 120], ['Veg Manchurian Gravy', 130],
+      ['Manchurian Schezwan', 150], ['Manchurian Paneer', 170]
+    ]},
+    { id: 'noodles', name: 'Noodles', items: [
+      ['Veg Hakka Noodles', 120], ['Veg Schezwan Noodles', 130], ['Veg Garlic Noodles', 130],
+      ['Veg Manchurian Noodles', 150], ['Paneer Noodles', 160], ['Singapore Noodles', 150],
+      ['Chinese Special Noodles', 180]
+    ]},
+    { id: 'rice', name: 'Fried Rice', items: [
+      ['Veg Fried Rice', 120], ['Schezwan Fried Rice', 130], ['Garlic Fried Rice', 130],
+      ['Manchurian Fried Rice', 150], ['Paneer Fried Rice', 160], ['Triple Schezwan Rice', 180],
+      ['Chinese Special Rice', 190]
+    ]},
+    { id: 'gravy', name: 'Chinese Gravy', items: [
+      ['Veg Manchurian Gravy', 130], ['Veg Schezwan Gravy', 140], ['Paneer Chilli Gravy', 190],
+      ['Paneer Manchurian Gravy', 180], ['Mix Vegetable Chinese Gravy', 160]
+    ]},
+    { id: 'combos', name: 'Combos', items: [
+      ['Manchurian + Fried Rice', 180], ['Noodles + Manchurian', 180],
+      ['Schezwan Rice + Manchurian', 200], ['Paneer Chilli + Fried Rice', 220]
+    ]}
+  ];
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  /* ---- Render menu + category tabs ---- */
+  var root = document.getElementById('menuRoot');
+  var tabs = document.getElementById('catTabs');
+  var html = '', tabHtml = '';
+  MENU.forEach(function (cat) {
+    tabHtml += '<button class="cat-tab" role="tab" data-target="cat-' + cat.id + '">' + esc(cat.name) + '</button>';
+    html += '<section class="menu-cat reveal" id="cat-' + cat.id + '" aria-label="' + esc(cat.name) + '">' +
+      '<h3>' + esc(cat.name) + '</h3><ul class="menu-list">';
+    cat.items.forEach(function (it) {
+      html += '<li class="menu-item"><span class="veg" title="Vegetarian" aria-label="Vegetarian"></span>' +
+        '<span class="name">' + esc(it[0]) + '</span><span class="dots"></span>' +
+        '<span class="price">₹' + it[1] + '</span></li>';
+    });
+    html += '</ul></section>';
+  });
+  root.innerHTML = html;
+  tabs.innerHTML = tabHtml;
+
+  /* ---- Category tabs: smooth scroll + active state ---- */
+  var tabEls = Array.prototype.slice.call(tabs.querySelectorAll('.cat-tab'));
+  function setActive(id) {
+    tabEls.forEach(function (t) {
+      var on = t.getAttribute('data-target') === id;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on && tabs.scrollWidth > tabs.clientWidth) {
+        tabs.scrollTo({ left: t.offsetLeft - 20, behavior: 'smooth' });
+      }
+    });
+  }
+  tabEls.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var el = document.getElementById(t.getAttribute('data-target'));
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  var cats = Array.prototype.slice.call(document.querySelectorAll('.menu-cat'));
+  if ('IntersectionObserver' in window) {
+    var catObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-140px 0px -60% 0px' });
+    cats.forEach(function (c) { catObs.observe(c); });
+  }
+
+  /* ---- Header: shadow on scroll ---- */
+  var header = document.querySelector('.site-header');
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 30); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Mobile nav toggle ---- */
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainNav');
+  function closeNav() { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') closeNav(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+  /* ---- Highlight current section in nav ---- */
+  var navLinks = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var secs = ['home', 'about', 'menu', 'location', 'contact']
+    .map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          navLinks.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (s) { secObs.observe(s); });
+  }
+
+  /* ---- Fade-in on scroll ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var rObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); rObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(function (el) { rObs.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---- Broken remote photo? Fall back to the illustrated tile ---- */
+  document.querySelectorAll('.ph img').forEach(function (img) {
+    function hide() { img.style.display = 'none'; }
+    img.addEventListener('error', hide);
+    if (img.complete && img.naturalWidth === 0) hide();
+  });
+})();
+
+</script>
+</body>
+</html>

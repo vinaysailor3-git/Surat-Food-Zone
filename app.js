@@ -6,6 +6,9 @@ const currency = value => new Intl.NumberFormat('en-IN', { style: 'currency', cu
 $('#category-grid').innerHTML = foodCategories.map(category => `<button class="category" data-category="${escapeHTML(category.name)}" aria-pressed="false"><span class="category-icon" aria-hidden="true">${category.icon}</span>${escapeHTML(category.name)}</button>`).join('');
 $('#place-types').innerHTML = placeTypes.map(type => `<button class="place-card" data-type="${escapeHTML(type.name)}" aria-pressed="false"><span class="place-icon" aria-hidden="true">${type.icon}</span><strong>${escapeHTML(type.name)}</strong><small>${escapeHTML(type.description)}</small></button>`).join('');
 
+function restaurantCard(restaurant) { return `<article class="restaurant-card"><div class="card-photo"><img src="${escapeHTML(restaurant.image)}" alt="${escapeHTML(restaurant.imageAlt)}" loading="lazy"><span class="card-tag">${escapeHTML(restaurant.category)}</span></div><div class="card-body"><h3>${escapeHTML(restaurant.name)}</h3><p class="location">⌖ &nbsp; ${escapeHTML(restaurant.area)}</p><p class="card-description">${escapeHTML(restaurant.description)}</p><div class="card-bottom"><span>${restaurant.isSample === false ? 'Menu available · Illustrative photo' : 'Sample restaurant'}</span><a class="menu-button" href="menus/${encodeURIComponent(restaurant.id)}.html" aria-label="View menu for ${escapeHTML(restaurant.name)}">View Menu</a></div></div></article>`; }
+$('#featured-grid').innerHTML = restaurants.filter(restaurant => restaurant.featured).map(restaurantCard).join('');
+
 function matchingRestaurants() {
   return restaurants.filter(restaurant => {
     const searchable = [restaurant.name, restaurant.area, restaurant.description, ...restaurant.categories, ...restaurant.types, ...restaurant.menu.map(item => item.name + ' ' + item.description)].join(' ').toLowerCase();
@@ -14,7 +17,7 @@ function matchingRestaurants() {
 }
 function renderRestaurants() {
   const results = matchingRestaurants();
-  $('#restaurant-grid').innerHTML = results.map(restaurant => `<article class="restaurant-card"><div class="card-photo"><img src="${escapeHTML(restaurant.image)}" alt="${escapeHTML(restaurant.imageAlt)}" loading="lazy"><span class="card-tag">${escapeHTML(restaurant.category)}</span></div><div class="card-body"><h3>${escapeHTML(restaurant.name)}</h3><p class="location">⌖ &nbsp; ${escapeHTML(restaurant.area)}</p><p class="card-description">${escapeHTML(restaurant.description)}</p><div class="card-bottom"><span>${restaurant.isSample === false ? 'Menu available · Illustrative photo' : 'Sample restaurant'}</span><a class="menu-button" href="menus/${encodeURIComponent(restaurant.id)}.html" aria-label="View menu for ${escapeHTML(restaurant.name)}">View Menu</a></div></div></article>`).join('');
+  $('#restaurant-grid').innerHTML = results.map(restaurantCard).join('');
   $('#result-count').textContent = `${results.length} ${results.length === 1 ? 'place' : 'places'} to discover${state.category ? ' · ' + state.category : ''}${state.type ? ' · ' + state.type : ''}${state.query ? ' · “' + state.query + '”' : ''}`;
   $('#clear-filters').hidden = !(state.query || state.category || state.type);
   $('#empty-state').hidden = results.length !== 0;
