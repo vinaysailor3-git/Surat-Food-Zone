@@ -10,6 +10,16 @@ const template = fs.readFileSync(path.join(root, 'templates/menu.html'), 'utf8')
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 fs.mkdirSync(path.join(root, 'menus'), { recursive: true });
 for (const restaurant of restaurants) {
+  if (restaurant.profileTemplate) {
+    const profile = fs.readFileSync(path.join(root, 'templates/restaurant-profile.html'), 'utf8')
+      .replace('{{profileStyles}}', () => fs.readFileSync(path.join(root, 'templates/restaurant-profile.css'), 'utf8'))
+      .replace('{{profileScript}}', () => fs.readFileSync(path.join(root, 'templates/restaurant-profile.js'), 'utf8'));
+    const sections = [...new Set(restaurant.menu.map(item => item.section))];
+    const menu = sections.map(section => `<section class="menu-category"><h3>${escape(section)}</h3><dl>${restaurant.menu.filter(item => item.section === section).map(item => `<div><dt>${escape(item.name)}</dt><dd>₹${escape(item.price)}</dd></div>`).join('')}</dl></section>`).join('\n');
+    const html = profile.replaceAll('{{name}}', escape(restaurant.name)).replaceAll('{{image}}', escape(restaurant.image)).replaceAll('{{imageAlt}}', escape(restaurant.imageAlt)).replaceAll('{{description}}', escape(restaurant.description)).replaceAll('{{cuisine}}', escape(restaurant.cuisine)).replace('{{menu}}', menu);
+    fs.writeFileSync(path.join(root, `menus/${restaurant.id}.html`), html);
+    continue;
+  }
   // Preserve supplied standalone restaurant pages.
   if (['zaam-chinins', 'quite-momo'].includes(restaurant.id)) {
     if (!fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) throw new Error(`Missing landing page: ${restaurant.id}`);
@@ -20,8 +30,6 @@ for (const restaurant of restaurants) {
     if (!fs.existsSync(path.join(root, 'menus', 'suzu-chinese.html'))) throw new Error('Missing Suzu landing page');
     continue;
   }
-  // Sainath is being edited directly while its individual design is finalized.
-  if (restaurant.id === 'sainath-nasta-centre' && fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) continue;
   const items = JSON.stringify(restaurant.menu.map(({ name, price }) => ({ name, price }))).replace(/</g, '\\u003c');
   let html = template.replace(/const menuItems = \[[\s\S]*?\];/, `const menuItems = ${items};`)
     .replaceAll('City Tadka', escape(restaurant.name))
@@ -32,7 +40,7 @@ for (const restaurant of restaurants) {
     .replace('window.open(url, "_blank");', 'window.open(url, "_blank", "noopener,noreferrer");')
     .replace('Check your selected items before sending the order.', 'Check your selection, then open WhatsApp to review and send your order. You can also save or share it as an image.')
     .replace('<main class="container">', '<main class="container"><a class="back-link" href="../index.html#restaurants">Back to Surat Food Zone</a>')
-    .replace('Select your favourite items</p>', `Select your favourite items</p><p class="menu-note">${restaurant.isSample === false ? 'Menu prices supplied for Sainath Nasta Centre. Address coming soon.' : 'Sample restaurant and illustrative menu prices.'}</p>`)
+    .replace('Select your favourite items</p>', `Select your favourite items</p><p class="menu-note">${restaurant.isSample === false ? 'Restaurant menu prices. Address coming soon.' : 'Sample restaurant and illustrative menu prices.'}</p>`)
     .replace('ctx.font = "bold 54px Arial";', 'ctx.font = "bold 40px Arial";')
     .replace('const rowHeight = 64;', 'const rowHeight = 84;')
     .replace('let generatedOrderFile = null;', 'let generatedOrderFile = null;')

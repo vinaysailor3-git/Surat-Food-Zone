@@ -45,7 +45,7 @@ All menus use `site-config.json`'s `defaultWhatsAppNumber` (currently `919106197
 Use international format with digits only, without `+` or spaces.
 
 After editing, run `node scripts/build-site.cjs` to regenerate menus and validate
-locally. GitHub Actions also does this on every push. For generated menus, edit data.js or templates/menu.html. Sainath is currently a hand-edited exception: edit menus/sainath-nasta-centre.html directly; the build preserves it.
+locally. GitHub Actions also does this on every push. For generated menus, edit data.js or templates/menu.html.
 
 ## Local preview
 
@@ -95,3 +95,23 @@ by the build. Edit its inline MENU data directly and keep `data.js` in sync.
 Set `featured: true` on a restaurant in `data.js` to show it in the homepage
 spotlight below the hero. Quite Momo, ZAAM CHININS and Suzu Chinese are featured;
 all listings remain available in the searchable restaurant section.
+
+## Mokabo Cafe
+
+Mokabo Cafe is listed in `data.js` and opens `menus/mokabo-cafe.html`.
+Its menu, prices and listing details have one source of truth in `data.js`.
+The build renders its browsing-only page from `templates/restaurant-profile.html`;
+edit the template rather than the generated page. Run `node scripts/build-site.cjs`
+after changes. The `profileTemplate` flag opts into this informational template,
+and `wholeCardLink` makes the listing card clickable.
+
+The page includes six sample photos and three explicitly fictional reviews.
+Replace the contact placeholders, Google review place ID and general Surat map
+URL in the template before launch. Replace the disabled Call button with a `tel:`
+link once a verified number is supplied. External sample photos need internet.
+
+Mokabo styling and interactions live in `templates/restaurant-profile.css` and
+`templates/restaurant-profile.js`. The build embeds both in the generated HTML,
+so the page also works when opened directly. Menu tabs and gallery controls
+progressively enhance the static content. Opening hours and Instagram remain
+placeholders; the current day uses Surat’s Asia/Kolkata timezone.
