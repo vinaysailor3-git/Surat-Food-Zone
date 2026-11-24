@@ -17,6 +17,10 @@ fs.mkdirSync(output, { recursive: true });
 for (const file of ['index.html', 'styles.css', 'app.js', 'data.js', 'logo.png', '.nojekyll']) {
   fs.copyFileSync(path.join(root, file), path.join(output, file));
 }
+// Include shared restaurant logos and other public assets.
+if (fs.existsSync(path.join(root, 'assets'))) {
+  fs.cpSync(path.join(root, 'assets'), path.join(output, 'assets'), { recursive: true });
+}
 const restaurants = vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8') + '\nrestaurants');
 fs.mkdirSync(path.join(output, 'menus'));
 for (const restaurant of restaurants) {

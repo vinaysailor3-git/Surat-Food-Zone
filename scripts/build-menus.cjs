@@ -21,7 +21,7 @@ for (const restaurant of restaurants) {
     continue;
   }
   // Preserve supplied standalone restaurant pages.
-  if (['zaam-chinins', 'quite-momo'].includes(restaurant.id)) {
+  if (restaurant.standalonePage || ['zaam-chinins', 'quite-momo'].includes(restaurant.id)) {
     if (!fs.existsSync(path.join(root, 'menus', `${restaurant.id}.html`))) throw new Error(`Missing landing page: ${restaurant.id}`);
     continue;
   }

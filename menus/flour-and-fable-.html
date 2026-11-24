@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FLOUR &amp; FABLE — Little Treats. Lovely Moments.</title>
+<meta name="description" content="FLOUR & FABLE is a dessert atelier and cafe serving waffles, pancakes, croissants, cakes, cookies and specialty coffee. Demo website, Surat.">
+<meta name="theme-color" content="#FBE3E4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. TOKENS (edit here) ============ */
+:root{
+  --blush:#FBE3E4; --cream:#FFF8EC; --butter:#FBEBB8; --cocoa:#3E2523; --cocoa-2:#5A3B37;
+  --rasp:#B8304F; --pista:#B5CDA3; --pista-d:#5E7F55; --peach:#F6C3A6;
+  --f-display:'Gloock',Georgia,serif;
+  --f-body:'Figtree',system-ui,sans-serif;
+  --f-script:'Caveat',cursive;
+  --pad:clamp(20px,5vw,80px); --maxw:1260px; --hh:68px;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+/* ============ 2. BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 6px)}
+body{margin:0;background:var(--cream);color:var(--cocoa);font-family:var(--f-body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--rasp);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--cocoa);color:#fff;padding:10px 16px;z-index:999}
+.skip:focus{left:8px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.02;letter-spacing:-.01em;margin:0}
+h2{font-size:clamp(2.4rem,8.4vw,5rem)}
+.script{font-family:var(--f-script);font-weight:700;color:var(--rasp);letter-spacing:0}
+.kicker{font-family:var(--f-script);font-weight:700;font-size:clamp(1.35rem,3.6vw,1.7rem);color:var(--rasp);display:flex;align-items:center;gap:10px;line-height:1}
+.kicker::before{content:"✦";font-size:.8em}
+.sec{padding:clamp(76px,11vw,140px) 0;position:relative}
+.scal::before{content:"";position:absolute;left:0;right:0;top:-13px;height:14px;background:radial-gradient(circle at 11px 100%,var(--sc) 11px,transparent 12px) 0 0/22px 14px repeat-x;z-index:2}
+.clip{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(32px,6vw,58px)}
+.sec-head p{margin:0;max-width:44ch;font-size:1.06rem}
+@media(min-width:900px){.sec-head.two{grid-template-columns:1.2fr .8fr;align-items:end}}
+/* ============ 3. BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 28px;border-radius:999px;border:2px solid var(--cocoa);background:var(--rasp);border-color:var(--rasp);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;position:relative;transition:transform .3s var(--ease),background .3s,color .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 -3px var(--cocoa)}
+.btn.out{background:transparent;color:var(--cocoa);border-color:var(--cocoa)}
+.btn.out:hover{background:var(--cocoa);color:var(--cream)}
+.btn.cocoa{background:var(--cocoa);border-color:var(--cocoa);color:var(--cream)}
+.btn.cream{background:var(--cream);border-color:var(--cream);color:var(--cocoa)}
+.btn.sm{min-height:44px;padding:0 20px;font-size:.72rem}
+/* ============ 4. HEADER ============ */
+header.site{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:300;transition:background .35s,box-shadow .35s}
+header.site.scrolled{background:rgba(255,248,236,.95);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(62,37,35,.12)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:inline-flex;align-items:baseline;gap:6px;text-decoration:none;position:relative;z-index:320;line-height:1}
+.logo b{font-family:var(--f-display);font-weight:400;font-size:1.45rem;letter-spacing:.02em;text-transform:uppercase}
+.logo i{font-family:var(--f-script);font-style:normal;font-weight:700;font-size:1.9rem;color:var(--rasp);transform:translateY(2px)}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:28px}
+.nav ul a{font-weight:600;font-size:.9rem;text-decoration:none;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:50%;bottom:-2px;width:6px;height:6px;border-radius:50%;background:var(--rasp);transform:translateX(-50%) scale(0);transition:transform .3s var(--ease)}
+.nav ul a:hover::after{transform:translateX(-50%) scale(1)}
+.nav .cta{display:none}
+.burger{width:46px;height:46px;border-radius:50%;border:2px solid var(--cocoa);background:transparent;display:grid;place-items:center;position:relative;z-index:320}
+.burger i,.burger i::before,.burger i::after{display:block;width:18px;height:2px;background:var(--cocoa);position:relative;border-radius:2px;transition:transform .3s var(--ease),background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:310;background:var(--blush);padding:calc(var(--hh) + 20px) var(--pad) 32px;display:flex;flex-direction:column;justify-content:center;transform:translateX(100%);visibility:hidden;transition:transform .55s var(--ease),visibility 0s .55s}
+.drawer.open{transform:none;visibility:visible;transition:transform .55s var(--ease),visibility 0s}
+.drawer ul{list-style:none;margin:0 0 28px;padding:0}
+.drawer li a{display:flex;align-items:baseline;gap:12px;font-family:var(--f-display);font-size:clamp(2.2rem,10vw,3.2rem);text-decoration:none;padding:8px 0;line-height:1.05}
+.drawer li a span{font-family:var(--f-script);font-weight:700;font-size:1.3rem;color:var(--rasp)}
+.drawer li a:hover{color:var(--rasp)}
+.drawer .btn{align-self:flex-start}
+body.lock{overflow:hidden}
+@media(min-width:1020px){.nav ul{display:flex}.nav .cta{display:inline-flex}.burger,.drawer{display:none}}
+/* ============ 5. HERO ============ */
+.hero{padding:calc(var(--hh) + 26px) 0 clamp(60px,8vw,100px);background:var(--blush);position:relative;min-height:100svh;display:flex;align-items:center}
+.hero-grid{display:grid;gap:34px;align-items:center;width:100%;position:relative}
+.hero .kicker{margin-bottom:16px}
+.hero h1{font-size:clamp(3.2rem,13.5vw,8rem);line-height:.96}
+.hero h1 .script{font-size:1.12em;display:inline-block;transform:rotate(-3deg)}
+.hero p.lead{max-width:40ch;font-size:clamp(1.05rem,2.5vw,1.25rem);margin:22px 0 28px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.arch-wrap{position:relative;width:min(86%,440px);margin-inline:auto}
+.arch{aspect-ratio:3/4;border-radius:999px 999px 28px 28px;overflow:hidden;background:linear-gradient(160deg,var(--peach),var(--rasp));border:3px solid var(--cocoa);position:relative}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch-back{position:absolute;inset:14px -14px -14px 14px;border-radius:999px 999px 28px 28px;background:var(--butter);border:3px solid var(--cocoa);z-index:-1}
+.spin{position:absolute;left:-12%;bottom:6%;width:110px;height:110px;animation:rot 18s linear infinite}
+.spin svg{width:100%;height:100%}
+@keyframes rot{to{transform:rotate(360deg)}}
+.sprinkle{position:absolute;width:26px;height:7px;border-radius:4px;animation:bob 6s ease-in-out infinite}
+.sp1{top:4%;right:-8%;background:var(--rasp);transform:rotate(30deg)}
+.sp2{top:30%;left:-10%;background:var(--pista-d);transform:rotate(-40deg);animation-delay:-2s}
+.sp3{bottom:20%;right:-12%;background:var(--cocoa);transform:rotate(70deg);animation-delay:-4s}
+.sp4{top:14%;left:4%;background:var(--butter);border:1px solid var(--cocoa);transform:rotate(10deg);animation-delay:-3s}
+@keyframes bob{50%{translate:0 -14px}}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:60px}.arch-wrap{width:min(100%,480px);margin-right:0}}
+.scroll-cue{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-script);font-weight:700;font-size:1.35rem;text-decoration:none}
+.scroll-cue svg{width:28px;height:28px;animation:bounce 1.5s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(7px)}}
+/* ============ 6. STORY ============ */
+.story{background:var(--cream);--sc:var(--cream)}
+.story-grid{display:grid;gap:50px;align-items:center}
+.story-pics{position:relative;max-width:480px;margin-inline:auto;width:100%;padding-bottom:60px}
+.story-pics .p1{width:76%;aspect-ratio:3/4;border-radius:999px 999px 24px 24px;overflow:hidden;background:var(--peach);border:3px solid var(--cocoa)}
+.story-pics .p2{position:absolute;right:0;bottom:0;width:52%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--butter);border:3px solid var(--cocoa);box-shadow:0 0 0 8px var(--cream)}
+.story-pics img{width:100%;height:100%;object-fit:cover}
+.story-pics .note{position:absolute;top:8%;right:6%;background:var(--butter);border:2px solid var(--cocoa);border-radius:14px;padding:8px 14px;font-family:var(--f-script);font-weight:700;font-size:1.25rem;line-height:1;transform:rotate(7deg)}
+.story-text h2{margin:14px 0 24px}
+.story-text p{max-width:48ch;margin:0 0 16px;font-size:1.06rem}
+.story-text .btn{margin-top:10px}
+@media(min-width:900px){.story-grid{grid-template-columns:.9fr 1.1fr;gap:100px}}
+/* ============ 7. MENU ============ */
+.menu{background:var(--butter);--sc:var(--butter)}
+.filters{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad) * -1);padding:6px var(--pad) 12px;scroll-snap-type:x proximity}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:46px;padding:0 22px;border-radius:999px;border:2px solid var(--cocoa);background:transparent;font-weight:700;font-size:.82rem;scroll-snap-align:start;transition:background .25s,color .25s,transform .25s var(--ease)}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--cocoa);color:var(--cream)}
+.mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 14px;margin-top:26px}
+.item{position:relative;display:flex;flex-direction:column;animation:rise .55s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.item .ph{aspect-ratio:4/5;border-radius:999px 999px 18px 18px;overflow:hidden;background:var(--tint,#f6c3a6);border:2.5px solid var(--cocoa);position:relative}
+.item .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.item:hover .ph img{transform:scale(1.1) rotate(1.5deg)}
+.ribbon{position:absolute;top:44%;left:-6px;background:var(--rasp);color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;transform:rotate(-6deg);z-index:2;border:2px solid var(--cocoa)}
+.ribbon.sig{background:var(--pista-d)}.ribbon.new{background:var(--cocoa)}
+.item .body{padding:12px 4px 0;display:flex;flex-direction:column;flex:1}
+.item h3{font-size:1.3rem;line-height:1.05}
+.item p{margin:6px 0 10px;font-size:.84rem;line-height:1.4;opacity:.85;flex:1}
+.item .pr{font-family:var(--f-script);font-weight:700;font-size:1.65rem;line-height:1;color:var(--rasp)}
+@media(min-width:700px){.mgrid{grid-template-columns:repeat(3,1fr);gap:40px 24px}.item h3{font-size:1.5rem}.item p{font-size:.92rem}}
+@media(min-width:1100px){.mgrid{grid-template-columns:repeat(4,1fr)}}
+/* ============ 8. FEATURE ============ */
+.feat{background:var(--rasp);color:var(--cream);--sc:var(--rasp)}
+.feat .giant{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--f-script);font-weight:700;font-size:clamp(9rem,42vw,34rem);line-height:.8;color:rgba(255,248,236,.1);white-space:nowrap;user-select:none}
+.feat-grid{position:relative;display:grid;gap:44px;align-items:center}
+.feat-pic{position:relative;width:min(86%,480px);margin-inline:auto}
+.feat-pic .arch{border-color:var(--cream);box-shadow:12px 12px 0 var(--cocoa)}
+.berry{position:absolute;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff7a96,#8f1c3a);border:2px solid var(--cocoa);animation:bob 5s ease-in-out infinite}
+.b1{top:-4%;left:-8%}.b2{top:40%;right:-10%;width:30px;height:30px;animation-delay:-2s;background:radial-gradient(circle at 35% 30%,#8aa0ff,#2f3f9a)}.b3{bottom:6%;left:-6%;width:26px;height:26px;animation-delay:-3.5s}
+.feat-text .kicker{color:var(--butter);margin-bottom:12px}
+.feat-text h2{font-size:clamp(3.2rem,13vw,7.6rem);line-height:.92}
+.feat-text h2 .script{color:var(--butter);font-size:1.1em;display:block}
+.feat-text p{max-width:38ch;font-size:clamp(1.05rem,2.5vw,1.3rem);margin:22px 0 26px}
+.feat-price{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.feat-price b{font-family:var(--f-script);font-size:4.4rem;line-height:.9;color:var(--butter)}
+@media(min-width:900px){.feat-grid{grid-template-columns:1fr 1fr;gap:90px}}
+/* ============ 9. GALLERY ============ */
+.gallery{background:var(--cream);--sc:var(--cream)}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;gap:10px}
+.gal figure{margin:0;position:relative;overflow:hidden;border-radius:22px;background:var(--bg,#f6c3a6);border:2.5px solid var(--cocoa)}
+.gal .arc{border-radius:999px 999px 22px 22px}
+.gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.gal button:focus-visible{outline:3px solid var(--rasp);outline-offset:-6px}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.gal figure:hover img,.gal button:focus-visible img{transform:scale(1.1)}
+.gal .cap{position:absolute;left:10px;bottom:10px;background:var(--butter);border:2px solid var(--cocoa);border-radius:999px;padding:3px 12px;font-family:var(--f-script);font-weight:700;font-size:1.1rem;line-height:1.2;transform:translateY(160%) rotate(-3deg);transition:transform .4s var(--ease)}
+.gal figure:hover .cap,.gal button:focus-visible .cap{transform:rotate(-3deg)}
+@media(hover:none){.gal .cap{transform:rotate(-3deg);font-size:.95rem}}
+.gal .t{grid-row:span 2}.gal .w{grid-column:span 2}
+@media(min-width:800px){.gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:190px;gap:14px}
+  .gal .a{grid-column:span 2;grid-row:span 2}.gal .b{grid-column:span 2}.gal .c{grid-column:span 2;grid-row:span 2}.gal .d{grid-column:span 2}.gal .e{grid-column:span 1;grid-row:span 2}.gal .f{grid-column:span 2}.gal .g2{grid-column:span 3}.gal .h{grid-column:span 2}.gal .i{grid-column:span 1}}
+.lb{position:fixed;inset:0;z-index:600;background:rgba(62,37,35,.93);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.lb.open{opacity:1;visibility:visible;transition:opacity .35s}
+.lb figure{margin:0;max-width:min(94vw,980px);transform:scale(.9) rotate(-1.5deg);transition:transform .5s var(--ease)}
+.lb.open figure{transform:none}
+.lb img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;border-radius:20px;border:3px solid var(--cream);min-height:100px;background:#5a3b37}
+.lb figcaption{text-align:center;margin-top:14px;font-family:var(--f-script);font-weight:700;font-size:1.6rem;color:var(--butter)}
+.lb-x{position:absolute;top:14px;right:14px;width:52px;height:52px;border-radius:50%;border:2px solid var(--cream);background:transparent;color:var(--cream);font-size:1.7rem;line-height:1;display:grid;place-items:center;transition:background .25s,color .25s}
+.lb-x:hover{background:var(--cream);color:var(--cocoa)}
+/* ============ 10. RECIPE (WHY) ============ */
+.why{background:var(--pista);--sc:var(--pista)}
+.why-grid{display:grid;gap:44px;align-items:center}
+.why h2{margin:12px 0 0}
+.why .kicker{color:var(--cocoa)}
+.why .arch{width:min(76%,380px);margin-inline:auto;background:var(--butter)}
+.recipe{background:var(--cream);border:3px solid var(--cocoa);border-radius:8px;padding:clamp(22px,4vw,38px);position:relative;transform:rotate(-1deg);box-shadow:10px 10px 0 var(--cocoa)}
+.recipe::before{content:"";position:absolute;inset:8px;border:2px dashed rgba(62,37,35,.3);border-radius:4px;pointer-events:none}
+.recipe header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.recipe header h3{font-size:clamp(1.5rem,5vw,2.1rem)}
+.recipe header span{font-family:var(--f-script);font-weight:700;font-size:1.25rem;color:var(--rasp)}
+.recipe ul{list-style:none;margin:0;padding:0}
+.recipe li{display:grid;grid-template-columns:78px 1fr;gap:2px 14px;padding:16px 0;border-top:1.5px dashed rgba(62,37,35,.35);align-items:baseline}
+.recipe .m{font-family:var(--f-script);font-weight:700;color:var(--rasp);font-size:1.45rem;line-height:1.05}
+.recipe h4{font-family:var(--f-display);font-weight:400;font-size:clamp(1.4rem,4.4vw,1.8rem);margin:0;line-height:1.1}
+.recipe p{grid-column:2;margin:2px 0 0;font-size:.95rem}
+@media(min-width:900px){.why-grid{grid-template-columns:.8fr 1.2fr;gap:90px}.why-left{display:grid;gap:30px}}
+/* ============ 11. REVIEWS ============ */
+.reviews{background:var(--blush);--sc:var(--blush)}
+.rev-grid{display:grid;gap:34px}
+.note-card{margin:0;position:relative;padding:34px 24px 26px;border:2.5px solid var(--cocoa);border-radius:6px;background:var(--cream);transition:transform .4s var(--ease)}
+.note-card:nth-child(1){background:var(--butter)}
+.note-card:nth-child(2){background:var(--cream)}
+.note-card:nth-child(3){background:var(--pista)}
+.note-card::before{content:"";position:absolute;top:-11px;left:50%;width:22px;height:22px;border-radius:50%;background:var(--rasp);border:2.5px solid var(--cocoa);transform:translateX(-50%)}
+.stars{color:var(--rasp);letter-spacing:5px;font-size:1.1rem;margin-bottom:10px}
+.note-card blockquote{margin:0 0 16px;font-family:var(--f-display);font-size:1.3rem;line-height:1.25}
+.note-card figcaption{font-family:var(--f-script);font-weight:700;font-size:1.7rem;line-height:1;color:var(--rasp)}
+@media(min-width:850px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:30px}.note-card:nth-child(1){transform:rotate(-2deg)}.note-card:nth-child(2){transform:translateY(22px) rotate(1deg)}.note-card:nth-child(3){transform:rotate(2deg)}.note-card:hover{transform:rotate(0) translateY(-6px)}}
+.rev-foot{margin-top:56px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.rev-foot small{font-weight:600}
+/* ============ 12. VISIT + HOURS ============ */
+.visit{background:var(--cream);--sc:var(--cream)}
+.visit-grid{display:grid;gap:44px}
+.visit h2{margin:12px 0 26px}
+.details{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:18px}
+.details b{display:block;font-family:var(--f-script);font-weight:700;font-size:1.35rem;color:var(--rasp);line-height:1}
+.details a,.details span{font-size:1.12rem;font-weight:500;text-decoration:none}
+.details a:hover{color:var(--rasp)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.demo{display:inline-block;font-size:.8rem;font-weight:600;background:var(--butter);border:2px dashed var(--cocoa);border-radius:10px;padding:6px 12px}
+.map{border:3px solid var(--cocoa);border-radius:999px 999px 24px 24px;overflow:hidden;min-height:380px;background:var(--butter)}
+.map iframe{width:100%;height:100%;min-height:400px;border:0;display:block;filter:sepia(.3) saturate(.9)}
+@media(min-width:900px){.visit-grid{grid-template-columns:1fr 1fr;gap:90px;align-items:center}.map{max-width:460px;justify-self:end;width:100%}}
+.hours{background:var(--cocoa);color:var(--cream);--sc:var(--cocoa)}
+.hours-grid{display:grid;gap:36px;align-items:center}
+.hours h2{margin:12px 0 0}
+.hours .kicker{color:var(--butter)}
+.status{display:inline-flex;align-items:center;gap:12px;margin-top:24px;padding:11px 20px;border-radius:999px;font-weight:700;letter-spacing:.12em;font-size:.78rem;text-transform:uppercase;border:2px solid var(--cream)}
+.status i{width:11px;height:11px;border-radius:50%;background:#999}
+.status.open{background:var(--pista);color:var(--cocoa);border-color:var(--pista)}
+.status.open i{background:var(--pista-d);animation:pulse 1.8s infinite}
+.status.closed{background:var(--rasp);border-color:var(--rasp);color:#fff}
+.status.closed i{background:#fff}
+@keyframes pulse{50%{transform:scale(1.5);opacity:.6}}
+.sched{list-style:none;margin:0;padding:0;background:var(--cream);color:var(--cocoa);border-radius:8px;padding:12px 18px;position:relative;transform:rotate(.8deg);border:3px solid var(--butter)}
+.sched li{display:flex;justify-content:space-between;gap:12px;padding:13px 6px;border-bottom:2px dotted rgba(62,37,35,.3);font-weight:500}
+.sched li:last-child{border-bottom:0}
+.sched li.today{background:var(--rasp);color:#fff;border-radius:10px;border-bottom-color:transparent;font-weight:700;transform:rotate(-1deg);margin:2px -4px;padding-inline:12px}
+.sched li.today .d::after{content:" · today";font-family:var(--f-script);font-size:1.3rem;font-weight:700;color:var(--butter)}
+@media(min-width:900px){.hours-grid{grid-template-columns:1fr 1fr;gap:100px}}
+/* ============ 13. FOOTER ============ */
+footer{background:var(--blush);padding:clamp(64px,9vw,110px) 0 28px;position:relative;--sc:var(--blush);overflow:hidden}
+.foot-word{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(3.2rem,14.5vw,14rem);line-height:.9;text-align:center;margin:0 0 40px;letter-spacing:-.01em;white-space:nowrap}
+.foot-word i{font-family:var(--f-script);font-style:normal;color:var(--rasp);text-transform:none;font-size:1.05em}
+.foot-grid{display:grid;gap:30px;margin-bottom:44px}
+.foot-grid h4{margin:0 0 10px;font-family:var(--f-script);font-weight:700;font-size:1.6rem;color:var(--rasp);line-height:1}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot-grid a{text-decoration:none;font-weight:500}.foot-grid a:hover{color:var(--rasp)}
+.foot-grid p{margin:0}
+.foot-tag{font-family:var(--f-script);font-weight:700;font-size:2rem!important;line-height:1.05;color:var(--cocoa);margin-bottom:8px!important}
+.foot-bottom{border-top:2px dashed rgba(62,37,35,.3);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:.76rem;font-weight:600;letter-spacing:.06em}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+.totop{position:fixed;right:14px;bottom:14px;z-index:250;width:52px;height:52px;border-radius:50%;border:2.5px solid var(--cocoa);background:var(--butter);font-size:1.3rem;font-weight:700;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .3s,transform .3s var(--ease),visibility 0s .3s,background .25s,color .25s}
+.totop.show{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s var(--ease),background .25s,color .25s}
+.totop:hover{background:var(--rasp);color:#fff}
+/* ============ 14. MOTION ============ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s var(--ease),transform .85s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+.note-card.rv.in:hover{transition-delay:0s}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#home" aria-label="FLOUR &amp; FABLE home"><b>Flour</b><i>&amp;</i><b>Fable</b></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit">Visit Us</a></li>
+    </ul>
+    <a class="btn sm cta" href="#menu">Explore the menu</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <ul>
+    <li><a href="#home"><span>i.</span>Home</a></li>
+    <li><a href="#story"><span>ii.</span>Our Story</a></li>
+    <li><a href="#menu"><span>iii.</span>Menu</a></li>
+    <li><a href="#gallery"><span>iv.</span>Gallery</a></li>
+    <li><a href="#reviews"><span>v.</span>Reviews</a></li>
+    <li><a href="#visit"><span>vi.</span>Visit Us</a></li>
+  </ul>
+  <a class="btn" href="#menu">Explore the menu</a>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker rv">A little sweetness, every day</span>
+      <h1 class="rv" style="--d:.08s">Life is better with a little <span class="script">dessert.</span></h1>
+      <p class="lead rv" style="--d:.16s">Freshly baked favourites, dreamy desserts, and coffee made for the moments you want to make last.</p>
+      <div class="hero-btns rv" style="--d:.24s">
+        <a class="btn" href="#menu">Explore our menu</a>
+        <a class="btn out" href="#story">Meet our cafe</a>
+      </div>
+      <a class="scroll-cue rv" style="--d:.3s" href="#story" aria-label="Scroll to our story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3E2523" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
+        <span>turn the page</span>
+      </a>
+    </div>
+    <div class="arch-wrap rv" style="--d:.15s">
+      <div class="arch-back" aria-hidden="true"></div>
+      <div class="arch"><img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=900&q=80" alt="A golden waffle topped with berries and cream" fetchpriority="high"></div>
+      <span class="sprinkle sp1" aria-hidden="true"></span><span class="sprinkle sp2" aria-hidden="true"></span><span class="sprinkle sp3" aria-hidden="true"></span><span class="sprinkle sp4" aria-hidden="true"></span>
+      <div class="spin" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="cc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs><circle cx="60" cy="60" r="58" fill="#FFF8EC" stroke="#3E2523" stroke-width="3"/><text font-family="Figtree,sans-serif" font-weight="700" font-size="12.5" letter-spacing="3" fill="#B8304F"><textPath href="#cc">LITTLE TREATS ✦ LOVELY MOMENTS ✦</textPath></text><text x="60" y="72" text-anchor="middle" font-family="Gloock,serif" font-size="34" fill="#3E2523">&amp;</text></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec story scal" id="story">
+  <div class="wrap story-grid">
+    <div class="story-pics rv">
+      <div class="p1"><img loading="lazy" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=75" alt="Golden buttery croissants on a tray"></div>
+      <div class="p2"><img loading="lazy" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=75" alt="Fresh dough being shaped by hand"></div>
+      <span class="note">chapter one</span>
+    </div>
+    <div class="story-text">
+      <span class="kicker rv">The story behind the sweetness</span>
+      <h2 class="rv" style="--d:.1s">A little flour. A little magic. <span class="script">A lot of love.</span></h2>
+      <p class="rv" style="--d:.15s">We believe the best moments are often the simplest: warm pastries, a favourite cup of coffee, and good company. At FLOUR &amp; FABLE, we make each treat with care, bringing together comforting classics and little creative surprises.</p>
+      <p class="rv" style="--d:.2s">From the first batch of the morning to the last slice of cake, our cafe is made for slowing down, celebrating small things, and sharing something sweet.</p>
+      <a class="btn cocoa rv" style="--d:.25s" href="#why">More about us</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu scal" id="menu">
+  <div class="wrap">
+    <div class="sec-head two">
+      <div>
+        <span class="kicker rv">Made for your sweet tooth</span>
+        <h2 class="rv" style="--d:.08s;margin-top:12px">A menu full of <span class="script">happy endings.</span></h2>
+      </div>
+      <p class="rv" style="--d:.15s">From buttery, flaky layers to warm, decadent bites, find your next favourite.</p>
+    </div>
+    <div class="filters rv" id="filters" role="group" aria-label="Filter menu by category">
+      <button class="chip" data-f="all" aria-pressed="true">All Treats</button>
+      <button class="chip" data-f="waffle" aria-pressed="false">Waffles</button>
+      <button class="chip" data-f="pancake" aria-pressed="false">Pancakes</button>
+      <button class="chip" data-f="pastry" aria-pressed="false">Pastries</button>
+      <button class="chip" data-f="cake" aria-pressed="false">Cakes</button>
+      <button class="chip" data-f="cookie" aria-pressed="false">Cookies</button>
+      <button class="chip" data-f="coffee" aria-pressed="false">Coffee</button>
+    </div>
+    <div class="mgrid" id="mgrid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- FEATURE -->
+<section class="sec feat scal" id="signature">
+  <div class="clip" aria-hidden="true"><div class="giant">Fable</div></div>
+  <div class="wrap feat-grid">
+    <div class="feat-pic rv">
+      <div class="arch"><img loading="lazy" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1000&q=80" alt="The Fable Waffle with berries, cream and chocolate drizzle"></div>
+      <span class="berry b1" aria-hidden="true"></span><span class="berry b2" aria-hidden="true"></span><span class="berry b3" aria-hidden="true"></span>
+    </div>
+    <div class="feat-text">
+      <span class="kicker rv">Our signature creation</span>
+      <h2 class="rv" style="--d:.1s">The Fable <span class="script">Waffle</span></h2>
+      <p class="rv" style="--d:.2s">A warm golden waffle layered with berries, velvety cream, chocolate drizzle, and a little extra magic.</p>
+      <div class="feat-price rv" style="--d:.3s"><b>₹349</b><a class="btn cream" href="#menu">Find your favourite</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery scal" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Gallery</span>
+      <h2 class="rv" style="--d:.08s">Little moments, <span class="script">beautifully plated.</span></h2>
+    </div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- WHY: RECIPE -->
+<section class="sec why scal" id="why">
+  <div class="wrap why-grid">
+    <div class="why-left">
+      <div class="rv">
+        <span class="kicker">The cafe experience</span>
+        <h2 style="margin-top:12px">Made with care. <span class="script">Served with a little joy.</span></h2>
+      </div>
+      <div class="arch rv" style="--d:.1s"><img loading="lazy" src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=75" alt="A slice of creamy cheesecake on a plate"></div>
+    </div>
+    <article class="recipe rv" style="--d:.1s" aria-label="Recipe for a lovely moment">
+      <header><h3>Recipe for a lovely moment</h3><span>serves: everyone</span></header>
+      <ul>
+        <li><span class="m">1 part</span><h4>Freshly Made</h4><p>Prepared with care and made to feel special.</p></li>
+        <li><span class="m">2 parts</span><h4>Quality Ingredients</h4><p>Thoughtful ingredients, comforting flavours, and little details.</p></li>
+        <li><span class="m">a pinch of</span><h4>Sweet Moments</h4><p>Desserts made for celebrations or everyday treats.</p></li>
+        <li><span class="m">1 cozy</span><h4>Corner</h4><p>A welcoming place to meet, relax, and enjoy a little break.</p></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec reviews scal" id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Reviews</span>
+      <h2 class="rv" style="--d:.08s">Sweet words <span class="script">from our guests.</span></h2>
+    </div>
+    <div class="rev-grid">
+      <figure class="note-card rv"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>The waffles are amazing and the cafe has such a lovely atmosphere. Perfect for a little weekend treat!</blockquote><figcaption>Anaya</figcaption></figure>
+      <figure class="note-card rv" style="--d:.1s"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Their croissants are buttery and flaky, and the coffee is just right. I could visit every day.</blockquote><figcaption>Kunal</figcaption></figure>
+      <figure class="note-card rv" style="--d:.2s"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>The cheesecake is delicious and the presentation is beautiful. Such a sweet little place to spend time.</blockquote><figcaption>Diya</figcaption></figure>
+    </div>
+    <div class="rev-foot rv">
+      <a class="btn cocoa" href="https://www.google.com/search?q=FLOUR+%26+FABLE+cafe+Surat+reviews" target="_blank" rel="noopener">Review us on Google ↗</a>
+      <small>Sample reviews for a fictional cafe.</small>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec visit scal" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <span class="kicker rv">Visit us</span>
+      <h2 class="rv" style="--d:.08s">There's always room <span class="script">for dessert.</span></h2>
+      <ul class="details rv" style="--d:.15s">
+        <li><b>Where</b><span>27 Sweet Street, City Centre, Surat, Gujarat, India</span></li>
+        <li><b>Ring us</b><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><b>Write to us</b><a href="mailto:hello@flourandfable.in">hello@flourandfable.in</a></li>
+      </ul>
+      <div class="links rv" style="--d:.2s">
+        <a class="btn" href="tel:+919876543210">Call the cafe</a>
+        <a class="btn out" href="https://www.google.com/maps/search/?api=1&query=27+Sweet+Street+City+Centre+Surat+Gujarat+India" target="_blank" rel="noopener">Get directions ↗</a>
+        <a class="btn out" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn out" href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <span class="demo rv" style="--d:.25s">Demo content: the address is fictional.</span>
+    </div>
+    <div class="map rv" style="--d:.15s">
+      <iframe title="Map of Surat, Gujarat" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Surat,Gujarat,India&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="sec hours scal" id="hours">
+  <div class="wrap hours-grid">
+    <div>
+      <span class="kicker rv">Opening hours</span>
+      <h2 class="rv" style="--d:.08s">Your sweet little <span class="script" style="color:var(--butter)">escape awaits.</span></h2>
+      <div class="status rv" id="status" role="status" style="--d:.15s"><i></i><span>Checking…</span></div>
+    </div>
+    <ul class="sched rv" id="sched" style="--d:.1s"></ul>
+  </div>
+</section>
+</main>
+
+<footer class="scal">
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">Flour <i>&amp;</i> Fable</p>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-tag">Little Treats. Lovely Moments.</p>
+        <p>27 Sweet Street, City Centre,<br>Surat, Gujarat, India</p>
+        <p style="margin-top:8px"><a href="tel:+919876543210">+91 98765 43210</a></p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#home">Home</a></li><li><a href="#story">Our Story</a></li><li><a href="#menu">Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#visit">Visit Us</a></li></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li></ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon – Thu · 10 AM – 10 PM<br>Fri – Sun · 10 AM – 11 PM</p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 FLOUR &amp; FABLE. All rights reserved.</span><span>DEMO CAFE WEBSITE · SURAT FOOD ZONE</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-x" id="lbx" aria-label="Close image">×</button>
+  <figure><img id="lbimg" src="" alt=""><figcaption id="lbcap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  document.body.classList.remove('no-js');
+  var U=function(id,w){return 'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||600)+'&q=75';};
+  function imgFail(e){e.target.style.display='none';}
+
+  /* ===== MENU DATA (edit here). t: fav | sig | new ===== */
+  var TAGS={fav:'Favourite',sig:'Signature',new:'New'};
+  var MENU=[
+    {n:'Classic Belgian Waffle',p:229,c:'waffle',d:'Golden waffle, butter, maple-style syrup, and powdered sugar.',i:'1562376552-0d160a2f238d',tint:'#f3cf8c',t:'fav'},
+    {n:'Berry Bliss Waffle',p:299,c:'waffle',d:'Fresh berries, cream, and berry drizzle.',i:'1504754524776-8f4f37790ca0',tint:'#f2a0b4'},
+    {n:'Chocolate Overload Waffle',p:319,c:'waffle',d:'Chocolate sauce, chocolate chips, and ice cream.',i:'1568051243851-f9b136146e97',tint:'#a9705a',t:'sig'},
+    {n:'Lotus Dream Waffle',p:329,c:'waffle',d:'Lotus-style caramel biscuit spread, crumbs, and cream.',i:'1562376552-0d160a2f238d',tint:'#d9a066',t:'new'},
+    {n:'Fluffy Stack',p:249,c:'pancake',d:'Soft pancakes with syrup and butter.',i:'1528207776546-365bb710ee93',tint:'#f0c27a',t:'fav'},
+    {n:'Strawberry Cloud',p:299,c:'pancake',d:'Strawberries, whipped cream, and sweet drizzle.',i:'1567620905732-2d1ec7ab7445',tint:'#f5a3a8'},
+    {n:'Banana Caramel Pancakes',p:299,c:'pancake',d:'Banana slices and caramel sauce.',i:'1506084868230-bb9d95c24759',tint:'#e8c06a'},
+    {n:'Butter Croissant',p:149,c:'pastry',d:'Flaky, golden, buttery layers.',i:'1555507036-ab1f4038808a',tint:'#f0c58a',t:'fav'},
+    {n:'Chocolate Croissant',p:179,c:'pastry',d:'Warm pastry with chocolate filling.',i:'1623334044303-241021148842',tint:'#c99a6a'},
+    {n:'Almond Croissant',p:199,c:'pastry',d:'Almond cream and toasted almond topping.',i:'1509365465985-25d11c17e812',tint:'#e8c9a0'},
+    {n:'Cinnamon Roll',p:189,c:'pastry',d:'Soft roll with cinnamon and glaze.',i:'1509365390695-33aee754301f',tint:'#e2a96a'},
+    {n:'Classic New York Cheesecake',p:249,c:'cake',d:'Creamy cheesecake on a buttery base.',i:'1533134242443-d4fd215305ad',tint:'#f6e0b0',t:'sig'},
+    {n:'Red Velvet Slice',p:229,c:'cake',d:'Soft red velvet with cream cheese frosting.',i:'1586788680434-30d324b2d46f',tint:'#e57a8a'},
+    {n:'Chocolate Fudge Cake',p:249,c:'cake',d:'Rich chocolate cake with fudge layers.',i:'1578985545062-69928b1d9587',tint:'#9a6a52'},
+    {n:'Blueberry Cheesecake',p:269,c:'cake',d:'Creamy cheesecake with blueberry topping.',i:'1524351199678-941a58a3df50',tint:'#b9a5d9',t:'new'},
+    {n:'Chocolate Chip Cookie',p:99,c:'cookie',d:'Soft centre with chocolate chips.',i:'1499636136210-6f4ee915583e',tint:'#e8c48a',t:'fav'},
+    {n:'Double Chocolate Cookie',p:129,c:'cookie',d:'Deep cocoa cookie with chocolate chunks.',i:'1558961363-fa8fdf82db35',tint:'#a67b5b'},
+    {n:'Pistachio White Chocolate Cookie',p:149,c:'cookie',d:'Pistachio and white chocolate.',i:'1590080875515-8a3a8dc5735e',tint:'#c4d6a0',t:'new'},
+    {n:'Espresso',p:119,c:'coffee',d:'A short, bold shot of freshly pulled espresso.',i:'1510707577719-ae7c14805e3a',tint:'#b58a63'},
+    {n:'Cappuccino',p:169,c:'coffee',d:'Espresso with velvety steamed milk and a soft foam cap.',i:'1572442388796-11668a67e53d',tint:'#d9b58a'},
+    {n:'Cafe Latte',p:179,c:'coffee',d:'Smooth espresso with plenty of steamed milk.',i:'1461023058943-07fcbe16d735',tint:'#e0c09a'},
+    {n:'Mocha',p:199,c:'coffee',d:'Espresso, chocolate, and steamed milk in one cup.',i:'1578314675249-a6910f80cc4e',tint:'#a97a5c'},
+    {n:'Iced Latte',p:189,c:'coffee',d:'Espresso over ice with cold milk.',i:'1517701604599-bb29b565090c',tint:'#d8b48c'},
+    {n:'Caramel Cold Coffee',p:219,c:'coffee',d:'Chilled coffee swirled with caramel.',i:'1517701550927-30cf4ba1dba5',tint:'#c99a63',t:'fav'}
+  ];
+  var mgrid=document.getElementById('mgrid');
+  function renderMenu(f){
+    var arr=MENU.filter(function(x){return f==='all'||x.c===f;}),h='';
+    arr.forEach(function(x,k){
+      h+='<article class="item" style="animation-delay:'+(k*40)+'ms"><div class="ph" style="--tint:'+x.tint+'"><img loading="lazy" src="'+U(x.i,600)+'" alt="'+x.n+'">'
+        +(x.t?'<span class="ribbon '+(x.t==='sig'?'sig':x.t==='new'?'new':'')+'">'+TAGS[x.t]+'</span>':'')+'</div>'
+        +'<div class="body"><h3>'+x.n+'</h3><p>'+x.d+'</p><span class="pr">₹'+x.p+'</span></div></article>';
+    });
+    mgrid.innerHTML=h;
+    mgrid.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+  }
+  renderMenu('all');
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    this.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});
+    renderMenu(b.dataset.f);
+    b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+
+  /* ===== GALLERY DATA ===== */
+  var GAL=[
+    {i:'1562376552-0d160a2f238d',cap:'Waffle, up close',k:'a arc',m:'t'},
+    {i:'1528207776546-365bb710ee93',cap:'The fluffy stack',k:'b',m:''},
+    {i:'1555507036-ab1f4038808a',cap:'Fresh croissants',k:'c arc',m:'t'},
+    {i:'1533134242443-d4fd215305ad',cap:'Cheesecake o\'clock',k:'d',m:''},
+    {i:'1499636136210-6f4ee915583e',cap:'Still warm',k:'e',m:'t'},
+    {i:'1504754524776-8f4f37790ca0',cap:'Berries & cream',k:'f',m:''},
+    {i:'1461023058943-07fcbe16d735',cap:'The coffee pour',k:'g2',m:'w'},
+    {i:'1554118811-1e0d58224f24',cap:'A cozy corner',k:'h',m:''},
+    {i:'1509440159596-0249088772ff',cap:'Made by hand',k:'i',m:''}
+  ];
+  var gal=document.getElementById('gal'),gh='';
+  GAL.forEach(function(g,n){
+    gh+='<figure class="'+g.k+' '+g.m+' rv" style="--bg:#f6c3a6;--d:'+((n%3)*.07)+'s"><button type="button" data-k="'+n+'" aria-label="Open image: '+g.cap+'"><img loading="lazy" src="'+U(g.i,g.m==='w'?1100:800)+'" alt="'+g.cap+'"><span class="cap">'+g.cap+'</span></button></figure>';
+  });
+  gal.innerHTML=gh;
+  gal.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap'),lbx=document.getElementById('lbx'),lastF=null;
+  function openLB(n){var g=GAL[n];lastF=document.activeElement;lbimg.src=U(g.i,1500);lbimg.alt=g.cap;lbcap.textContent=g.cap;lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.classList.add('lock');lbx.focus();}
+  function closeLB(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('lock');if(lastF)lastF.focus();}
+  gal.addEventListener('click',function(e){var b=e.target.closest('button');if(b)openLB(+b.dataset.k);});
+  lbx.addEventListener('click',closeLB);
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')closeLB();});
+
+  /* ===== NAV ===== */
+  var header=document.getElementById('header'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+  function setMenu(o){drawer.classList.toggle('open',o);burger.setAttribute('aria-expanded',o?'true':'false');burger.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('lock',o);}
+  burger.addEventListener('click',function(){setMenu(!drawer.classList.contains('open'));});
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1020)setMenu(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){if(lb.classList.contains('open'))closeLB();else if(drawer.classList.contains('open'))setMenu(false);}
+  });
+  var totop=document.getElementById('totop');
+  function onScroll(){var y=window.scrollY||document.documentElement.scrollTop;header.classList.toggle('scrolled',y>30);totop.classList.toggle('show',y>800);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  /* ===== REVEAL ===== */
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    rvs.forEach(function(el){io.observe(el);});
+  } else rvs.forEach(function(el){el.classList.add('in');});
+
+  /* ===== HOURS (24h clock; a close time above 24 would mean after midnight) ===== */
+  var HOURS=[ // 0 Sun ... 6 Sat
+    {d:'Sunday',o:10,c:23},{d:'Monday',o:10,c:22},{d:'Tuesday',o:10,c:22},{d:'Wednesday',o:10,c:22},
+    {d:'Thursday',o:10,c:22},{d:'Friday',o:10,c:23},{d:'Saturday',o:10,c:23}
+  ];
+  var ORDER=[1,2,3,4,5,6,0];
+  function fmt(h){h=h%24;var hr=Math.floor(h),mn=Math.round((h-hr)*60),ap=hr>=12?'PM':'AM',hh=hr%12||12;return hh+':'+(mn<10?'0':'')+mn+' '+ap;}
+  function state(){
+    var n=new Date(),day=n.getDay(),hr=n.getHours()+n.getMinutes()/60,t=HOURS[day],y=HOURS[(day+6)%7];
+    if(y.c>24&&hr<(y.c-24)) return {open:true,day:(day+6)%7,close:y.c};
+    if(hr>=t.o&&hr<t.c) return {open:true,day:day,close:t.c};
+    return {open:false,day:day,next:hr<t.o?t:HOURS[(day+1)%7],tomorrow:hr>=t.o};
+  }
+  function render(){
+    var s=state(),h='';
+    ORDER.forEach(function(di){var x=HOURS[di];h+='<li'+(di===s.day?' class="today" aria-current="date"':'')+'><span class="d">'+x.d+'</span><span>'+fmt(x.o)+' – '+fmt(x.c)+'</span></li>';});
+    document.getElementById('sched').innerHTML=h;
+    var el=document.getElementById('status'),tx=el.querySelector('span');
+    el.className='status '+(s.open?'open':'closed');
+    tx.textContent=s.open?'Open now · until '+fmt(s.close):'Closed now · opens '+(s.tomorrow?'tomorrow ':'today ')+fmt(s.next.o);
+  }
+  render();setInterval(render,60000);
+})();
+</script>
+</body>
+</html>

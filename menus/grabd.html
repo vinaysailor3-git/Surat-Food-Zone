@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRAB'D — Big Bites. Zero Boring.</title>
+<meta name="description" content="GRAB'D is an urban street-food kitchen serving smash burgers, sandwiches, wraps, loaded fries and thick shakes in Surat. Demo website.">
+<meta name="theme-color" content="#FFC72C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+/* ===================== 1. TOKENS ===================== */
+:root{
+  --ketchup:#E4301B; --mustard:#FFC72C; --ink:#121212; --paper:#F7F0E1; --paper-2:#EDE3CC; --pickle:#2F7D3B; --white:#fff;
+  --f-display:'Anton','Impact',sans-serif;
+  --f-body:'Space Grotesk',system-ui,sans-serif;
+  --f-marker:'Permanent Marker',cursive;
+  --pad:clamp(18px,5vw,72px); --maxw:1280px; --hh:64px;
+  --bd:3px solid var(--ink);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+/* ===================== 2. BASE ===================== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 6px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-weight:500;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:4px solid var(--ketchup);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;z-index:999}
+.skip:focus{left:8px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.005em;margin:0}
+h2{font-size:clamp(2.6rem,10vw,6rem)}
+.tag-label{display:inline-block;background:var(--ink);color:var(--mustard);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;transform:rotate(-2deg)}
+.marker{font-family:var(--f-marker);font-weight:400;text-transform:none;letter-spacing:0}
+.sec{padding:clamp(64px,10vw,130px) 0;position:relative}
+/* ===================== 3. BUTTONS ===================== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;background:var(--ketchup);color:#fff;border:var(--bd);font-family:var(--f-display);font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;box-shadow:5px 5px 0 var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s}
+.btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
+.btn.y{background:var(--mustard);color:var(--ink)}
+.btn.w{background:var(--white);color:var(--ink)}
+.btn.k{background:var(--ink);color:var(--mustard);box-shadow:5px 5px 0 var(--ketchup)}
+.btn.sm{min-height:44px;padding:0 18px;font-size:.95rem;box-shadow:4px 4px 0 var(--ink)}
+/* ===================== 4. HEADER ===================== */
+header.site{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:300;background:var(--mustard);border-bottom:var(--bd);transition:height .3s,box-shadow .3s}
+header.site.scrolled{--hh:58px;box-shadow:0 5px 0 var(--ink)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:var(--f-display);font-size:1.9rem;letter-spacing:.02em;text-decoration:none;line-height:1;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:320}
+.logo i{font-style:normal;background:var(--ketchup);color:#fff;padding:2px 7px 0;border:2px solid var(--ink);transform:rotate(-6deg);display:inline-block}
+.logo span{color:var(--ink)}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:28px}
+.nav ul a{font-family:var(--f-display);font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;position:relative;padding:4px 0}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:4px;background:var(--ketchup);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nav ul a:hover::after{transform:scaleX(1)}
+.nav .cta{display:none}
+.burger{width:46px;height:46px;border:var(--bd);background:var(--white);display:grid;place-items:center;position:relative;z-index:320}
+.burger i,.burger i::before,.burger i::after{display:block;width:20px;height:3px;background:var(--ink);position:relative;transition:transform .3s var(--ease),background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0}
+.burger i::before{top:-7px}.burger i::after{top:7px}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] i::after{transform:translateY(-7px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:310;background:var(--ketchup);color:#fff;padding:calc(var(--hh) + 24px) var(--pad) 32px;display:flex;flex-direction:column;justify-content:center;transform:translateY(-100%);visibility:hidden;transition:transform .55s var(--ease),visibility 0s .55s}
+.drawer.open{transform:none;visibility:visible;transition:transform .55s var(--ease),visibility 0s}
+.drawer ul{list-style:none;margin:0 0 28px;padding:0}
+.drawer li{border-bottom:3px solid rgba(255,255,255,.35)}
+.drawer li a{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-display);font-size:clamp(2.4rem,11vw,3.6rem);text-transform:uppercase;text-decoration:none;padding:8px 0;line-height:1}
+.drawer li a::after{content:"→";font-family:var(--f-body);font-size:1.6rem;transition:transform .25s}
+.drawer li a:hover::after{transform:translateX(6px)}
+.drawer .btn{align-self:flex-start}
+body.lock{overflow:hidden}
+@media(min-width:980px){.nav ul{display:flex}.nav .cta{display:inline-flex}.burger,.drawer{display:none}}
+/* ===================== 5. HERO ===================== */
+.hero{padding:calc(var(--hh) + 34px) 0 0;background:var(--mustard);position:relative;overflow:hidden;border-bottom:var(--bd)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(18,18,18,.14) 1.5px,transparent 1.6px);background-size:18px 18px;pointer-events:none}
+.hero-grid{position:relative;display:grid;gap:26px;padding-bottom:clamp(40px,6vw,80px)}
+.eyebrow{display:inline-block;margin-bottom:16px}
+.hero h1{font-size:clamp(4.2rem,21vw,12rem);line-height:.82}
+.hero h1 span{display:block}
+.hero h1 .r{color:var(--ketchup);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
+.hero p.lead{font-size:clamp(1.05rem,2.6vw,1.3rem);max-width:36ch;margin:22px 0 26px;font-weight:500}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px}
+.hero-visual{position:relative;width:min(100%,520px);margin-inline:auto;aspect-ratio:1/1}
+.hero-photo{position:absolute;inset:6% 4% 4% 4%;border:var(--bd);background:var(--ketchup);overflow:hidden;transform:rotate(3deg);box-shadow:10px 10px 0 var(--ink)}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.sticker{position:absolute;z-index:3;display:grid;place-items:center;text-align:center;border:var(--bd);border-radius:50%;font-family:var(--f-display);text-transform:uppercase;line-height:.95}
+.st1{width:104px;height:104px;background:var(--white);right:-2px;top:-2px;font-size:1.05rem;transform:rotate(14deg);animation:wob 4s ease-in-out infinite}
+.st1 b{display:block;font-size:2rem;color:var(--ketchup);font-weight:400}
+.st2{width:92px;height:92px;background:var(--pickle);color:#fff;left:-6px;bottom:6%;font-size:.95rem;transform:rotate(-12deg);animation:wob 5s ease-in-out infinite reverse}
+@keyframes wob{0%,100%{transform:rotate(14deg) scale(1)}50%{transform:rotate(8deg) scale(1.06)}}
+.st2{animation-name:wob2}@keyframes wob2{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(-5deg) scale(1.05)}}
+.cats{background:var(--ink);color:var(--mustard);font-family:var(--f-display);font-size:clamp(1rem,3.4vw,1.4rem);letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:14px var(--pad);position:relative;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px}
+.cats span:not(:last-child)::after{content:"•";margin-left:22px;color:var(--ketchup)}
+.cue{position:absolute;left:var(--pad);bottom:-1px;display:none}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center;gap:40px}
+  .hero-visual{width:100%;margin-right:0}
+}
+.scroll-cue{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-family:var(--f-marker);font-size:1.15rem;text-decoration:none}
+.scroll-cue svg{width:34px;height:34px;animation:bounce 1.4s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(8px)}}
+/* ===================== 6. STORY ===================== */
+.story{background:var(--paper)}
+.story-grid{display:grid;gap:44px;align-items:center}
+.collage{position:relative;padding-bottom:50px}
+.collage .a{width:80%;aspect-ratio:4/5;border:var(--bd);overflow:hidden;background:var(--mustard);transform:rotate(-2.5deg);box-shadow:8px 8px 0 var(--ink)}
+.collage .b{position:absolute;right:0;bottom:0;width:52%;aspect-ratio:1;border:var(--bd);overflow:hidden;background:var(--ketchup);transform:rotate(4deg);box-shadow:6px 6px 0 var(--ink)}
+.collage img{width:100%;height:100%;object-fit:cover}
+.tape{position:absolute;top:-12px;left:30%;width:110px;height:30px;background:rgba(255,199,44,.85);transform:rotate(-5deg);border:1px dashed rgba(18,18,18,.35);z-index:2}
+.story-text h2{margin:18px 0 24px}
+.story-text h2 em{font-style:normal;color:var(--ketchup)}
+.story-text p{max-width:50ch;margin:0 0 16px;font-size:1.08rem}
+.story-text .btn{margin-top:12px}
+@media(min-width:900px){.story-grid{grid-template-columns:.9fr 1.1fr;gap:90px}}
+/* ===================== 7. MENU ===================== */
+.menu{background:var(--ink);color:var(--paper)}
+.menu .tag-label{background:var(--mustard);color:var(--ink)}
+.menu h2{margin:16px 0 8px}
+.menu h2 em{font-style:normal;color:var(--mustard)}
+.menu .sub{max-width:44ch;opacity:.85;margin:0 0 30px}
+.filters{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad) * -1);padding:6px var(--pad) 12px;scroll-snap-type:x proximity}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:46px;padding:0 22px;background:transparent;color:var(--paper);border:3px solid var(--paper);font-family:var(--f-display);font-size:1rem;letter-spacing:.1em;text-transform:uppercase;scroll-snap-align:start;transition:transform .2s var(--ease),background .2s,color .2s}
+.chip:hover{transform:translateY(-3px)}
+.chip[aria-pressed="true"]{background:var(--mustard);color:var(--ink);border-color:var(--mustard);box-shadow:4px 4px 0 var(--ketchup)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.card{background:var(--paper);color:var(--ink);border:var(--bd);display:flex;flex-direction:column;position:relative;animation:pop .5s var(--ease) both;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(20px) rotate(-1deg)}to{opacity:1;transform:none}}
+.card:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ketchup)}
+.card .ph{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg,#f4b942);border-bottom:var(--bd)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.card:hover .ph img{transform:scale(1.1) rotate(1deg)}
+.badge{position:absolute;top:8px;left:8px;background:var(--ketchup);color:#fff;font-weight:700;font-size:.6rem;letter-spacing:.12em;padding:4px 8px;border:2px solid var(--ink);text-transform:uppercase;transform:rotate(-3deg)}
+.badge.pick{background:var(--pickle)}.badge.new{background:var(--mustard);color:var(--ink)}
+.price{position:absolute;right:8px;bottom:-16px;z-index:2;background:var(--mustard);border:3px solid var(--ink);font-family:var(--f-display);font-size:1.3rem;padding:3px 10px 1px;transform:rotate(3deg);line-height:1.2}
+.card .body{padding:22px 12px 14px;display:flex;flex-direction:column;flex:1}
+.card .cat{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ketchup)}
+.card h3{font-size:1.35rem;margin:3px 0 6px;line-height:1}
+.card p{margin:0;font-size:.82rem;line-height:1.4;opacity:.8}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:22px}.card h3{font-size:1.6rem}.card p{font-size:.9rem}.card .body{padding:24px 16px 18px}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
+/* ===================== 8. SPOTLIGHT ===================== */
+.spot{background:var(--ketchup);color:#fff;overflow:hidden;border-block:var(--bd)}
+.spot .giant{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--f-display);font-size:clamp(9rem,44vw,36rem);line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(0,0,0,.22);white-space:nowrap;pointer-events:none;user-select:none}
+.spot-grid{position:relative;display:grid;gap:40px;align-items:center}
+.spot-img{position:relative;width:min(92%,520px);margin-inline:auto;aspect-ratio:1}
+.spot-img .disc{position:absolute;inset:0;border-radius:50%;background:var(--mustard);border:var(--bd);box-shadow:10px 10px 0 var(--ink);overflow:hidden}
+.spot-img .disc img{width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.spin{position:absolute;top:-14px;right:-8px;width:112px;height:112px;z-index:3;animation:spin 14s linear infinite}
+.spin svg{width:100%;height:100%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spot-text .tag-label{background:var(--mustard);color:var(--ink);margin-bottom:18px}
+.spot-text h2{font-size:clamp(3.4rem,15vw,9rem);line-height:.84}
+.spot-text h2 span{color:var(--mustard);display:block}
+.spot-text p{max-width:38ch;font-size:clamp(1.05rem,2.5vw,1.3rem);margin:22px 0 26px}
+.spot-price{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.spot-price b{font-family:var(--f-display);font-weight:400;font-size:3.6rem;line-height:1;background:var(--ink);color:var(--mustard);padding:6px 16px 2px;transform:rotate(-3deg)}
+@media(min-width:900px){.spot-grid{grid-template-columns:1fr 1fr;gap:80px}}
+/* ===================== 9. GALLERY ===================== */
+.gallery{background:var(--paper-2)}
+.gallery h2{margin:16px 0 36px}
+.gallery h2 em{font-style:normal;color:var(--ketchup)}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;gap:10px}
+.gal figure{margin:0;position:relative;overflow:hidden;border:var(--bd);background:var(--bg,#f4b942)}
+.gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.gal button:focus-visible{outline:4px solid var(--ketchup);outline-offset:-6px}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.gal figure:hover img,.gal button:focus-visible img{transform:scale(1.1)}
+.gal .cap{position:absolute;left:0;bottom:0;background:var(--mustard);border-top:3px solid var(--ink);border-right:3px solid var(--ink);font-family:var(--f-display);text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;padding:4px 10px 2px;transform:translateY(101%);transition:transform .3s var(--ease)}
+.gal figure:hover .cap,.gal button:focus-visible .cap{transform:none}
+@media(hover:none){.gal .cap{transform:none;font-size:.7rem}}
+.gal .t{grid-row:span 2}.gal .w{grid-column:span 2}
+@media(min-width:800px){.gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:190px;gap:14px}
+  .gal .a{grid-column:span 3;grid-row:span 2}.gal .b{grid-column:span 3}.gal .c{grid-column:span 1;grid-row:span 2}.gal .d{grid-column:span 2}.gal .e{grid-column:span 2;grid-row:span 2}.gal .f{grid-column:span 2}.gal .g2{grid-column:span 2}.gal .h{grid-column:span 2}.gal .i{grid-column:span 2}}
+.lb{position:fixed;inset:0;z-index:600;background:rgba(18,18,18,.94);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.lb.open{opacity:1;visibility:visible;transition:opacity .3s}
+.lb figure{margin:0;max-width:min(94vw,980px);transform:scale(.9) rotate(-1deg);transition:transform .4s var(--ease)}
+.lb.open figure{transform:none}
+.lb img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;border:var(--bd);border-color:var(--mustard);min-height:100px;background:#222}
+.lb figcaption{text-align:center;margin-top:14px;font-family:var(--f-marker);font-size:1.3rem;color:var(--mustard)}
+.lb-x{position:absolute;top:14px;right:14px;width:52px;height:52px;background:var(--mustard);border:var(--bd);font-family:var(--f-display);font-size:1.6rem;line-height:1;display:grid;place-items:center;box-shadow:4px 4px 0 var(--ketchup)}
+.lb-x:hover{background:var(--ketchup);color:#fff}
+/* ===================== 10. WHY ===================== */
+.why{background:var(--paper)}
+.why h2{margin:16px 0 40px}
+.why h2 em{font-style:normal;color:var(--ketchup)}
+.why-list{list-style:none;margin:0;padding:0;border:var(--bd);background:var(--white)}
+.why-list li{display:grid;grid-template-columns:auto 1fr;gap:0 18px;padding:24px 18px;border-bottom:var(--bd);position:relative;overflow:hidden;transition:background .3s,color .3s}
+.why-list li:last-child{border-bottom:0}
+.why-list .n{font-family:var(--f-display);font-size:clamp(3.4rem,14vw,6rem);line-height:.8;color:var(--ketchup);grid-row:span 2;-webkit-text-stroke:0}
+.why-list h3{font-size:clamp(1.7rem,6.5vw,2.8rem)}
+.why-list p{margin:6px 0 0;max-width:42ch}
+.why-list .doodle{position:absolute;right:12px;top:10px;font-family:var(--f-marker);font-size:1.1rem;transform:rotate(8deg);color:var(--pickle)}
+@media(hover:hover){.why-list li:hover{background:var(--mustard)}.why-list li:hover .n{color:var(--ink)}}
+@media(min-width:900px){.why-list{display:grid;grid-template-columns:1fr 1fr}.why-list li{border-bottom:var(--bd);padding:34px 28px;grid-template-columns:auto 1fr}.why-list li:nth-child(odd){border-right:var(--bd)}.why-list li:nth-last-child(-n+2){border-bottom:0}}
+/* ===================== 11. REVIEWS ===================== */
+.reviews{background:var(--mustard);border-block:var(--bd);overflow:hidden}
+.reviews::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(18,18,18,.14) 1.5px,transparent 1.6px);background-size:18px 18px;pointer-events:none}
+.reviews .wrap{position:relative}
+.reviews h2{margin:16px 0 44px}
+.reviews h2 em{font-style:normal;color:var(--ketchup);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.rev-grid{display:grid;gap:30px}
+.ticket{margin:0;background:var(--white);border:var(--bd);padding:26px 22px 30px;position:relative;font-family:var(--f-body);box-shadow:6px 6px 0 var(--ink);
+  -webkit-mask:none}
+.ticket::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-12px;height:12px;background:linear-gradient(135deg,var(--white) 50%,transparent 50%) 0 0/16px 12px,linear-gradient(225deg,var(--white) 50%,transparent 50%) 0 0/16px 12px;border-inline:3px solid var(--ink);background-repeat:repeat-x}
+.ticket .top{display:flex;justify-content:space-between;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:2px dashed var(--ink);padding-bottom:10px;margin-bottom:16px}
+.ticket .st{color:var(--ketchup);font-size:1.25rem;letter-spacing:4px;margin-bottom:8px}
+.ticket blockquote{margin:0 0 18px;font-size:1.12rem;font-weight:500;line-height:1.4}
+.ticket figcaption{font-family:var(--f-marker);font-size:1.4rem}
+.rev-foot{margin-top:56px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.rev-foot small{font-weight:700}
+@media(min-width:850px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:34px}.ticket:nth-child(1){transform:rotate(-2deg)}.ticket:nth-child(2){transform:translateY(18px) rotate(1deg)}.ticket:nth-child(3){transform:rotate(-1deg)}}
+/* ===================== 12. FIND US + HOURS ===================== */
+.find{background:var(--paper)}
+.find-grid{display:grid;gap:40px}
+.find h2{margin:16px 0 28px}
+.find h2 em{font-style:normal;color:var(--ketchup)}
+.details{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:16px}
+.details b{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ketchup)}
+.details a,.details span{font-size:1.15rem;font-weight:700;text-decoration:none}
+.details a:hover{color:var(--ketchup)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.demo{font-size:.8rem;font-weight:700;background:var(--paper-2);border:2px dashed var(--ink);padding:8px 12px;display:inline-block}
+.map{border:var(--bd);box-shadow:8px 8px 0 var(--ink);min-height:320px;background:var(--paper-2)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+@media(min-width:900px){.find-grid{grid-template-columns:1fr 1fr;gap:80px}}
+.hours{background:var(--ink);color:var(--paper);margin-top:clamp(56px,9vw,100px);border:var(--bd);box-shadow:8px 8px 0 var(--ketchup);padding:clamp(24px,5vw,56px);display:grid;gap:30px}
+.hours h2{font-size:clamp(2.2rem,8vw,4.4rem);color:var(--mustard)}
+.hours .tag-label{background:var(--mustard);color:var(--ink)}
+.status{display:inline-flex;align-items:center;gap:12px;margin-top:22px;border:3px solid var(--paper);padding:10px 18px;font-family:var(--f-display);letter-spacing:.1em;font-size:1.1rem;text-transform:uppercase}
+.status i{width:14px;height:14px;border-radius:50%;background:#888;border:2px solid var(--ink)}
+.status.open{background:var(--pickle);border-color:var(--pickle);color:#fff}
+.status.open i{background:var(--mustard);animation:pulse 1.6s infinite}
+.status.closed{background:var(--ketchup);border-color:var(--ketchup);color:#fff}
+@keyframes pulse{50%{transform:scale(1.4)}}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{display:flex;justify-content:space-between;gap:12px;padding:14px 10px;border-bottom:2px dashed rgba(247,240,225,.3);font-weight:500}
+.sched li.today{background:var(--mustard);color:var(--ink);font-weight:700;border-bottom-color:var(--mustard);transform:rotate(-.6deg)}
+.sched li.today .d::after{content:" ← TODAY";font-family:var(--f-marker);font-weight:400;color:var(--ketchup)}
+@media(min-width:900px){.hours{grid-template-columns:1fr 1fr;align-items:center}}
+/* ===================== 13. FOOTER ===================== */
+footer{background:var(--ketchup);color:#fff;padding:clamp(56px,9vw,100px) 0 26px;border-top:var(--bd);overflow:hidden}
+.foot-word{font-family:var(--f-display);font-size:clamp(5rem,30vw,26rem);line-height:.78;text-align:center;margin:0 0 40px;color:var(--mustard);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;white-space:nowrap;letter-spacing:.01em}
+.foot-grid{display:grid;gap:30px;margin-bottom:40px}
+.foot-grid h4{margin:0 0 12px;font-family:var(--f-display);font-weight:400;letter-spacing:.14em;text-transform:uppercase;font-size:1.1rem;color:var(--mustard)}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot-grid a{text-decoration:none;font-weight:500}.foot-grid a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot-grid p{margin:0;font-weight:500}
+.foot-tag{font-family:var(--f-marker);font-size:1.7rem;margin-bottom:10px!important}
+.foot-bottom{border-top:3px solid rgba(255,255,255,.4);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:.78rem;font-weight:700;letter-spacing:.06em}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+.totop{position:fixed;right:14px;bottom:14px;z-index:250;width:52px;height:52px;background:var(--mustard);border:var(--bd);font-family:var(--f-display);font-size:1.5rem;line-height:1;display:grid;place-items:center;box-shadow:4px 4px 0 var(--ink);opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .25s,transform .25s var(--ease),visibility 0s .25s,box-shadow .2s}
+.totop.show{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .25s var(--ease),box-shadow .2s}
+.totop:hover{box-shadow:1px 1px 0 var(--ink)}
+/* ===================== 14. MOTION ===================== */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#home" aria-label="GRAB'D home"><span>GRAB</span><i>'D</i></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#reviews">Fan Reviews</a></li>
+      <li><a href="#find">Find Us</a></li>
+    </ul>
+    <a class="btn sm cta" href="#menu">Get Hungry</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#reviews">Fan Reviews</a></li>
+    <li><a href="#find">Find Us</a></li>
+  </ul>
+  <a class="btn y" href="#menu">Get Hungry</a>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag-label eyebrow rv">Made for the cravings</span>
+      <h1 class="rv" style="--d:.08s"><span>Hunger</span><span class="r">doesn't</span><span>wait.</span></h1>
+      <p class="lead rv" style="--d:.16s">Stacked burgers, loaded sides, killer sandwiches and shakes worth slowing down for.</p>
+      <div class="hero-btns rv" style="--d:.24s">
+        <a class="btn" href="#menu">Explore the menu</a>
+        <a class="btn w" href="#story">Meet GRAB'D</a>
+      </div>
+      <a class="scroll-cue rv" style="--d:.3s" href="#menu" aria-label="Scroll to menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7"/></svg>
+        <span class="marker">scroll, we're loaded</span>
+      </a>
+    </div>
+    <div class="hero-visual rv" style="--d:.15s">
+      <div class="hero-photo"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" alt="A stacked cheeseburger with a juicy patty" fetchpriority="high"></div>
+      <div class="sticker st1"><div><b>2×</b>smashed<br>patties</div></div>
+      <div class="sticker st2"><div>fresh<br>off the<br>grill</div></div>
+    </div>
+  </div>
+  <div class="cats"><span>Burgers</span><span>Sandwiches</span><span>Fries</span><span>Shakes</span></div>
+</section>
+
+<!-- STORY -->
+<section class="sec story" id="story">
+  <div class="wrap story-grid">
+    <div class="collage rv">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="a"><img loading="lazy" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=75" alt="Kitchen staff preparing food on a busy grill"></div>
+      <div class="b"><img loading="lazy" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=75" alt="Golden crispy fries"></div>
+    </div>
+    <div class="story-text">
+      <span class="tag-label rv">Who we are</span>
+      <h2 class="rv" style="--d:.1s">Real food. <em>Loud flavour.</em> No shortcuts.</h2>
+      <p class="rv" style="--d:.15s">GRAB'D is built around one simple idea: fast food should never be boring. We bring together juicy patties, crunchy bites, fresh toppings, bold sauces and proper comfort-food energy. Every craving deserves a good answer.</p>
+      <p class="rv" style="--d:.2s">Whether it's a quick lunch break, a late-night craving, or a casual hangout with friends, we're the place where the table gets loud and nobody leaves hungry.</p>
+      <a class="btn k rv" style="--d:.25s" href="#why">Our food philosophy</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu" id="menu">
+  <div class="wrap">
+    <span class="tag-label rv">The menu</span>
+    <h2 class="rv" style="--d:.08s">Pick your <em>poison.</em></h2>
+    <p class="sub rv" style="--d:.15s">Burgers, wraps, sides and shakes. Showcase menu, come hungry.</p>
+    <div class="filters rv" id="filters" role="group" aria-label="Filter menu by category">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="burger" aria-pressed="false">Burgers</button>
+      <button class="chip" data-f="sandwich" aria-pressed="false">Sandwiches</button>
+      <button class="chip" data-f="wrap" aria-pressed="false">Wraps</button>
+      <button class="chip" data-f="side" aria-pressed="false">Sides</button>
+      <button class="chip" data-f="shake" aria-pressed="false">Shakes</button>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="sec spot" id="signature">
+  <div class="giant" aria-hidden="true">DOUBLE</div>
+  <div class="wrap spot-grid">
+    <div class="spot-img rv">
+      <div class="disc"><img loading="lazy" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=1000&q=80" alt="A double smash burger with melted cheese"></div>
+      <div class="spin" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="c" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><circle cx="60" cy="60" r="58" fill="#FFC72C" stroke="#121212" stroke-width="4"/><text font-family="Anton,sans-serif" font-size="15" letter-spacing="2.4" fill="#121212"><textPath href="#c">THE HOUSE LEGEND ★ THE HOUSE LEGEND ★</textPath></text><text x="60" y="70" text-anchor="middle" font-family="Anton,sans-serif" font-size="30" fill="#E4301B">★</text></svg>
+      </div>
+    </div>
+    <div class="spot-text">
+      <span class="tag-label rv">The house legend</span>
+      <h2 class="rv" style="--d:.1s">The GRAB'D <span>Double</span></h2>
+      <p class="rv" style="--d:.2s">Two smashed patties. Double cheese. Pickles, crispy onions and our secret sauce. Built big. Gone fast.</p>
+      <div class="spot-price rv" style="--d:.3s"><b>₹329</b><a class="btn y" href="#menu">See the menu</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery" id="gallery">
+  <div class="wrap">
+    <span class="tag-label rv">Gallery</span>
+    <h2 class="rv" style="--d:.08s">Look at <em>that.</em></h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why" id="why">
+  <div class="wrap">
+    <span class="tag-label rv">Our food philosophy</span>
+    <h2 class="rv" style="--d:.08s">Why <em>GRAB'D?</em></h2>
+    <ul class="why-list">
+      <li class="rv"><span class="n">01</span><h3>Fresh Off The Grill</h3><p>Food made fresh, not sitting around.</p><span class="doodle" aria-hidden="true">hot!</span></li>
+      <li class="rv" style="--d:.06s"><span class="n">02</span><h3>Big Flavour Energy</h3><p>Sauces, seasoning, crunch, and craveable combinations.</p><span class="doodle" aria-hidden="true">loud!</span></li>
+      <li class="rv" style="--d:.12s"><span class="n">03</span><h3>Made For The Moment</h3><p>Quick bites, hangouts, and satisfying breaks.</p><span class="doodle" aria-hidden="true">now!</span></li>
+      <li class="rv" style="--d:.18s"><span class="n">04</span><h3>No Boring Bites</h3><p>Familiar favourites with a little extra personality.</p><span class="doodle" aria-hidden="true">never!</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec reviews" id="reviews">
+  <div class="wrap">
+    <span class="tag-label rv">Fan reviews</span>
+    <h2 class="rv" style="--d:.08s">Straight from <em>the fans.</em></h2>
+    <div class="rev-grid">
+      <figure class="ticket rv"><div class="top"><span>Order #0421</span><span>Sample</span></div><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>That smash burger is unreal. The sauce and crispy edges are a perfect combo.</blockquote><figcaption>— Kunal</figcaption></figure>
+      <figure class="ticket rv" style="--d:.1s"><div class="top"><span>Order #0422</span><span>Sample</span></div><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Loaded fries and Oreo shake. That is my entire happiness sorted.</blockquote><figcaption>— Neha</figcaption></figure>
+      <figure class="ticket rv" style="--d:.2s"><div class="top"><span>Order #0423</span><span>Sample</span></div><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Great place to grab a bite with friends. The food is fun, filling and full of flavour.</blockquote><figcaption>— Dev</figcaption></figure>
+    </div>
+    <div class="rev-foot rv">
+      <a class="btn k" href="https://www.google.com/search?q=GRAB%27D+fast+food+reviews" target="_blank" rel="noopener">Review us ↗</a>
+      <small>Sample reviews for a fictional brand.</small>
+    </div>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="sec find" id="find">
+  <div class="wrap">
+    <div class="find-grid">
+      <div>
+        <span class="tag-label rv">Find us</span>
+        <h2 class="rv" style="--d:.08s">Your next craving <em>has an address.</em></h2>
+        <ul class="details rv" style="--d:.15s">
+          <li><b>Address</b><span>22 Street Food Avenue, City Centre, Surat, Gujarat, India</span></li>
+          <li><b>Phone</b><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><b>Email</b><a href="mailto:hello@grabd.in">hello@grabd.in</a></li>
+        </ul>
+        <div class="links rv" style="--d:.2s">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=22+Street+Food+Avenue+City+Centre+Surat+Gujarat+India" target="_blank" rel="noopener">Get directions ↗</a>
+          <a class="btn w" href="tel:+919876543210">Call us</a>
+          <a class="btn w" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn w" href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+        <span class="demo rv" style="--d:.25s">Demo content: the address is fictional.</span>
+      </div>
+      <div class="map rv" style="--d:.15s">
+        <iframe title="Map of Surat, Gujarat" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Surat,Gujarat,India&output=embed"></iframe>
+      </div>
+    </div>
+
+    <div class="hours rv" id="hours">
+      <div>
+        <span class="tag-label">Opening hours</span>
+        <h2 style="margin-top:16px">Open late. Eat great.</h2>
+        <div class="status" id="status" role="status"><i></i><span>Checking…</span></div>
+      </div>
+      <ul class="sched" id="sched"></ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">GRAB'D</p>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-tag">Big Bites. Zero Boring.</p>
+        <p>22 Street Food Avenue, City Centre,<br>Surat, Gujarat, India</p>
+        <p style="margin-top:8px"><a href="tel:+919876543210">+91 98765 43210</a></p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#home">Home</a></li><li><a href="#menu">Menu</a></li><li><a href="#story">Our Story</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Fan Reviews</a></li><li><a href="#find">Find Us</a></li></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li></ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon – Thu · 11 AM – 11 PM<br>Fri – Sun · 11 AM – 12 AM</p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 GRAB'D. All rights reserved.</span><span>DEMO FOOD BRAND · SURAT FOOD ZONE</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-x" id="lbx" aria-label="Close image">×</button>
+  <figure><img id="lbimg" src="" alt=""><figcaption id="lbcap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  document.body.classList.remove('no-js');
+  var U=function(id,w){return 'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||600)+'&q=75';};
+  function imgFail(e){e.target.style.display='none';}
+
+  /* ===== MENU DATA (edit here). t: best | pick | new ===== */
+  var CATS={burger:'Burger',sandwich:'Sandwich',wrap:'Wrap',side:'Side',shake:'Shake'};
+  var TAGS={best:'Bestseller',pick:"GRAB'D Pick",new:'New'};
+  var MENU=[
+    {n:'Classic Smash',p:199,c:'burger',d:'Double smashed patty, cheese, pickles, onions, and house sauce.',i:'1550547660-d9450f859349',bg:'#f2a33a',t:'best'},
+    {n:'Firecracker Burger',p:249,c:'burger',d:'Spicy crispy patty, jalapeños, pepper sauce, and crunchy slaw.',i:'1586190848861-99aa4a171e90',bg:'#e4401f',t:'new'},
+    {n:'BBQ Beast',p:279,c:'burger',d:'Smoky BBQ patty, caramelized onions, cheddar, and BBQ glaze.',i:'1594212699903-ec8a3eca50f5',bg:'#8a4b2a',t:'pick'},
+    {n:'Mighty Veg Stack',p:229,c:'burger',d:'Crunchy veggie patty, lettuce, tomato, cheese, and signature dressing.',i:'1520072959219-c595dc870360',bg:'#7aa84a'},
+    {n:'Double Trouble',p:329,c:'burger',d:"Two juicy patties, double cheese, and extra GRAB'D sauce.",i:'1553979459-d2229ba7433b',bg:'#f2a33a',t:'pick'},
+    {n:'Grilled Cheese Melt',p:169,c:'sandwich',d:'Toasted bread with a gooey cheese blend.',i:'1528735602780-2552fd46c7af',bg:'#f6c85a'},
+    {n:'Chicken Club',p:249,c:'sandwich',d:'Chicken, lettuce, tomato, cheese, and creamy house dressing.',i:'1567234669003-dce7a7a88821',bg:'#d9a066',t:'best'},
+    {n:'Paneer Crunch',p:219,c:'sandwich',d:'Crispy paneer, fresh veggies, and spicy mayo.',i:'1539252554453-80ab65ce3586',bg:'#e8a65a'},
+    {n:'Street Stack Sandwich',p:199,c:'sandwich',d:'A loaded sandwich with crunchy fillings and tangy sauce.',i:'1553909489-cd47e0907980',bg:'#c7a15a'},
+    {n:'Crispy Chicken Wrap',p:219,c:'wrap',d:'Crispy chicken, lettuce, and creamy spicy sauce.',i:'1626700051175-6818013e1d4f',bg:'#e0b36a',t:'best'},
+    {n:'Paneer Tikka Wrap',p:199,c:'wrap',d:'Tikka paneer, peppers, onion, and mint sauce.',i:'1565299585323-38d6b0865b47',bg:'#d98a3a'},
+    {n:'Loaded Veg Wrap',p:179,c:'wrap',d:'Grilled veggies, crunchy greens, and house dressing.',i:'1600850056064-a8b380df8395',bg:'#9bc267'},
+    {n:'Classic Fries',p:99,c:'side',d:'Golden, crispy, salted fries.',i:'1573080496219-bb080dd4f877',bg:'#f6c93a'},
+    {n:'Loaded Cheese Fries',p:179,c:'side',d:'Fries topped with cheese sauce and seasoning.',i:'1630384060421-cb20d0e0649d',bg:'#f0b429',t:'pick'},
+    {n:'Peri Peri Wedges',p:149,c:'side',d:'Crispy potato wedges with peri-peri spice.',i:'1518013431117-eb1465fa5752',bg:'#e0742a'},
+    {n:'Crispy Nuggets',p:169,c:'side',d:'Crunchy bite-sized nuggets with dip.',i:'1562967914-608f82629710',bg:'#e8a23a'},
+    {n:'Onion Rings',p:129,c:'side',d:'Golden onion rings with a crunchy coating.',i:'1639024471283-03518883512d',bg:'#f1b84a'},
+    {n:'Thick Chocolate Shake',p:179,c:'shake',d:'Rich chocolate shake topped with chocolate drizzle.',i:'1572490122747-3968b75cc699',bg:'#7a4a36'},
+    {n:'Oreo Overload',p:199,c:'shake',d:'Creamy shake blended with cookie pieces.',i:'1579954115545-a95591f28bfc',bg:'#9a8a84',t:'best'},
+    {n:'Strawberry Rush',p:179,c:'shake',d:'Sweet strawberry shake with a creamy finish.',i:'1553177595-4de2bb0842b9',bg:'#ff9db8'},
+    {n:'Caramel Crunch',p:209,c:'shake',d:'Caramel shake with crunchy topping.',i:'1517701604599-bb29b565090c',bg:'#d4a373',t:'new'},
+    {n:'Cold Coffee Kick',p:169,c:'shake',d:'Chilled coffee blended smooth.',i:'1461023058943-07fcbe16d735',bg:'#b9895b'}
+  ];
+  var grid=document.getElementById('grid');
+  function renderMenu(f){
+    var h='', arr=MENU.filter(function(x){return f==='all'||x.c===f;});
+    arr.forEach(function(x,k){
+      h+='<article class="card" style="animation-delay:'+(k*35)+'ms"><div class="ph" style="--bg:'+x.bg+'"><img loading="lazy" src="'+U(x.i,600)+'" alt="'+x.n+'">'
+        +(x.t?'<span class="badge '+x.t+'">'+TAGS[x.t]+'</span>':'')+'<span class="price">₹'+x.p+'</span></div>'
+        +'<div class="body"><span class="cat">'+CATS[x.c]+'</span><h3>'+x.n+'</h3><p>'+x.d+'</p></div></article>';
+    });
+    grid.innerHTML=h;
+    grid.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+  }
+  renderMenu('all');
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b=e.target.closest('.chip'); if(!b) return;
+    this.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});
+    renderMenu(b.dataset.f);
+    b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+
+  /* ===== GALLERY DATA ===== */
+  var GAL=[
+    {i:'1568901346375-23c9450c58cd',cap:'Stacked. Always.',k:'a',m:'w t'},
+    {i:'1573080496219-bb080dd4f877',cap:'Fries on fries',k:'b',m:''},
+    {i:'1556910103-1c02745aae4d',cap:'Behind the grill',k:'c',m:'t'},
+    {i:'1572490122747-3968b75cc699',cap:'Shake o\'clock',k:'d',m:''},
+    {i:'1555396273-367ea4eb4db5',cap:'Table for the crew',k:'e',m:'t'},
+    {i:'1626700051175-6818013e1d4f',cap:'Wrapped up',k:'f',m:''},
+    {i:'1567234669003-dce7a7a88821',cap:'Club class',k:'g2',m:'w'},
+    {i:'1630384060421-cb20d0e0649d',cap:'Loaded',k:'h',m:''},
+    {i:'1550547660-d9450f859349',cap:'Smash it',k:'i',m:''}
+  ];
+  var gal=document.getElementById('gal'), gh='';
+  GAL.forEach(function(g,n){
+    gh+='<figure class="'+g.k+' '+g.m+' rv" style="--bg:#f2a33a;--d:'+((n%3)*.07)+'s"><button type="button" data-k="'+n+'" aria-label="Open image: '+g.cap+'"><img loading="lazy" src="'+U(g.i,g.k==='a'||g.k==='e'?1100:800)+'" alt="'+g.cap+'"><span class="cap">'+g.cap+'</span></button></figure>';
+  });
+  gal.innerHTML=gh;
+  gal.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap'),lbx=document.getElementById('lbx'),lastF=null;
+  function openLB(n){var g=GAL[n];lastF=document.activeElement;lbimg.src=U(g.i,1500);lbimg.alt=g.cap;lbcap.textContent=g.cap;lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.classList.add('lock');lbx.focus();}
+  function closeLB(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('lock');if(lastF)lastF.focus();}
+  gal.addEventListener('click',function(e){var b=e.target.closest('button');if(b)openLB(+b.dataset.k);});
+  lbx.addEventListener('click',closeLB);
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')closeLB();});
+
+  /* ===== NAV ===== */
+  var header=document.getElementById('header'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+  function setMenu(o){drawer.classList.toggle('open',o);burger.setAttribute('aria-expanded',o?'true':'false');burger.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('lock',o);}
+  burger.addEventListener('click',function(){setMenu(!drawer.classList.contains('open'));});
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  window.addEventListener('resize',function(){if(window.innerWidth>=980)setMenu(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){if(lb.classList.contains('open'))closeLB();else if(drawer.classList.contains('open'))setMenu(false);}
+  });
+  var totop=document.getElementById('totop');
+  function onScroll(){var y=window.scrollY||document.documentElement.scrollTop;header.classList.toggle('scrolled',y>30);totop.classList.toggle('show',y>700);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  /* ===== REVEAL ===== */
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    rvs.forEach(function(el){io.observe(el);});
+  } else rvs.forEach(function(el){el.classList.add('in');});
+
+  /* ===== HOURS (24h clock; close of 24 = midnight, >24 = after midnight) ===== */
+  var HOURS=[ // 0 Sun ... 6 Sat
+    {d:'Sunday',o:11,c:24},{d:'Monday',o:11,c:23},{d:'Tuesday',o:11,c:23},{d:'Wednesday',o:11,c:23},
+    {d:'Thursday',o:11,c:23},{d:'Friday',o:11,c:24},{d:'Saturday',o:11,c:24}
+  ];
+  var ORDER=[1,2,3,4,5,6,0];
+  function fmt(h){h=h%24;var ap=h>=12?'PM':'AM',hh=h%12||12;return hh+':00 '+ap;}
+  function state(){
+    var n=new Date(),day=n.getDay(),hr=n.getHours()+n.getMinutes()/60,t=HOURS[day],y=HOURS[(day+6)%7];
+    if(y.c>24&&hr<(y.c-24)) return {open:true,day:(day+6)%7,close:y.c};
+    if(hr>=t.o&&hr<t.c) return {open:true,day:day,close:t.c};
+    return {open:false,day:day,next:hr<t.o?t:HOURS[(day+1)%7],tomorrow:hr>=t.o};
+  }
+  function render(){
+    var s=state(),h='';
+    ORDER.forEach(function(di){var x=HOURS[di];h+='<li'+(di===s.day?' class="today" aria-current="date"':'')+'><span class="d">'+x.d+'</span><span>'+fmt(x.o)+' – '+fmt(x.c)+'</span></li>';});
+    document.getElementById('sched').innerHTML=h;
+    var el=document.getElementById('status'),tx=el.querySelector('span');
+    el.className='status '+(s.open?'open':'closed');
+    tx.textContent=s.open?'Open now · until '+fmt(s.close):'Closed · opens '+(s.tomorrow?'tomorrow ':'today ')+fmt(s.next.o);
+  }
+  render();setInterval(render,60000);
+})();
+</script>
+</body>
+</html>

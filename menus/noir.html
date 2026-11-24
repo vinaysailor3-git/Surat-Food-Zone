@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOIR — The Midnight Cafe · Stay a little longer.</title>
+<meta name="description" content="NOIR is a late-night concept cafe for slow coffee, desserts and handcrafted mocktails. Demo website.">
+<meta name="theme-color" content="#0A0C12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME TOKENS (edit here) ===== */
+:root{
+  --night:#0A0C12; --night-2:#10131C; --night-3:#171B27; --line:rgba(217,220,230,.14);
+  --moon:#E4E6EE; --moon-dim:#A4A9BA; --amber:#E9A94F; --violet:#8E82E0;
+  --f-serif:'Cormorant Garamond',Georgia,serif;
+  --f-sans:'Jost',system-ui,sans-serif;
+  --pad:clamp(20px,5vw,80px); --maxw:1240px;
+  --ease:cubic-bezier(.2,.7,.2,1); --hh:68px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--night);color:var(--moon);font-family:var(--f-sans);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:500;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--amber);color:var(--night);padding:10px 16px;z-index:600}
+.skip:focus{left:8px}
+
+/* Type */
+.eyebrow{font-size:.7rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);display:block}
+h1,h2,h3{font-family:var(--f-serif);font-weight:500;margin:0;line-height:1;letter-spacing:-.01em}
+h2{font-size:clamp(2.3rem,7.5vw,4.6rem)}
+h2 em,h1 em{font-style:italic;color:var(--amber);font-weight:400}
+.sec{padding:clamp(80px,12vw,150px) 0;position:relative}
+.sec-head{margin-bottom:clamp(36px,6vw,64px);display:grid;gap:18px}
+.sec-head h2{margin-top:6px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 28px;border:1px solid var(--moon);background:transparent;color:var(--moon);font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s var(--ease),border-color .4s,transform .3s}
+.btn::before{content:"";position:absolute;inset:0;background:var(--moon);transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1}
+.btn{isolation:isolate}
+.btn:hover{color:var(--night)}.btn:hover::before{transform:none}
+.btn.solid{background:var(--amber);border-color:var(--amber);color:var(--night);font-weight:600}
+.btn.solid::before{background:var(--moon)}
+.btn.sm{min-height:42px;padding:0 20px;font-size:.66rem}
+
+/* Header */
+header.site{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:200;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+header.site.scrolled{background:rgba(10,12,18,.85);backdrop-filter:blur(12px);border-color:var(--line)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;position:relative;z-index:230}
+.moon{width:22px;height:22px;border-radius:50%;background:var(--moon);position:relative;flex:none;box-shadow:inset -7px -2px 0 0 var(--night)}
+.logo b{font-family:var(--f-serif);font-weight:500;font-size:1.7rem;letter-spacing:.32em;line-height:1}
+.logo small{display:none;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--moon-dim);margin-left:2px}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:30px}
+.nav ul a{text-decoration:none;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;color:var(--moon-dim);transition:color .3s;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav ul a:hover{color:var(--moon)}.nav ul a:hover::after{transform:scaleX(1)}
+.nav .cta{display:none}
+.burger{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:transparent;position:relative;z-index:230;display:grid;place-items:center}
+.burger i,.burger i::before{display:block;width:18px;height:1px;background:var(--moon);position:relative;transition:transform .35s var(--ease),background .2s}
+.burger i::before{content:"";position:absolute;top:6px;left:0}
+.burger i{transform:translateY(-3px)}
+.burger[aria-expanded="true"] i{transform:rotate(45deg)}
+.burger[aria-expanded="true"] i::before{transform:translateY(-6px) rotate(-90deg);top:6px}
+.drawer{position:fixed;inset:0;z-index:220;background:var(--night);display:flex;flex-direction:column;justify-content:center;padding:100px var(--pad) 40px;opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility 0s .45s}
+.drawer::before{content:"";position:absolute;right:-30vw;top:-20vw;width:80vw;height:80vw;border-radius:50%;background:radial-gradient(circle,rgba(142,130,224,.22),transparent 65%)}
+.drawer.open{opacity:1;visibility:visible;transition:opacity .45s var(--ease)}
+.drawer ul{list-style:none;margin:0 0 36px;padding:0;position:relative}
+.drawer li{border-bottom:1px solid var(--line);overflow:hidden}
+.drawer li a{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-serif);font-size:clamp(2rem,9vw,3rem);text-decoration:none;padding:12px 0;transform:translateY(100%);transition:transform .6s var(--ease)}
+.drawer li a span{font-family:var(--f-sans);font-size:.62rem;letter-spacing:.2em;color:var(--amber)}
+.drawer.open li a{transform:none}
+.drawer.open li:nth-child(2) a{transition-delay:.05s}.drawer.open li:nth-child(3) a{transition-delay:.1s}.drawer.open li:nth-child(4) a{transition-delay:.15s}.drawer.open li:nth-child(5) a{transition-delay:.2s}.drawer.open li:nth-child(6) a{transition-delay:.25s}
+.drawer .btn{align-self:flex-start;position:relative}
+body.lock{overflow:hidden}
+@media(min-width:980px){.nav ul{display:flex}.nav .cta{display:inline-flex}.burger,.drawer{display:none}.logo small{display:inline}}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 90px;overflow:hidden;background:radial-gradient(ellipse at 70% 30%,#2a2447 0%,#10131C 50%,#0A0C12 100%)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% center;opacity:.55;transform:scale(1.06);animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.14) translate(-1.5%,1%)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,18,.55) 0%,rgba(10,12,18,.1) 35%,rgba(10,12,18,.85) 80%,var(--night) 100%),radial-gradient(circle at 15% 80%,rgba(10,12,18,.8),transparent 55%)}
+.hero .wrap{position:relative;width:100%}
+.hero .eyebrow{margin-bottom:22px}
+.hero h1{font-size:clamp(3.6rem,17vw,10.5rem);text-transform:uppercase;letter-spacing:-.02em;line-height:.88}
+.hero h1 span{display:block}
+.hero h1 .yours{font-style:italic;text-transform:none;color:var(--amber);font-weight:400;padding-left:.15em}
+.hero p{max-width:34ch;font-size:clamp(1.05rem,2.6vw,1.3rem);color:var(--moon);margin:26px 0 32px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero-meta{position:absolute;right:var(--pad);bottom:0;display:none}
+.hero-small{margin-top:42px;font-size:.66rem;letter-spacing:.3em;color:var(--moon-dim);display:flex;align-items:center;gap:12px}
+.hero-small::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px var(--amber);animation:flick 3s infinite}
+@keyframes flick{0%,100%{opacity:1}45%{opacity:.5}55%{opacity:1}70%{opacity:.7}}
+.cue{position:absolute;right:var(--pad);bottom:34px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;writing-mode:vertical-rl;color:var(--moon-dim);text-decoration:none;display:none}
+.cue::after{content:"";width:1px;height:56px;background:linear-gradient(var(--amber),transparent);animation:line 2.2s infinite;transform-origin:top}
+@keyframes line{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@media(min-width:700px){.cue{display:flex}}
+.stars-bg{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 78% 12%,#fff,transparent),radial-gradient(1.5px 1.5px at 44% 8%,#fff,transparent),radial-gradient(1px 1px at 90% 38%,#fff,transparent),radial-gradient(1px 1px at 28% 30%,#fff,transparent);opacity:.5;animation:twk 6s ease-in-out infinite alternate}
+@keyframes twk{to{opacity:.2}}
+
+/* Experience */
+.exp-grid{display:grid;gap:50px;align-items:center}
+.exp-img{position:relative;padding:0 0 60px 0}
+.exp-img .main{aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#2a2447,#10131C);border-radius:200px 200px 0 0;border:1px solid var(--line)}
+.exp-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.exp-img .small{position:absolute;right:-4px;bottom:0;width:46%;aspect-ratio:1;overflow:hidden;border:6px solid var(--night);background:#171B27}
+.exp-img .circle{position:absolute;left:-8px;top:10%;width:76px;height:76px;border-radius:50%;background:var(--amber);color:var(--night);display:grid;place-items:center;font-family:var(--f-serif);font-style:italic;font-size:1rem;text-align:center;line-height:1;transform:rotate(-12deg)}
+.exp-text h2{margin:18px 0 28px}
+.exp-text p{color:var(--moon-dim);max-width:46ch;margin:0 0 18px;font-size:1.05rem}
+.exp-text .pull{font-family:var(--f-serif);font-style:italic;font-size:clamp(1.5rem,4vw,2rem);color:var(--moon);line-height:1.2;margin:26px 0 32px;padding-left:20px;border-left:1px solid var(--amber)}
+@media(min-width:900px){.exp-grid{grid-template-columns:.95fr 1.05fr;gap:90px}}
+
+/* Menu */
+.menu{background:var(--night-2)}
+.filters{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad) * -1);padding:4px var(--pad);scroll-snap-type:x proximity}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:44px;padding:0 22px;border:1px solid var(--line);background:transparent;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--moon-dim);border-radius:999px;scroll-snap-align:start;transition:all .3s var(--ease)}
+.chip:hover{color:var(--moon);border-color:var(--moon-dim)}
+.chip[aria-pressed="true"]{background:var(--moon);color:var(--night);border-color:var(--moon)}
+.mlist{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:76px 1fr auto;gap:6px 18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);animation:rise .55s var(--ease) both;transition:padding .4s var(--ease),background .4s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.item .th{width:76px;height:76px;overflow:hidden;background:var(--bg,#2a2447);border-radius:50%;grid-row:span 2;border:1px solid var(--line)}
+.item .th img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);filter:saturate(.9)}
+.item h3{font-size:1.45rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.item p{margin:0;grid-column:2/4;color:var(--moon-dim);font-size:.9rem;line-height:1.5}
+.item .pr{font-family:var(--f-serif);font-size:1.5rem;color:var(--amber)}
+.tg{font-family:var(--f-sans);font-size:.55rem;letter-spacing:.2em;font-weight:500;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tg.v{border-color:var(--violet);color:var(--violet)}
+@media(hover:hover){.item:hover .th img{transform:scale(1.15)}.item:hover{padding-left:14px;background:linear-gradient(90deg,rgba(142,130,224,.08),transparent)}}
+@media(min-width:900px){
+  .mlist{grid-template-columns:1fr 1fr;column-gap:70px}
+  .item{grid-template-columns:84px 1fr auto}.item .th{width:84px;height:84px}
+}
+
+/* Spotlight */
+.spot{overflow:hidden;background:#07080D}
+.spot .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--f-serif);font-size:clamp(7rem,38vw,34rem);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(228,230,238,.09);white-space:nowrap;pointer-events:none;line-height:.8;user-select:none}
+.spot-grid{position:relative;display:grid;gap:44px;align-items:center}
+.eclipse{position:relative;width:min(88%,430px);aspect-ratio:1;margin-inline:auto}
+.eclipse .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle,#3b2a1f,#0A0C12);box-shadow:0 0 0 1px var(--line),0 0 120px rgba(233,169,79,.22)}
+.eclipse .disc img{width:100%;height:100%;object-fit:cover}
+.eclipse .ring{position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(233,169,79,.5);animation:spin 40s linear infinite}
+.eclipse .ring::after{content:"";position:absolute;top:50%;left:-4px;width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px var(--amber)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spot-text .eyebrow{margin-bottom:16px}
+.spot-text h2{font-size:clamp(3.4rem,15vw,8.5rem);text-transform:uppercase;line-height:.85;letter-spacing:-.02em}
+.spot-text p{max-width:40ch;color:var(--moon-dim);font-size:1.1rem;margin:24px 0 28px}
+.spot-price{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.spot-price b{font-family:var(--f-serif);font-weight:500;font-size:3.2rem;color:var(--amber)}
+@media(min-width:900px){.spot-grid{grid-template-columns:1fr 1fr;gap:80px}}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;gap:8px}
+.gal .g{position:relative;overflow:hidden;background:var(--bg,#171B27)}
+.gal .g button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.gal .g button:focus-visible{outline:2px solid var(--amber);outline-offset:-4px}
+.gal img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.85);transition:transform 1s var(--ease),filter .6s}
+.gal .g:hover img,.gal .g button:focus-visible img{transform:scale(1.08);filter:saturate(1) brightness(1)}
+.gal .cap{position:absolute;left:12px;bottom:10px;font-family:var(--f-serif);font-style:italic;font-size:1rem;text-shadow:0 1px 8px #000;opacity:.95}
+.gal .t{grid-row:span 2}.gal .w{grid-column:span 2}
+@media(min-width:800px){.gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:190px;gap:12px}
+  .gal .a{grid-column:span 3;grid-row:span 2}.gal .b{grid-column:span 3}.gal .c{grid-column:span 2}.gal .d{grid-column:span 1;grid-row:span 2}.gal .e{grid-column:span 2;grid-row:span 2}.gal .f{grid-column:span 2}.gal .g2{grid-column:span 2}.gal .h{grid-column:span 2}.gal .i{grid-column:span 2}}
+.lb{position:fixed;inset:0;z-index:400;background:rgba(5,6,10,.94);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.lb.open{opacity:1;visibility:visible;transition:opacity .4s}
+.lb figure{margin:0;max-width:min(94vw,1000px);transform:scale(.94);transition:transform .5s var(--ease)}
+.lb.open figure{transform:none}
+.lb img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;min-height:100px;background:var(--night-3)}
+.lb figcaption{text-align:center;margin-top:14px;font-family:var(--f-serif);font-style:italic;font-size:1.2rem;color:var(--moon-dim)}
+.lb-x{position:absolute;top:16px;right:16px;width:50px;height:50px;border-radius:50%;border:1px solid var(--moon-dim);background:transparent;font-size:1.6rem;line-height:1;display:grid;place-items:center;transition:background .3s,color .3s}
+.lb-x:hover{background:var(--moon);color:var(--night)}
+
+/* Atmosphere */
+.atmo{background:var(--night-2);overflow:hidden}
+.atmo-list{counter-reset:a;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.atmo-list li{display:grid;grid-template-columns:auto 1fr;gap:4px 22px;padding:30px 0;border-bottom:1px solid var(--line);position:relative}
+.atmo-list li::before{counter-increment:a;content:"0" counter(a);font-family:var(--f-serif);font-style:italic;color:var(--amber);font-size:1.3rem;grid-row:span 2;padding-top:6px}
+.atmo-list h3{font-size:clamp(1.9rem,6vw,3.2rem);transition:transform .5s var(--ease),color .4s}
+.atmo-list p{margin:0;color:var(--moon-dim);max-width:44ch}
+.atmo-list li::after{content:"";position:absolute;right:0;top:50%;width:46px;height:46px;border-radius:50%;background:var(--violet);opacity:.0;transform:translateY(-50%) scale(.4);transition:all .6s var(--ease);box-shadow:inset -14px -4px 0 0 var(--night-2)}
+@media(hover:hover){.atmo-list li:hover h3{transform:translateX(14px);color:var(--amber)}.atmo-list li:hover::after{opacity:1;transform:translateY(-50%) scale(1)}}
+@media(max-width:699px){.atmo-list li::after{opacity:.9;transform:translateY(-50%) scale(.6);right:-6px;width:36px;height:36px}}
+@media(min-width:900px){.atmo-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:80px;align-items:start}.atmo-grid .sec-head{position:sticky;top:110px}.atmo-list li{grid-template-columns:70px 1fr 1fr;align-items:center}.atmo-list li::before{grid-row:auto}}
+
+/* Reviews */
+.reviews{background:radial-gradient(ellipse at 50% 0%,#1c1838,var(--night) 70%)}
+.rev-grid{display:grid;gap:22px}
+.rev{margin:0;border:1px solid var(--line);padding:32px 26px;position:relative;background:rgba(255,255,255,.015)}
+.rev::before{content:"“";font-family:var(--f-serif);font-size:5rem;line-height:.6;color:var(--amber);display:block;height:32px}
+.rev .st{color:var(--amber);letter-spacing:5px;font-size:.85rem;margin-bottom:14px}
+.rev blockquote{margin:0 0 22px;font-family:var(--f-serif);font-size:1.4rem;line-height:1.3;color:var(--moon)}
+.rev figcaption{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--moon-dim)}
+.rev-foot{margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.rev-foot small{color:var(--moon-dim);font-size:.8rem}
+@media(min-width:850px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:0}.rev{border-right:0}.rev:last-child{border-right:1px solid var(--line)}.rev:nth-child(2){margin-top:44px}.rev{padding:42px 32px}}
+
+/* Hours + Find us */
+.hours-grid{display:grid;gap:44px}
+.status{display:inline-flex;align-items:center;gap:12px;margin-top:26px;border:1px solid var(--line);padding:11px 20px;border-radius:999px;font-size:.72rem;letter-spacing:.24em;font-weight:500}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--moon-dim)}
+.status.open{border-color:rgba(233,169,79,.6);color:var(--amber)}
+.status.open i{background:var(--amber);box-shadow:0 0 12px var(--amber);animation:flick 3s infinite}
+.status.closed i{background:var(--violet)}
+.sched{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.sched li{display:flex;justify-content:space-between;gap:14px;padding:16px 10px;border-bottom:1px solid var(--line);font-size:1rem}
+.sched li .t{color:var(--moon-dim)}
+.sched li.today{background:linear-gradient(90deg,rgba(233,169,79,.14),transparent);border-bottom-color:var(--amber)}
+.sched li.today .d{color:var(--amber);font-weight:500}
+.sched li.today .d::after{content:"  · TONIGHT";font-size:.6rem;letter-spacing:.2em}
+.sched li.today .t{color:var(--moon)}
+@media(min-width:900px){.hours-grid{grid-template-columns:1fr 1fr;gap:90px;align-items:center}}
+.find{background:var(--night-2)}
+.find-grid{display:grid;gap:44px}
+.find h2{margin:16px 0 26px}
+.details{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:20px}
+.details b{display:block;font-size:.66rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);margin-bottom:2px}
+.details a,.details span{font-size:1.1rem;text-decoration:none}
+.details a:hover{color:var(--amber)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.demo-note{font-size:.76rem;color:var(--moon-dim);letter-spacing:.06em;border-left:1px solid var(--violet);padding-left:12px}
+.map{border:1px solid var(--line);min-height:320px;background:var(--night-3)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:invert(.92) hue-rotate(180deg) saturate(.55) brightness(.9) contrast(.95)}
+@media(min-width:900px){.find-grid{grid-template-columns:1fr 1fr;gap:80px}}
+
+/* Footer */
+footer{padding:clamp(60px,9vw,110px) 0 30px;background:#06070B;border-top:1px solid var(--line);overflow:hidden;position:relative}
+footer::before{content:"";position:absolute;left:50%;bottom:-40vw;width:90vw;height:90vw;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(142,130,224,.16),transparent 62%);pointer-events:none}
+.foot-word{font-family:var(--f-serif);font-weight:400;font-size:clamp(5rem,31vw,26rem);letter-spacing:.08em;line-height:.8;text-align:center;margin:0 0 48px;color:transparent;-webkit-text-stroke:1px rgba(228,230,238,.35);position:relative}
+.foot-grid{display:grid;gap:34px;margin-bottom:46px;position:relative}
+.foot-grid h4{margin:0 0 14px;font-size:.66rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot-grid a{text-decoration:none;color:var(--moon-dim);transition:color .3s}.foot-grid a:hover{color:var(--moon)}
+.foot-grid p{margin:0;color:var(--moon-dim);font-size:.95rem}
+.foot-tag{font-family:var(--f-serif);font-style:italic;font-size:1.7rem!important;color:var(--moon)!important;margin-bottom:10px!important}
+.foot-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:.72rem;letter-spacing:.1em;color:var(--moon-dim);position:relative}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+.totop{position:fixed;right:16px;bottom:16px;z-index:150;width:50px;height:50px;border-radius:50%;border:1px solid var(--moon-dim);background:rgba(10,12,18,.85);backdrop-filter:blur(8px);font-size:1.1rem;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,transform .3s var(--ease),visibility 0s .3s,background .3s,color .3s}
+.totop.show{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s var(--ease),background .3s,color .3s}
+.totop:hover{background:var(--amber);color:var(--night);border-color:var(--amber)}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#home" aria-label="NOIR — The Midnight Cafe, home"><span class="moon" aria-hidden="true"></span><b>NOIR</b><small>Midnight Cafe</small></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#experience">The Experience</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#find">Find Us</a></li>
+    </ul>
+    <a class="btn sm cta" href="#menu">Explore Menu</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <ul>
+    <li><a href="#home">Home <span>01</span></a></li>
+    <li><a href="#experience">The Experience <span>02</span></a></li>
+    <li><a href="#menu">Menu <span>03</span></a></li>
+    <li><a href="#gallery">Gallery <span>04</span></a></li>
+    <li><a href="#reviews">Reviews <span>05</span></a></li>
+    <li><a href="#find">Find Us <span>06</span></a></li>
+  </ul>
+  <a class="btn solid" href="#menu">Explore Menu</a>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="stars-bg" aria-hidden="true"></div>
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=75" alt="A warmly lit cafe interior at night" fetchpriority="high"></div>
+  <div class="wrap">
+    <span class="eyebrow rv">Coffee · Dessert · After dark</span>
+    <h1 class="rv" style="--d:.1s"><span>The night</span><span class="yours">is yours.</span></h1>
+    <p class="rv" style="--d:.2s">A little coffee, a little sweetness, and nowhere else you need to be.</p>
+    <div class="hero-btns rv" style="--d:.3s">
+      <a class="btn solid" href="#menu">Discover the menu</a>
+      <a class="btn" href="#experience">Explore the experience</a>
+    </div>
+    <div class="hero-small rv" style="--d:.4s">OPEN LATE · MADE FOR THE MOMENT</div>
+  </div>
+  <a class="cue" href="#experience" aria-label="Scroll down">Scroll</a>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec" id="experience">
+  <div class="wrap exp-grid">
+    <div class="exp-img rv">
+      <div class="main"><img loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=75" alt="Espresso being prepared in a dim cafe"></div>
+      <div class="small"><img loading="lazy" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=75" alt="A coffee cup on a dark table"></div>
+      <div class="circle">open<br>late</div>
+    </div>
+    <div class="exp-text">
+      <span class="eyebrow rv">The NOIR experience</span>
+      <h2 class="rv" style="--d:.1s">When the city slows down, <em>we come alive.</em></h2>
+      <p class="rv" style="--d:.15s">NOIR was imagined for the hours that feel like your own. A late-night corner for rich coffee, comforting desserts, curious conversations, and small moments that deserve to last a little longer.</p>
+      <div class="pull rv" style="--d:.2s">Come for the craving. Stay for the atmosphere.</div>
+      <a class="btn rv" style="--d:.25s" href="#atmosphere">Meet your nighttime escape</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow rv">The menu</span>
+      <h2 class="rv" style="--d:.1s">A taste <em>after dark.</em></h2>
+    </div>
+    <div class="filters rv" id="filters" role="group" aria-label="Filter menu by category">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="coffee" aria-pressed="false">Coffee</button>
+      <button class="chip" data-f="dessert" aria-pressed="false">Desserts</button>
+      <button class="chip" data-f="mocktail" aria-pressed="false">Mocktails</button>
+      <button class="chip" data-f="bites" aria-pressed="false">Small Bites</button>
+    </div>
+    <div class="mlist" id="mlist" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="sec spot" id="signature">
+  <div class="ghost" aria-hidden="true">Eclipse</div>
+  <div class="wrap spot-grid">
+    <div class="eclipse rv">
+      <div class="disc"><img loading="lazy" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=75" alt="A dark chocolate dessert dusted with cocoa"></div>
+      <div class="ring" aria-hidden="true"></div>
+    </div>
+    <div class="spot-text">
+      <span class="eyebrow rv">NOIR Signature</span>
+      <h2 class="rv" style="--d:.1s">The <em>Eclipse</em></h2>
+      <p class="rv" style="--d:.2s">A dramatic dark-chocolate dessert paired with a silky cream centre and a dusting of midnight cocoa. Made for the last craving of the night.</p>
+      <div class="spot-price rv" style="--d:.3s"><b>₹280</b><a class="btn" href="#find">Find us</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow rv">Gallery</span>
+      <h2 class="rv" style="--d:.1s">Moments <em>at NOIR.</em></h2>
+    </div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- ATMOSPHERE -->
+<section class="sec atmo" id="atmosphere">
+  <div class="wrap atmo-grid">
+    <div class="sec-head">
+      <span class="eyebrow rv">The atmosphere</span>
+      <h2 class="rv" style="--d:.1s">Why <em>NOIR.</em></h2>
+    </div>
+    <ul class="atmo-list">
+      <li class="rv"><h3>Late Hours</h3><p>A place to unwind when the day is done.</p></li>
+      <li class="rv"><h3>Made with Care</h3><p>Crafted drinks and comforting treats, prepared thoughtfully.</p></li>
+      <li class="rv"><h3>A Different Mood</h3><p>A distinctive atmosphere that feels like a mini escape.</p></li>
+      <li class="rv"><h3>Your Own Moment</h3><p>Meet friends, work quietly, or simply enjoy being here.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow rv">Reviews</span>
+      <h2 class="rv" style="--d:.1s">The night has <em>good things to say.</em></h2>
+    </div>
+    <div class="rev-grid">
+      <figure class="rev rv"><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>The cold brew and the atmosphere are both incredible. This is my favourite place to slow down after a busy day.</blockquote><figcaption>— Aarav</figcaption></figure>
+      <figure class="rev rv" style="--d:.1s"><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>That brownie is unreal. Came for dessert and ended up staying for hours.</blockquote><figcaption>— Mira</figcaption></figure>
+      <figure class="rev rv" style="--d:.2s"><div class="st" role="img" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Such a unique cafe vibe. Great drinks, beautiful lighting, and a place where you can actually relax.</blockquote><figcaption>— Dev</figcaption></figure>
+    </div>
+    <div class="rev-foot rv">
+      <a class="btn solid" href="https://www.google.com/search?q=NOIR+Midnight+Cafe+reviews" target="_blank" rel="noopener">Review us ↗</a>
+      <small>Sample reviews for a fictional cafe.</small>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="sec" id="hours">
+  <div class="wrap hours-grid">
+    <div>
+      <span class="eyebrow rv">Opening hours</span>
+      <h2 class="rv" style="--d:.1s;margin-top:18px">The night is <em>still young.</em></h2>
+      <div class="status rv" id="status" role="status" style="--d:.2s"><i></i><span>CHECKING…</span></div>
+    </div>
+    <ul class="sched rv" id="sched" style="--d:.15s"></ul>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="sec find" id="find">
+  <div class="wrap find-grid">
+    <div>
+      <span class="eyebrow rv">Find us</span>
+      <h2 class="rv" style="--d:.1s">Come find <em>the light.</em></h2>
+      <ul class="details rv" style="--d:.15s">
+        <li><b>Address</b><span>27 Moonlight Lane, City Centre, Surat, Gujarat, India</span></li>
+        <li><b>Phone</b><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><b>Email</b><a href="mailto:hello@noircafe.example">hello@noircafe.example</a></li>
+      </ul>
+      <div class="links rv" style="--d:.2s">
+        <a class="btn solid" href="https://www.google.com/maps/search/?api=1&query=27+Moonlight+Lane+City+Centre+Surat+Gujarat+India" target="_blank" rel="noopener">Get directions ↗</a>
+        <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <p class="demo-note rv" style="--d:.25s">All details are fictional demo data for a concept cafe.</p>
+    </div>
+    <div class="map rv" style="--d:.15s">
+      <iframe title="Map of Surat, Gujarat" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Surat,Gujarat,India&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">NOIR</p>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-tag">Stay a little longer.</p>
+        <p>27 Moonlight Lane, City Centre,<br>Surat, Gujarat, India</p>
+        <p style="margin-top:8px"><a href="tel:+919876543210">+91 98765 43210</a></p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#home">Home</a></li><li><a href="#experience">The Experience</a></li><li><a href="#menu">Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#find">Find Us</a></li></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li></ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Sun – Thu · 4 PM – 12 AM<br>Fri – Sat · 4 PM – 1 AM</p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 NOIR — The Midnight Cafe. All rights reserved.</span><span>CONCEPT CAFE WEBSITE · SURAT FOOD ZONE</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-x" id="lbx" aria-label="Close image">×</button>
+  <figure><img id="lbimg" src="" alt=""><figcaption id="lbcap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  document.body.classList.remove('no-js');
+  var U = function(id,w){ return 'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||600)+'&q=75'; };
+  function imgFail(e){ e.target.style.display='none'; }
+
+  /* ===== MENU DATA (edit here) ===== */
+  var CATS = {coffee:'Coffee',dessert:'Dessert',mocktail:'Mocktail',bites:'Small Bite'};
+  var MENU = [
+    {n:'Midnight Mocha',p:220,c:'coffee',d:'Espresso, dark chocolate, steamed milk, and a hint of cocoa.',i:'1572442388796-11668a67e53d',bg:'#3b2a22',t:'NOIR Favourite'},
+    {n:'Noir Cold Brew',p:190,c:'coffee',d:'Slow-steeped coffee served chilled and smooth.',i:'1517701604599-bb29b565090c',bg:'#2a2018',t:'Signature'},
+    {n:'Vanilla Night Latte',p:210,c:'coffee',d:'Espresso, creamy milk, and soft vanilla.',i:'1461023058943-07fcbe16d735',bg:'#4a3a2c'},
+    {n:'Caramel Afterglow',p:230,c:'coffee',d:'Iced coffee with caramel and a velvety finish.',i:'1495474472287-4d71bcdd2085',bg:'#5a4026'},
+    {n:'Dark Matter Brownie',p:190,c:'dessert',d:'Warm dark chocolate brownie with a rich centre.',i:'1606313564200-e75d5e30476c',bg:'#2b1b14',t:'NOIR Favourite'},
+    {n:'Moonlight Cheesecake',p:240,c:'dessert',d:'Silky cheesecake with a delicate biscuit base.',i:'1533134242443-d4fd215305ad',bg:'#3a3340'},
+    {n:'Midnight Tiramisu',p:260,c:'dessert',d:'Coffee-soaked layers with a cocoa finish.',i:'1571877227200-a0d98ea607e9',bg:'#3a2a20',t:'Signature'},
+    {n:'Velvet Lava',p:220,c:'dessert',d:'Warm chocolate cake with a molten middle.',i:'1624353365286-3f8d62daad51',bg:'#2b1710'},
+    {n:'Blue Hour',p:210,c:'mocktail',d:'Blue citrus, lime, and sparkling soda.',i:'1536935338788-846bb9981813',bg:'#1c3560',t:'Signature',v:1},
+    {n:'Moonlit Mojito',p:190,c:'mocktail',d:'Mint, lime, and chilled bubbles.',i:'1551538827-9c037cb4f32a',bg:'#1e3a2c'},
+    {n:'Blackberry Eclipse',p:230,c:'mocktail',d:'Blackberry, citrus, and a dramatic deep-purple finish.',i:'1551024709-8f23befc6f87',bg:'#2d1b45',t:'NOIR Favourite',v:1},
+    {n:'Starlight Fizz',p:200,c:'mocktail',d:'A bright, fruity sparkling refresher.',i:'1513558161293-cdaf765ed2fd',bg:'#40305a'},
+    {n:'Truffle Fries',p:180,c:'bites',d:'Crisp fries with a truffle-inspired seasoning.',i:'1573080496219-bb080dd4f877',bg:'#4a3a1e'},
+    {n:'Cheese Melt Toast',p:220,c:'bites',d:'Toasted bread with a gooey cheese blend.',i:'1528735602780-2552fd46c7af',bg:'#5a4524'},
+    {n:'Crispy Mushroom Bites',p:240,c:'bites',d:'Golden mushrooms with a house dip.',i:'1604908176997-125f25cc6f3d',bg:'#4a3720'},
+    {n:'Midnight Nachos',p:230,c:'bites',d:'Crunchy nachos, cheese, salsa, and jalapeños.',i:'1513456852971-30c0b8199d4d',bg:'#523a1c'}
+  ];
+  var list = document.getElementById('mlist');
+  function renderMenu(f){
+    var h='', arr = MENU.filter(function(x){return f==='all'||x.c===f;});
+    arr.forEach(function(x,k){
+      h += '<article class="item" style="animation-delay:'+(k*40)+'ms"><div class="th" style="--bg:'+x.bg+'"><img loading="lazy" src="'+U(x.i,300)+'" alt="'+x.n+'"></div>'
+        + '<h3>'+x.n+(x.t?' <span class="tg'+(x.v?' v':'')+'">'+x.t+'</span>':'')+'</h3><span class="pr">₹'+x.p+'</span><p>'+x.d+'</p></article>';
+    });
+    list.innerHTML = h;
+    list.querySelectorAll('img').forEach(function(im){ im.addEventListener('error',imgFail); });
+  }
+  renderMenu('all');
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    this.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c===b?'true':'false'); });
+    renderMenu(b.dataset.f);
+    b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+
+  /* ===== GALLERY DATA ===== */
+  var GAL = [
+    {i:'1554118811-1e0d58224f24',cap:'The room after dark',k:'a'},
+    {i:'1495474472287-4d71bcdd2085',cap:'Espresso, slowly',k:'b'},
+    {i:'1606313564200-e75d5e30476c',cap:'Dark Matter Brownie',k:'c'},
+    {i:'1509042239860-f550ce710b93',cap:'Cups & reflections',k:'d'},
+    {i:'1521017432531-fbd92d768814',cap:'A late table, shared',k:'e'},
+    {i:'1536935338788-846bb9981813',cap:'Blue Hour',k:'f'},
+    {i:'1442512595331-e89e73853f31',cap:'The barista\'s hands',k:'g2'},
+    {i:'1571877227200-a0d98ea607e9',cap:'Midnight Tiramisu',k:'h'},
+    {i:'1551024709-8f23befc6f87',cap:'Blackberry Eclipse',k:'i'}
+  ];
+  var gal = document.getElementById('gal'), gh='';
+  var mobCls = {a:'w t',b:'',c:'',d:'t',e:'t',f:'',g2:'w',h:'',i:''};
+  GAL.forEach(function(g,n){
+    gh += '<figure class="g '+g.k+' '+mobCls[g.k]+' rv" style="margin:0;--bg:#171B27;--d:'+((n%3)*.08)+'s"><button type="button" data-k="'+n+'" aria-label="Open image: '+g.cap+'"><img loading="lazy" src="'+U(g.i,g.k==='a'||g.k==='e'?1100:800)+'" alt="'+g.cap+'"><span class="cap">'+g.cap+'</span></button></figure>';
+  });
+  gal.innerHTML = gh;
+  gal.querySelectorAll('img').forEach(function(im){ im.addEventListener('error',imgFail); });
+
+  var lb=document.getElementById('lb'), lbimg=document.getElementById('lbimg'), lbcap=document.getElementById('lbcap'), lbx=document.getElementById('lbx'), lastF=null;
+  function openLB(n){
+    var g=GAL[n]; lastF=document.activeElement;
+    lbimg.src=U(g.i,1500); lbimg.alt=g.cap; lbcap.textContent=g.cap;
+    lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.classList.add('lock'); lbx.focus();
+  }
+  function closeLB(){
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.classList.remove('lock');
+    if(lastF) lastF.focus();
+  }
+  gal.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) openLB(+b.dataset.k); });
+  lbx.addEventListener('click',closeLB);
+  lb.addEventListener('click',function(e){ if(e.target===lb||e.target.tagName==='FIGURE') closeLB(); });
+
+  /* ===== NAV ===== */
+  var header=document.getElementById('header'), burger=document.getElementById('burger'), drawer=document.getElementById('drawer');
+  function setMenu(o){
+    drawer.classList.toggle('open',o); burger.setAttribute('aria-expanded',o?'true':'false');
+    burger.setAttribute('aria-label',o?'Close menu':'Open menu'); document.body.classList.toggle('lock',o);
+  }
+  burger.addEventListener('click',function(){ setMenu(!drawer.classList.contains('open')); });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=980) setMenu(false); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(lb.classList.contains('open')) closeLB();
+      else if(drawer.classList.contains('open')) setMenu(false);
+    }
+  });
+
+  var totop=document.getElementById('totop');
+  function onScroll(){
+    var y=window.scrollY||document.documentElement.scrollTop;
+    header.classList.toggle('scrolled',y>40); totop.classList.toggle('show',y>800);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ===== REVEAL ===== */
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } });
+    },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    rvs.forEach(function(el){ io.observe(el); });
+  } else rvs.forEach(function(el){ el.classList.add('in'); });
+
+  /* ===== HOURS (24h; close > 24 means after midnight) ===== */
+  var HOURS = [ // index = Date.getDay(): 0 Sun ... 6 Sat
+    {d:'Sunday',o:16,c:24},{d:'Monday',o:16,c:24},{d:'Tuesday',o:16,c:24},{d:'Wednesday',o:16,c:24},
+    {d:'Thursday',o:16,c:24},{d:'Friday',o:16,c:25},{d:'Saturday',o:16,c:25}
+  ];
+  var ORDER=[1,2,3,4,5,6,0];
+  function fmt(h){ h=h%24; var ap=h>=12?'PM':'AM', hh=h%12||12; return hh+':00 '+ap; }
+  function state(){
+    var n=new Date(), day=n.getDay(), hr=n.getHours()+n.getMinutes()/60;
+    var t=HOURS[day], y=HOURS[(day+6)%7];
+    // Still inside yesterday's late-night window (e.g. Fri closing at 1 AM)
+    if(y.c>24 && hr < (y.c-24)) return {open:true,day:(day+6)%7,close:y.c};
+    if(hr>=t.o && hr<Math.min(t.c,24)) return {open:true,day:day,close:t.c};
+    if(t.c>24 && hr>=t.o) return {open:true,day:day,close:t.c};
+    return {open:false,day:day,next:hr<t.o?t:HOURS[(day+1)%7],tomorrow:hr>=t.o};
+  }
+  function render(){
+    var s=state(), sched=document.getElementById('sched'), h='';
+    // highlight the "service day" the guest is currently in
+    ORDER.forEach(function(di){
+      var x=HOURS[di];
+      h+='<li'+(di===s.day?' class="today" aria-current="date"':'')+'><span class="d">'+x.d+'</span><span class="t">'+fmt(x.o)+' – '+fmt(x.c)+'</span></li>';
+    });
+    sched.innerHTML=h;
+    var el=document.getElementById('status'), tx=el.querySelector('span');
+    el.className='status '+(s.open?'open':'closed');
+    tx.textContent = s.open ? 'OPEN NOW · UNTIL '+fmt(s.close) : 'CLOSED NOW · OPENS '+(s.tomorrow?'TOMORROW ':'TODAY ')+fmt(s.next.o);
+  }
+  render(); setInterval(render,60000);
+})();
+</script>
+</body>
+</html>

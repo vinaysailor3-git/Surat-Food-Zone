@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIZZA THEORY — Pizza is an Art.</title>
+<meta name="description" content="PIZZA THEORY is a pizza-only kitchen experimenting with dough, sauce, cheese and fire. Demo restaurant website, Surat.">
+<meta name="theme-color" content="#F2E9D8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. DESIGN TOKENS (edit here) ============ */
+:root{
+  --flour:#F2E9D8; --flour-2:#E8DCC4; --char:#1B1814; --char-2:#26211B;
+  --tomato:#D63A1C; --basil:#1F4A33; --crust:#C98A3B; --line:rgba(27,24,20,.22);
+  --f-serif:'Instrument Serif',Georgia,serif;
+  --f-sans:'Instrument Sans',system-ui,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,monospace;
+  --pad:clamp(20px,5vw,80px); --maxw:1280px; --hh:66px;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+/* ============ 2. BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 4px)}
+body{margin:0;background:var(--flour);color:var(--char);font-family:var(--f-sans);font-size:1rem;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;background-position:-1px -1px;background-attachment:local}
+body::before{content:"";position:fixed;inset:0;background:var(--flour);opacity:.9;z-index:-1}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--char);color:#fff;padding:10px 16px;z-index:999}
+.skip:focus{left:8px}
+.mono{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.fig{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tomato);display:flex;align-items:center;gap:10px}
+.fig::before{content:"";width:26px;height:1px;background:currentColor}
+h1,h2,h3{font-family:var(--f-serif);font-weight:400;line-height:.95;letter-spacing:-.015em;margin:0}
+h2{font-size:clamp(2.6rem,9vw,5.6rem)}
+h2 em,h1 em{color:var(--tomato)}
+.sec{padding:clamp(70px,11vw,140px) 0;position:relative}
+.sec-solid{background:var(--flour)}
+.sec-head{display:grid;gap:16px;margin-bottom:clamp(34px,6vw,60px)}
+.sec-head p{margin:0;max-width:44ch;font-size:1.05rem}
+@media(min-width:900px){.sec-head.two{grid-template-columns:1.2fr .8fr;align-items:end}}
+/* ============ 3. BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border:1.5px solid var(--char);background:var(--char);color:var(--flour);font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;text-decoration:none;position:relative;overflow:hidden;isolation:isolate;transition:color .35s var(--ease),transform .25s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;background:var(--tomato);transform:translateY(101%);transition:transform .4s var(--ease);z-index:-1}
+.btn:hover::before{transform:none}
+.btn:hover{color:#fff;border-color:var(--tomato)}
+.btn.line{background:transparent;color:var(--char)}
+.btn.line::before{background:var(--char)}
+.btn.line:hover{color:var(--flour);border-color:var(--char)}
+.btn.light{background:var(--flour);color:var(--char);border-color:var(--flour)}
+.btn.light::before{background:var(--tomato)}
+.btn.sm{min-height:42px;padding:0 18px;font-size:.68rem}
+/* ============ 4. HEADER ============ */
+header.site{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:300;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+header.site.scrolled{background:rgba(242,233,216,.94);backdrop-filter:blur(10px);border-color:var(--line)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;position:relative;z-index:320;line-height:1}
+.pie{width:28px;height:28px;border-radius:50%;flex:none;background:conic-gradient(from 20deg,var(--tomato) 0 75%,transparent 75% 100%);border:1.5px solid var(--char);position:relative}
+.pie::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flour);border:1.5px solid var(--char)}
+.logo b{font-family:var(--f-serif);font-weight:400;font-size:1.45rem;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.logo b i{color:var(--tomato)}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:22px}
+.nav ul a{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:6px 0;position:relative}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--tomato);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav ul a:hover::after{transform:scaleX(1)}
+.nav .cta{display:none}
+.burger{width:46px;height:46px;border:1.5px solid var(--char);background:transparent;display:grid;place-items:center;position:relative;z-index:320}
+.burger i,.burger i::before,.burger i::after{display:block;width:18px;height:1.5px;background:var(--char);position:relative;transition:transform .3s var(--ease),background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{position:fixed;inset:0;z-index:310;background:var(--basil);color:var(--flour);padding:calc(var(--hh) + 20px) var(--pad) 32px;display:flex;flex-direction:column;justify-content:center;clip-path:circle(0 at 92% 34px);visibility:hidden;transition:clip-path .65s var(--ease),visibility 0s .65s}
+.drawer.open{clip-path:circle(150% at 92% 34px);visibility:visible;transition:clip-path .65s var(--ease),visibility 0s}
+.drawer ul{list-style:none;margin:0 0 28px;padding:0}
+.drawer li{border-bottom:1px solid rgba(242,233,216,.25)}
+.drawer li a{display:flex;align-items:baseline;gap:14px;font-family:var(--f-serif);font-size:clamp(2.2rem,10vw,3.2rem);text-decoration:none;padding:9px 0;line-height:1}
+.drawer li a span{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;color:var(--crust)}
+.drawer li a:hover{color:var(--crust)}
+.drawer .btn{align-self:flex-start}
+body.lock{overflow:hidden}
+@media(min-width:1120px){.nav ul{display:flex}.nav .cta{display:inline-flex}.burger,.drawer{display:none}}
+/* ============ 5. HERO ============ */
+.hero{padding:calc(var(--hh) + 30px) 0 clamp(50px,7vw,90px);position:relative;overflow:hidden;min-height:100svh;display:flex;align-items:center}
+.hero-grid{display:grid;gap:34px;align-items:center;width:100%}
+.hero .fig{margin-bottom:18px}
+.hero h1{font-size:clamp(3.6rem,15.5vw,10rem);text-transform:uppercase;line-height:.86}
+.hero h1 span{display:block}
+.hero h1 em{text-transform:none;font-style:italic;display:block;color:var(--tomato)}
+.hero p.lead{max-width:38ch;font-size:clamp(1.05rem,2.5vw,1.25rem);margin:22px 0 28px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.oven{position:relative;width:min(92%,540px);aspect-ratio:1;margin-inline:auto}
+.oven .ring{position:absolute;inset:-4%;border:1px dashed var(--char);border-radius:50%;animation:spin 60s linear infinite}
+.oven .ring::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--tomato)}
+.oven .disc{position:absolute;inset:3%;border-radius:50%;overflow:hidden;background:radial-gradient(circle,#e8a64a,#7a2c12);box-shadow:0 30px 60px -28px rgba(27,24,20,.55);border:1.5px solid var(--char)}
+.oven .disc img{width:100%;height:100%;object-fit:cover;animation:turn 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes turn{to{transform:rotate(360deg)}}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;justify-content:center}
+.pill{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--char);color:var(--flour);padding:7px 12px;white-space:nowrap}
+.pill.t{background:var(--tomato)}.pill.b{background:var(--basil)}
+.scroll-cue{display:none;position:absolute;left:var(--pad);bottom:28px;align-items:center;gap:12px;text-decoration:none}
+.scroll-cue i{width:1px;height:46px;background:var(--char);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;top:-100%;width:1px;height:100%;background:var(--tomato);animation:drip 2s infinite}
+@keyframes drip{to{top:100%}}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:1.05fr .95fr;gap:40px}
+  .oven{width:min(120%,640px);margin-right:-8%}
+  .hero-tags{position:absolute;inset:0;margin:0;pointer-events:none}
+  .hero-tags .pill{position:absolute}
+  .hero-tags .p1{top:6%;left:-6%}.hero-tags .p2{top:50%;right:-4%}.hero-tags .p3{bottom:8%;left:2%}
+  .scroll-cue{display:flex}
+}
+/* marquee */
+.band{background:var(--char);color:var(--flour);overflow:hidden;white-space:nowrap}
+.band div{display:inline-flex;gap:32px;padding:14px 0;animation:marq 34s linear infinite;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase}
+.band span:nth-child(even){color:var(--crust)}
+@keyframes marq{to{transform:translateX(-50%)}}
+/* ============ 6. STORY ============ */
+.story-grid{display:grid;gap:50px;align-items:center}
+.story-fig{position:relative;max-width:520px;margin-inline:auto;width:100%}
+.story-fig .a{aspect-ratio:4/5;overflow:hidden;background:var(--crust);border:1.5px solid var(--char)}
+.story-fig img{width:100%;height:100%;object-fit:cover}
+.story-fig .b{position:absolute;right:-6%;bottom:-8%;width:46%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid var(--flour);background:var(--tomato);outline:1.5px solid var(--char)}
+.note{position:absolute;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;background:var(--flour);border:1px solid var(--char);padding:5px 9px;white-space:nowrap}
+.note::before{content:"";position:absolute;top:50%;width:26px;height:1px;background:var(--char)}
+.n1{top:12%;left:-4%}.n1::before{left:100%}
+.n2{top:44%;right:-4%}.n2::before{right:100%}
+.story-text h2{margin:18px 0 26px}
+.story-text p{max-width:48ch;margin:0 0 16px;font-size:1.06rem}
+.ingr{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 30px}
+.ingr span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--char);padding:6px 11px}
+@media(min-width:900px){.story-grid{grid-template-columns:.9fr 1.1fr;gap:100px}}
+@media(max-width:560px){.n1{left:0}.n2{right:0}}
+/* ============ 7. MENU ============ */
+.menu{background:var(--flour-2);border-block:1px solid var(--char)}
+.filters{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad) * -1);padding:4px var(--pad) 10px;scroll-snap-type:x proximity}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:44px;padding:0 20px;border:1.5px solid var(--char);background:transparent;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;scroll-snap-align:start;transition:background .25s,color .25s,transform .25s var(--ease)}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--char);color:var(--flour)}
+.count{margin:18px 0 0;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tomato)}
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:14px;border-top:1.5px solid var(--char);border-left:1.5px solid var(--char)}
+.tile{border-right:1.5px solid var(--char);border-bottom:1.5px solid var(--char);background:var(--flour);display:flex;flex-direction:column;animation:rise .55s var(--ease) both;position:relative;transition:background .3s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.tile .ph{aspect-ratio:1;display:grid;place-items:center;background:var(--tint,#e9c98f);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
+.tile .ph .pic{width:84%;aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 14px 24px -14px rgba(27,24,20,.6);transition:transform .8s var(--ease)}
+.tile .ph img{width:100%;height:100%;object-fit:cover}
+.tile:hover .pic{transform:rotate(14deg) scale(1.05)}
+.lbl{position:absolute;top:8px;left:8px;font-family:var(--f-mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;background:var(--char);color:var(--flour);padding:3px 7px}
+.lbl.hot{background:var(--tomato)}.lbl.new{background:var(--basil)}
+.tile .body{padding:12px 12px 14px;display:flex;flex-direction:column;flex:1}
+.tile .meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tile .cat{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tomato)}
+.tile h3{font-size:1.5rem;margin:6px 0}
+.tile p{margin:0 0 12px;font-size:.84rem;line-height:1.4;opacity:.82;flex:1}
+.tile .pr{font-family:var(--f-mono);font-size:1rem;font-weight:500;border-top:1px dashed var(--char);padding-top:8px;display:flex;justify-content:space-between}
+.tile .pr small{font-size:.6rem;letter-spacing:.12em;opacity:.6;align-self:center}
+@media(min-width:700px){.pgrid{grid-template-columns:repeat(3,1fr)}.tile h3{font-size:1.8rem}.tile p{font-size:.92rem}.tile .body{padding:16px 16px 18px}}
+@media(min-width:1100px){.pgrid{grid-template-columns:repeat(4,1fr)}}
+@media(hover:hover){.tile:hover{background:#fff8e8}}
+/* ============ 8. PROCESS ============ */
+.eq{font-family:var(--f-serif);font-size:clamp(1.3rem,4.4vw,2.2rem);margin:0 0 40px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.eq i{color:var(--tomato);font-style:normal;font-family:var(--f-mono);font-size:.8em}
+.steps{list-style:none;margin:0;padding:0 0 0 0;display:grid;gap:34px;position:relative}
+.step{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;position:relative}
+.step .disc{width:96px;height:96px;border-radius:50%;overflow:hidden;border:1.5px solid var(--char);background:var(--tint,#e9c98f);position:relative;z-index:2}
+.step .disc img{width:100%;height:100%;object-fit:cover}
+.step:not(:last-child)::after{content:"";position:absolute;left:47px;top:96px;bottom:-34px;width:1px;border-left:1.5px dashed var(--char)}
+.step h3{font-size:clamp(1.9rem,6vw,2.6rem);margin:4px 0 6px}
+.step p{margin:0;max-width:34ch;font-size:.98rem}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);gap:26px}
+  .step{grid-template-columns:1fr;gap:20px;align-items:start;text-align:left}
+  .step .disc{width:150px;height:150px}
+  .step:not(:last-child)::after{left:170px;top:75px;bottom:auto;width:calc(100% - 140px);height:1px;border-left:0;border-top:1.5px dashed var(--char)}
+}
+/* ============ 9. FEATURE ============ */
+.feat{background:var(--tomato);color:var(--flour);overflow:hidden;border-block:1px solid var(--char)}
+.feat .giant{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--f-serif);font-size:clamp(8rem,38vw,34rem);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(27,24,20,.28);white-space:nowrap;pointer-events:none;user-select:none;text-transform:uppercase}
+.feat-grid{position:relative;display:grid;gap:44px;align-items:center}
+.slice-wrap{position:relative;width:min(88%,520px);margin-inline:auto;aspect-ratio:1}
+.slice-wrap .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:1.5px solid var(--char);background:var(--crust);box-shadow:14px 14px 0 var(--char)}
+.slice-wrap .disc img{width:100%;height:100%;object-fit:cover}
+.stamp{position:absolute;top:-4%;right:-4%;width:108px;height:108px;border-radius:50%;background:var(--flour);color:var(--char);border:1.5px solid var(--char);display:grid;place-items:center;text-align:center;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.35;transform:rotate(12deg);animation:stampy 6s ease-in-out infinite}
+@keyframes stampy{50%{transform:rotate(4deg) scale(1.05)}}
+.feat-text .fig{color:var(--flour);margin-bottom:18px}
+.feat-text h2{font-size:clamp(3.6rem,15vw,9rem);text-transform:uppercase;line-height:.84}
+.feat-text h2 em{display:block;text-transform:none;color:var(--char)}
+.feat-text p{max-width:38ch;font-size:clamp(1.05rem,2.5vw,1.3rem);margin:22px 0 22px}
+.feat-list{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.feat-list li{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--flour);padding:6px 11px}
+.feat-price{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.feat-price b{font-family:var(--f-serif);font-weight:400;font-size:4rem;line-height:1}
+@media(min-width:900px){.feat-grid{grid-template-columns:1fr 1fr;gap:80px}}
+/* ============ 10. SIDES ============ */
+.sides-grid{display:grid;gap:44px}
+.col h3{font-size:2.4rem;margin-bottom:16px;display:flex;align-items:baseline;gap:12px}
+.col h3 small{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;color:var(--tomato)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:0 10px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line)}
+.row b{font-weight:600}
+.row i{border-bottom:1px dotted var(--char);height:.8em;opacity:.45}
+.row span.p{font-family:var(--f-mono);font-weight:500}
+.row p{grid-column:1/-1;margin:2px 0 0;font-size:.86rem;opacity:.75}
+@media(min-width:900px){.sides-grid{grid-template-columns:1.3fr 1fr 1fr;gap:56px}}
+/* ============ 11. GALLERY ============ */
+.gallery{background:var(--char);color:var(--flour)}
+.gallery .fig{color:var(--crust)}
+.gallery h2 em{color:var(--crust)}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:140px;gap:8px}
+.gal figure{margin:0;position:relative;overflow:hidden;background:var(--bg,#3a2c1e)}
+.gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.gal button:focus-visible{outline:2px solid var(--tomato);outline-offset:-4px}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .5s;filter:saturate(.95)}
+.gal figure:hover img,.gal button:focus-visible img{transform:scale(1.08);filter:saturate(1.15)}
+.gal .cap{position:absolute;left:0;bottom:0;right:0;padding:24px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;transform:translateY(100%);transition:transform .4s var(--ease)}
+.gal figure:hover .cap,.gal button:focus-visible .cap{transform:none}
+@media(hover:none){.gal .cap{transform:none;font-size:.56rem}}
+.gal .t{grid-row:span 2}.gal .w{grid-column:span 2}
+@media(min-width:800px){.gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:190px;gap:12px}
+  .gal .a{grid-column:span 3;grid-row:span 2}.gal .b{grid-column:span 3}.gal .c{grid-column:span 1;grid-row:span 2}.gal .d{grid-column:span 2}.gal .e{grid-column:span 2;grid-row:span 2}.gal .f{grid-column:span 2}.gal .g2{grid-column:span 2}.gal .h{grid-column:span 2}.gal .i{grid-column:span 2}}
+.lb{position:fixed;inset:0;z-index:600;background:rgba(14,12,10,.95);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.lb.open{opacity:1;visibility:visible;transition:opacity .35s}
+.lb figure{margin:0;max-width:min(94vw,1000px);transform:scale(.92);transition:transform .45s var(--ease)}
+.lb.open figure{transform:none}
+.lb img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;min-height:100px;background:#26211B}
+.lb figcaption{text-align:center;margin-top:14px;font-family:var(--f-serif);font-style:italic;font-size:1.3rem;color:var(--flour)}
+.lb-x{position:absolute;top:14px;right:14px;width:50px;height:50px;border:1.5px solid var(--flour);background:transparent;color:var(--flour);font-size:1.6rem;line-height:1;display:grid;place-items:center;transition:background .25s,color .25s}
+.lb-x:hover{background:var(--flour);color:var(--char)}
+/* ============ 12. REVIEWS ============ */
+.reviews{background:var(--basil);color:var(--flour)}
+.reviews .fig{color:var(--crust)}
+.reviews h2 em{color:var(--crust)}
+.quote-box{display:grid;gap:30px;margin-top:10px}
+.qbig{position:relative;min-height:230px}
+.qbig .mark{font-family:var(--f-serif);font-size:7rem;line-height:.6;color:var(--crust);display:block;height:50px}
+.qbig blockquote{margin:0;font-family:var(--f-serif);font-size:clamp(1.8rem,6.4vw,3.6rem);line-height:1.08;max-width:22ch;transition:opacity .35s,transform .35s var(--ease)}
+.qbig blockquote.swap{opacity:0;transform:translateY(10px)}
+.stars{color:var(--crust);letter-spacing:6px;font-size:1.1rem;margin:20px 0 6px}
+.who{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.tabs{display:flex;flex-direction:column;border-top:1px solid rgba(242,233,216,.3)}
+.tab{display:flex;justify-content:space-between;align-items:center;min-height:56px;padding:0 4px;background:transparent;border:0;border-bottom:1px solid rgba(242,233,216,.3);text-align:left;font-family:var(--f-serif);font-size:1.7rem;color:rgba(242,233,216,.6);transition:color .3s,padding .3s var(--ease)}
+.tab span{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em}
+.tab:hover{color:var(--flour)}
+.tab[aria-selected="true"]{color:var(--flour);padding-left:14px;background:linear-gradient(90deg,rgba(201,138,59,.25),transparent)}
+.rev-foot{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.rev-foot small{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+@media(min-width:900px){.quote-box{grid-template-columns:1.5fr .5fr;gap:80px;align-items:end}.qbig{min-height:360px}}
+/* ============ 13. HOURS + CONTACT ============ */
+.hours-grid{display:grid;gap:44px;align-items:center}
+.hours-grid h2{margin:16px 0 0}
+.status{display:inline-flex;align-items:center;gap:12px;margin-top:26px;border:1.5px solid var(--char);padding:11px 18px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.status i{width:10px;height:10px;border-radius:50%;background:#999}
+.status.open{background:var(--basil);color:var(--flour);border-color:var(--basil)}
+.status.open i{background:#8fe0a8;animation:pulse 1.8s infinite}
+.status.closed{background:var(--tomato);color:#fff;border-color:var(--tomato)}
+.status.closed i{background:#fff}
+@keyframes pulse{50%{transform:scale(1.5);opacity:.6}}
+.sched{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--char)}
+.sched li{display:flex;justify-content:space-between;gap:12px;padding:15px 10px;border-bottom:1px solid var(--line);font-size:1.02rem}
+.sched li .t{font-family:var(--f-mono);font-size:.86rem}
+.sched li.today{background:var(--char);color:var(--flour);border-bottom-color:var(--char)}
+.sched li.today .d::after{content:"  ← today";font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;color:var(--crust);text-transform:uppercase}
+@media(min-width:900px){.hours-grid{grid-template-columns:1fr 1fr;gap:100px}}
+.visit{background:var(--flour-2);border-top:1px solid var(--char)}
+.visit-grid{display:grid;gap:44px}
+.visit h2{margin:16px 0 28px}
+.details{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:18px}
+.details b{display:block;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tomato);font-weight:500}
+.details a,.details span{font-size:1.15rem;text-decoration:none}
+.details a:hover{color:var(--tomato)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.demo{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;border-left:2px solid var(--tomato);padding-left:10px;display:block}
+.map{border:1.5px solid var(--char);min-height:320px;background:var(--flour)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:sepia(.35) saturate(.8) contrast(.95)}
+@media(min-width:900px){.visit-grid{grid-template-columns:1fr 1fr;gap:80px}}
+/* ============ 14. FOOTER ============ */
+footer{background:var(--char);color:var(--flour);padding:clamp(60px,9vw,110px) 0 28px;overflow:hidden}
+.foot-word{font-family:var(--f-serif);font-size:clamp(3.4rem,17.5vw,17rem);line-height:.82;text-transform:uppercase;text-align:center;margin:0 0 44px;letter-spacing:-.02em;color:var(--flour);white-space:nowrap}
+.foot-word i{color:var(--tomato);font-style:italic;text-transform:none}
+.foot-grid{display:grid;gap:30px;margin-bottom:44px}
+.foot-grid h4{margin:0 0 12px;font-family:var(--f-mono);font-weight:500;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crust)}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.foot-grid a{text-decoration:none;opacity:.85}.foot-grid a:hover{color:var(--crust);opacity:1}
+.foot-grid p{margin:0;opacity:.85;font-size:.95rem}
+.foot-tag{font-family:var(--f-serif);font-style:italic;font-size:1.8rem!important;opacity:1!important;margin-bottom:10px!important}
+.foot-bottom{border-top:1px solid rgba(242,233,216,.2);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+.totop{position:fixed;right:14px;bottom:14px;z-index:250;width:50px;height:50px;border-radius:50%;border:1.5px solid var(--char);background:var(--flour);font-size:1.2rem;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,transform .3s var(--ease),visibility 0s .3s,background .25s,color .25s}
+.totop.show{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s var(--ease),background .25s,color .25s}
+.totop:hover{background:var(--tomato);color:#fff;border-color:var(--tomato)}
+/* ============ 15. MOTION ============ */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#home" aria-label="PIZZA THEORY home"><span class="pie" aria-hidden="true"></span><b>Pizza <i>Theory</i></b></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Pizzas</a></li>
+      <li><a href="#process">The Process</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn sm cta" href="#menu">Explore Pizzas</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <ul>
+    <li><a href="#home"><span>01</span>Home</a></li>
+    <li><a href="#story"><span>02</span>Our Story</a></li>
+    <li><a href="#menu"><span>03</span>Pizzas</a></li>
+    <li><a href="#process"><span>04</span>The Process</a></li>
+    <li><a href="#gallery"><span>05</span>Gallery</a></li>
+    <li><a href="#reviews"><span>06</span>Reviews</a></li>
+    <li><a href="#contact"><span>07</span>Contact</a></li>
+  </ul>
+  <a class="btn light" href="#menu">Explore Pizzas</a>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="fig rv">Dough · Sauce · Fire · Passion</span>
+      <h1 class="rv" style="--d:.08s"><span>We take</span><span>pizza</span><em>seriously.</em></h1>
+      <p class="lead rv" style="--d:.16s">From perfectly proofed dough to bold toppings and oven-fresh cheese, every pizza has a little theory behind it.</p>
+      <div class="hero-btns rv" style="--d:.24s">
+        <a class="btn" href="#menu">Explore the menu</a>
+        <a class="btn line" href="#story">Our pizza philosophy</a>
+      </div>
+    </div>
+    <div class="rv" style="--d:.15s">
+      <div class="oven">
+        <div class="ring" aria-hidden="true"></div>
+        <div class="disc"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80" alt="A freshly baked pizza with melted cheese and charred crust" fetchpriority="high"></div>
+        <div class="hero-tags">
+          <span class="pill t p1">Fresh dough daily</span>
+          <span class="pill p2">Oven baked</span>
+          <span class="pill b p3">Made with passion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#story" aria-label="Scroll to our story"><i></i><span class="mono">Scroll</span></a>
+</section>
+
+<div class="band" aria-hidden="true">
+  <div>
+    <span>Fresh dough daily</span><span>✦</span><span>Oven baked</span><span>✦</span><span>Pizza is an art</span><span>✦</span><span>Made with passion</span><span>✦</span>
+    <span>Fresh dough daily</span><span>✦</span><span>Oven baked</span><span>✦</span><span>Pizza is an art</span><span>✦</span><span>Made with passion</span><span>✦</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="sec" id="story">
+  <div class="wrap story-grid">
+    <div class="story-fig rv">
+      <div class="a"><img loading="lazy" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=75" alt="Hands working fresh pizza dough with flour"></div>
+      <div class="b"><img loading="lazy" src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=500&q=75" alt="Ripe tomatoes for pizza sauce" style="width:100%;height:100%;object-fit:cover"></div>
+      <span class="note n1">Dough · slow-rested</span>
+      <span class="note n2">Heat · oven hot</span>
+    </div>
+    <div class="story-text">
+      <span class="fig rv">Our philosophy</span>
+      <h2 class="rv" style="--d:.1s">A great pizza is never <em>an accident.</em></h2>
+      <p class="rv" style="--d:.15s">It starts with the dough. A little patience, the right ingredients, a sauce that brings everything together, and heat that transforms it all. We believe every layer matters, and every pizza should leave you thinking about the next slice.</p>
+      <p class="rv" style="--d:.2s">We keep our ingredients honest, prepare everything fresh, and love experimenting with flavour combinations that still feel like pizza.</p>
+      <div class="ingr rv" style="--d:.25s"><span>Dough</span><span>Tomato</span><span>Cheese</span><span>Fresh toppings</span><span>Fire</span></div>
+      <a class="btn rv" style="--d:.3s" href="#process">See how we make it</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head two">
+      <div>
+        <span class="fig rv">The pizza collection</span>
+        <h2 class="rv" style="--d:.08s;margin-top:16px">Find your <em>perfect slice.</em></h2>
+      </div>
+      <p class="rv" style="--d:.15s">Classic comfort or a little adventure. There's a pizza for every craving.</p>
+    </div>
+    <div class="filters rv" id="filters" role="group" aria-label="Filter pizzas by category">
+      <button class="chip" data-f="all" aria-pressed="true">All Pizzas</button>
+      <button class="chip" data-f="classic" aria-pressed="false">Classic</button>
+      <button class="chip" data-f="veggie" aria-pressed="false">Veggie</button>
+      <button class="chip" data-f="signature" aria-pressed="false">Signature</button>
+      <button class="chip" data-f="spicy" aria-pressed="false">Spicy</button>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="fig rv">The process</span>
+      <h2 class="rv" style="--d:.08s">The art behind <em>every slice.</em></h2>
+    </div>
+    <p class="eq rv" aria-hidden="true">Dough <i>+</i> Sauce <i>+</i> Toppings <i>+</i> Heat <i>=</i> <em style="font-style:italic;color:var(--tomato)">Pizza</em></p>
+    <ol class="steps">
+      <li class="step rv"><div class="disc" style="--tint:#e9d3a8"><img loading="lazy" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=75" alt="Pizza dough being prepared"></div><div><span class="fig">01</span><h3>The Dough</h3><p>Slow-rested dough for a flavourful base and texture.</p></div></li>
+      <li class="step rv" style="--d:.08s"><div class="disc" style="--tint:#e5836a"><img loading="lazy" src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=75" alt="Tomatoes for pizza sauce"></div><div><span class="fig">02</span><h3>The Sauce</h3><p>A balanced tomato base, made to complement the toppings.</p></div></li>
+      <li class="step rv" style="--d:.16s"><div class="disc" style="--tint:#b9cf8c"><img loading="lazy" src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&w=400&q=75" alt="Fresh toppings on a pizza"></div><div><span class="fig">03</span><h3>The Toppings</h3><p>Fresh ingredients, thoughtfully layered.</p></div></li>
+      <li class="step rv" style="--d:.24s"><div class="disc" style="--tint:#e08a3a"><img loading="lazy" src="https://images.unsplash.com/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=400&q=75" alt="A pizza baking in a hot oven"></div><div><span class="fig">04</span><h3>The Heat</h3><p>Baked hot until the crust is golden and the cheese is bubbling.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- FEATURE -->
+<section class="sec feat" id="signature">
+  <div class="giant" aria-hidden="true">Theory</div>
+  <div class="wrap feat-grid">
+    <div class="slice-wrap rv">
+      <div class="disc"><img loading="lazy" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=80" alt="The Theory pizza topped with peppers, mushrooms and melted cheese"></div>
+      <div class="stamp" aria-hidden="true">House<br>signature<br>★</div>
+    </div>
+    <div class="feat-text">
+      <span class="fig rv">House signature</span>
+      <h2 class="rv" style="--d:.1s">The <em>Theory</em></h2>
+      <p class="rv" style="--d:.2s">A little crunch, a lot of cheese, perfectly balanced toppings, and flavours that make the rules worth breaking.</p>
+      <ul class="feat-list rv" style="--d:.25s"><li>Cheese</li><li>Roasted peppers</li><li>Mushrooms</li><li>Caramelized onion</li><li>House seasoning</li></ul>
+      <div class="feat-price rv" style="--d:.3s"><b>₹379</b><a class="btn light" href="#menu">See the collection</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SIDES -->
+<section class="sec" id="sides">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="fig rv">Companions</span>
+      <h2 class="rv" style="--d:.08s">Sides, dips <em>&amp; drinks.</em></h2>
+    </div>
+    <div class="sides-grid">
+      <div class="col rv"><h3>Sides <small>05</small></h3>
+        <div class="row"><b>Classic Fries</b><i></i><span class="p">₹129</span><p>Golden crispy fries with sea salt.</p></div>
+        <div class="row"><b>Peri Peri Fries</b><i></i><span class="p">₹159</span><p>Fries tossed in a spicy peri-peri seasoning.</p></div>
+        <div class="row"><b>Garlic Bread</b><i></i><span class="p">₹149</span><p>Toasted bread with garlic butter and herbs.</p></div>
+        <div class="row"><b>Cheese Garlic Bread</b><i></i><span class="p">₹189</span><p>Garlic bread topped with melted cheese.</p></div>
+        <div class="row"><b>Jalapeño Poppers</b><i></i><span class="p">₹199</span><p>Crispy bites with a creamy, spicy centre.</p></div>
+      </div>
+      <div class="col rv" style="--d:.1s"><h3>Dips <small>04</small></h3>
+        <div class="row"><b>Classic Marinara</b><i></i><span class="p">₹49</span></div>
+        <div class="row"><b>Garlic Mayo</b><i></i><span class="p">₹49</span></div>
+        <div class="row"><b>Cheese Dip</b><i></i><span class="p">₹59</span></div>
+        <div class="row"><b>Spicy Salsa</b><i></i><span class="p">₹49</span></div>
+      </div>
+      <div class="col rv" style="--d:.2s"><h3>Drinks <small>04</small></h3>
+        <div class="row"><b>Lemon Iced Tea</b><i></i><span class="p">₹119</span></div>
+        <div class="row"><b>Classic Cold Coffee</b><i></i><span class="p">₹149</span></div>
+        <div class="row"><b>Fresh Lime Soda</b><i></i><span class="p">₹99</span></div>
+        <div class="row"><b>Chocolate Shake</b><i></i><span class="p">₹179</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="fig rv">Straight from the oven</span>
+      <h2 class="rv" style="--d:.08s">One slice is <em>never enough.</em></h2>
+    </div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec reviews" id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="fig rv">Slice of love</span>
+      <h2 class="rv" style="--d:.08s">A few words from <em>our pizza people.</em></h2>
+    </div>
+    <div class="quote-box rv">
+      <div class="qbig" id="qbig" aria-live="polite">
+        <span class="mark" aria-hidden="true">“</span>
+        <blockquote id="qtext">The crust is incredible and the cheese is perfect. The Theory pizza is a must-try.</blockquote>
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="who" id="qwho">— Aarav</div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Choose a review">
+        <button class="tab" role="tab" aria-selected="true" data-i="0">Aarav <span>01</span></button>
+        <button class="tab" role="tab" aria-selected="false" data-i="1">Riya <span>02</span></button>
+        <button class="tab" role="tab" aria-selected="false" data-i="2">Dhruv <span>03</span></button>
+      </div>
+    </div>
+    <div class="rev-foot rv">
+      <a class="btn light" href="https://www.google.com/search?q=PIZZA+THEORY+Surat+reviews" target="_blank" rel="noopener">Review us on Google ↗</a>
+      <small>Sample reviews for a fictional restaurant.</small>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="sec" id="hours">
+  <div class="wrap hours-grid">
+    <div>
+      <span class="fig rv">Opening hours</span>
+      <h2 class="rv" style="--d:.08s">The oven is <em>waiting.</em></h2>
+      <div class="status rv" id="status" role="status" style="--d:.15s"><i></i><span>Checking…</span></div>
+    </div>
+    <ul class="sched rv" id="sched" style="--d:.1s"></ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec visit" id="contact">
+  <div class="wrap visit-grid">
+    <div>
+      <span class="fig rv">Visit us</span>
+      <h2 class="rv" style="--d:.08s">Come for a slice. <em>Stay for another.</em></h2>
+      <ul class="details rv" style="--d:.15s">
+        <li><b>Address</b><span>24 Pizza Street, City Centre, Surat, Gujarat, India</span></li>
+        <li><b>Phone</b><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><b>Email</b><a href="mailto:hello@pizzatheory.in">hello@pizzatheory.in</a></li>
+      </ul>
+      <div class="links rv" style="--d:.2s">
+        <a class="btn" href="tel:+919876543210">Call us</a>
+        <a class="btn line" href="https://www.google.com/maps/search/?api=1&query=24+Pizza+Street+City+Centre+Surat+Gujarat+India" target="_blank" rel="noopener">Get directions ↗</a>
+        <a class="btn line" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn line" href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <span class="demo rv" style="--d:.25s">Demo content · fictional address and details</span>
+    </div>
+    <div class="map rv" style="--d:.15s">
+      <iframe title="Map of Surat, Gujarat" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Surat,Gujarat,India&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">Pizza <i>Theory</i></p>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-tag">Pizza is an Art.</p>
+        <p>24 Pizza Street, City Centre,<br>Surat, Gujarat, India</p>
+        <p style="margin-top:8px"><a href="tel:+919876543210">+91 98765 43210</a></p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#home">Home</a></li><li><a href="#story">Our Story</a></li><li><a href="#menu">Pizzas</a></li><li><a href="#process">The Process</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li></ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon – Thu · 12 PM – 10:30 PM<br>Fri – Sun · 12 PM – 11 PM</p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 PIZZA THEORY. All rights reserved.</span><span>DEMO RESTAURANT WEBSITE · SURAT FOOD ZONE</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-x" id="lbx" aria-label="Close image">×</button>
+  <figure><img id="lbimg" src="" alt=""><figcaption id="lbcap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  document.body.classList.remove('no-js');
+  var U=function(id,w){return 'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||600)+'&q=75';};
+  function imgFail(e){e.target.style.display='none';}
+
+  /* ===== PIZZA MENU DATA (edit here). c = filter tags. l = label ===== */
+  var LBL={best:'Bestseller',sig:'Signature',new:'New',hot:'Spicy'};
+  var PIZZAS=[
+    {n:'Margherita',p:249,c:['classic','veggie'],cat:'Classic',d:'Tomato sauce, mozzarella, basil, and a drizzle of olive oil.',i:'1574071318508-1cdbab80d002',tint:'#efc9a0',l:'best'},
+    {n:'Classic Cheese',p:279,c:['classic'],cat:'Classic',d:'A generous blend of cheese, signature tomato sauce, and herbs.',i:'1565299624946-b28f40a0ae38',tint:'#f0d79a'},
+    {n:'Farmhouse',p:329,c:['classic','veggie'],cat:'Classic',d:'Capsicum, onion, mushrooms, olives, mozzarella, and tomato sauce.',i:'1571407970349-bc81e7e96d47',tint:'#c9d9a0'},
+    {n:'The Theory',p:379,c:['signature'],cat:'Signature',d:'Our signature blend of cheese, roasted peppers, mushrooms, caramelized onion, and house seasoning.',i:'1513104890138-7c749659a591',tint:'#e8b27a',l:'sig'},
+    {n:'Truffle Mushroom',p:399,c:['signature','veggie'],cat:'Signature',d:'Mushrooms, creamy cheese, aromatic herbs, and a hint of truffle flavour.',i:'1594007654729-407eedc4be65',tint:'#d9c4a8',l:'new'},
+    {n:'Four Cheese',p:429,c:['signature'],cat:'Signature',d:'Mozzarella, cheddar, parmesan, and creamy cheese sauce.',i:'1573821663912-569905455b1c',tint:'#f3dc9a',l:'best'},
+    {n:'Spicy Paneer',p:369,c:['spicy'],cat:'Spicy',d:'Paneer, jalapeños, peppers, spicy sauce, and mozzarella.',i:'1628840042765-356cda07504e',tint:'#ea9a6a',l:'hot'},
+    {n:'Firecracker',p:399,c:['spicy'],cat:'Spicy',d:'Chilli flakes, jalapeños, spicy sauce, peppers, and a bold cheese blend.',i:'1604382354936-07c5d9983bd3',tint:'#e8785a',l:'hot'},
+    {n:'Corn & Cheese',p:299,c:['veggie'],cat:'Special',d:'Sweet corn, mozzarella, creamy sauce, and herbs.',i:'1590947132387-155cc02f3212',tint:'#f3d878'},
+    {n:'Pesto Garden',p:379,c:['veggie'],cat:'Special',d:'Basil pesto, cherry tomatoes, peppers, mozzarella, and fresh greens.',i:'1595854341625-f33ee10dbf94',tint:'#b7d08a',l:'new'}
+  ];
+  var pgrid=document.getElementById('pgrid'),count=document.getElementById('count');
+  function esc(s){return s.replace(/&/g,'&amp;');}
+  function renderMenu(f){
+    var arr=PIZZAS.filter(function(x){return f==='all'||x.c.indexOf(f)>-1;}),h='';
+    arr.forEach(function(x,k){
+      h+='<article class="tile" style="animation-delay:'+(k*50)+'ms"><div class="ph" style="--tint:'+x.tint+'"><div class="pic"><img loading="lazy" src="'+U(x.i,600)+'" alt="'+esc(x.n)+' pizza"></div>'
+        +(x.l?'<span class="lbl '+(x.l==='hot'?'hot':x.l==='new'?'new':'')+'">'+LBL[x.l]+'</span>':'')+'</div>'
+        +'<div class="body"><div class="meta"><span class="cat">'+x.cat+'</span></div><h3>'+esc(x.n)+'</h3><p>'+esc(x.d)+'</p><div class="pr"><span>₹'+x.p+'</span><small>REGULAR</small></div></div></article>';
+    });
+    pgrid.innerHTML=h;
+    count.textContent=arr.length+(arr.length===1?' pizza':' pizzas');
+    pgrid.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+  }
+  renderMenu('all');
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    this.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});
+    renderMenu(b.dataset.f);
+    b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+
+  /* ===== GALLERY DATA ===== */
+  var GAL=[
+    {i:'1593560708920-61dd98c46a4e',cap:'The cheese pull',k:'a',m:'w t'},
+    {i:'1513104890138-7c749659a591',cap:'Fresh from the oven',k:'b',m:''},
+    {i:'1509440159596-0249088772ff',cap:'Dough, by hand',k:'c',m:'t'},
+    {i:'1595854341625-f33ee10dbf94',cap:'Topping close-up',k:'d',m:''},
+    {i:'1544982503-9f984c14501a',cap:'Fire & stone',k:'e',m:'t'},
+    {i:'1565299624946-b28f40a0ae38',cap:'Slices on the table',k:'f',m:''},
+    {i:'1571407970349-bc81e7e96d47',cap:'The Theory',k:'g2',m:'w'},
+    {i:'1573140247632-f8fd74997d5c',cap:'Garlic bread',k:'h',m:''},
+    {i:'1517248135467-4c7edcad34c4',cap:'The dining room',k:'i',m:''}
+  ];
+  var gal=document.getElementById('gal'),gh='';
+  GAL.forEach(function(g,n){
+    gh+='<figure class="'+g.k+' '+g.m+' rv" style="--d:'+((n%3)*.07)+'s"><button type="button" data-k="'+n+'" aria-label="Open image: '+g.cap+'"><img loading="lazy" src="'+U(g.i,g.k==='a'||g.k==='e'?1100:800)+'" alt="'+g.cap+'"><span class="cap">'+g.cap+'</span></button></figure>';
+  });
+  gal.innerHTML=gh;
+  gal.querySelectorAll('img').forEach(function(im){im.addEventListener('error',imgFail);});
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap'),lbx=document.getElementById('lbx'),lastF=null;
+  function openLB(n){var g=GAL[n];lastF=document.activeElement;lbimg.src=U(g.i,1500);lbimg.alt=g.cap;lbcap.textContent=g.cap;lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.classList.add('lock');lbx.focus();}
+  function closeLB(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.classList.remove('lock');if(lastF)lastF.focus();}
+  gal.addEventListener('click',function(e){var b=e.target.closest('button');if(b)openLB(+b.dataset.k);});
+  lbx.addEventListener('click',closeLB);
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')closeLB();});
+
+  /* ===== REVIEWS ===== */
+  var REV=[
+    {t:'The crust is incredible and the cheese is perfect. The Theory pizza is a must-try.',w:'Aarav'},
+    {t:'Finally, a place where the pizza is the star. Loved the farmhouse and garlic bread.',w:'Riya'},
+    {t:'Great flavours, generous toppings, and a very relaxed vibe. Definitely coming back.',w:'Dhruv'}
+  ];
+  var qtext=document.getElementById('qtext'),qwho=document.getElementById('qwho'),tabs=document.querySelectorAll('.tab'),swapT;
+  function showRev(i){
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');});
+    qtext.classList.add('swap');clearTimeout(swapT);
+    swapT=setTimeout(function(){qtext.textContent=REV[i].t;qwho.textContent='— '+REV[i].w;qtext.classList.remove('swap');},220);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){showRev(+t.dataset.i);});});
+  document.querySelector('.tabs').addEventListener('keydown',function(e){
+    var cur=[].indexOf.call(tabs,document.activeElement);if(cur<0)return;
+    var nx=e.key==='ArrowDown'||e.key==='ArrowRight'?(cur+1)%3:e.key==='ArrowUp'||e.key==='ArrowLeft'?(cur+2)%3:-1;
+    if(nx>-1){e.preventDefault();tabs[nx].focus();showRev(nx);}
+  });
+
+  /* ===== NAV ===== */
+  var header=document.getElementById('header'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+  function setMenu(o){drawer.classList.toggle('open',o);burger.setAttribute('aria-expanded',o?'true':'false');burger.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.classList.toggle('lock',o);}
+  burger.addEventListener('click',function(){setMenu(!drawer.classList.contains('open'));});
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  window.addEventListener('resize',function(){if(window.innerWidth>=1120)setMenu(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){if(lb.classList.contains('open'))closeLB();else if(drawer.classList.contains('open'))setMenu(false);}
+  });
+  var totop=document.getElementById('totop');
+  function onScroll(){var y=window.scrollY||document.documentElement.scrollTop;header.classList.toggle('scrolled',y>30);totop.classList.toggle('show',y>800);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  /* ===== REVEAL ===== */
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+    rvs.forEach(function(el){io.observe(el);});
+  } else rvs.forEach(function(el){el.classList.add('in');});
+
+  /* ===== HOURS (decimal 24h clock; close >24 would mean after midnight) ===== */
+  var HOURS=[ // 0 Sun ... 6 Sat
+    {d:'Sunday',o:12,c:23},{d:'Monday',o:12,c:22.5},{d:'Tuesday',o:12,c:22.5},{d:'Wednesday',o:12,c:22.5},
+    {d:'Thursday',o:12,c:22.5},{d:'Friday',o:12,c:23},{d:'Saturday',o:12,c:23}
+  ];
+  var ORDER=[1,2,3,4,5,6,0];
+  function fmt(h){h=h%24;var hr=Math.floor(h),mn=Math.round((h-hr)*60),ap=hr>=12?'PM':'AM',hh=hr%12||12;return hh+':'+(mn<10?'0':'')+mn+' '+ap;}
+  function state(){
+    var n=new Date(),day=n.getDay(),hr=n.getHours()+n.getMinutes()/60,t=HOURS[day],y=HOURS[(day+6)%7];
+    if(y.c>24&&hr<(y.c-24)) return {open:true,day:(day+6)%7,close:y.c};
+    if(hr>=t.o&&hr<t.c) return {open:true,day:day,close:t.c};
+    return {open:false,day:day,next:hr<t.o?t:HOURS[(day+1)%7],tomorrow:hr>=t.o};
+  }
+  function render(){
+    var s=state(),h='';
+    ORDER.forEach(function(di){var x=HOURS[di];h+='<li'+(di===s.day?' class="today" aria-current="date"':'')+'><span class="d">'+x.d+'</span><span class="t">'+fmt(x.o)+' – '+fmt(x.c)+'</span></li>';});
+    document.getElementById('sched').innerHTML=h;
+    var el=document.getElementById('status'),tx=el.querySelector('span');
+    el.className='status '+(s.open?'open':'closed');
+    tx.textContent=s.open?'Open now · until '+fmt(s.close):'Closed · opens '+(s.tomorrow?'tomorrow ':'today ')+fmt(s.next.o);
+  }
+  render();setInterval(render,60000);
+})();
+</script>
+</body>
+</html>

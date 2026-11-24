@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIPSTER — Sip Fresh. Feel Good.</title>
+<meta name="description" content="SIPSTER is a modern beverage bar serving fresh juices, smoothies, milkshakes, iced coffee and coolers in Surat. Demo brand.">
+<meta name="theme-color" content="#FFF4DC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF4DC; --cream-2:#FFE9BD; --ink:#1A2A1F; --leaf:#14573A; --leaf-2:#1F7A52;
+  --mango:#FF8A1F; --pink:#FF4B86; --lime:#C8E03A; --white:#fff;
+  --f-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --f-body:'DM Sans',system-ui,sans-serif;
+  --f-accent:'Fraunces',Georgia,serif;
+  --pad:clamp(20px,5vw,72px);
+  --maxw:1280px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --header-h:68px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 8px)}
+body{margin:0;font-family:var(--f-body);color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:4px}
+.container{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;z-index:200}
+.skip:focus{left:8px}
+
+/* Type */
+.label{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-body);font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--leaf)}
+.label::before{content:"";width:28px;height:2px;background:currentColor}
+h1,h2,h3{font-family:var(--f-display);line-height:.98;letter-spacing:-.03em;margin:0}
+h2{font-size:clamp(2.2rem,7vw,4.6rem);font-weight:800}
+h2 em,h1 em{font-family:var(--f-accent);font-style:italic;font-weight:500;letter-spacing:-.02em;color:var(--pink)}
+.lead{font-size:clamp(1rem,2.4vw,1.2rem);max-width:52ch}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;border-radius:999px;border:2px solid var(--ink);font-family:var(--f-body);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:var(--ink);color:var(--cream);transition:transform .3s var(--ease),background .3s,color .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 -2px var(--pink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--cream)}
+.btn.pink{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn.pink:hover{box-shadow:0 8px 0 -2px var(--ink)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* Header */
+header.site{position:fixed;inset:0 0 auto 0;height:var(--header-h);z-index:100;transition:background .35s,box-shadow .35s,height .35s}
+header.site.scrolled{background:rgba(255,244,220,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(26,42,31,.12);--header-h:60px}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:1.55rem;letter-spacing:-.04em}
+.logo svg{width:30px;height:30px;flex:none}
+.logo span i{color:var(--pink);font-style:normal}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:30px}
+.nav ul a{text-decoration:none;font-weight:500;font-size:.92rem;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--pink);transition:width .3s var(--ease)}
+.nav ul a:hover::after{width:100%}
+.nav .btn{display:none;min-height:42px;padding:0 20px;font-size:.72rem}
+.burger{width:46px;height:46px;border-radius:50%;border:2px solid var(--ink);background:transparent;display:grid;place-items:center;z-index:120;position:relative}
+.burger span{display:block;width:18px;height:2px;background:var(--ink);position:relative;transition:background .2s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);transition:transform .3s var(--ease)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--leaf);color:var(--cream);z-index:110;display:flex;flex-direction:column;justify-content:center;padding:90px var(--pad) 40px;clip-path:circle(0 at calc(100% - 44px) 40px);visibility:hidden;transition:clip-path .6s var(--ease),visibility 0s .6s}
+.mobile-menu.open{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible;transition:clip-path .6s var(--ease),visibility 0s}
+.mobile-menu ul{list-style:none;padding:0;margin:0 0 32px}
+.mobile-menu li{overflow:hidden}
+.mobile-menu a.ml{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,11vw,3.4rem);letter-spacing:-.03em;text-decoration:none;padding:6px 0;transform:translateY(110%);transition:transform .6s var(--ease)}
+.mobile-menu.open a.ml{transform:none}
+.mobile-menu.open li:nth-child(1) a{transition-delay:.15s}.mobile-menu.open li:nth-child(2) a{transition-delay:.2s}.mobile-menu.open li:nth-child(3) a{transition-delay:.25s}.mobile-menu.open li:nth-child(4) a{transition-delay:.3s}.mobile-menu.open li:nth-child(5) a{transition-delay:.35s}.mobile-menu.open li:nth-child(6) a{transition-delay:.4s}
+.mobile-menu a.ml:hover{color:var(--lime)}
+.mobile-menu .btn{background:var(--mango);border-color:var(--mango);color:var(--ink);align-self:flex-start}
+body.lock{overflow:hidden}
+.mobile-menu-open .logo,.mobile-menu-open .burger{color:var(--cream)}
+header.menu-open .logo{color:var(--cream);position:relative;z-index:120}
+header.menu-open .burger{border-color:var(--cream)}
+header.menu-open .burger span::before,header.menu-open .burger span::after{background:var(--cream)}
+@media(min-width:960px){
+  .nav ul{display:flex}.nav .btn{display:inline-flex}.burger{display:none}.mobile-menu{display:none}
+}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;padding:calc(var(--header-h) + 36px) 0 90px;display:flex;align-items:center;overflow:hidden;background:var(--cream)}
+.hero::before{content:"";position:absolute;right:-18vw;top:-10vw;width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:var(--mango);opacity:.95}
+.hero-grid{position:relative;display:grid;gap:34px;align-items:center}
+.hero .label{margin-bottom:20px;font-size:.68rem}
+.hero h1{font-size:clamp(3.3rem,15.5vw,9rem);font-weight:800;text-transform:uppercase}
+.hero h1 .l2{display:block;color:var(--leaf)}
+.hero h1 em{text-transform:none;display:inline-block;transform:rotate(-3deg);font-size:.78em}
+.hero p.lead{margin:22px 0 28px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero-visual{position:relative;width:min(100%,460px);margin-inline:auto;aspect-ratio:4/5}
+.hero-img{position:absolute;inset:0;border-radius:999px 999px 24px 24px;overflow:hidden;background:linear-gradient(160deg,#ffb347,#ff4b86);border:3px solid var(--ink)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.sticker{position:absolute;z-index:2;display:grid;place-items:center;text-align:center;width:104px;height:104px;border-radius:50%;background:var(--lime);border:2px solid var(--ink);font-family:var(--f-display);font-weight:800;font-size:.78rem;line-height:1.05;text-transform:uppercase;left:-10px;bottom:12%;transform:rotate(-12deg);animation:bob 5s ease-in-out infinite}
+.float{position:absolute;z-index:3;font-size:2.4rem;line-height:1;animation:bob 6s ease-in-out infinite;filter:drop-shadow(0 6px 0 rgba(26,42,31,.15))}
+.f1{top:2%;right:-6px}.f2{top:48%;right:-18px;animation-delay:-2s;font-size:2rem}.f3{bottom:-2%;right:20%;animation-delay:-4s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-14px) rotate(var(--r,0deg))}}
+.sticker{--r:-12deg}
+.scroll-ind{position:absolute;left:var(--pad);bottom:24px;display:flex;align-items:center;gap:12px;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+.scroll-ind i{width:24px;height:40px;border:2px solid var(--ink);border-radius:20px;position:relative}
+.scroll-ind i::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--pink);animation:scrolldot 1.8s infinite}
+@keyframes scrolldot{0%{transform:translateY(0);opacity:1}80%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:1.15fr .85fr;gap:40px}
+  .hero-visual{width:100%;max-width:480px;margin-right:0}
+  .sticker{width:124px;height:124px;font-size:.9rem;left:-40px}
+}
+
+/* Marquee */
+.marquee{background:var(--ink);color:var(--cream);overflow:hidden;white-space:nowrap;border-block:2px solid var(--ink)}
+.marquee div{display:inline-flex;gap:36px;padding:14px 0;animation:marq 28s linear infinite;font-family:var(--f-display);font-weight:800;font-size:1.1rem;letter-spacing:.02em;text-transform:uppercase}
+.marquee span:nth-child(even){color:var(--mango)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Sections */
+section{position:relative}
+.sec{padding:clamp(70px,11vw,140px) 0}
+
+/* Story */
+.story{background:var(--leaf);color:var(--cream)}
+.story .label{color:var(--lime)}
+.story h2 em{color:var(--mango)}
+.story-grid{display:grid;gap:44px;align-items:center}
+.story-text p{margin:0 0 18px;opacity:.92;max-width:50ch}
+.story-text h2{margin:18px 0 26px}
+.story .btn{background:var(--cream);color:var(--ink);border-color:var(--cream);margin-top:10px}
+.story .btn:hover{box-shadow:0 8px 0 -2px var(--mango)}
+.story-imgs{position:relative;padding-bottom:70px}
+.story-imgs .a{width:78%;aspect-ratio:4/5;border-radius:24px 24px 140px 24px;overflow:hidden;background:linear-gradient(160deg,#ffb347,#ff4b86)}
+.story-imgs .b{position:absolute;right:0;bottom:0;width:50%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid var(--leaf);background:linear-gradient(160deg,#c8e03a,#1f7a52)}
+.story-imgs img{width:100%;height:100%;object-fit:cover}
+.story-badge{position:absolute;top:8%;right:6%;background:var(--mango);color:var(--ink);border-radius:50%;width:96px;height:96px;display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:800;line-height:1;font-size:.82rem;transform:rotate(10deg)}
+.story-badge b{display:block;font-size:1.7rem}
+@media(min-width:900px){.story-grid{grid-template-columns:1fr 1fr;gap:80px}.story-imgs{order:-1}}
+
+/* Menu */
+.menu{background:var(--cream)}
+.menu-head{display:grid;gap:18px;margin-bottom:36px}
+.menu-head h2{margin-top:16px}
+.filters{display:flex;gap:10px;overflow-x:auto;padding:4px var(--pad) 12px;margin-inline:calc(var(--pad) * -1);scrollbar-width:none;scroll-snap-type:x proximity}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;scroll-snap-align:start;min-height:46px;padding:0 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font-weight:700;font-size:.82rem;letter-spacing:.04em;transition:background .25s,color .25s,transform .25s var(--ease)}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+.card{position:relative;display:flex;flex-direction:column;background:var(--white);border:2px solid var(--ink);border-radius:18px;overflow:hidden;transition:transform .35s var(--ease),opacity .35s,box-shadow .35s;animation:pop .5s var(--ease) both}
+.card:hover{transform:translateY(-6px);box-shadow:6px 6px 0 var(--ink)}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.card .ph{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg,#ffd7a3)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.card:hover .ph img{transform:scale(1.08)}
+.tag{position:absolute;top:10px;left:10px;background:var(--ink);color:var(--cream);font-size:.6rem;font-weight:700;letter-spacing:.12em;padding:4px 9px;border-radius:999px;text-transform:uppercase}
+.tag.sig{background:var(--pink)}.tag.new{background:var(--lime);color:var(--ink)}.tag.best{background:var(--mango);color:var(--ink)}
+.card .body{padding:14px 14px 16px;display:flex;flex-direction:column;flex:1}
+.card .cat{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--leaf-2)}
+.card h3{font-size:1.15rem;margin:4px 0 6px;letter-spacing:-.02em;line-height:1.05}
+.card p{font-size:.84rem;margin:0 0 12px;opacity:.78;line-height:1.45;flex:1}
+.card .price{font-family:var(--f-display);font-weight:800;font-size:1.25rem;color:var(--pink)}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}.card h3{font-size:1.3rem}.card p{font-size:.9rem}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}.menu-head{grid-template-columns:1.2fr 1fr;align-items:end}}
+
+/* Feature */
+.feature{background:var(--mango);overflow:hidden;color:var(--ink)}
+.feature .big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--f-display);font-weight:800;font-size:clamp(7rem,32vw,28rem);line-height:.8;letter-spacing:-.06em;color:rgba(255,244,220,.28);white-space:nowrap;pointer-events:none;user-select:none}
+.feat-grid{position:relative;display:grid;gap:40px;align-items:center}
+.feat-img{position:relative;width:min(88%,420px);margin-inline:auto;aspect-ratio:3/4}
+.feat-img .blob{position:absolute;inset:0;border-radius:42% 58% 55% 45%/50% 40% 60% 50%;overflow:hidden;border:3px solid var(--ink);background:linear-gradient(160deg,#ffd23f,#ff8a1f);animation:morph 12s ease-in-out infinite}
+.feat-img img{width:100%;height:100%;object-fit:cover}
+@keyframes morph{0%,100%{border-radius:42% 58% 55% 45%/50% 40% 60% 50%}50%{border-radius:58% 42% 40% 60%/45% 58% 42% 55%}}
+.feat-img .float{font-size:2.6rem}
+.feat-text .tagline{display:inline-block;background:var(--ink);color:var(--lime);padding:7px 16px;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.18em;margin-bottom:20px}
+.feat-text h2{font-size:clamp(3rem,13vw,7.5rem);text-transform:uppercase;color:var(--ink)}
+.feat-text h2 em{color:var(--cream);text-transform:none}
+.feat-text p{font-size:clamp(1.05rem,2.6vw,1.3rem);max-width:40ch;margin:20px 0 26px}
+.feat-price{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.feat-price b{font-family:var(--f-display);font-size:2.8rem;font-weight:800}
+@media(min-width:900px){.feat-grid{grid-template-columns:.9fr 1.1fr;gap:70px}}
+
+/* Gallery */
+.gallery{background:var(--cream-2)}
+.gallery h2{margin:16px 0 40px}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;gap:10px}
+.gal figure{margin:0;position:relative;overflow:hidden;border-radius:16px;background:var(--bg,#ffc58a);cursor:zoom-in;border:0;padding:0}
+.gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.gal button:focus-visible{outline:3px solid var(--pink);outline-offset:-3px}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.gal figure:hover img{transform:scale(1.1)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(26,42,31,.8));color:#fff;font-size:.8rem;font-weight:500;transform:translateY(100%);transition:transform .4s var(--ease)}
+.gal figure:hover figcaption,.gal button:focus-visible figcaption{transform:none}
+.gal .tall{grid-row:span 2}.gal .wide{grid-column:span 2}
+@media(hover:none){.gal figcaption{transform:none;font-size:.7rem;padding-top:20px}}
+@media(min-width:800px){.gal{grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:14px}.gal .wide{grid-column:span 2}.gal figure{border-radius:20px}}
+.lightbox{position:fixed;inset:0;z-index:300;background:rgba(15,25,18,.92);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.lightbox.open{opacity:1;visibility:visible;transition:opacity .35s}
+.lightbox figure{margin:0;max-width:min(94vw,1000px);transform:scale(.92);transition:transform .45s var(--ease)}
+.lightbox.open figure{transform:none}
+.lightbox img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;border-radius:14px;background:#222;min-height:120px}
+.lightbox figcaption{color:var(--cream);text-align:center;margin-top:14px;font-family:var(--f-accent);font-style:italic;font-size:1.1rem}
+.lb-close{position:absolute;top:16px;right:16px;width:50px;height:50px;border-radius:50%;border:2px solid var(--cream);background:transparent;color:var(--cream);font-size:1.6rem;line-height:1;display:grid;place-items:center;transition:background .25s,color .25s}
+.lb-close:hover{background:var(--cream);color:var(--ink)}
+
+/* Why */
+.why{background:var(--cream)}
+.why h2{margin:16px 0 50px;max-width:14ch}
+.why-list{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.why-list li{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;align-items:baseline;padding:26px 0;border-bottom:2px solid var(--ink);position:relative;transition:padding .4s var(--ease),background .4s}
+.why-list .n{font-family:var(--f-accent);font-style:italic;font-size:1.4rem;color:var(--pink);grid-row:span 2}
+.why-list h3{font-size:clamp(1.7rem,6vw,3rem);transition:color .3s,transform .4s var(--ease)}
+.why-list p{margin:0;max-width:44ch;opacity:.8}
+.why-list .em{position:absolute;right:0;top:50%;transform:translateY(-50%) scale(.6) rotate(-10deg);font-size:2.6rem;opacity:0;transition:opacity .35s,transform .45s var(--ease)}
+@media(hover:hover){.why-list li:hover{padding-left:18px}.why-list li:hover h3{color:var(--leaf-2)}.why-list li:hover .em{opacity:1;transform:translateY(-50%) scale(1) rotate(8deg)}}
+@media(max-width:699px){.why-list .em{opacity:1;transform:translateY(-50%) scale(.8);font-size:2rem;right:2px}}
+@media(min-width:900px){.why-list li{grid-template-columns:80px 1fr 1fr;align-items:center}.why-list .n{grid-row:auto}}
+
+/* Reviews */
+.reviews{background:var(--pink);color:var(--cream);overflow:hidden}
+.reviews .label{color:var(--cream)}
+.reviews h2{margin:16px 0 40px}.reviews h2 em{color:var(--lime)}
+.rev-grid{display:grid;gap:18px}
+.rev{background:var(--cream);color:var(--ink);border:2px solid var(--ink);border-radius:20px;padding:26px 24px;position:relative;box-shadow:6px 6px 0 var(--ink)}
+.rev:nth-child(2){transform:rotate(0)}
+.rev .q{font-family:var(--f-accent);font-size:4.2rem;line-height:.6;color:var(--mango);display:block;height:30px}
+.stars{color:var(--mango);letter-spacing:3px;font-size:1.05rem;margin-bottom:10px}
+.rev p{font-size:1.08rem;margin:0 0 18px;line-height:1.5}
+.who{display:flex;align-items:center;gap:12px;font-weight:700}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--leaf);color:var(--cream);font-family:var(--f-display)}
+.who small{display:block;font-weight:400;opacity:.65}
+.rev-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.rev-cta .btn{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.rev-cta .btn:hover{box-shadow:0 8px 0 -2px var(--ink)}
+.rev-cta span{font-size:.9rem;opacity:.9}
+@media(min-width:850px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:26px}.rev:nth-child(1){transform:rotate(-1.5deg)}.rev:nth-child(2){transform:translateY(20px)}.rev:nth-child(3){transform:rotate(1.5deg)}}
+
+/* Contact + hours */
+.visit{background:var(--cream)}
+.visit-grid{display:grid;gap:44px}
+.visit h2{margin:16px 0 28px}
+.info{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:18px}
+.info li{display:grid;gap:2px}
+.info b{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--leaf-2)}
+.info a,.info span{font-size:1.1rem;text-decoration:none}
+.info a:hover{color:var(--pink)}
+.socials{display:flex;gap:10px;margin-bottom:28px}
+.socials a{min-height:44px;display:inline-flex;align-items:center;padding:0 18px;border:2px solid var(--ink);border-radius:999px;font-weight:700;font-size:.8rem;text-decoration:none;transition:background .25s,color .25s}
+.socials a:hover{background:var(--ink);color:var(--cream)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.map{border:2px solid var(--ink);border-radius:24px;overflow:hidden;min-height:300px;background:linear-gradient(135deg,var(--cream-2),#ffd29a);position:relative}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block;filter:saturate(1.1)}
+.hours{margin-top:clamp(60px,9vw,110px);background:var(--leaf);color:var(--cream);border-radius:28px;padding:clamp(28px,5vw,64px);display:grid;gap:34px}
+.hours .label{color:var(--lime)}
+.hours h2{margin-top:16px}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:10px 18px;border-radius:999px;font-weight:700;letter-spacing:.14em;font-size:.8rem;background:rgba(255,255,255,.12)}
+.status i{width:12px;height:12px;border-radius:50%;background:#888}
+.status.open i{background:var(--lime);box-shadow:0 0 0 0 rgba(200,224,58,.7);animation:pulse 1.8s infinite}
+.status.closed i{background:var(--pink)}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(200,224,58,0)}100%{box-shadow:0 0 0 0 rgba(200,224,58,0)}}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{display:flex;justify-content:space-between;gap:14px;padding:15px 12px;border-bottom:1px solid rgba(255,244,220,.2);font-size:1rem;border-radius:0;transition:background .3s}
+.sched li.today{background:var(--mango);color:var(--ink);font-weight:700;border-radius:12px;border-bottom-color:transparent}
+.sched li.today .d::after{content:" · TODAY";font-size:.65rem;letter-spacing:.14em}
+@media(min-width:900px){.visit-grid{grid-template-columns:1fr 1fr;gap:70px;align-items:stretch}.hours{grid-template-columns:1fr 1fr;align-items:center}}
+
+/* Footer */
+footer{background:var(--ink);color:var(--cream);padding:clamp(60px,9vw,110px) 0 30px;overflow:hidden;position:relative}
+.foot-word{font-family:var(--f-display);font-weight:800;font-size:clamp(4.5rem,25vw,22rem);line-height:.8;letter-spacing:-.06em;color:var(--mango);margin:0 0 40px;white-space:nowrap}
+.foot-word i{color:var(--pink);font-style:normal}
+.foot-grid{display:grid;gap:34px;margin-bottom:46px}
+.foot-grid h4{margin:0 0 12px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot-grid a{text-decoration:none;opacity:.85}.foot-grid a:hover{color:var(--mango);opacity:1}
+.foot-grid p{margin:0;opacity:.85;font-size:.95rem}
+.foot-tag{font-family:var(--f-accent);font-style:italic;font-size:1.5rem;margin:0 0 10px}
+.foot-bottom{border-top:1px solid rgba(255,244,220,.2);padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:.76rem;letter-spacing:.06em}
+.foot-bottom span:last-child{letter-spacing:.14em;opacity:.7}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr 1.3fr}}
+.totop{position:fixed;right:16px;bottom:16px;z-index:90;width:52px;height:52px;border-radius:50%;border:2px solid var(--ink);background:var(--lime);color:var(--ink);font-size:1.3rem;font-weight:700;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .3s,transform .3s var(--ease),visibility 0s .3s}
+.totop.show{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s var(--ease)}
+.totop:hover{background:var(--pink);color:#fff}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  .marquee div{animation:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" id="header">
+  <div class="container nav">
+    <a class="logo" href="#home" aria-label="SIPSTER home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="22" r="15" fill="#FF8A1F" stroke="#1A2A1F" stroke-width="2.5"/><path d="M20 22 L20 4" stroke="#1A2A1F" stroke-width="3" stroke-linecap="round"/><path d="M20 4 L28 2" stroke="#FF4B86" stroke-width="3" stroke-linecap="round"/><path d="M8 22 H32 M10.5 30 H29.5 M11 14 H29" stroke="#fff" stroke-width="1.5" opacity=".7"/></svg>
+      <span>SIP<i>S</i>TER</span>
+    </a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Drinks</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn" href="#menu">Explore Drinks</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <ul>
+    <li><a class="ml" href="#home">Home</a></li>
+    <li><a class="ml" href="#story">Our Story</a></li>
+    <li><a class="ml" href="#menu">Drinks</a></li>
+    <li><a class="ml" href="#gallery">Gallery</a></li>
+    <li><a class="ml" href="#reviews">Reviews</a></li>
+    <li><a class="ml" href="#contact">Contact</a></li>
+  </ul>
+  <a class="btn" href="#menu">Explore Drinks →</a>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="label rv">Freshly blended · Naturally refreshing</span>
+      <h1 class="rv" style="--d:.1s">Good mood.<span class="l2">Great <em>sips.</em></span></h1>
+      <p class="lead rv" style="--d:.2s">From fresh fruit blends to creamy shakes and chilled coffee, discover your new favourite way to refresh.</p>
+      <div class="hero-btns rv" style="--d:.3s">
+        <a class="btn pink" href="#menu">Explore our menu <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#story">Discover SIPSTER</a>
+      </div>
+    </div>
+    <div class="hero-visual rv" style="--d:.2s">
+      <div class="hero-img"><img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=900&q=80" alt="A colourful fruit smoothie in a glass" fetchpriority="high"></div>
+      <div class="sticker">100%<br>fresh<br>fruit</div>
+      <span class="float f1" aria-hidden="true">🍊</span>
+      <span class="float f2" aria-hidden="true">🍓</span>
+      <span class="float f3" aria-hidden="true">🍋</span>
+    </div>
+  </div>
+  <a class="scroll-ind" href="#story" aria-label="Scroll to our story"><i></i><span>Scroll</span></a>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div>
+    <span>Fresh Juices</span><span>✦</span><span>Smoothies</span><span>✦</span><span>Milkshakes</span><span>✦</span><span>Iced Coffee</span><span>✦</span><span>Coolers</span><span>✦</span>
+    <span>Fresh Juices</span><span>✦</span><span>Smoothies</span><span>✦</span><span>Milkshakes</span><span>✦</span><span>Iced Coffee</span><span>✦</span><span>Coolers</span><span>✦</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="sec story" id="story">
+  <div class="container story-grid">
+    <div class="story-imgs rv">
+      <div class="a"><img loading="lazy" src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=900&q=80" alt="Fresh colourful fruits piled together"></div>
+      <div class="b"><img loading="lazy" src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80" alt="Glass of fresh orange juice"></div>
+      <div class="story-badge"><div><b>100%</b>made<br>to order</div></div>
+    </div>
+    <div class="story-text">
+      <span class="label rv">A little about us</span>
+      <h2 class="rv" style="--d:.1s">Fresh ingredients. <em>Good energy.</em> Better days.</h2>
+      <p class="rv" style="--d:.15s">At SIPSTER, we believe a great drink can turn an ordinary moment into something better. We blend fresh ingredients, bold flavours, and a little creativity to make every sip worth remembering.</p>
+      <p class="rv" style="--d:.2s">Whether you're looking for your morning coffee, a post-workout smoothie, a fruity afternoon refresher, or a thick indulgent shake, we have something made just for your mood.</p>
+      <a class="btn rv" style="--d:.25s" href="#why">Our story <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu" id="menu">
+  <div class="container">
+    <div class="menu-head">
+      <div>
+        <span class="label rv">Find your favourite</span>
+        <h2 class="rv" style="--d:.1s">Something delicious <em>for every mood.</em></h2>
+      </div>
+      <p class="lead rv" style="--d:.2s">Freshly blended, carefully crafted, and made to make your day.</p>
+    </div>
+    <div class="filters rv" role="group" aria-label="Filter drinks by category" id="filters">
+      <button class="chip" data-f="all" aria-pressed="true">All Drinks</button>
+      <button class="chip" data-f="juice" aria-pressed="false">Fresh Juices</button>
+      <button class="chip" data-f="smoothie" aria-pressed="false">Smoothies</button>
+      <button class="chip" data-f="shake" aria-pressed="false">Milkshakes</button>
+      <button class="chip" data-f="coffee" aria-pressed="false">Coffee</button>
+      <button class="chip" data-f="cooler" aria-pressed="false">Coolers</button>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- FEATURE -->
+<section class="sec feature" id="signature">
+  <div class="big" aria-hidden="true">MANGO</div>
+  <div class="container feat-grid">
+    <div class="feat-img rv">
+      <div class="blob"><img loading="lazy" src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80" alt="Ripe mango, the star of the Mango Magic smoothie"></div>
+      <span class="float" style="top:-4%;left:-4%" aria-hidden="true">🥭</span>
+      <span class="float" style="bottom:4%;right:-6%;animation-delay:-3s" aria-hidden="true">🥥</span>
+    </div>
+    <div class="feat-text">
+      <span class="tagline rv">SIPSTER SIGNATURE</span>
+      <h2 class="rv" style="--d:.1s">Mango <em>Magic</em></h2>
+      <p class="rv" style="--d:.2s">Sweet mango, creamy texture, tropical vibes, and a refreshing finish. One sip and you're somewhere sunnier.</p>
+      <div class="feat-price rv" style="--d:.3s"><b>₹229</b><a class="btn" href="#contact">Find us <span class="arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery" id="gallery">
+  <div class="container">
+    <span class="label rv">Gallery</span>
+    <h2 class="rv" style="--d:.1s">A little colour. <em>A lot of flavour.</em></h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why" id="why">
+  <div class="container">
+    <span class="label rv">Why SIPSTER?</span>
+    <h2 class="rv" style="--d:.1s">Freshness is <em>our thing.</em></h2>
+    <ul class="why-list">
+      <li class="rv"><span class="n">01</span><h3>Fresh Ingredients</h3><p>Fresh fruit and quality ingredients in every blend.</p><span class="em" aria-hidden="true">🍓</span></li>
+      <li class="rv"><span class="n">02</span><h3>Made to Order</h3><p>Every drink prepared fresh when you order.</p><span class="em" aria-hidden="true">🥤</span></li>
+      <li class="rv"><span class="n">03</span><h3>Big on Flavour</h3><p>Creative combinations that never feel ordinary.</p><span class="em" aria-hidden="true">🍍</span></li>
+      <li class="rv"><span class="n">04</span><h3>Your Everyday Escape</h3><p>A little refreshing break from your everyday routine.</p><span class="em" aria-hidden="true">🌴</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec reviews" id="reviews">
+  <div class="container">
+    <span class="label rv">Reviews</span>
+    <h2 class="rv" style="--d:.1s">Good sips. <em>Good words.</em></h2>
+    <div class="rev-grid">
+      <figure class="rev rv" style="margin:0"><span class="q" aria-hidden="true">“</span><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><p>The mango smoothie is incredible. Super fresh and honestly my new favourite drink.</p><figcaption class="who"><span class="av">A</span><span>Aanya<small>Regular</small></span></figcaption></figure>
+      <figure class="rev rv" style="margin:0;--d:.1s"><span class="q" aria-hidden="true">“</span><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><p>Their cold coffee is amazing. Perfect balance and not overly sweet.</p><figcaption class="who"><span class="av">R</span><span>Rohan<small>Coffee lover</small></span></figcaption></figure>
+      <figure class="rev rv" style="margin:0;--d:.2s"><span class="q" aria-hidden="true">“</span><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><p>Love the vibe and the drinks. Every time I visit, I end up trying something new.</p><figcaption class="who"><span class="av">M</span><span>Meera<small>Weekend visitor</small></span></figcaption></figure>
+    </div>
+    <div class="rev-cta rv">
+      <a class="btn" href="https://www.google.com/search?q=SIPSTER+beverage+bar+reviews" target="_blank" rel="noopener">Review us on Google ↗</a>
+      <span>Demo reviews for a fictional brand.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + HOURS -->
+<section class="sec visit" id="contact">
+  <div class="container">
+    <div class="visit-grid">
+      <div>
+        <span class="label rv">Visit us</span>
+        <h2 class="rv" style="--d:.1s">Come by <em>for a sip.</em></h2>
+        <ul class="info rv" style="--d:.15s">
+          <li><b>Address</b><span>18 Refreshment Street, City Centre, Surat, Gujarat, India</span></li>
+          <li><b>Phone</b><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><b>Email</b><a href="mailto:hello@sipster.in">hello@sipster.in</a></li>
+        </ul>
+        <div class="socials rv" style="--d:.2s">
+          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+        <div class="cta-row rv" style="--d:.25s">
+          <a class="btn pink" href="tel:+919876543210">Call SIPSTER</a>
+          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=18+Refreshment+Street+City+Centre+Surat+Gujarat+India" target="_blank" rel="noopener">Get directions ↗</a>
+        </div>
+      </div>
+      <div class="map rv" style="--d:.15s">
+        <iframe title="Map showing SIPSTER location in Surat" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Surat,Gujarat,India&output=embed"></iframe>
+      </div>
+    </div>
+
+    <div class="hours rv" id="hours">
+      <div>
+        <span class="label">Opening hours</span>
+        <h2>Your refreshing break <em>starts here.</em></h2>
+        <div class="status" id="status" role="status"><i></i><span>CHECKING…</span></div>
+      </div>
+      <ul class="sched" id="sched"></ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="foot-word" aria-hidden="true">SIP<i>S</i>TER</p>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-tag">Sip Fresh. Feel Good.</p>
+        <p>18 Refreshment Street, City Centre,<br>Surat, Gujarat, India</p>
+        <p style="margin-top:8px"><a href="tel:+919876543210">+91 98765 43210</a></p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home">Home</a></li><li><a href="#story">Our Story</a></li><li><a href="#menu">Drinks</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon – Thu · 10 AM – 10 PM<br>Fri – Sun · 10 AM – 11 PM</p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SIPSTER. All rights reserved.</span><span>DEMO BEVERAGE BRAND · SURAT FOOD ZONE</span></div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Back to top">↑</button>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close image">×</button>
+  <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  document.body.classList.remove('no-js');
+  var U = function(id,w){ return 'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||600)+'&q=75'; };
+
+  /* ---------- Menu data ---------- */
+  var CATS = {juice:'Fresh Juice',smoothie:'Smoothie',shake:'Milkshake',coffee:'Coffee',cooler:'Cooler'};
+  var DRINKS = [
+    {n:'Orange Sunshine',p:149,c:'juice',d:'Freshly squeezed oranges with a naturally sweet citrus flavour.',i:'1600271886742-f049cd451bba',bg:'#ffb347',t:'best'},
+    {n:'Watermelon Chill',p:129,c:'juice',d:'Fresh watermelon blended into a cool summer refresher.',i:'1589733955941-5eeaf752f6dd',bg:'#ff7a8a'},
+    {n:'Green Glow',p:169,c:'juice',d:'Green apple, cucumber, mint, and lime.',i:'1610970881699-44a5587cabec',bg:'#a8d86a',t:'new'},
+    {n:'Pineapple Punch',p:159,c:'juice',d:'Fresh pineapple with a tropical twist.',i:'1587883012610-e3df17d41270',bg:'#ffd84a'},
+    {n:'Berry Blast',p:199,c:'smoothie',d:'Strawberries, blueberries, banana, and yogurt.',i:'1502741224143-90386d7f8c82',bg:'#c97bd1',t:'best'},
+    {n:'Tropical Sunrise',p:219,c:'smoothie',d:'Mango, pineapple, banana, and coconut milk.',i:'1553530666-ba11a7da3888',bg:'#ffc04d',t:'sig'},
+    {n:'Peanut Butter Power',p:229,c:'smoothie',d:'Banana, peanut butter, milk, and a touch of honey.',i:'1577805947697-89e18249d767',bg:'#d9a066',t:'must'},
+    {n:'Green Energy',p:199,c:'smoothie',d:'Spinach, green apple, banana, and refreshing ingredients.',i:'1610970881699-44a5587cabec',bg:'#8fcf6a'},
+    {n:'Classic Chocolate Shake',p:189,c:'shake',d:'Rich chocolate blended with creamy milk and ice cream.',i:'1572490122747-3968b75cc699',bg:'#a0674b'},
+    {n:'Oreo Crush',p:219,c:'shake',d:'Cookies, chocolate, and thick creamy milkshake.',i:'1579954115545-a95591f28bfc',bg:'#8b7d78',t:'best'},
+    {n:'Strawberry Dream',p:199,c:'shake',d:'Fresh strawberry flavour blended into a creamy shake.',i:'1553177595-4de2bb0842b9',bg:'#ff9db8'},
+    {n:'Caramel Coffee Shake',p:229,c:'shake',d:'Coffee, caramel, and smooth ice cream.',i:'1517701604599-bb29b565090c',bg:'#d4a373',t:'sig'},
+    {n:'Iced Americano',p:149,c:'coffee',d:'Bold espresso over ice, clean and crisp.',i:'1461023058943-07fcbe16d735',bg:'#b9895b'},
+    {n:'Iced Latte',p:179,c:'coffee',d:'Smooth espresso poured over cold milk and ice.',i:'1517701604599-bb29b565090c',bg:'#d8b48c'},
+    {n:'Caramel Cold Coffee',p:219,c:'coffee',d:'Chilled coffee swirled with silky caramel.',i:'1461023058943-07fcbe16d735',bg:'#c99a63',t:'must'},
+    {n:'Mocha Frappe',p:229,c:'coffee',d:'Blended coffee and chocolate, topped light and frosty.',i:'1572490122747-3968b75cc699',bg:'#9c6b4e',t:'new'},
+    {n:'Mint Mojito',p:149,c:'cooler',d:'Muddled mint and lime with sparkling fizz.',i:'1551538827-9c037cb4f32a',bg:'#9be0b0'},
+    {n:'Blue Lagoon',p:179,c:'cooler',d:'A cool blue citrus sparkler that looks as good as it tastes.',i:'1536935338788-846bb9981813',bg:'#6ec6ff',t:'best'},
+    {n:'Lemon Iced Tea',p:139,c:'cooler',d:'Brewed tea, fresh lemon, and plenty of ice.',i:'1556679343-c7306c1976bc',bg:'#ffd27a'},
+    {n:'Mango Cooler',p:169,c:'cooler',d:'Sweet mango pulp shaken with a zesty chilled finish.',i:'1553279768-865429fa0078',bg:'#ffb92e'}
+  ];
+  var TAGS = {best:'BESTSELLER',sig:'SIGNATURE',new:'NEW',must:'MUST TRY'};
+  var grid = document.getElementById('grid');
+
+  function imgFail(e){ e.target.style.display='none'; }
+
+  function renderMenu(filter){
+    var html = '';
+    var list = DRINKS.filter(function(x){ return filter==='all' || x.c===filter; });
+    list.forEach(function(x,idx){
+      html += '<article class="card" style="animation-delay:'+(idx*45)+'ms">'
+        + '<div class="ph" style="--bg:'+x.bg+'"><img loading="lazy" src="'+U(x.i,600)+'" alt="'+x.n+'">'
+        + (x.t ? '<span class="tag '+x.t+'">'+TAGS[x.t]+'</span>' : '')
+        + '</div><div class="body"><span class="cat">'+CATS[x.c]+'</span><h3>'+x.n+'</h3><p>'+x.d+'</p><span class="price">₹'+x.p+'</span></div></article>';
+    });
+    grid.innerHTML = html;
+    grid.querySelectorAll('img').forEach(function(im){ im.addEventListener('error',imgFail); });
+  }
+  renderMenu('all');
+
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    this.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c===b ? 'true':'false'); });
+    renderMenu(b.dataset.f);
+    b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+
+  /* ---------- Gallery ---------- */
+  var GAL = [
+    {i:'1600271886742-f049cd451bba',cap:'Fresh juice, squeezed to order',cls:'wide',bg:'#ffb347'},
+    {i:'1553530666-ba11a7da3888',cap:'Mango smoothie',cls:'tall',bg:'#ffc04d'},
+    {i:'1461023058943-07fcbe16d735',cap:'Iced coffee o\'clock',cls:'',bg:'#b9895b'},
+    {i:'1572490122747-3968b75cc699',cap:'Thick & creamy shakes',cls:'',bg:'#a0674b'},
+    {i:'1619566636858-adf3ef46400b',cap:'Fruit, fresh from the market',cls:'tall',bg:'#ff8aa0'},
+    {i:'1610970881699-44a5587cabec',cap:'Green Glow in the making',cls:'',bg:'#a8d86a'},
+    {i:'1554118811-1e0d58224f24',cap:'The SIPSTER corner',cls:'wide',bg:'#e5c9a0'},
+    {i:'1551538827-9c037cb4f32a',cap:'Mint Mojito',cls:'',bg:'#9be0b0'},
+    {i:'1502741224143-90386d7f8c82',cap:'Berry Blast',cls:'',bg:'#c97bd1'}
+  ];
+  var gal = document.getElementById('gal'), gh='';
+  GAL.forEach(function(g,k){
+    gh += '<figure class="'+g.cls+' rv" style="--bg:'+g.bg+';--d:'+((k%4)*.07)+'s"><button type="button" data-k="'+k+'" aria-label="Open image: '+g.cap+'"><img loading="lazy" src="'+U(g.i,g.cls==='wide'?1000:700)+'" alt="'+g.cap+'"><figcaption>'+g.cap+'</figcaption></button></figure>';
+  });
+  gal.innerHTML = gh;
+  gal.querySelectorAll('img').forEach(function(im){ im.addEventListener('error',imgFail); });
+
+  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap'), lbClose = document.getElementById('lbClose'), lastFocus=null;
+  function openLB(k){
+    var g = GAL[k]; lastFocus = document.activeElement;
+    lbImg.src = U(g.i,1400); lbImg.alt = g.cap; lbCap.textContent = g.cap;
+    lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.classList.add('lock');
+    lbClose.focus();
+  }
+  function closeLB(){
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.classList.remove('lock');
+    if(lastFocus) lastFocus.focus();
+  }
+  gal.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) openLB(+b.dataset.k); });
+  lbClose.addEventListener('click',closeLB);
+  lb.addEventListener('click',function(e){ if(e.target===lb || e.target.tagName==='FIGURE') closeLB(); });
+
+  /* ---------- Mobile menu ---------- */
+  var burger = document.getElementById('burger'), mm = document.getElementById('mobileMenu'), header = document.getElementById('header');
+  function setMenu(open){
+    mm.classList.toggle('open',open); burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+    header.classList.toggle('menu-open',open); document.body.classList.toggle('lock',open);
+  }
+  burger.addEventListener('click',function(){ setMenu(!mm.classList.contains('open')); });
+  mm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ setMenu(false); }); });
+  window.addEventListener('resize',function(){ if(window.innerWidth>=960) setMenu(false); });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(lb.classList.contains('open')) closeLB();
+      else if(mm.classList.contains('open')) setMenu(false);
+    }
+  });
+
+  /* ---------- Scroll effects ---------- */
+  var totop = document.getElementById('totop');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y>30);
+    totop.classList.toggle('show', y>700);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  totop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ---------- Reveal ---------- */
+  var rvs = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } });
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    rvs.forEach(function(el){ io.observe(el); });
+  } else { rvs.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* ---------- Opening hours ---------- */
+  var HOURS = [
+    {d:'Sunday',o:10,c:23},{d:'Monday',o:10,c:22},{d:'Tuesday',o:10,c:22},{d:'Wednesday',o:10,c:22},
+    {d:'Thursday',o:10,c:22},{d:'Friday',o:10,c:23},{d:'Saturday',o:10,c:23}
+  ];
+  var ORDER = [1,2,3,4,5,6,0];
+  function fmt(h){ var ap=h>=12?'PM':'AM', hh=h%12||12; return hh+':00 '+ap; }
+  var now = new Date(), today = now.getDay();
+  var sched = document.getElementById('sched'), sh='';
+  ORDER.forEach(function(di){
+    var h = HOURS[di];
+    sh += '<li'+(di===today?' class="today" aria-current="date"':'')+'><span class="d">'+h.d+'</span><span>'+fmt(h.o)+' – '+fmt(h.c)+'</span></li>';
+  });
+  sched.innerHTML = sh;
+  function updateStatus(){
+    var n = new Date(), t = HOURS[n.getDay()], hr = n.getHours()+n.getMinutes()/60;
+    var open = hr>=t.o && hr<t.c, el = document.getElementById('status');
+    el.className = 'status '+(open?'open':'closed');
+    el.querySelector('span').textContent = open ? 'OPEN NOW · CLOSES '+fmt(t.c) : 'CLOSED · OPENS '+fmt(t.o);
+    if(!open && hr>=t.c){
+      var nx = HOURS[(n.getDay()+1)%7]; el.querySelector('span').textContent = 'CLOSED · OPENS TOMORROW '+fmt(nx.o);
+    }
+  }
+  updateStatus(); setInterval(updateStatus,60000);
+})();
+</script>
+</body>
+</html>

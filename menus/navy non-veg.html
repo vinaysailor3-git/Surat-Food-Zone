@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Navy Non-Veg — Fresh Flavours. Bold Taste.</title>
+<meta name="description" content="Digital menu of Navy Non-Veg — freshly prepared seafood, chicken, mutton and egg specialties. Select your dishes and order on WhatsApp.">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   THEME VARIABLES
+   ========================================================================== */
+:root{
+  --navy:#0B1F3A; --navy-2:#142C4C; --gold:#D6A85C; --gold-soft:rgba(214,168,92,.16);
+  --warm:#F7F4ED; --white:#FFFFFF; --char:#252A31;
+  --line-dark:rgba(255,255,255,.12); --line-light:rgba(11,31,58,.10);
+  --shadow-sm:0 2px 10px rgba(11,31,58,.06); --shadow-md:0 12px 32px rgba(11,31,58,.12); --shadow-lg:0 24px 60px rgba(5,14,28,.35);
+  --r-sm:12px; --r-md:18px; --r-lg:26px;
+  --hh:66px;
+  --font:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --ease:cubic-bezier(.22,.8,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 10px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--char);background:var(--warm);line-height:1.55;overflow-x:hidden;font-size:16px;-webkit-font-smoothing:antialiased}
+body.has-bar{padding-bottom:calc(84px + var(--safe-b))}
+body.lock{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent}
+ul{list-style:none;margin:0;padding:0}
+h1,h2,h3,h4,p{margin:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.container{width:100%;max-width:1160px;margin-inline:auto;padding-inline:20px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:600;font-size:.98rem;transition:transform .25s var(--ease),box-shadow .25s,background .25s,color .25s,border-color .25s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 6px 20px rgba(214,168,92,.28)}
+.btn-gold:hover{box-shadow:0 8px 30px rgba(214,168,92,.55);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.35);color:var(--white)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-outline{border:1.5px solid var(--line-light);color:var(--navy);background:var(--white)}
+.btn-outline:hover{border-color:var(--gold);box-shadow:var(--shadow-sm)}
+.btn-sm{min-height:44px;padding:0 18px;font-size:.92rem}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header{position:fixed;inset:0 0 auto 0;height:var(--hh);z-index:50;transition:background .3s,backdrop-filter .3s,box-shadow .3s}
+.header.scrolled{background:rgba(11,31,58,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.header .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--white);font-weight:700;letter-spacing:.2px;min-width:0}
+.brand img,.logo-fallback{height:44px;width:auto;max-width:150px;object-fit:contain;flex:none}
+.logo-fallback{display:inline-grid;place-items:center;width:44px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:800;font-size:.95rem}
+.brand-name{font-size:1.02rem;white-space:nowrap}
+.nav-desktop{display:none;align-items:center;gap:6px}
+.nav-desktop a{padding:8px 14px;border-radius:999px;color:rgba(255,255,255,.85);font-weight:500;font-size:.95rem;transition:color .2s,background .2s}
+.nav-desktop a:hover{color:var(--gold);background:rgba(255,255,255,.06)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.hamburger{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:var(--white);border:1px solid var(--line-dark)}
+.hamburger span,.hamburger span::before,.hamburger span::after{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease),opacity .2s,background .2s}
+.hamburger span{position:relative}
+.hamburger span::before,.hamburger span::after{content:"";position:absolute;left:0}
+.hamburger span::before{top:-6px}.hamburger span::after{top:6px}
+.hamburger[aria-expanded="true"] span{background:transparent}
+.hamburger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.hamburger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.header .btn-order-h{display:none}
+.nav-mobile{position:absolute;top:var(--hh);left:0;right:0;background:rgba(11,31,58,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);overflow:hidden;max-height:0;opacity:0;visibility:hidden;transition:max-height .4s var(--ease),opacity .3s,visibility .4s;border-bottom:1px solid var(--line-dark)}
+.nav-mobile.open{max-height:80vh;opacity:1;visibility:visible}
+.nav-mobile ul{padding:10px 20px 6px}
+.nav-mobile a.link{display:block;padding:15px 4px;color:var(--white);font-weight:500;border-bottom:1px solid var(--line-dark);font-size:1.05rem}
+.nav-mobile .btn{margin:16px 20px 22px;width:calc(100% - 40px)}
+@media (min-width:900px){
+  :root{--hh:76px}
+  .nav-desktop{display:flex}.hamburger,.nav-mobile{display:none}
+  .header .btn-order-h{display:inline-flex}
+  .brand img,.logo-fallback{height:52px}
+  .logo-fallback{width:52px}
+}
+@media (max-width:359px){.brand-name{display:none}}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{position:relative;background:var(--navy);color:var(--white);overflow:hidden;padding:calc(var(--hh) + 36px) 0 64px;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(900px 500px at 85% 10%,rgba(214,168,92,.16),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(20,44,76,.9),transparent 65%),linear-gradient(160deg,#0B1F3A 0%,#081730 100%)}
+.shape{position:absolute;border-radius:50%;z-index:-1;pointer-events:none}
+.shape.s1{width:340px;height:340px;right:-120px;top:80px;border:1px solid rgba(214,168,92,.28);animation:float 11s ease-in-out infinite}
+.shape.s2{width:140px;height:140px;left:-50px;bottom:120px;background:radial-gradient(circle,rgba(214,168,92,.18),transparent 70%);animation:float 9s ease-in-out infinite reverse}
+.shape.s3{width:16px;height:16px;left:12%;top:28%;background:var(--gold);opacity:.55;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.hero-grid{display:grid;gap:36px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow::before{content:"";width:28px;height:1.5px;background:var(--gold)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,10vw,4.6rem);line-height:1.05;margin:16px 0 18px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{color:rgba(255,255,255,.78);max-width:520px;font-size:1.02rem}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 24px}
+.hero-line{display:flex;flex-wrap:wrap;gap:6px 14px;color:rgba(255,255,255,.62);font-size:.85rem;letter-spacing:.04em}
+.hero-art{position:relative;width:min(86%,400px);margin-inline:auto}
+.hero-art::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border:1.5px solid var(--gold);border-radius:200px 200px 28px 28px;opacity:.55}
+.imgbox{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy-2),#1d3b63);}
+.imgbox img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.imgbox img.is-broken{visibility:hidden}
+.hero-frame{aspect-ratio:4/5;border-radius:200px 200px 28px 28px;box-shadow:var(--shadow-lg)}
+.hero-badge{position:absolute;left:-10px;bottom:28px;background:var(--white);color:var(--navy);padding:12px 16px;border-radius:var(--r-md);box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;font-weight:600;font-size:.86rem;animation:float 8s ease-in-out infinite}
+.hero-badge b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--gold);}
+@media (min-width:900px){.hero{padding:calc(var(--hh) + 60px) 0 96px}.hero-grid{grid-template-columns:1.05fr .95fr;gap:56px}.hero-badge{left:-34px}}
+.fade-in{opacity:0;transform:translateY(22px);animation:rise .9s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ==========================================================================
+   SECTIONS (shared)
+   ========================================================================== */
+section{position:relative}
+.section{padding:72px 0}
+.section-head{max-width:640px;margin-bottom:34px}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head.center .eyebrow{justify-content:center}
+.section-head h2{font-family:var(--font-display);font-size:clamp(1.8rem,6vw,2.7rem);line-height:1.15;margin:12px 0 10px;color:var(--navy)}
+.section-head p{color:#5a6270}
+.on-dark .section-head h2{color:var(--white)}.on-dark .section-head p{color:rgba(255,255,255,.7)}
+.on-dark{background:var(--navy);color:var(--white)}
+.on-navy2{background:var(--navy-2);color:var(--white)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* Highlights */
+.highlights{padding:44px 0 8px}
+.hl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.hl{background:var(--white);border:1px solid var(--line-light);border-radius:var(--r-md);padding:20px 16px;box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.hl:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--gold)}
+.hl .ico{width:48px;height:48px;border-radius:14px;background:var(--navy);color:var(--gold);display:grid;place-items:center;margin-bottom:14px;transition:transform .4s var(--ease)}
+.hl:hover .ico{transform:rotate(-8deg) scale(1.06)}
+.hl .ico svg{width:24px;height:24px}
+.hl h3{font-size:1rem;color:var(--navy);margin-bottom:4px}
+.hl p{font-size:.85rem;color:#666e7a;line-height:1.45}
+@media (min-width:800px){.hl-grid{grid-template-columns:repeat(4,1fr);gap:18px}.hl{padding:26px 22px}}
+
+/* Featured */
+.feat-grid{display:grid;gap:16px;grid-template-columns:1fr}
+.feat{background:var(--white);border:1px solid var(--line-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s}
+.feat:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.feat:hover .imgbox img{transform:scale(1.07)}
+.feat .imgbox{aspect-ratio:16/10}
+.feat-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.feat-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a7433;background:var(--gold-soft);padding:4px 10px;border-radius:999px}
+.feat h3{font-size:1.15rem;color:var(--navy)}
+.feat p{font-size:.9rem;color:#5a6270;flex:1}
+.feat-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.feat-price{font-weight:700;color:var(--navy);font-size:1.1rem}
+.link-btn{color:var(--navy);font-weight:600;font-size:.9rem;min-height:44px;display:inline-flex;align-items:center;gap:6px;border-bottom:1.5px solid var(--gold);padding:0 2px}
+.link-btn:hover{color:#9a7433}
+@media (min-width:640px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.feat-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+
+/* ==========================================================================
+   MENU
+   ========================================================================== */
+.menu-section{padding-top:72px;padding-bottom:70px;background:var(--warm)}
+.menu-tools{display:flex;flex-direction:column;gap:12px;margin-bottom:6px}
+.search{position:relative;flex:1}
+.search input{width:100%;height:52px;border-radius:999px;border:1.5px solid var(--line-light);background:var(--white);padding:0 50px 0 48px;font:inherit;font-size:1rem;color:var(--char);transition:border-color .2s,box-shadow .2s}
+.search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+.search .s-ico{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#8b93a0;pointer-events:none}
+.search .clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#6b7380}
+.search .clear[hidden]{display:none}
+.search .clear:hover{color:var(--navy);background:var(--gold-soft)}
+.chipbar{position:sticky;top:var(--hh);z-index:20;margin:0 -20px;padding:10px 20px;background:rgba(247,244,237,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-light)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0;scroll-snap-type:x proximity}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-light);background:var(--white);font-weight:600;font-size:.9rem;color:var(--navy);display:inline-flex;align-items:center;gap:8px;scroll-snap-align:start;transition:background .25s,color .25s,border-color .25s,transform .2s,box-shadow .25s}
+.chip:hover{border-color:var(--gold)}
+.chip:active{transform:scale(.96)}
+.chip.active{background:var(--gold);border-color:var(--gold);color:var(--navy);box-shadow:0 6px 18px rgba(214,168,92,.4)}
+.chip .n{min-width:20px;height:20px;border-radius:10px;padding:0 6px;background:var(--navy);color:var(--gold);font-size:.72rem;display:grid;place-items:center}
+.chip .n[hidden]{display:none}
+@media (min-width:1200px){.chipbar{margin:0}}
+
+.menu-panel{padding-top:26px;min-height:300px;animation:fade .45s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cat-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.cat-thumb{width:68px;height:68px;border-radius:18px;flex:none;border:2px solid var(--gold)}
+.cat-head h3{font-family:var(--font-display);font-size:1.6rem;color:var(--navy);line-height:1.2}
+.cat-notes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.note{font-size:.8rem;background:var(--white);border:1px solid var(--line-light);color:#555d6a;padding:5px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center}
+.note.gold{background:var(--gold-soft);border-color:rgba(214,168,92,.4);color:#7d5c1f}
+.group-title{display:flex;align-items:center;gap:12px;margin:26px 0 10px;font-weight:700;color:var(--navy);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase}
+.group-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.items{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media (min-width:760px){.items{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media (min-width:1100px){.items{grid-template-columns:repeat(4,1fr)}}
+.item{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;opacity:0}
+.item.in{opacity:1;animation:pop .7s var(--ease) backwards;animation-delay:var(--d,0s)}
+.item:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(214,168,92,.7)}
+.item.flash{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft),var(--shadow-md)}
+.item-img{aspect-ratio:4/3;position:relative}
+.item-img::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(11,31,58,.45));pointer-events:none}
+.item:hover .item-img img{transform:scale(1.09)}
+.item-body{padding:12px 13px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.item-body h4{font-size:.98rem;color:var(--navy);line-height:1.3;font-weight:700}
+.item-body .desc{font-size:.82rem;color:#6a7280}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:var(--navy);color:var(--gold)}
+.tag.soft{background:var(--gold-soft);color:#7d5c1f}
+.price-line{margin-top:auto;padding-top:6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.price{font-weight:800;color:var(--navy);font-size:1.12rem;white-space:nowrap}
+.price::before{content:"";display:inline-block;width:14px;height:2px;background:var(--gold);vertical-align:middle;margin-right:8px;border-radius:2px}
+.price sup{color:#b0452f;font-size:.8em}
+.price.txt{font-size:.78rem;font-weight:700;color:#7d5c1f;background:var(--gold-soft);padding:4px 10px;border-radius:999px;line-height:1.25}
+.price.txt::before{display:none}
+.vchip{font-size:.85rem;font-weight:800;color:var(--navy);background:var(--gold-soft);border:1px solid rgba(214,168,92,.55);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.vchip em{font-style:normal;font-weight:600;color:#7d5c1f;margin-right:3px}
+.size-note{font-size:.74rem;color:#7d5c1f;font-weight:600;width:100%}
+.placeholder{padding:22px;border:1.5px dashed rgba(214,168,92,.7);border-radius:var(--r-md);color:#7d5c1f;background:rgba(214,168,92,.08);text-align:center;font-size:.92rem}
+.empty-search{text-align:center;padding:50px 10px;color:#666e7a}
+.empty-search h3{color:var(--navy);margin-bottom:6px}
+.results-head{color:#666e7a;font-size:.92rem;margin-bottom:4px}
+.seasonal-grid{display:grid;gap:10px}
+@media (min-width:860px){.seasonal-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ==========================================================================
+   ABOUT / SPECIALTIES / REVIEWS / CONTACT / FOOTER
+   ========================================================================== */
+.about-grid{display:grid;gap:40px;align-items:center}
+.about-art{position:relative;max-width:480px;margin-inline:auto;width:100%}
+.about-art::after{content:"";position:absolute;right:-14px;bottom:-14px;width:70%;height:70%;border:1.5px solid var(--gold);border-radius:var(--r-lg);z-index:0;opacity:.6}
+.about-img{position:relative;z-index:1;aspect-ratio:4/5;border-radius:var(--r-lg);box-shadow:var(--shadow-lg)}
+.about-text h2{font-family:var(--font-display);font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.15;margin:12px 0 22px}
+.about-text h2 em{font-style:normal;color:var(--gold)}
+.about-text p{color:rgba(255,255,255,.8);margin-bottom:16px;font-size:1.02rem}
+.about-text p.big{font-family:var(--font-display);font-size:1.3rem;color:var(--white);line-height:1.4}
+.about-rule{width:64px;height:3px;background:var(--gold);border-radius:2px;margin-top:22px}
+@media (min-width:900px){.about-grid{grid-template-columns:.9fr 1.1fr;gap:72px}}
+
+.spec-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+.spec{position:relative;aspect-ratio:3/4;border-radius:var(--r-lg);overflow:hidden;display:block;text-align:left;width:100%;box-shadow:var(--shadow-sm);transition:transform .35s var(--ease),box-shadow .35s}
+.spec .imgbox{position:absolute;inset:0}
+.spec::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.05) 30%,rgba(11,31,58,.92));}
+.spec:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.spec:hover .imgbox img{transform:scale(1.08)}
+.spec-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px;color:var(--white)}
+.spec-body h3{font-family:var(--font-display);font-size:1.25rem}
+.spec-body span{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:.82rem;font-weight:600;margin-top:4px}
+@media (min-width:860px){.spec-grid{grid-template-columns:repeat(4,1fr);gap:20px}.spec{aspect-ratio:3/4.2}}
+
+.rev-grid{display:grid;gap:16px}
+.rev{background:rgba(255,255,255,.05);border:1px solid var(--line-dark);border-radius:var(--r-lg);padding:24px;transition:transform .3s var(--ease),border-color .3s}
+.rev:hover{transform:translateY(-5px);border-color:var(--gold)}
+.stars{color:var(--gold);letter-spacing:3px;font-size:1.05rem;margin-bottom:12px}
+.rev p{color:rgba(255,255,255,.85);font-size:.98rem}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:18px}
+.rev .av{width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:700}
+.rev .who small{display:block;color:rgba(255,255,255,.5);font-size:.75rem}
+.demo-note{margin-top:22px;text-align:center;font-size:.8rem;color:rgba(255,255,255,.5)}
+@media (min-width:800px){.rev-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
+
+.contact-grid{display:grid;gap:18px}
+.card{background:var(--white);border:1px solid var(--line-light);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-sm)}
+.card h3{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:16px}
+.info-line{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-light);align-items:flex-start}
+.info-line:last-of-type{border-bottom:0}
+.info-line .ico{width:40px;height:40px;border-radius:12px;background:var(--navy);color:var(--gold);display:grid;place-items:center;flex:none}
+.info-line small{display:block;color:#7b8390;font-size:.76rem;text-transform:uppercase;letter-spacing:.1em}
+.info-line b{color:var(--navy);font-weight:600}
+.info-line .placeholder-text{color:#8a7a55;font-style:italic}
+.contact-btns{display:grid;gap:12px}
+.social{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--gold);transition:transform .25s,background .25s,color .25s}
+.social a:hover{background:var(--gold);color:var(--navy);transform:translateY(-3px)}
+.social-empty{font-size:.85rem;color:#8a92a0}
+@media (min-width:860px){.contact-grid{grid-template-columns:1.1fr .9fr;gap:24px}}
+
+.footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 28px;border-top:1px solid rgba(214,168,92,.35)}
+.foot-grid{display:grid;gap:34px}
+.foot-brand .brand{margin-bottom:14px}
+.foot-brand p{max-width:320px;font-size:.92rem}
+.footer h4{color:var(--white);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.footer li a{display:inline-block;padding:7px 0;min-height:36px;transition:color .2s,padding .2s}
+.footer li a:hover{color:var(--gold);padding-left:4px}
+.footer .social a{background:rgba(255,255,255,.08)}
+.copy{margin-top:40px;padding-top:20px;border-top:1px solid var(--line-dark);font-size:.82rem;text-align:center;color:rgba(255,255,255,.5)}
+@media (min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:48px}}
+
+
+/* ==========================================================================
+   MOTION & GRAPHICS
+   ========================================================================== */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:linear-gradient(90deg,var(--gold),#f3d9a4);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+@keyframes pop{from{opacity:0;transform:translateY(34px) scale(.95)}}
+.stagger>*{opacity:0}
+.stagger.in>*{opacity:1;animation:pop .8s var(--ease) backwards;animation-delay:calc(var(--i,0) * .09s)}
+.reveal.from-left{transform:translateX(-46px)}
+.reveal.from-right{transform:translateX(46px)}
+.reveal.in{opacity:1;transform:none}
+.section-head .eyebrow::before{transition:width .9s .25s var(--ease)}
+.section-head.reveal:not(.in) .eyebrow::before{width:0}
+
+/* background layer (bubbles + floating food icons) */
+.fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fx-host>.container{position:relative;z-index:1}
+.fx.paused *{animation-play-state:paused!important}
+.bub{position:absolute;bottom:-40px;border-radius:50%;border:1.5px solid rgba(214,168,92,.5);opacity:0;animation:rise-b linear infinite}
+.fx.light .bub{background:radial-gradient(circle at 30% 30%,rgba(214,168,92,.2),transparent 65%)}
+.fx.dark .bub{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.14),transparent 65%)}
+@keyframes rise-b{0%{transform:translate3d(0,0,0) scale(.6);opacity:0}10%{opacity:.9}85%{opacity:.5}100%{transform:translate3d(var(--dx,0px),calc(var(--h,600px) * -1),0) scale(1.15);opacity:0}}
+.fx-item{position:absolute;color:var(--gold);opacity:.38;transform:translate3d(0,var(--py,0px),0);will-change:transform}
+.fx.light .fx-item{opacity:.3}
+.fx-item svg,.orbit svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.a-swim{animation:swim var(--t,14s) ease-in-out infinite alternate}
+@keyframes swim{0%{transform:translateX(-34px) rotate(-5deg)}50%{transform:translate(0,-12px) rotate(3deg)}100%{transform:translateX(34px) rotate(-3deg)}}
+.a-bob{animation:bob var(--t,7s) ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-16px) rotate(8deg)}}
+.a-wobble{animation:wobble var(--t,6s) ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg) translateY(-8px)}}
+.a-twinkle{animation:twinkle var(--t,3.5s) ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:scale(.7) rotate(0);opacity:.35}50%{transform:scale(1.15) rotate(25deg);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* hero extras */
+.hero-frame img{animation:kb 22s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
+.hero-art .ring{position:absolute;inset:-46px;border:1.5px dashed rgba(214,168,92,.45);border-radius:50%;animation:spin 50s linear infinite;pointer-events:none}
+.orbit{position:absolute;width:54px;height:54px;padding:13px;border-radius:50%;color:var(--gold);background:rgba(11,31,58,.72);border:1.5px solid var(--gold);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 8px 22px rgba(0,0,0,.35);animation:bob 6s ease-in-out infinite;z-index:3}
+.orbit.o1{top:6%;left:-7%}
+.orbit.o2{top:30%;right:-9%;animation-delay:-2s}
+.orbit.o3{bottom:6%;right:-4%;animation-delay:-4s;width:48px;height:48px;padding:11px}
+.orbit.o4{top:-2%;right:18%;animation-delay:-1s;width:42px;height:42px;padding:10px}
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:64px;overflow:hidden;z-index:2;pointer-events:none}
+.waves svg{position:absolute;bottom:0;left:0;width:200%;height:100%;fill:var(--warm)}
+.waves .w-back{opacity:.45;animation:wave 14s linear infinite}
+.waves .w-front{animation:wave 9s linear infinite reverse}
+@keyframes wave{to{transform:translateX(-50%)}}
+@media (min-width:900px){.waves{height:96px}}
+.hero{padding-bottom:96px}
+@media (min-width:900px){.hero{padding-bottom:130px}}
+
+/* marquee */
+.marquee{overflow:hidden;background:var(--warm);border-bottom:1px solid rgba(214,168,92,.35);padding:14px 0}
+.marquee-track{display:flex;align-items:center;width:max-content;animation:mq 38s linear infinite;font-family:var(--font-display);font-size:1.25rem;color:var(--navy);white-space:nowrap}
+.marquee-track span{padding:0 22px}
+.marquee-track svg{width:20px;height:20px;color:var(--gold);fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;animation:spin 8s linear infinite;flex:none}
+@keyframes mq{to{transform:translateX(-50%)}}
+.marquee:hover .marquee-track{animation-play-state:paused}
+
+/* small living details */
+.hl .ico{position:relative}
+.hl .ico::after{content:"";position:absolute;inset:0;border-radius:14px;border:1.5px solid var(--gold);animation:ping 2.8s ease-out infinite;opacity:0}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+.hl:nth-child(2) .ico::after{animation-delay:.5s}.hl:nth-child(3) .ico::after{animation-delay:1s}.hl:nth-child(4) .ico::after{animation-delay:1.5s}
+.price::before{animation:grow 2.5s ease-in-out infinite alternate}
+@keyframes grow{from{width:8px}to{width:18px}}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal,.fade-in,.item,.stagger>*{opacity:1;transform:none}
+  .fx,.marquee-track,.waves svg,.hero-art .ring{display:none}
+  .progress{display:none}
+}
+/* Cream branding surfaces keep the black logo clear on desktop and mobile. */
+.header,.header.scrolled{background:var(--warm);color:var(--navy);box-shadow:0 2px 12px rgba(11,31,58,.08)}
+.header .brand,.footer .brand,.nav-desktop a{color:var(--navy)}
+.nav-desktop a:hover{color:var(--navy);background:var(--gold-soft)}
+.hamburger{color:var(--navy);border-color:var(--line-light)}
+.nav-mobile{background:var(--warm);border-color:var(--line-light)}
+.nav-mobile a.link{color:var(--navy);border-color:var(--line-light)}
+.footer{background:var(--warm);color:var(--char);border-color:var(--line-light)}
+.footer h4{color:var(--navy)}
+.footer li a:hover{color:#79551f}
+.footer .social a{background:var(--navy);color:var(--gold)}
+.footer .social a:hover{background:var(--gold);color:var(--navy)}
+.footer .copy{color:#555b63;border-color:var(--line-light)}
+
+/* A stationary circular photograph inside a slowly turning captain's wheel. */
+.hero-art{width:min(110%,580px);max-width:none;aspect-ratio:1;isolation:isolate;left:50%;margin-inline:0;translate:-50% 0}
+.hero-art::before{display:none}
+.hero-art .hero-frame{position:absolute;inset:17%;aspect-ratio:1;border-radius:50%;box-shadow:var(--shadow-lg);z-index:0}
+.hero-art .hero-frame img{animation:none;transform:none}
+.captain-wheel{position:absolute;inset:-20%;width:140%;height:140%;max-width:none;color:var(--gold);z-index:1;pointer-events:none;transform-origin:50% 50%;animation:captain-turn 60s linear infinite}
+.hero-art .hero-badge{left:50%;bottom:0;transform:translateX(-50%);width:max-content;max-width:90%;z-index:2;animation:none}
+@keyframes captain-turn{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.captain-wheel{animation:none!important}}
+
+/* Featured dishes rotate inside the stationary circular crop. */
+.hero-frame .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;pointer-events:none}
+.hero-frame .hero-slide.is-active{opacity:1}
+.hero-carousel-toggle{position:absolute;bottom:0;left:50%;translate:-50% 0;z-index:3;min-height:44px;padding:8px 18px;border:1px solid var(--gold);border-radius:999px;background:var(--navy);color:var(--warm);font-size:.85rem}
+@media(prefers-reduced-motion:reduce){.hero-frame .hero-slide{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="ic-fish" viewBox="0 0 48 48"><path d="M4 24c6-10 16-12 24-6l10-8v28l-10-8c-8 6-18 4-24-6z"/><circle cx="14" cy="22" r="1.4"/></symbol>
+<symbol id="ic-prawn" viewBox="0 0 48 48"><path d="M34 9c-10-2-20 4-22 14-1 6 2 11 8 13 6 2 12-1 14-7"/><path d="M34 9c3 1 5 4 5 7"/><path d="M34 29l7 3M33 34l6 5M20 36l-2 6"/><circle cx="36" cy="13" r="1.2"/></symbol>
+<symbol id="ic-drum" viewBox="0 0 48 48"><path d="M31 7c6 0 11 5 10 11-1 6-7 9-13 7l-8 8c-2 2-5 2-6 0s-1-4 1-6l8-8c-2-6 1-12 8-12z"/><path d="M14 36l-4 4"/></symbol>
+<symbol id="ic-egg" viewBox="0 0 48 48"><path d="M24 5c8 0 14 13 14 21a14 14 0 0 1-28 0C10 18 16 5 24 5z"/><path d="M18 28c0 3 2 6 6 6"/></symbol>
+<symbol id="ic-chili" viewBox="0 0 48 48"><path d="M30 8c4-2 8 0 8 4 0 14-12 28-28 28 10-4 16-12 17-24 0-4 1-7 3-8z"/><path d="M30 8c0-3 2-4 4-4"/></symbol>
+<symbol id="ic-spark" viewBox="0 0 48 48"><path d="M24 5l3.5 13.5L41 24l-13.5 3.5L24 43l-3.5-15.5L7 24l13.5-5.5z"/></symbol>
+</defs></svg>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============================ HEADER ============================ -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="#home" class="brand" aria-label="Navy Non-Veg — home">
+      <img class="brand-logo" src="../assets/navynonveglogo.png" alt="Navy Non-Veg Logo">
+      <span class="brand-name">Navy Non-Veg</span>
+    </a>
+    <nav class="nav-desktop" aria-label="Main">
+      <a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#specialties">Specialties</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-gold btn-sm btn-order-h" href="tel:09081219157"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call Now</a>
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="navMobile" aria-label="Open menu" type="button"><span></span></button>
+    </div>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <ul>
+      <li><a class="link" href="#home">Home</a></li>
+      <li><a class="link" href="#menu">Menu</a></li>
+      <li><a class="link" href="#about">About</a></li>
+      <li><a class="link" href="#specialties">Specialties</a></li>
+      <li><a class="link" href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-gold" href="tel:09081219157">Call Now</a>
+  </div>
+</header>
+
+<main>
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="home">
+  <span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span>
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow fade-in" style="--d:.05s">Navy Non-Veg</span>
+      <h1 class="fade-in" style="--d:.15s">Fresh Flavours.<br><em>Bold Taste.</em></h1>
+      <p class="lead fade-in" style="--d:.25s">Experience the authentic taste of freshly prepared seafood, chicken, mutton and more. Every dish is prepared fresh, with flavour that brings you back.</p>
+      <div class="hero-btns fade-in" style="--d:.35s">
+        <a href="#menu" class="btn btn-gold">Explore Menu</a>
+        <a href="#contact" class="btn btn-ghost">Contact Us</a>
+      </div>
+      <div class="hero-line fade-in" style="--d:.45s"><span>Freshly Prepared</span><span>•</span><span>Seafood Specialties</span><span>•</span><span>Authentic Flavours</span></div>
+    </div>
+    <div data-parallax="0.07"><div class="hero-art fade-in" style="--d:.3s"><img class="captain-wheel" src="../assets/navy-captain-wheel.svg" alt="" aria-hidden="true" width="1000" height="1000">
+      <div class="imgbox hero-frame"><img id="heroImg" alt="Freshly prepared seafood and non-veg dishes" fetchpriority="high"></div>
+      
+    </div></div>
+  </div>
+  <div class="waves" aria-hidden="true"><svg class="w-back" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60C240 0 480 120 720 60S1200 0 1440 60 1680 120 2160 60 2640 0 2880 60V120H0Z"/></svg><svg class="w-front" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 75C240 25 480 125 720 75S1200 25 1440 75 1680 125 2160 75 2640 25 2880 75V120H0Z"/></svg></div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+<!-- ============================ HIGHLIGHTS ============================ -->
+<section class="highlights" aria-label="Restaurant highlights">
+  <div class="container">
+    <div class="hl-grid stagger">
+      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 4 6 6 6 10a6 6 0 0 1-12 0c0-2 1-3 2-5 1 1 2 1.5 2 1.5C10 7 11 5 12 3z"/></svg></div><h3>Freshly Prepared</h3><p>Every dish cooked fresh to order.</p></article>
+      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M3 12c3-5 8-6 12-3l4-3v12l-4-3c-4 3-9 2-12-3z"/><circle cx="9" cy="11" r=".8"/></svg></div><h3>Seafood Specialties</h3><p>Fish, prawns, crabs and scampi.</p></article>
+      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><polygon points="12 3 14.8 9 21 9.7 16.3 14 17.7 20.5 12 17.2 6.3 20.5 7.7 14 3 9.7 9.2 9"/></svg></div><h3>Authentic Flavours</h3><p>Refined techniques, real taste.</p></article>
+      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Quality Ingredients</h3><p>Carefully selected, start to finish.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FEATURED ============================ -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Favourites</span><h2>Featured Dishes</h2><p>A taste of what the kitchen is known for. Tap a dish to jump to it in the menu.</p></div>
+    <div class="feat-grid stagger" id="featGrid"></div>
+  </div>
+</section>
+
+<!-- ============================ MENU ============================ -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Digital Menu</span><h2>Our Menu</h2><p>Browse our dishes by category, or search for your favourite.</p></div>
+    <div class="menu-tools">
+      <div class="search">
+        <svg class="i s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search your favourite dish..." aria-label="Search menu" autocomplete="off" enterkeyhint="search">
+        <button class="clear" id="searchClear" type="button" aria-label="Clear search" hidden><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="chipbar"><div class="chips" id="chips" role="tablist" aria-label="Menu categories"></div></div>
+    <div class="menu-panel" id="menuPanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="section on-dark" id="about">
+  <div class="container about-grid">
+    <div class="about-art reveal from-left"><div class="imgbox about-img"><img id="aboutImg" alt="Plated dish at Navy Non-Veg" loading="lazy"></div></div>
+    <div class="about-text reveal from-right" style="--d:.1s">
+      <span class="eyebrow">Our Story</span>
+      <h2>More Than Food. <em>An Experience.</em></h2>
+      <p class="big">We do not simply serve food, we curate an experience.</p>
+      <p>Every dish we serve begins with carefully selected ingredients, from the freshest seafood to premium chicken, tender mutton, and farm-fresh eggs, prepared fresh to order.</p>
+      <p>Each creation reflects our chefs' passion for authentic flavors, refined techniques, and exceptional quality.</p>
+      <div class="about-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SPECIALTIES ============================ -->
+<section class="section" id="specialties">
+  <div class="container">
+    <div class="section-head center reveal"><span class="eyebrow">Specialties</span><h2>What We Do Best</h2><p>Tap a card to jump straight to that part of the menu.</p></div>
+    <div class="spec-grid stagger" id="specGrid"></div>
+  </div>
+</section>
+
+<!-- ============================ REVIEWS ============================ -->
+<section class="section on-navy2" id="reviews">
+  <div class="container">
+    <div class="section-head center reveal"><span class="eyebrow">Testimonials</span><h2>Loved by Our Guests</h2></div>
+    <div class="rev-grid stagger" id="revGrid"></div>
+    <p class="demo-note">Sample content for demonstration only — not real customer reviews. Replace in the <code>REVIEWS</code> list in the script.</p>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Visit Us</span><h2>Location &amp; Contact</h2></div>
+    <div class="contact-grid">
+      <div class="card reveal from-left">
+        <h3>Navy Non-Veg</h3>
+        <div class="info-line"><span class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Address</small><b class="placeholder-text" id="cAddr"></b></div></div>
+        <div class="info-line"><span class="ico"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Opening hours</small><b class="placeholder-text" id="cHours"></b></div></div>
+        <div class="info-line"><span class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><div><small>Phone / WhatsApp</small><b id="cPhone"></b></div></div>
+        <div class="info-line"><span class="ico"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><div><small>Follow us</small><div class="social" id="contactSocial"></div></div></div>
+      </div>
+      <div class="card reveal from-right" style="--d:.1s">
+        <h3>Get in touch</h3>
+        <div class="contact-btns">
+          <a class="btn btn-gold" id="callBtn"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call Now</a>
+          <a class="btn btn-outline" id="waBtn" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5z"/></svg>Chat on WhatsApp</a>
+          <a class="btn btn-outline" id="mapBtn" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#home" class="brand"><img class="brand-logo" src="../assets/navynonveglogo.png" alt="Navy Non-Veg Logo"><span class="brand-name">Navy Non-Veg</span></a>
+        <p>Fresh Flavours. Bold Taste. Seafood, chicken, mutton and egg specialties, prepared fresh to order.</p>
+      </div>
+      <div><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#menu">Menu</a></li><li><a href="#about">About</a></li><li><a href="#specialties">Specialties</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Reach Us</h4><ul><li><a id="fCall">Call</a></li><li><a id="fWa" target="_blank" rel="noopener">WhatsApp</a></li><li><a id="fMap" target="_blank" rel="noopener">Google Maps</a></li></ul><div class="social" id="footSocial" style="margin-top:10px"></div></div>
+    </div>
+    <p class="copy">© <span id="year"></span> Navy Non-Veg. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   1. CONFIG  — edit restaurant details here
+   ========================================================================== */
+const CONFIG = {
+  name: 'Navy Non-Veg',
+  waNumber: '919081219157',                 // international format, no + or spaces
+  phoneTel: 'tel:09081219157',
+  phoneDisplay: '09081219157',
+  mapsUrl: 'https://maps.app.goo.gl/wQpSPQ17XuCZsb5h8',
+  address: 'Address to be updated',
+  hours: 'Opening hours to be updated',
+  showPriceConfirmNote: true,               // shows the "* price to be confirmed" note in Chicken
+  social: { instagram: '', facebook: '', youtube: '' }   // add real URLs; empty = hidden
+};
+
+/* Image sources (online, for development). Swap any URL for your own photo. */
+const unsplash = (id, w = 900) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
+const IMAGES = {
+  hero:      unsplash('photo-1519708227418-c8fd9a32b7a2', 900),
+  about:     unsplash('photo-1414235077428-338989a2e8c0', 900),
+  egg:       unsplash('photo-1482049016688-2d3e1b311543', 700),
+  chicken:   unsplash('photo-1603894584373-5ac82b2ae398', 700),
+  butterChicken: unsplash('photo-1588166524941-3bf61a9c41db', 700),
+  mutton:    unsplash('photo-1545247181-516773cae754', 700),
+  extras:    unsplash('photo-1599487488170-d11ec9c172f0', 700),
+  drinks:    unsplash('photo-1581006852262-e4307cf6283a', 700),
+  dara:      unsplash('photo-1519708227418-c8fd9a32b7a2', 700),
+  prawns:    unsplash('photo-1559737558-2f5a35f4523b', 700),
+  crabs:     unsplash('photo-1553247407-23251ce81f59', 700),
+  pomfret:   unsplash('photo-1467003909585-2f8a72700288', 700),
+  scampi:    unsplash('photo-1625943553852-781c6dd46faa', 700),
+  seasonal:  unsplash('photo-1535140728325-a4d3707eee61', 700)
+};
+
+/* ==========================================================================
+   2. MENU DATA  — categories → groups → items
+      item: { name, price (number|null), priceText, tags[], desc, confirm, options }
+      options: { choices: [{label, price}] }  → customer picks a size/option before adding
+   ========================================================================== */
+const CRAB_SIZES   = { choices: [250, 280, 330, 350].map(p => ({ label: 'Size ₹' + p, price: p })) };
+const SCAMPI_SIZES = { choices: [350, 450, 650].map(p => ({ label: 'Size ₹' + p, price: p })) };
+const HALF_FULL = (h, f) => ({ choices: [{ label: 'Half', price: h }, { label: 'Full', price: f }] });
+const BY_SIZE = 'Price according to size';
+
+const MENU = [
+  { id: 'egg', name: 'Egg', short: 'Egg', img: IMAGES.egg, notes: [],
+    groups: [
+      { items: [
+        { name: 'Boil', price: 15 }, { name: 'Omlet', price: 70 }, { name: 'Boil Green Fry', price: 150 },
+        { name: 'Fry', price: 120 }, { name: 'Kachu', price: 170 }, { name: 'Khima Red', price: 170 },
+        { name: 'Khima Green', price: 170 }, { name: 'Fry Red', price: 200 }, { name: 'Fry Green', price: 170 },
+        { name: 'Curry Red', price: 200 }, { name: 'Curry Green', price: 170 }, { name: 'Rice Green', price: 200 } ] },
+      { title: 'Preparation', items: [ { name: 'Butter Preparation', price: 30 } ] }
+    ] },
+  { id: 'chicken', name: 'Chicken', short: 'Chicken', img: IMAGES.chicken, notes: [],
+    groups: [
+      { title: 'Starter – Tandoor', items: [], placeholder: 'Tandoor starters coming soon — menu and prices are pending confirmation.' },
+      { title: 'Starter – Fry', items: [
+        { name: 'Fry (Boneless)', price: 300 }, { name: 'Fry (With Bone)', price: 300 },
+        { name: 'Drumstick (Garlic/Patra) (3 pcs)', price: 350 } ] },
+      { title: 'Gravy', items: [
+        { name: 'Soup', price: 300, confirm: true }, { name: 'Gravy (Boneless)', price: 350, confirm: true },
+        { name: 'Gravy (With Bone)', price: 300 }, { name: 'Lemon Chicken', price: 350 },
+        { name: 'Butter Chicken', price: 350 }, { name: 'Gauthi Chicken', price: 300 } ] },
+      { title: 'Rice', items: [
+        { name: 'Rice (Boneless)', price: 400 }, { name: 'Rice (With Bone)', price: 380 },
+        { name: 'Khichdi (Boneless)', price: 350 }, { name: 'Gravy Rice', price: 200 } ] },
+      { title: 'Preparation', items: [ { name: 'Butter Preparation', price: 50 } ] }
+    ] },
+  { id: 'mutton', name: 'Mutton', short: 'Mutton', img: IMAGES.mutton, notes: [],
+    groups: [ { items: [ { name: 'Mutton Bheja', price: 380 }, { name: 'Mutton Gravy', price: 450 }, { name: 'Paya Soup', price: 350 } ] } ] },
+  { id: 'extras', name: 'Extras', short: 'Extras', img: IMAGES.extras, notes: [],
+    groups: [ { items: [
+      { name: 'Pav (2 pcs)', price: 10 }, { name: 'Tandoori Nan Plain', price: 60 }, { name: 'Tandoori Nan Butter', price: 80 },
+      { name: 'Garlic Nan', price: 100 }, { name: 'Tandoori Roti Plain', price: 30 }, { name: 'Tandoori Roti Butter', price: 40 },
+      { name: 'Chapati', price: 15 }, { name: 'Chapati Butter', price: 20 }, { name: 'Rotla', price: 30 }, { name: 'Rotla Butter', price: 40 },
+      { name: 'Khichdi', price: 180 }, { name: 'Rice (Half)', price: 80 }, { name: 'Rice (Full)', price: 100 }, { name: 'Jeera Rice', price: 130 },
+      { name: 'Green Chatani (Hot)', price: 50 }, { name: 'Green Chatani', price: 10 }, { name: 'Tomato Plate', price: 15 },
+      { name: 'Roasted Papad', price: 20 }, { name: 'Fry Papad', price: 30 } ] } ] },
+  { id: 'drinks', name: 'Soft Drinks', short: 'Drinks', img: IMAGES.drinks, notes: [],
+    groups: [ { items: [
+      { name: 'Thumps Up', price: 20 }, { name: 'Coke', price: 20 }, { name: 'Sprite', price: 20 },
+      { name: 'Maza', price: 20 }, { name: 'Sosyo', price: 20 }, { name: 'Butter Milk (Chhas)', price: 30 } ] } ] },
+  { id: 'dara', name: 'Indian Salmon (Dara Fish)', short: 'Dara Fish', img: IMAGES.dara, notes: ['Choose Half or Full before adding'],
+    groups: [
+      { title: 'Half / Full', items: [
+        { name: 'Regular Fry', img: IMAGES.pomfret, options: HALF_FULL(400, 650), priceText: 'Half / Full', tags: ['Seafood'] },
+        { name: 'Green Chatni Masala Fry', options: HALF_FULL(450, 700), priceText: 'Half / Full', tags: ['Seafood'] },
+        { name: 'Semi Gravy', options: HALF_FULL(400, 650), priceText: 'Half / Full', tags: ['Seafood'] } ] },
+      { title: 'Other', items: [
+        { name: 'Full Gravy', price: 650 }, { name: 'Biryani', price: 650 },
+        { name: 'Fish Tikka (Boneless)', price: 850 }, { name: 'Patra Fish', price: 750 } ] },
+      { title: 'Preparation', items: [ { name: 'Butter', price: 50 }, { name: 'Ghee', price: 100 } ] }
+    ] },
+  { id: 'prawns', name: 'Prawns', short: 'Prawns', img: IMAGES.prawns, notes: ['Preparation time: approx. 15 minutes'],
+    groups: [
+      { items: [
+        { name: 'Fry', price: 330 }, { name: 'Semi Gravy Red', price: 330 }, { name: 'Semi Gravy Green', price: 380 },
+        { name: 'Full Gravy Red', price: 380 }, { name: 'Garlic Butter', price: 380 }, { name: 'Rice', price: 450 }, { name: 'Khichdi', price: 480 } ] },
+      { title: 'Preparation', items: [ { name: 'Butter Preparation', price: 50 } ] }
+    ] },
+  { id: 'crabs', name: 'Crabs', short: 'Crab', img: IMAGES.crabs,
+    notes: ['Price depends on size — final price confirmed by the restaurant'],
+    groups: [
+      { items: [
+        { name: 'Fry', options: CRAB_SIZES, priceText: BY_SIZE },
+        { name: 'Gravy (Red)', options: CRAB_SIZES, priceText: BY_SIZE },
+        { name: 'Semi Gravy (Red)', options: CRAB_SIZES, priceText: BY_SIZE },
+        { name: 'Soup', price: 600, tags: ['Pre-order only'] },
+        { name: 'Khima', price: 600, tags: ['Pre-order only'] } ] },
+      { title: 'Preparation', items: [ { name: 'Butter Preparation', price: 50 } ] }
+    ] },
+  { id: 'pomfret', name: 'Pomfret (Paplet)', short: 'Pomfret', img: IMAGES.pomfret,
+    notes: ['Price depends on size — final price confirmed by the restaurant'],
+    groups: [
+      { items: [
+        { name: 'Regular Fry', priceText: BY_SIZE }, { name: 'White Masala', priceText: BY_SIZE }, { name: 'Green Paplet', priceText: BY_SIZE } ] },
+      { title: 'Preparation', items: [ { name: 'Butter', price: 50 }, { name: 'Ghee', price: 100 }, { name: 'Green Paplet (extra)', price: 50, desc: '₹50 extra' } ] }
+    ] },
+  { id: 'scampi', name: 'Scampi', short: 'Scampi', img: IMAGES.scampi,
+    notes: ['2 pcs per dish', 'Preparation time: 20 minutes', 'Final price confirmed by the restaurant'],
+    groups: [
+      { items: [
+        { name: 'Fry', options: SCAMPI_SIZES, priceText: BY_SIZE },
+        { name: 'Semi Gravy (Red)', options: SCAMPI_SIZES, priceText: BY_SIZE },
+        { name: 'Semi Gravy (Green)', options: SCAMPI_SIZES, priceText: BY_SIZE },
+        { name: 'Full Gravy', options: SCAMPI_SIZES, priceText: BY_SIZE },
+        { name: 'Khima', price: 430 }, { name: 'Dal Scampi', price: 450 } ] },
+      { title: 'Preparation', items: [ { name: 'Butter Preparation', price: 50 } ] }
+    ] },
+  { id: 'seasonal', name: 'Seasonal Fish', short: 'Seasonal', img: IMAGES.seasonal, notes: ['Availability depends on the season — restaurant will confirm'], seasonal: true,
+    groups: [ { items: ['Modar', 'Bumla', 'Gariyu', 'Levta', 'Chelyu', 'Surmay', 'Alvo', 'Baagro', 'Morva', 'Jipto']
+      .map(n => ({ name: n, priceText: 'Seasonal', tags: ['Seafood'] })) } ] }
+];
+
+/* Featured dishes — ref: [categoryId, exact item name]. Price is read from MENU (never typed here). */
+const FEATURED = [
+  { ref: ['chicken', 'Butter Chicken'],        desc: 'Chicken in a rich, buttery gravy — a house favourite.', img: IMAGES.butterChicken },
+  { ref: ['prawns', 'Garlic Butter'],          desc: 'Prawns finished in garlic butter.', img: IMAGES.prawns },
+  { ref: ['dara', 'Regular Fry'],              desc: 'Indian salmon (Dara) fry — choose Half or Full.', img: IMAGES.pomfret },
+  { ref: ['mutton', 'Mutton Gravy'],           desc: 'Tender mutton in a slow-cooked gravy.', img: IMAGES.mutton },
+  { ref: ['dara', 'Fish Tikka (Boneless)'],    desc: 'Boneless Dara fish tikka, straight from the tandoor.', img: IMAGES.extras },
+  { ref: ['chicken', 'Fry (Boneless)'],        desc: 'Crisp, golden boneless chicken fry.', img: IMAGES.chicken }
+];
+
+/* Specialties cards → scroll to category */
+const SPECIALTIES = [
+  { title: 'Seafood', cat: 'prawns', img: IMAGES.prawns },
+  { title: 'Chicken', cat: 'chicken', img: IMAGES.chicken },
+  { title: 'Mutton',  cat: 'mutton',  img: IMAGES.mutton },
+  { title: 'Egg Specialties', cat: 'egg', img: IMAGES.egg }
+];
+
+/* SAMPLE reviews — replace with real ones when available */
+const REVIEWS = [
+  { name: 'Sample Guest A', text: 'Sample review text — replace this with a real customer testimonial.', stars: 5 },
+  { name: 'Sample Guest B', text: 'Sample review text — replace this with a real customer testimonial.', stars: 5 },
+  { name: 'Sample Guest C', text: 'Sample review text — replace this with a real customer testimonial.', stars: 4 }
+];
+
+/* ==========================================================================
+   3. HELPERS + STATE
+   ========================================================================== */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const rupee = n => '₹' + n;
+
+const ITEM_BY_REF = {};    // "cat|name" -> item
+MENU.forEach(cat => {
+  let n = 0;
+  cat.groups.forEach(g => g.items.forEach(it => { it.id = cat.id + '-' + (++n); it._cat = cat; ITEM_BY_REF[cat.id + '|' + it.name] = it; }));
+});
+
+let activeCat = MENU[0].id;
+let query = '';
+
+/* ==========================================================================
+   4. RENDER — menu
+   ========================================================================== */
+function priceHTML(it) {
+  if (it.price != null) return `<span class="price">${rupee(it.price)}${it.confirm ? '<sup>*</sup>' : ''}</span>`;
+  return `<span class="price txt">${esc(it.priceText || '')}</span>`;
+}
+function priceLine(it) {
+  if (!it.options) return priceHTML(it);
+  const sized = it.priceText === BY_SIZE;
+  const chips = it.options.choices.map(c => `<span class="vchip">${sized ? '' : `<em>${esc(c.label)}</em>`}${rupee(c.price)}</span>`).join('');
+  return (sized ? `<span class="size-note">${BY_SIZE}</span>` : '') + chips;
+}
+function itemHTML(it, delay) {
+  const tags = (it.tags || []).map(t => `<span class="tag${t === 'Seafood' ? ' soft' : ''}">${esc(t)}</span>`).join('');
+  const src = it.img || it._cat.img;
+  return `<li class="item" id="item-${it.id}" style="--d:${delay}s"><div class="imgbox item-img"><img src="${src}" alt="${esc(it.name)}" loading="lazy"></div><div class="item-body"><h4>${esc(it.name)}</h4>${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ''}${tags ? `<div class="tags">${tags}</div>` : ''}<div class="price-line">${priceLine(it)}</div></div></li>`;
+}
+function renderCategory(cat) {
+  let d = 0;
+  const notes = cat.notes.map(n => `<span class="note gold">${esc(n)}</span>`).join('');
+  const hasConfirm = cat.groups.some(g => g.items.some(i => i.confirm));
+  const confirmNote = hasConfirm && CONFIG.showPriceConfirmNote ? `<span class="note">* Price to be confirmed</span>` : '';
+  const groups = cat.groups.map(g => {
+    const title = g.title ? `<div class="group-title">${esc(g.title)}</div>` : '';
+    const body = g.items.length ? `<ul class="items">${g.items.map(it => itemHTML(it, Math.min((d++) * .03, .45))).join('')}</ul>` : `<div class="placeholder">${esc(g.placeholder || 'Coming soon')}</div>`;
+    return title + body;
+  }).join('');
+  return `<div class="cat-head"><div class="imgbox cat-thumb"><img src="${cat.img}" alt="" loading="lazy"></div><div><h3>${esc(cat.name)}</h3><div class="cat-notes">${notes}${confirmNote}</div></div></div>${groups}`;
+}
+function renderSearch(q) {
+  const needle = q.trim().toLowerCase();
+  let html = '', hits = 0, d = 0;
+  MENU.forEach(cat => {
+    const out = [];
+    cat.groups.forEach(g => g.items.forEach(it => {
+      const hay = (it.name + ' ' + cat.name + ' ' + cat.short + ' ' + (g.title || '')).toLowerCase();
+      if (needle.split(/\s+/).every(w => hay.includes(w))) out.push(it);
+    }));
+    if (out.length) { hits += out.length; html += `<div class="group-title">${esc(cat.name)}</div><ul class="items">${out.map(it => itemHTML(it, Math.min((d++) * .03, .4))).join('')}</ul>`; }
+  });
+  if (!hits) return `<div class="empty-search"><h3>No dishes found</h3><p>Nothing matches “${esc(q)}”. Try another name or clear the search.</p></div>`;
+  return `<p class="results-head">${hits} dish${hits > 1 ? 'es' : ''} found for “${esc(q)}”</p>${html}`;
+}
+function renderMenu(scrollIntoView) {
+  const panel = $('#menuPanel');
+  panel.innerHTML = query.trim() ? renderSearch(query) : renderCategory(MENU.find(c => c.id === activeCat));
+  panel.style.animation = 'none'; void panel.offsetWidth; panel.style.animation = '';
+  renderChips(); watch('.item', panel);
+  if (scrollIntoView) {
+    const bar = $('.chipbar').getBoundingClientRect();
+    const top = panel.getBoundingClientRect().top;
+    if (top < bar.bottom) window.scrollTo({ top: window.scrollY + top - bar.height - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hh')) - 8 });
+  }
+}
+function renderChips() {
+  const searching = !!query.trim();
+  $('#chips').innerHTML = MENU.map(c => {
+    const on = !searching && c.id === activeCat;
+    return `<button class="chip${on ? ' active' : ''}" role="tab" aria-selected="${on}" data-cat="${c.id}" type="button">${esc(c.name)}</button>`;
+  }).join('');
+  const act = $('.chip.active'); if (act) act.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+}
+function setCategory(id, scroll = true) {
+  activeCat = id;
+  if (query) { query = ''; $('#search').value = ''; $('#searchClear').hidden = true; }
+  renderMenu(scroll);
+}
+function goToItem(catId, itemId) {
+  setCategory(catId, false);
+  document.getElementById('menu').scrollIntoView();
+  requestAnimationFrame(() => {
+    const el = document.getElementById('item-' + itemId);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 190;
+    window.scrollTo({ top: y });
+    el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 2200);
+  });
+}
+
+/* ==========================================================================
+   5. LINKS
+   ========================================================================== */
+function waUrl() { return `https://wa.me/${CONFIG.waNumber}`; }
+
+/* ==========================================================================
+   8. NAV, SCROLL, REVEAL
+   ========================================================================== */
+function closeNav() { $('#navMobile').classList.remove('open'); const h = $('#hamburger'); h.setAttribute('aria-expanded', 'false'); h.setAttribute('aria-label', 'Open menu'); }
+function toggleNav() { const o = $('#navMobile').classList.toggle('open'); const h = $('#hamburger'); h.setAttribute('aria-expanded', o); h.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); }
+
+/* ==========================================================================
+   8b. MOTION ENGINE (scroll reveal, background FX, parallax, progress)
+   ========================================================================== */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IO = ('IntersectionObserver' in window) ? new IntersectionObserver(es => {
+  es.filter(e => e.isIntersecting).forEach((e, i) => {
+    if (e.target.classList.contains('item')) e.target.style.setProperty('--d', (i * .07) + 's');
+    e.target.classList.add('in'); IO.unobserve(e.target);
+  });
+}, { threshold: .12, rootMargin: '0px 0px -40px 0px' }) : null;
+function watch(sel, root = document) { $$(sel, root).forEach(el => { if (el.classList.contains('in')) return; IO ? IO.observe(el) : el.classList.add('in'); }); }
+
+const FX_ICONS = ['fish', 'prawn', 'drum', 'egg', 'chili', 'spark'];
+const FX_ANIM = { fish: 'a-swim', prawn: 'a-bob', drum: 'a-wobble', egg: 'a-wobble', chili: 'a-bob', spark: 'a-twinkle' };
+const rnd = (a, b) => a + Math.random() * (b - a);
+const fxHosts = []; const fxVisible = new Set();
+function buildFx(host) {
+  const old = host.querySelector(':scope > .fx'); if (old) old.remove();
+  const h = host.offsetHeight, w = host.offsetWidth, small = w < 640; host._fxh = h;
+  const dark = host.classList.contains('on-dark') || host.classList.contains('on-navy2') || host.id === 'home';
+  const fx = document.createElement('div'); fx.className = 'fx ' + (dark ? 'dark' : 'light'); fx.setAttribute('aria-hidden', 'true');
+  let html = '';
+  const nb = Math.max(5, Math.min(small ? 9 : 20, Math.round(h / (small ? 240 : 210))));
+  for (let i = 0; i < nb; i++) {
+    const sz = rnd(8, 30), dur = Math.max(9, (h + 60) / rnd(30, 55));
+    html += `<span class="bub" style="left:${rnd(2, 98).toFixed(1)}%;width:${sz.toFixed(0)}px;height:${sz.toFixed(0)}px;--dx:${rnd(-30, 30).toFixed(0)}px;--h:${h + 60}px;animation-duration:${dur.toFixed(1)}s;animation-delay:-${rnd(0, dur).toFixed(1)}s"></span>`;
+  }
+  const ni = Math.max(3, Math.min(small ? 5 : 11, Math.round(h / 380)));
+  for (let i = 0; i < ni; i++) {
+    const n = FX_ICONS[i % FX_ICONS.length], sz = small ? rnd(24, 36) : rnd(32, 54);
+    const left = Math.random() < .5 ? rnd(1, 12) : rnd(84, 95);
+    html += `<span class="fx-item" data-speed="${rnd(-.12, .12).toFixed(3)}" style="left:${left.toFixed(1)}%;top:${rnd(3, 90).toFixed(1)}%;width:${sz.toFixed(0)}px;height:${sz.toFixed(0)}px"><svg class="${FX_ANIM[n]}" style="--t:${rnd(5, 16).toFixed(1)}s;animation-delay:-${rnd(0, 8).toFixed(1)}s" viewBox="0 0 48 48"><use href="#ic-${n}"/></svg></span>`;
+  }
+  fx.innerHTML = html; host.insertBefore(fx, host.firstChild);
+}
+function setupFx() {
+  if (REDUCED) return;
+  ['#home', '#featured', '#menu', '#about', '#specialties', '#reviews', '#contact'].forEach(sel => {
+    const host = $(sel); if (!host) return;
+    host.classList.add('fx-host'); buildFx(host); fxHosts.push(host);
+  });
+  if ('IntersectionObserver' in window) {
+    const vio = new IntersectionObserver(es => es.forEach(e => {
+      e.target.classList.toggle('fx-vis', e.isIntersecting);
+      e.isIntersecting ? fxVisible.add(e.target) : fxVisible.delete(e.target);
+      const fx = e.target.querySelector(':scope > .fx'); if (fx) fx.classList.toggle('paused', !e.isIntersecting);
+    }), { rootMargin: '100px' });
+    fxHosts.forEach(h => vio.observe(h));
+  } else fxHosts.forEach(h => fxVisible.add(h));
+  // rebuild when the host height changes a lot (e.g. switching menu category)
+  if ('ResizeObserver' in window) {
+    let t; const ro = new ResizeObserver(() => { clearTimeout(t); t = setTimeout(() => fxHosts.forEach(h => { if (Math.abs(h.offsetHeight - h._fxh) > h._fxh * .2 || h.offsetHeight < 50) buildFx(h); }), 600); });
+    fxHosts.forEach(h => ro.observe(h));
+  }
+}
+function setupScrollFx() {
+  const bar = $('#progress'); let ticking = false;
+  const frame = () => {
+    ticking = false; const y = window.scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+    if (REDUCED) return;
+    $$('[data-parallax]').forEach(el => { el.style.transform = `translate3d(0,${Math.min(y, 900) * el.dataset.parallax}px,0)`; });
+    fxVisible.forEach(h => {
+      const r = h.getBoundingClientRect(), off = r.top + r.height / 2 - innerHeight / 2;
+      h.querySelectorAll(':scope > .fx .fx-item').forEach(it => it.style.setProperty('--py', Math.max(-140, Math.min(140, off * it.dataset.speed)).toFixed(1) + 'px'));
+    });
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+  window.addEventListener('resize', frame); frame();
+}
+function buildMarquee() {
+  const words = ['Fresh Seafood', 'Chicken', 'Mutton', 'Egg Specialties', 'Dara Fish', 'Prawns', 'Crabs', 'Pomfret', 'Scampi'];
+  const one = words.map(w => `<span>${w}</span><svg viewBox="0 0 48 48"><use href="#ic-spark"/></svg>`).join('');
+  const half = one + one; $('#marquee').innerHTML = half + half;
+}
+
+/* ==========================================================================
+   9. STATIC SECTIONS (data-driven)
+   ========================================================================== */
+function renderFeatured() {
+  $('#featGrid').innerHTML = FEATURED.map(f => {
+    const it = ITEM_BY_REF[f.ref.join('|')]; if (!it) return '';
+    let price = '';
+    if (it.price != null) price = rupee(it.price);
+    else if (it.options) price = 'From ' + rupee(Math.min(...it.options.choices.map(c => c.price)));
+    return `<article class="feat"><div class="imgbox"><img src="${f.img}" alt="${esc(it._cat.short + ' ' + it.name)}" loading="lazy"></div><div class="feat-body"><div class="feat-top"><span class="label">${esc(it._cat.short)}</span></div><h3>${esc(it.name)}</h3><p>${esc(f.desc)}</p><div class="feat-foot"><span class="feat-price">${price}</span><button class="link-btn" type="button" data-goto="${it._cat.id}|${it.id}">View in menu →</button></div></div></article>`;
+  }).join('');
+}
+function renderSpecialties() {
+  $('#specGrid').innerHTML = SPECIALTIES.map(s => `<button class="spec" type="button" data-cat-go="${s.cat}"><div class="imgbox"><img src="${s.img}" alt="" loading="lazy"></div><div class="spec-body"><h3>${esc(s.title)}</h3><span>View menu →</span></div></button>`).join('');
+}
+function renderReviews() {
+  $('#revGrid').innerHTML = REVIEWS.map(r => `<article class="rev"><div class="stars" aria-label="${r.stars} out of 5 stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div><p>${esc(r.text)}</p><div class="who"><span class="av">${esc(r.name.slice(-1))}</span><div>${esc(r.name)}<small>Sample — not a real review</small></div></div></article>`).join('');
+}
+const SOCIAL_ICONS = {
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/>',
+  facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8z"/>',
+  youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>'
+};
+function renderSocial() {
+  const links = Object.entries(CONFIG.social).filter(([, u]) => u);
+  const html = links.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${n}"><svg class="i" viewBox="0 0 24 24">${SOCIAL_ICONS[n] || ''}</svg></a>`).join('');
+  $('#footSocial').innerHTML = html;
+  $('#contactSocial').innerHTML = html || '<span class="social-empty">Social links coming soon</span>';
+}
+function fillContact() {
+  $('#cAddr').textContent = CONFIG.address; $('#cHours').textContent = CONFIG.hours; $('#cPhone').textContent = CONFIG.phoneDisplay;
+  ['callBtn', 'fCall'].forEach(id => $('#' + id).href = CONFIG.phoneTel);
+  ['waBtn', 'fWa'].forEach(id => $('#' + id).href = waUrl());
+  ['mapBtn', 'fMap'].forEach(id => $('#' + id).href = CONFIG.mapsUrl);
+  $('#year').textContent = new Date().getFullYear();
+}
+
+/* ==========================================================================
+   10. IMAGE + LOGO FALLBACKS
+   ========================================================================== */
+function logoFallback(img) {
+  if (img.dataset.fb) return; img.dataset.fb = 1;
+  const s = document.createElement('span'); s.className = 'logo-fallback'; s.textContent = 'NN'; s.setAttribute('role', 'img'); s.setAttribute('aria-label', 'Navy Non-Veg');
+  img.replaceWith(s);
+}
+function imgFail(img) { img.classList.contains('brand-logo') ? logoFallback(img) : img.classList.add('is-broken'); }
+document.addEventListener('error', e => { if (e.target && e.target.tagName === 'IMG') imgFail(e.target); }, true);
+
+/* ==========================================================================
+   11. INIT + EVENTS
+   ========================================================================== */
+
+function setupHeroCarousel() {
+  const frame = $('#heroImg').parentElement;
+  const first = $('#heroImg');
+  first.classList.add('hero-slide', 'is-active');
+  const slides = [first];
+  FEATURED.forEach(dish => {
+    const img = new Image();
+    img.className = 'hero-slide';
+    img.alt = dish.ref[1];
+    img.setAttribute('aria-hidden', 'true');
+    img.decoding = 'async';
+    img.src = dish.img;
+    frame.appendChild(img);
+    slides.push(img);
+  });
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'hero-carousel-toggle';
+  frame.parentElement.appendChild(toggle);
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = motion.matches, active = 0, timer;
+  function advance() {
+    for (let offset = 1; offset < slides.length; offset++) {
+      const next = (active + offset) % slides.length;
+      if (!slides[next].complete || !slides[next].naturalWidth) continue;
+      slides[active].classList.remove('is-active');
+      slides[active].setAttribute('aria-hidden', 'true');
+      slides[next].classList.add('is-active');
+      slides[next].removeAttribute('aria-hidden');
+      active = next;
+      break;
+    }
+  }
+  function sync() {
+    clearInterval(timer);
+    toggle.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
+    toggle.setAttribute('aria-label', paused ? 'Play featured dish slideshow' : 'Pause featured dish slideshow');
+    if (!paused && !document.hidden) timer = setInterval(advance, 2000);
+  }
+  toggle.addEventListener('click', () => { paused = !paused; sync(); });
+  document.addEventListener('visibilitychange', sync);
+  motion.addEventListener('change', () => { paused = motion.matches; sync(); });
+  sync();
+}
+
+function init() {
+  $('#heroImg').src = IMAGES.hero; $('#aboutImg').src = IMAGES.about;
+  setupHeroCarousel();
+  renderFeatured(); renderSpecialties(); renderReviews(); renderSocial(); fillContact();
+  renderMenu(false);
+  $$('img').forEach(i => { if (i.complete && i.naturalWidth === 0 && i.getAttribute('src')) imgFail(i); });
+
+  // stagger indices
+  $$('.stagger').forEach(g => Array.from(g.children).forEach((c, i) => c.style.setProperty('--i', i)));
+
+  // scroll header
+  const hd = $('#header'); const onScroll = () => hd.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // reveal on scroll
+  watch('.reveal'); watch('.stagger');
+  buildMarquee(); setupScrollFx();
+  window.addEventListener('load', setupFx);
+  if (document.readyState === 'complete') setupFx();
+
+  // click delegation
+  document.addEventListener('click', e => {
+    const t = e.target.closest('button, a'); if (!t) return;
+    if (t.dataset.cat) return setCategory(t.dataset.cat);
+    if (t.dataset.catGo) { setCategory(t.dataset.catGo, false); document.getElementById('menu').scrollIntoView(); return; }
+    if (t.dataset.goto) { const [c, i] = t.dataset.goto.split('|'); return goToItem(c, i); }
+    if (t.matches('.nav-mobile a')) closeNav();
+  });
+  $('#hamburger').addEventListener('click', toggleNav);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  // search
+  const si = $('#search'), sc = $('#searchClear'); let tm;
+  si.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { query = si.value; sc.hidden = !query; renderMenu(false); }, 120); sc.hidden = !si.value; });
+  sc.addEventListener('click', () => { si.value = ''; query = ''; sc.hidden = true; renderMenu(false); si.focus(); });
+}
+init();
+</script>
+</body>
+</html>
