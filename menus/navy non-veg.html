@@ -467,6 +467,14 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 .category-photo{height:96px}
 .category-label{width:100%;margin:0;padding:7px 2px 3px;line-height:1.25}
 @media(max-width:600px){.chip{min-height:0;padding:4px}.category-photo{height:82px}.category-label{padding:6px 2px 3px}}
+/* Edge-to-edge menu photos above a navy name and price strip. */
+.items .item{padding:0;gap:0;overflow:hidden}
+.items .item-img{width:100%;aspect-ratio:4/3;flex:none;margin:0;padding:0;border-radius:0;overflow:hidden}
+.items .item-img img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;margin:0;padding:0;filter:none}
+.items .item-img::after{display:none}
+.items .item:hover .item-img img{transform:none}
+.items .item-body{margin:0;background:#0F2740;color:var(--cream);padding:12px 13px}
+@media(max-width:600px){.items .item-body{padding:10px 9px}}
 </style>
 </head>
 <body>
@@ -787,6 +795,9 @@ const MENU = [
       .map(n => ({ name: n, priceText: 'Seasonal', tags: ['Seafood'] })) } ] }
 ];
 
+// Main category order; additional categories follow the requested nine.
+const CATEGORY_ORDER = ['egg', 'chicken', 'mutton', 'prawns', 'crabs', 'dara', 'pomfret', 'scampi', 'drinks', 'extras', 'seasonal'];
+MENU.sort((a, b) => CATEGORY_ORDER.indexOf(a.id) - CATEGORY_ORDER.indexOf(b.id));
 /* Featured dishes — ref: [categoryId, exact item name]. Price is read from MENU (never typed here). */
 const FEATURED = [
   { ref: ['chicken', 'Butter Chicken'],        desc: 'Chicken in a rich, buttery gravy — a house favourite.', img: IMAGES.butterChicken },
@@ -847,6 +858,14 @@ function itemHTML(it, delay) {
   const src = it.img || it._cat.img;
   return `<li class="item" id="item-${it.id}" style="--d:${delay}s"><div class="imgbox item-img"><img src="${src}" alt="${esc(it.name)}" loading="lazy"></div><div class="item-body"><h4>${esc(it.name)}</h4>${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ''}${tags ? `<div class="tags">${tags}</div>` : ''}<div class="price-line">${priceLine(it)}</div></div></li>`;
 }
+// Category thumbnails: assets/NAVYIMG/EGG.PNG, CHICKEN.PNG, etc.
+function categoryImagePaths(cat) {
+  const names=[...new Set([cat.id.toUpperCase(),cat.name.toUpperCase(),cat.short.toUpperCase(),cat.id,cat.name])];
+  return names.flatMap(name=>['PNG','png'].map(ext=>'../assets/NAVYIMG/'+encodeURIComponent(name)+'.'+ext));
+}
+function categoryImage(cat) {
+  return `<img src="${categoryImagePaths(cat)[0]}" data-category-image="${cat.id}" data-image-index="0" alt="" loading="lazy">`;
+}
 function renderCategory(cat) {
   let d = 0;
   const notes = cat.notes.map(n => `<span class="note gold">${esc(n)}</span>`).join('');
@@ -857,7 +876,7 @@ function renderCategory(cat) {
     const body = g.items.length ? `<ul class="items">${g.items.map(it => itemHTML(it, Math.min((d++) * .03, .45))).join('')}</ul>` : `<div class="placeholder">${esc(g.placeholder || 'Coming soon')}</div>`;
     return title + body;
   }).join('');
-  return `<div class="cat-head"><div class="imgbox cat-thumb"><img src="${cat.img}" alt="" loading="lazy"></div><div><h3>${esc(cat.name)}</h3><div class="cat-notes">${notes}${confirmNote}</div></div></div>${groups}`;
+  return `<div class="cat-head"><div class="imgbox cat-thumb">${categoryImage(cat)}</div><div><h3>${esc(cat.name)}</h3><div class="cat-notes">${notes}${confirmNote}</div></div></div>${groups}`;
 }
 function renderSearch(q) {
   const needle = q.trim().toLowerCase();
@@ -888,7 +907,7 @@ function renderChips() {
   const searching = !!query.trim();
   $('#chips').innerHTML = MENU.map(c => {
     const on = !searching && c.id === activeCat;
-    return `<button class="chip${on ? ' active' : ''}" role="tab" aria-selected="${on}" data-cat="${c.id}" type="button" aria-controls="menuPanel"><span class="category-photo"><img src="${esc(c.img)}" alt="" loading="lazy"></span><span class="category-label">${esc(c.name)}</span></button>`;
+    return `<button class="chip${on ? ' active' : ''}" role="tab" aria-selected="${on}" data-cat="${c.id}" type="button" aria-controls="menuPanel"><span class="category-photo">${categoryImage(c)}</span><span class="category-label">${esc(c.name)}</span></button>`;
   }).join('');
   const act = $('.chip.active');
   if (act) { const strip = $('#chips'); strip.scrollTo({ left: act.offsetLeft - strip.clientWidth / 2 + act.offsetWidth / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
@@ -1042,7 +1061,19 @@ function logoFallback(img) {
   const s = document.createElement('span'); s.className = 'logo-fallback'; s.textContent = 'NN'; s.setAttribute('role', 'img'); s.setAttribute('aria-label', 'Navy Non-Veg');
   img.replaceWith(s);
 }
-function imgFail(img) { img.classList.contains('brand-logo') ? logoFallback(img) : img.classList.add('is-broken'); }
+function imgFail(img) {
+  if (img.dataset.categoryImage) {
+    const cat=MENU.find(c=>c.id===img.dataset.categoryImage);
+    const paths=categoryImagePaths(cat);
+    const next=Number(img.dataset.imageIndex || 0)+1;
+    img.dataset.imageIndex=next;
+    if(next<paths.length){img.src=paths[next];return;}
+    delete img.dataset.categoryImage;
+    img.src=cat.img;
+    return;
+  }
+  img.classList.contains('brand-logo') ? logoFallback(img) : img.classList.add('is-broken');
+}
 document.addEventListener('error', e => { if (e.target && e.target.tagName === 'IMG') imgFail(e.target); }, true);
 
 /* ==========================================================================
