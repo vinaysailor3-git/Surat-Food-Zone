@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b91c1c"><title>Bholenath Bhel Centre | Menu</title><link rel="icon" href="../assets/bholenathlogo.png">
+<style>
+:root{--navy:#06172a;--navy2:#0c2540;--silver:#d7dee8;--silver-dim:#aab7c7;--gold:#d6a85c;--line:#243a52;--card:#102943;--muted:#9eafc3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--silver);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#041221;color:var(--silver);padding:14px 16px;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);box-shadow:0 3px 12px #0004}
+.brand{font-weight:900;font-size:1.18rem;letter-spacing:.2px;line-height:1.15}.brand small{display:block;font-size:.68rem;letter-spacing:1.2px;color:var(--silver-dim);margin-top:4px}
+.nav-btn{width:44px;height:44px;border-radius:10px;border:1px solid #38536e;background:#0a2037;color:var(--gold);display:grid;place-items:center;cursor:pointer;flex:none;transition:background .2s,border-color .2s,transform .2s}
+.nav-btn:hover{background:#12304f;border-color:var(--gold)}
+.nav-btn:active{transform:scale(.95)}
+.nav-btn svg{width:22px;height:22px;display:block}
+.nav-drawer{position:absolute;top:100%;left:0;right:0;background:#041221;border-bottom:1px solid var(--line);box-shadow:0 14px 28px #0007;display:none;flex-direction:column;padding:10px 14px 14px;gap:6px;z-index:20}
+.nav-drawer.open{display:flex;animation:fadeUp .22s ease both}
+.nav-drawer a{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;background:#0b2239;border:1px solid #1e3852;color:#f1f5fa;text-decoration:none;font-weight:750;font-size:.94rem;transition:border-color .2s,background .2s,color .2s}
+.nav-drawer a:hover{border-color:var(--gold);background:#12304f;color:var(--gold)}
+.hero,.section{scroll-margin-top:96px}
+.language-switch{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid #50647b;background:#091d32;border-radius:999px;white-space:nowrap}.lang-option{border:0;background:transparent;color:#b7c4d2;border-radius:999px;padding:6px 9px;font-size:.72rem;font-weight:800;cursor:pointer}.lang-option.active{background:var(--gold);color:#10253a;box-shadow:0 1px 5px #0004}.lang-divider{font-size:.65rem;color:#71859b}
+main{max-width:1100px;margin:auto;padding:5px 5px 16px}.hero{background:linear-gradient(130deg,#0c2a48,#173957 60%,#1e4561);border:1px solid #294965;border-radius:10px;padding:11px 10px;color:var(--silver);position:relative;overflow:hidden}.hero:after{content:'🥣';position:absolute;right:4px;bottom:-10px;font-size:65px;opacity:.13;transform:rotate(-12deg)}.hero h1{margin:0 0 5px;font-size:1.2rem;max-width:78%}.hero p{margin:0;max-width:78%;line-height:1.35;font-size:.78rem;color:#c0ccda}
+.section{margin-top:14px}.section-title{display:flex;align-items:center;gap:7px;margin:0 0 7px;font-size:1.02rem;color:var(--silver)}.section-title:after{content:'';height:2px;flex:1;background:var(--line);border-radius:2px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.item{display:flex;flex-direction:row;align-items:center;text-align:left;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:5px;min-height:78px;box-shadow:0 2px 7px #0002;overflow:hidden}.thumb{width:58px;height:58px;flex:0 0 58px;border-radius:6px;overflow:hidden;background:linear-gradient(145deg,#1a3b59,#0a2037);display:grid;place-items:center;font-size:1.8rem;color:#7188a1}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.info{min-width:0;flex:1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:4px}.name-wrap{min-width:0;display:flex;flex-direction:column;gap:2px}.name{font-weight:750;font-size:.76rem;line-height:1.18;color:#e1e7ef;overflow-wrap:anywhere}.price{color:var(--gold);font-weight:900;font-size:.82rem;white-space:nowrap}.best{font-size:.52rem;display:inline-block;background:#304b66;color:#f0c876;border-radius:4px;padding:2px 4px;font-weight:900;letter-spacing:.2px;width:max-content}.category-block{display:block;margin-top:14px;padding-top:7px;border-top:1px solid #304861}.category-title{font-size:1rem;font-weight:950;color:#e2e9f2;margin:0 0 7px;padding:7px 8px;border-left:4px solid var(--gold);background:linear-gradient(90deg,#102b47,#0b2239 70%,transparent);border-radius:4px;letter-spacing:.3px}.subcategory-title{display:block;width:max-content;max-width:100%;font-size:.72rem;color:#d6a85c;font-weight:800;margin:8px 2px 5px;padding:3px 7px;border:1px solid #38536e;border-radius:999px;background:#0a2037;letter-spacing:.2px}
+.mapbox{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card);padding:12px}
+.quick-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.qa-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px 10px;border-radius:16px;background:linear-gradient(170deg,#12304f,#0d2339);border:1px solid #2a4562;color:#f1f5fa;text-decoration:none;box-shadow:0 4px 12px #0003;transition:transform .25s,border-color .25s,box-shadow .25s}
+.qa-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 18px #0005}
+.qa-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#0a2037;border:1px solid #38536e;color:var(--gold)}
+.qa-ic svg{width:22px;height:22px;display:block}
+.qa-label{font-weight:800;font-size:.86rem;letter-spacing:.2px;text-align:center}.mapbox iframe{width:100%;height:240px;border:0;border-radius:10px;display:block;margin-bottom:10px;background:#091d32}.mapbox-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}.mapbox p{color:var(--silver-dim);margin:0;font-size:.86rem;line-height:1.45}.maplink{display:inline-block;text-decoration:none;background:var(--gold);color:#10253a;padding:9px 14px;border-radius:8px;font-weight:800;white-space:nowrap}
+footer{background:#041221;color:var(--silver);border-top:1px solid var(--line);margin-top:18px;text-align:left}
+.footer-inner{max-width:1100px;margin:auto;padding:24px 14px 16px}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+.foot-brand{display:flex;align-items:center;gap:12px}
+.foot-logo{height:54px;width:auto;max-width:74px;object-fit:contain;flex:none;display:block}
+.foot-title{font-weight:900;font-size:1.12rem;line-height:1.2;color:#f1f5fa}
+.foot-sub{font-size:.66rem;letter-spacing:1.2px;color:var(--gold);margin-top:3px;font-weight:700}
+.foot-desc{margin:10px 0 0;font-size:.82rem;color:var(--silver-dim);line-height:1.5;max-width:440px}
+.foot-addr-box{background:rgba(16,41,67,.55);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.foot-addr-title{font-size:.76rem;text-transform:uppercase;letter-spacing:1px;color:var(--gold);font-weight:800;margin:0 0 5px}
+.foot-addr{margin:0;font-size:.88rem;color:#e1e7ef;line-height:1.45;font-weight:600}
+.foot-bottom{margin-top:18px;padding-top:12px;border-top:1px solid #1a3047;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:.75rem;color:var(--silver-dim)}
+@media(max-width:380px){.thumb{width:50px;height:50px;flex-basis:50px}.item{min-height:66px;padding:4px;gap:4px}.name{font-size:.7rem}.price{font-size:.76rem}.hero h1{font-size:1.08rem}.lang-option{padding:6px 7px}}
+@media(min-width:700px){main{padding:8px 8px 22px}.hero{padding:16px}.hero h1{font-size:1.7rem}.grid{gap:8px}.item{min-height:90px;padding:7px}.thumb{width:70px;height:70px;flex-basis:70px}.name{font-size:.9rem}.price{font-size:.95rem}.mapbox iframe{height:300px}.footer-grid{grid-template-columns:1.4fr 1fr;gap:28px}}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-12deg)}50%{transform:translateY(-8px) rotate(-6deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes shine{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 #d6a85c55}50%{box-shadow:0 0 0 6px #d6a85c00}}
+@keyframes steam{0%{opacity:0;transform:translateY(0) scale(.8)}40%{opacity:.7}100%{opacity:0;transform:translateY(-22px) scale(1.3)}}
+@keyframes langSwap{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes spinIn{from{transform:rotate(-200deg) scale(0)}to{transform:none}}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),#f3d69b);z-index:50;transition:width .1s}
+.brand{animation:fadeUp .6s ease both}
+.brand .om{display:inline-block;animation:spinIn .9s cubic-bezier(.2,.9,.3,1.2) both}
+.hero{animation:popIn .7s ease both}
+.hero:after{animation:floaty 5s ease-in-out infinite}
+.hero h1,.hero p{animation:fadeUp .8s ease both}.hero p{animation-delay:.15s}
+.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,#ffffff14 50%,transparent 70%);background-size:200% 100%;animation:shine 5s linear infinite;pointer-events:none}
+.steam{position:absolute;right:30px;bottom:48px;display:flex;gap:6px;pointer-events:none}
+.steam i{width:6px;height:18px;border-radius:6px;background:#ffffff40;filter:blur(3px);animation:steam 2.6s ease-in infinite}
+.steam i:nth-child(2){animation-delay:.8s}.steam i:nth-child(3){animation-delay:1.6s}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease,border-color .25s,box-shadow .25s;transition-delay:var(--d,0s)}
+.reveal.show{opacity:1;transform:none}
+.item{cursor:pointer;position:relative}
+.item.show:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 18px #0006;transition-delay:0s}
+.item.show:active{transform:scale(.97)}
+.thumb{transition:transform .35s ease}
+.item:hover .thumb{transform:scale(1.08) rotate(-4deg)}
+.thumb .emo{display:inline-block;animation:bob 3s ease-in-out infinite}
+.thumb{position:relative}
+.thumb img{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.thumb img.loaded{opacity:1}
+.best{animation:pulseGlow 2s ease-in-out infinite}
+.category-title{transition:letter-spacing .3s ease}
+.category-block:hover .category-title{letter-spacing:.8px}
+.lang-option{transition:all .25s ease}
+.swap{animation:langSwap .35s ease both}
+.maplink{transition:transform .2s,box-shadow .2s;animation:pulseGlow 2.4s infinite}
+.maplink:hover{transform:translateY(-2px);box-shadow:0 6px 14px #0006}
+.ripple{position:absolute;border-radius:50%;background:#d6a85c55;transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== VERTICAL PRODUCT CARDS ===== */
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid .item{flex-direction:column;align-items:center;text-align:center;gap:0;padding:16px 10px 14px;min-height:0;border-radius:22px;background:linear-gradient(170deg,#12304f,#0d2339);border:1px solid #2a4562;box-shadow:0 6px 16px #0004}
+.grid .item .thumb{width:100%;height:auto;flex:none;aspect-ratio:4/3;background:none;border-radius:0;overflow:visible;font-size:3.4rem;margin-bottom:8px}
+.grid .item .thumb .emo{font-size:3.6rem;filter:drop-shadow(0 6px 8px #0006)}
+.grid .item .thumb img{object-fit:contain;filter:drop-shadow(0 8px 10px #0007)}
+.grid .item .name{font-size:.95rem;font-weight:800;color:#f1f5fa;line-height:1.2;margin-top:2px}
+.grid .item .sub{font-size:.7rem;color:var(--muted);margin-top:3px;min-height:1em}
+.grid .item .price{font-size:1.15rem;font-weight:900;color:var(--gold);margin-top:8px}
+.grid .item .best{position:absolute;top:10px;left:10px;width:auto;transform:none;background:linear-gradient(90deg,#d6a85c,#f3d69b);color:#10253a;font-size:.55rem;letter-spacing:.4px;border-radius:999px;padding:4px 8px;box-shadow:0 2px 6px #0005;animation:none;z-index:2;white-space:nowrap}
+.grid .item.bestcard{border-color:var(--gold);background:linear-gradient(170deg,#1b3a58,#0f2740);animation:pulseGlow 2.6s ease-in-out infinite}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.grid .item{padding:20px 14px 18px}.grid .item .name{font-size:1.05rem}.grid .item .price{font-size:1.25rem}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:380px){.grid{gap:8px}.grid .item .name{font-size:.85rem}.grid .item .thumb .emo{font-size:3rem}}
+
+/* ===== CATEGORY DROPDOWNS ===== */
+.menu-header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 8px}
+.menu-header-row .menu-main-title{margin:0;flex:1;min-width:0;font-size:1.55rem;font-weight:950;letter-spacing:-.2px;color:#f4f7fb}
+@media(min-width:700px){.menu-header-row .menu-main-title{font-size:1.95rem}}
+@media(max-width:380px){.menu-header-row .menu-main-title{font-size:1.35rem}}
+.menu-hint{margin:-2px 2px 10px;font-size:.78rem;color:var(--silver-dim)}
+.cat{margin-bottom:10px;border-radius:18px;background:linear-gradient(135deg,#12304f,#0d2339);border:1px solid #2a4562;box-shadow:0 4px 12px #0003;scroll-margin-top:86px;transition:border-color .3s,box-shadow .3s}
+.cat.open{border-color:var(--gold);box-shadow:0 8px 22px #0006}
+.cat.cat-best{border-color:#d6a85c88;background:linear-gradient(135deg,#1d3d5c,#102943)}
+.cat-head{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:68px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cat-head:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:18px}
+.cat-ic{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:#0a2037;border:1px solid #38536e;transition:transform .35s}
+.cat:hover .cat-ic,.cat.open .cat-ic{transform:scale(1.1) rotate(-6deg)}
+.cat-txt{flex:1;min-width:0}
+.cat-name{display:block;font-weight:850;font-size:1.02rem;color:#f1f5fa;line-height:1.2}
+.cat-count{display:block;font-size:.72rem;color:var(--silver-dim);margin-top:3px}
+.cat-arrow{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#10253a;font-size:1.05rem;font-weight:900;transition:transform .4s ease;animation:bob 2.2s ease-in-out infinite}
+.cat.open .cat-arrow{transform:rotate(180deg);animation:none}
+.cat-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s ease,visibility .45s}
+.cat.open .cat-panel{grid-template-rows:1fr;visibility:visible}
+.cat-inner{overflow:hidden;min-height:0}
+.cat-inner .grid{padding:4px 10px 14px}
+@media(min-width:700px){.cat-head{padding:14px 18px}.cat-name{font-size:1.15rem}.cat-inner .grid{padding:6px 16px 18px}}
+
+/* ===== LOGO ===== */
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{height:52px;width:auto;max-width:72px;object-fit:contain;display:block;flex:none}
+.brand .om{font-size:1.8rem;line-height:1}
+@media(min-width:700px){header{padding:16px 22px;min-height:88px}.brand{font-size:1.3rem}.brand .logo{height:60px;max-width:86px}}
+/* ===== PRELOADER ===== */
+#preloader{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at center,#0c2540 0%,#06172a 65%,#041221 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .45s ease,visibility .45s ease}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-wrap{position:relative;display:grid;place-items:center;padding:12px;border-radius:24px;overflow:hidden;animation:loaderZoom 1.1s cubic-bezier(.16,1,.3,1) both}
+.loader-wrap::before{content:'';position:absolute;inset:-40% -60%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.38) 50%,rgba(214,168,92,.28) 55%,transparent 70%);transform:translateX(-120%);animation:loaderShine 1.4s ease-in-out .35s both}
+.loader-logo{width:130px;max-width:44vw;height:auto;display:block;filter:drop-shadow(0 12px 24px #0008);-webkit-box-reflect:below 4px linear-gradient(transparent 55%,rgba(255,255,255,.22))}
+.loader-title{font-weight:900;font-size:1.05rem;letter-spacing:.6px;color:var(--gold);opacity:0;animation:fadeUp .6s ease .45s forwards}
+@keyframes loaderZoom{0%{opacity:0;transform:scale(.35)}70%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+@keyframes loaderShine{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+/* ===== NAME LEFT + PRICE RIGHT (single row) ===== */
+.grid .item .row{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;margin-top:2px}
+.grid .item .row .name{flex:1;min-width:0;margin:0;font-size:.88rem}
+.grid .item .row .price{flex:none;margin:0;font-size:1rem}
+.grid .item .thumb{margin-bottom:10px}
+@media(min-width:700px){.grid .item .row .name{font-size:1rem}.grid .item .row .price{font-size:1.15rem}}
+@media(max-width:380px){.grid .item .row{gap:5px}.grid .item .row .name{font-size:.78rem}.grid .item .row .price{font-size:.9rem}}
+</style></head>
+<body>
+<div id="preloader" role="status" aria-label="Loading Bholenath Bhel Centre"><div class="loader-wrap"><img class="loader-logo" src="../assets/bholenathlogo.png" alt="Bholenath Bhel Centre logo" onerror="this.outerHTML='<span style=&quot;font-size:3.5rem&quot;>🕉️</span>'"></div><div class="loader-title">Bholenath Bhel Centre</div></div>
+<div id="progress"></div>
+<header><div class="brand"><img class="logo" src="../assets/bholenathlogo.png" alt="Bholenath Bhel Centre logo" onerror="this.outerHTML='<span class=&quot;om&quot;>🕉️</span>'"><div class="brand-txt">Bholenath Bhel Centre<small>CHATPATA • CRUNCHY • FRESH</small></div></div><button type="button" class="nav-btn" id="menuToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Toggle navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><nav class="nav-drawer" id="navDrawer" aria-label="Menu navigation"><a href="#aboutSection" id="navAbout">About Us</a><a href="#bestSection" id="navBest">Best Seller</a><a href="#menuSection" id="navMenu">Menu</a><a href="#connectSection" id="navContact">Contact Us</a></nav></header>
+<main>
+<section class="hero" id="aboutSection"><h1 id="heroTitle">A local favourite for years!</h1><div class="steam"><i></i><i></i><i></i></div><p id="heroText">Since 2010, Bholenath Bhel Centre has been serving fresh, flavourful street food loved by the local community. 16 years of taste, trust, and happy customers.</p></section>
+<section class="section" id="bestSection"><h2 class="section-title" id="bestTitle">⭐ Best Sellers</h2><div class="grid best-grid" id="bestGrid"></div></section>
+<section class="section" id="menuSection"><div class="menu-header-row"><h2 class="section-title menu-main-title" id="menuTitle">🍽️ Full Menu</h2><div class="language-switch" id="langSwitch" aria-label="Choose menu language"><button type="button" class="lang-option active" id="englishOption" onclick="setLanguage(false)">EN</button><span class="lang-divider">/</span><button type="button" class="lang-option" id="gujaratiOption" onclick="setLanguage(true)">ગુજરાતી</button></div></div><p class="menu-hint" id="menuHint"></p><div id="menuGrid"></div></section>
+<section class="section" id="connectSection"><h2 class="section-title" id="connectTitle">🤝 Connect With Us</h2><div class="quick-actions"><a class="qa-card" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><span class="qa-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span><span class="qa-label" id="qaInsta">Instagram</span></a><a class="qa-card" href="tel:+919106197737" aria-label="Call"><span class="qa-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="qa-label" id="qaCall">Call</span></a><a class="qa-card" href="https://www.google.com/maps/search/Gas+Circle,+Adajan,+Surat" target="_blank" rel="noopener" aria-label="Location"><span class="qa-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="qa-label" id="qaLocation">Location</span></a></div></section>
+<section class="section" id="locationSection"><h2 class="section-title" id="locationTitle">📍 Find Us</h2><div class="mapbox"><iframe title="Bholenath Bhel Centre - Gas Circle, Adajan, Surat" src="https://maps.google.com/maps?q=Gas+Circle,+Adajan,+Surat,+Gujarat&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="mapbox-meta"><p id="locationText">Gas Circle, Adajan, Surat — Visit Bholenath Bhel Centre for your favourite street snacks.</p><a class="maplink" href="https://www.google.com/maps/search/Gas+Circle,+Adajan,+Surat" target="_blank" rel="noopener" id="mapLink">Open Map</a></div></div></section>
+</main><footer><div class="footer-inner"><div class="footer-grid"><div><div class="foot-brand"><img class="foot-logo" src="../assets/bholenathlogo.png" alt="Bholenath Bhel Centre logo" onerror="this.outerHTML='<span class=&quot;om&quot;>🕉️</span>'"><div><div class="foot-title">Bholenath Bhel Centre</div><div class="foot-sub">CHATPATA • CRUNCHY • FRESH</div></div></div><p class="foot-desc" id="footerText">Serving Surat's street-food lovers with crunchy, chatpata bhel and snack favourites.</p></div><div class="foot-addr-box"><h3 class="foot-addr-title" id="footerAddrTitle">📍 Address</h3><p class="foot-addr" id="footerAddr">Gas Circle, Adajan, Surat, Gujarat</p></div></div><div class="foot-bottom"><span>© Bholenath Bhel Centre</span><span id="footerTag">Street-food favourites • Adajan, Surat</span></div></div></footer>
+<script>
+const items=[
+['Classic Bhel','ક્લાસિક ભેળ',40,'🥗'],['Sukhi Bhel','સૂકી ભેળ',40,'🥣'],['Gili Bhel','ભીની ભેળ',50,'🌶️'],['Special Bhel','સ્પેશિયલ ભેળ',60,'✨'],['Masala Bhel','મસાલા ભેળ',50,'🌶️'],['Collegian Bhel','કોલેજિયન ભેળ',60,'🥗'],['Nylon Sev Bhel','નાયલોન સેવ ભેળ',50,'🥣'],['Papdi Bhel','પાપડી ભેળ',50,'🥙'],['Monaco Bhel','મોનાકો ભેળ',50,'🥨'],['Chatpati Bhel','ચટપટી ભેળ',50,'🌶️'],['Cheese Bhel','ચીઝ ભેળ',70,'🧀'],['Butter Bhel','બટર ભેળ',60,'🧈'],['Jain Bhel','જૈન ભેળ',50,'🥗'],['Schezwan Bhel','શેઝવાન ભેળ',60,'🔥'],['Peri Peri Bhel','પેરી પેરી ભેળ',60,'🌶️'],
+['Kachori Bhel','કચોરી ભેળ',50,'🥟'],['Kachori Chaat','કચોરી ચાટ',60,'🥟'],['Masala Kachori','મસાલા કચોરી',40,'🥟'],['Sev Kachori','સેવ કચોરી',50,'🥟'],['Ragda Kachori','રગડા કચોરી',60,'🥟'],['Dahi Kachori','દહીં કચોરી',70,'🥟'],['Cheese Kachori','ચીઝ કચોરી',70,'🧀'],['Special Kachori Bhel','સ્પેશિયલ કચોરી ભેળ',70,'🥟'],
+['Sing Bhel','સિંગ ભેળ',40,'🥜'],['Masala Sing','મસાલા સિંગ',40,'🥜'],['Chatpati Sing','ચટપટી સિંગ',50,'🥜'],['Sing Sev Bhel','સિંગ સેવ ભેળ',50,'🥜'],['Sing Chana Mix','સિંગ ચણા મિક્સ',50,'🥜'],['Sing Mamra Mix','સિંગ મમરા મિક્સ',50,'🥜'],['Bafeli Sing','બાફેલી સિંગ',50,'🥜'],['Cheese Sing Bhel','ચીઝ સિંગ ભેળ',70,'🧀'],
+['Kurkure Bhel','કુરકુરે ભેળ',50,'🟠'],['Masala Kurkure Bhel','મસાલા કુરકુરે ભેળ',50,'🌶️'],['Cheese Kurkure Bhel','ચીઝ કુરકુરે ભેળ',70,'🧀'],['Schezwan Kurkure Bhel','શેઝવાન કુરકુરે ભેળ',60,'🔥'],['Peri Peri Kurkure Bhel','પેરી પેરી કુરકુરે ભેળ',60,'🌶️'],['Lays Bhel','લે’ઝ ભેળ',60,'🥔'],['Chips Bhel','ચિપ્સ ભેળ',50,'🥔'],['Mixed Chips Bhel','મિક્સ ચિપ્સ ભેળ',70,'🥔'],['Monaco Bhel','મોનાકો ભેળ',50,'🥨'],['Papdi Chips Bhel','પાપડી ચિપ્સ ભેળ',50,'🥙'],
+['Plain Khakhra','સાદો ખાખરો',30,'🫓'],['Masala Khakhra','મસાલા ખાખરો',40,'🫓'],['Butter Khakhra','બટર ખાખરો',40,'🧈'],['Cheese Khakhra','ચીઝ ખાખરો',60,'🧀'],['Khakhra Pizza','ખાખરા પિઝા',70,'🍕'],['Cheese Khakhra Pizza','ચીઝ ખાખરા પિઝા',80,'🍕'],['Corn Cheese Khakhra Pizza','કોર્ન ચીઝ ખાખરા પિઝા',90,'🍕'],['Paneer Khakhra Pizza','પનીર ખાખરા પિઝા',100,'🍕'],['Schezwan Khakhra Pizza','શેઝવાન ખાખરા પિઝા',80,'🍕'],['Peri Peri Khakhra','પેરી પેરી ખાખરો',60,'🫓'],['Jain Khakhra Pizza','જૈન ખાખરા પિઝા',80,'🍕'],
+['Sweet Corn Bhel','સ્વીટ કોર્ન ભેળ',50,'🌽'],['Masala Corn','મસાલા કોર્ન',40,'🌽'],['Butter Corn','બટર કોર્ન',50,'🧈'],['Cheese Corn','ચીઝ કોર્ન',60,'🧀'],['Corn Cheese Bhel','કોર્ન ચીઝ ભેળ',70,'🌽'],['Peri Peri Corn','પેરી પેરી કોર્ન',60,'🌶️'],['Paneer Corn Bhel','પનીર કોર્ન ભેળ',80,'🌽'],['Special Makai Bhel','સ્પેશિયલ મકાઈ ભેળ',70,'🌽'],
+['Chana Chatpati','ચણા ચટપટી',40,'🫘'],['Chana Bhel','ચણા ભેળ',50,'🫘'],['Masala Chana','મસાલા ચણા',40,'🫘'],['Bafeli Chana','બાફેલા ચણા',50,'🫘'],['Chana Sev Bhel','ચણા સેવ ભેળ',50,'🫘'],['Chana Sing Mix','ચણા સિંગ મિક્સ',60,'🫘'],['Chana Corn Mix','ચણા કોર્ન મિક્સ',60,'🫘'],['Special Chana Bhel','સ્પેશિયલ ચણા ભેળ',70,'🫘'],
+['Masala Bataka','મસાલા બટાકા',40,'🥔'],['Chatpata Bataka','ચટપટા બટાકા',50,'🥔'],['Bataka Bhel','બટાકા ભેળ',50,'🥔'],['Aloo Chaat','આલૂ ચાટ',60,'🥔'],['Sev Bataka','સેવ બટાકા',50,'🥔'],['Crispy Potato Chaat','ક્રિસ્પી પોટેટો ચાટ',60,'🥔'],['Special Bataka Chaat','સ્પેશિયલ બટાકા ચાટ',70,'🥔'],
+['Cheese Sev Bhel','ચીઝ સેવ ભેળ',70,'🧀'],['Butter Sev Bhel','બટર સેવ ભેળ',60,'🧈'],['Paneer Bhel','પનીર ભેળ',80,'🧀'],['Tandoori Bhel','તંદૂરી ભેળ',70,'🔥'],['Mexican Bhel','મેક્સિકન ભેળ',70,'🌮'],['Garlic Bhel','ગાર્લિક ભેળ',60,'🧄'],['Extra Spicy Bhel','એક્સ્ટ્રા સ્પાઈસી ભેળ',60,'🌶️'],['Special Mix Bhel','સ્પેશિયલ મિક્સ ભેળ',80,'✨'],['Cheese Special Mix','ચીઝ સ્પેશિયલ મિક્સ',90,'🧀'],['Jumbo Bhel','જમ્બો ભેળ',100,'🥗'],
+['Masala Wafer','મસાલા વેફર',40,'🍟'],['Green Chutney Wafer','લીલી ચટણી વેફર',50,'🍟'],['Masala Chips','મસાલા ચિપ્સ',40,'🥔'],['Chana Chor Garam','ચણા ચોર ગરમ',40,'🫘'],['Masala Mamra','મસાલા મમરા',40,'🥣'],['Chivda Mix','ચિવડા મિક્સ',50,'🥣'],['Papdi Mix','પાપડી મિક્સ',40,'🥙'],['Sev Mamra','સેવ મમરા',40,'🥣'],['Special Namkeen Mix','સ્પેશિયલ નમકીન મિક્સ',60,'🥣'],['French Fries','ફ્રેન્ચ ફ્રાઈસ',70,'🍟']];
+const bestNames=['Collegian Bhel','Kachori Bhel','Sing Bhel','Kurkure Bhel','Khakhra Pizza','Cheese Khakhra Pizza'];
+const categories=[
+{en:'Bhel & Chatpata',gu:'ભેળ અને ચટપટા',groups:[{en:'Classic Bhel',gu:'ક્લાસિક ભેળ',start:0,end:15}]},
+{en:'Kachori Specials',gu:'કચોરી સ્પેશિયલ',groups:[{en:'Kachori Items',gu:'કચોરી આઇટમ્સ',start:15,end:23}]},
+{en:'Sing & Peanut',gu:'સિંગ અને મગફળી',groups:[{en:'Peanut Mixes',gu:'સિંગના મિક્સ',start:23,end:31}]},
+{en:'Kurkure & Chips Bhel',gu:'કુરકુરે અને ચિપ્સ ભેળ',groups:[{en:'Crunchy Bhel',gu:'ક્રન્ચી ભેળ',start:31,end:41}]},
+{en:'Khakhra Pizza',gu:'ખાખરા પિઝા',groups:[{en:'Khakhra & Pizza',gu:'ખાખરા અને પિઝા',start:41,end:52}]},
+{en:'Corn & Makai',gu:'કોર્ન અને મકાઈ',groups:[{en:'Corn Specials',gu:'કોર્ન સ્પેશિયલ',start:52,end:60}]},
+{en:'Chana Specials',gu:'ચણા સ્પેશિયલ',groups:[{en:'Chana Mixes',gu:'ચણાના મિક્સ',start:60,end:68}]},
+{en:'Bataka & Potato',gu:'બટાકા આઇટમ્સ',groups:[{en:'Potato Snacks',gu:'બટાકાના નાસ્તા',start:68,end:75}]},
+{en:'Cheese & Special Bhel',gu:'ચીઝ અને સ્પેશિયલ ભેળ',groups:[{en:'Special Bhel Mixes',gu:'સ્પેશિયલ ભેળ મિક્સ',start:75,end:85}]},
+{en:'Other Lari Snacks',gu:'અન્ય લારી નાસ્તા',groups:[{en:'Namkeen & Snacks',gu:'નમકીન અને નાસ્તા',start:85,end:95}]}
+];
+let gu=false;let openCat=null;
+// ===== PHOTOS =====
+// Photo lagane ke liye: 'images' folder me photo daalo. Naam = item ka naam, lowercase aur dash ke saath.
+// Example: "Classic Bhel" -> images/classic-bhel.png  |  "Cheese Khakhra Pizza" -> images/cheese-khakhra-pizza.png
+// png, jpg, jpeg, webp sab chalega. Photo nahi mili to emoji apne aap dikhega. Code change nahi karna.
+// Background hata hua (transparent PNG) photo sabse sundar dikhta hai.
+const IMG_FOLDER='images/';
+const IMG_EXTS=['png','jpg','jpeg','webp'];
+// Kisi item ki alag photo ya online link chahiye to yaha likho, jaise: 'Classic Bhel':'https://example.com/bhel.png'
+const customImages={};
+const slug=n=>n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function imgFail(el){const i=(+el.dataset.i||0)+1;if(!el.dataset.base||i>=IMG_EXTS.length){el.remove();return}el.dataset.i=i;el.src=el.dataset.base+'.'+IMG_EXTS[i]}
+function card(item,best=false,i=0){const [en,guj,price,emoji]=item;const isBest=best||bestNames.includes(en);
+const src=customImages[en]?`src="${customImages[en]}"`:`src="${IMG_FOLDER+slug(en)}.${IMG_EXTS[0]}" data-base="${IMG_FOLDER+slug(en)}"`;
+return `<article class="item reveal${isBest?' bestcard':''}" style="--d:${Math.min(i,8)*.05}s">${isBest?`<span class="best">⭐ ${gu?'સૌથી વધુ પસંદગી':'BEST SELLER'}</span>`:''}<div class="thumb"><span class="emo">${emoji}</span><img ${src} alt="${en}" loading="lazy" onload="this.classList.add('loaded');this.previousElementSibling.style.display='none'" onerror="imgFail(this)"></div><div class="row"><div class="name">${gu?guj:en}</div><div class="price">₹${price}</div></div></article>`}
+function toggleCat(id){const was=openCat===id;openCat=was?null:id;document.querySelectorAll('.cat').forEach(c=>{const o=c.dataset.id===openCat;c.classList.toggle('open',o);c.querySelector('.cat-head').setAttribute('aria-expanded',o)});if(!was){const el=document.querySelector('.cat[data-id="'+id+'"]');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),60)}}
+function setLanguage(value){gu=value;render()}
+function render(){
+ const icons=['🥗','🥟','🥜','🟠','🍕','🌽','🫘','🥔','🧀','🍟'];
+ const bestItems=bestNames.map(n=>items.find(x=>x[0]===n));
+ const cnt=n=>n+(gu?' આઇટમ':' items');
+ const catHtml=(id,ic,name,count,body,extra='')=>`<div class="cat reveal${extra}${openCat===id?' open':''}" data-id="${id}"><button type="button" class="cat-head" aria-expanded="${openCat===id}" onclick="toggleCat('${id}')"><span class="cat-ic">${ic}</span><span class="cat-txt"><span class="cat-name">${name}</span><span class="cat-count">${cnt(count)}</span></span><span class="cat-arrow" aria-hidden="true">▾</span></button><div class="cat-panel"><div class="cat-inner"><div class="grid">${body}</div></div></div></div>`;
+ document.getElementById('bestGrid').innerHTML=bestItems.map((x,i)=>card(x,true,i)).join('');
+ document.getElementById('menuGrid').innerHTML=categories.map((cat,ci)=>{const g=cat.groups[0];const list=items.slice(g.start,g.end);return catHtml(String(ci),icons[ci]||'🍽️',gu?cat.gu:cat.en,list.length,list.map((x,i)=>card(x,false,i)).join(''))}).join('');
+ document.getElementById('menuHint').textContent=gu?'👇 તમને શું ખાવું છે? કેટેગરી પર ટેપ કરો':'👇 Kya khana hai? Category par tap karein';
+ document.getElementById('englishOption').classList.toggle('active',!gu);document.getElementById('gujaratiOption').classList.toggle('active',gu);
+ document.getElementById('heroTitle').textContent=gu?'વર્ષોથી સુરતના લોકોની પસંદ!':'A local favourite for years!';
+ document.getElementById('heroText').textContent=gu?'2010 થી ભોલેનાથ ભેળ સેન્ટર તાજા અને સ્વાદિષ્ટ સ્ટ્રીટ ફૂડ પીરસે છે, જેને સ્થાનિક લોકો ખૂબ પસંદ કરે છે. સ્વાદ, વિશ્વાસ અને ખુશ ગ્રાહકોના 16 વર્ષ.':'Since 2010, Bholenath Bhel Centre has been serving fresh, flavourful street food loved by the local community. 16 years of taste, trust, and happy customers.';
+ document.getElementById('bestTitle').textContent=gu?'⭐ સૌથી વધુ પસંદગી':'⭐ Best Sellers';document.getElementById('menuTitle').textContent=gu?'🍽️ આખું મેનુ':'🍽️ Full Menu';document.getElementById('navAbout').textContent=gu?'અમારા વિશે':'About Us';document.getElementById('navBest').textContent=gu?'બેસ્ટ સેલર':'Best Seller';document.getElementById('navMenu').textContent=gu?'મેનુ':'Menu';document.getElementById('navContact').textContent=gu?'સંપર્ક કરો':'Contact Us';
+document.getElementById('connectTitle').textContent=gu?'🤝 અમારી સાથે જોડાઓ':'🤝 Connect With Us';document.getElementById('qaInsta').textContent=gu?'ઇન્સ્ટાગ્રામ':'Instagram';document.getElementById('qaCall').textContent=gu?'કૉલ કરો':'Call';document.getElementById('qaLocation').textContent=gu?'લોકેશન':'Location';document.getElementById('locationTitle').textContent=gu?'📍 અમારું સરનામું':'📍 Find Us';document.getElementById('locationText').textContent=gu?'ગેસ સર્કલ, અડાજણ, સુરત — તમારા મનપસંદ સ્ટ્રીટ નાસ્તા માટે ભોલેનાથ ભેળ સેન્ટરની મુલાકાત લો.':'Gas Circle, Adajan, Surat — Visit Bholenath Bhel Centre for your favourite street snacks.';document.getElementById('mapLink').textContent=gu?'નકશામાં જુઓ':'Open Map';document.getElementById('footerText').textContent=gu?'સુરતના સ્ટ્રીટ ફૂડ પ્રેમીઓ માટે ક્રન્ચી, ચટપટી ભેળ અને તાજા નાસ્તા.':'Serving Surat’s street-food lovers with crunchy, chatpata bhel and snack favourites.';document.getElementById('footerAddrTitle').textContent=gu?'📍 સરનામું':'📍 Address';document.getElementById('footerAddr').textContent=gu?'ગેસ સર્કલ, અડાજણ, સુરત, ગુજરાત':'Gas Circle, Adajan, Surat, Gujarat';document.getElementById('footerTag').textContent=gu?'સ્ટ્રીટ ફૂડની પસંદગી • અડાજણ, સુરત':'Street-food favourites • Adajan, Surat';}
+render();
+// ===== scroll reveal =====
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.08});
+function observe(){document.querySelectorAll('.reveal:not(.show)').forEach(el=>io.observe(el))}
+const _render=render;
+render=function(){_render();document.querySelectorAll('#heroTitle,#heroText,.section-title,.cat-name,.menu-hint').forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});observe();};
+render();
+// ===== scroll progress bar =====
+addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+// ===== tap ripple =====
+document.addEventListener('click',e=>{const c=e.target.closest('.item');if(!c)return;const r=c.getBoundingClientRect(),d=Math.max(r.width,r.height)/3,x=document.createElement('span');x.className='ripple';x.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;c.appendChild(x);setTimeout(()=>x.remove(),600)});
+// ===== hamburger menu =====
+const menuBtn=document.getElementById('menuToggle'),navDrawer=document.getElementById('navDrawer');
+function closeNav(){navDrawer.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}
+menuBtn.addEventListener('click',e=>{e.stopPropagation();const open=navDrawer.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open))});
+navDrawer.addEventListener('click',e=>{if(e.target.closest('a'))closeNav()});
+document.addEventListener('click',e=>{if(navDrawer.classList.contains('open')&&!e.target.closest('header'))closeNav()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav()});
+// ===== preloader (2s) =====
+const preloader=document.getElementById('preloader');
+if(preloader){setTimeout(()=>{preloader.classList.add('hide');setTimeout(()=>preloader.remove(),500)},2000)}
+</script></body></html>
