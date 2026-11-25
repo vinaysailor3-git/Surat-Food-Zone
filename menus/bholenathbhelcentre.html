@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#b91c1c"><title>Bholenath Bhel Centre | Menu</title><link rel="icon" href="../assets/bholenathlogo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:wght@600;700&family=Noto+Sans+Gujarati:wght@400;500&family=Noto+Serif+Gujarati:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#06172a;--navy2:#0c2540;--silver:#d7dee8;--silver-dim:#aab7c7;--gold:#d6a85c;--line:#243a52;--card:#102943;--muted:#9eafc3}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--silver);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -144,6 +147,14 @@ footer{background:#041221;color:var(--silver);border-top:1px solid var(--line);m
 .grid .item .thumb{margin-bottom:10px}
 @media(min-width:700px){.grid .item .row .name{font-size:1rem}.grid .item .row .price{font-size:1.15rem}}
 @media(max-width:380px){.grid .item .row{gap:5px}.grid .item .row .name{font-size:.78rem}.grid .item .row .price{font-size:.9rem}}
+/* Expressive hero typography with matching Gujarati fallbacks. */
+.hero{padding:25px 20px 27px;border-radius:16px}
+.hero h1{font-family:'Fraunces','Noto Serif Gujarati',Georgia,serif;font-size:clamp(1.8rem,5.5vw,3.1rem);font-weight:700;line-height:1.2;letter-spacing:-.025em;color:#FFF0D3;max-width:850px;margin:0 0 14px;text-wrap:balance;position:relative;z-index:1}
+.hero h1::after{content:'';display:block;width:52px;height:3px;margin-top:14px;border-radius:3px;background:var(--gold)}
+.hero p{font-family:'DM Sans','Noto Sans Gujarati',system-ui,sans-serif;font-size:clamp(.88rem,2vw,1.04rem);font-weight:400;line-height:1.7;letter-spacing:.005em;max-width:720px;color:#D4DEEA;position:relative;z-index:1}
+.hero:after{right:12px;bottom:-12px;font-size:100px;opacity:.09;pointer-events:none}
+@media(min-width:700px){.hero{padding:34px 32px 36px}}
+@media(max-width:380px){.hero{padding:21px 15px}.hero h1{font-size:1.65rem}.hero p{font-size:.85rem}}
 </style></head>
 <body>
 <div id="preloader" role="status" aria-label="Loading Bholenath Bhel Centre"><div class="loader-wrap"><img class="loader-logo" src="../assets/bholenathlogo.png" alt="Bholenath Bhel Centre logo" onerror="this.outerHTML='<span style=&quot;font-size:3.5rem&quot;>🕉️</span>'"></div><div class="loader-title">Bholenath Bhel Centre</div></div>
