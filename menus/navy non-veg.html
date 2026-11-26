@@ -590,9 +590,83 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 }
 @media(prefers-reduced-motion:reduce){.hero-art .hero-frame .hero-slide.is-entering{animation:none!important;clip-path:none}}
 
+
+/* Glass logo preloader: decorative overlay with a bounded lifetime. */
+.site-preloader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 40%,#23496a 0%,#0b1f3a 62%,#071326 100%);pointer-events:none;opacity:1;transition:opacity .45s ease,visibility .45s;animation:preloader-safety .01s 4.5s forwards}
+.site-preloader[hidden]{display:none}
+.site-preloader.is-leaving{opacity:0;visibility:hidden}
+.preloader-glass{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(290px,80vw);aspect-ratio:4/5;padding:30px 24px;border:1px solid rgba(255,255,255,.3);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.035) 55%,rgba(214,168,92,.12));box-shadow:inset 0 1px 0 #ffffff50,inset 0 -1px 0 #ffffff15,0 30px 80px #0005;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden;animation:glass-arrive .85s cubic-bezier(.16,1,.3,1) both}
+.preloader-glass::before{content:"";position:absolute;inset:8px;border:1px solid #ffffff12;border-radius:21px;pointer-events:none}
+.preloader-glass::after{content:"";position:absolute;top:-40%;left:-70%;width:65%;height:180%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04) 15%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.08) 80%,transparent);transform:translateX(-100%) rotate(24deg);animation:glass-reflection 1.6s .15s ease-in-out both;pointer-events:none;z-index:2}
+.preloader-logo{display:block;width:140px;max-width:75%;height:162px;object-fit:contain;filter:drop-shadow(0 8px 18px #0003);animation:preloader-logo-in 1s .12s cubic-bezier(.16,1,.3,1) both}
+.preloader-name{font-family:var(--font-display);font-size:1.25rem;color:var(--cream);margin-top:20px;text-align:center;letter-spacing:.025em}
+.preloader-caption{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-top:9px;text-align:center}
+.preloader-line{height:2px;width:72px;margin-top:24px;background:#ffffff15;border-radius:2px;overflow:hidden}
+.preloader-line::after{content:"";display:block;width:100%;height:100%;background:var(--gold);transform-origin:left;animation:preloader-progress 1.4s ease-out both}
+@keyframes glass-arrive{from{opacity:0;transform:perspective(700px) translateY(20px) rotateX(8deg) scale(.92)}to{opacity:1;transform:perspective(700px) translateY(0) rotateX(0) scale(1)}}
+@keyframes preloader-logo-in{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes glass-reflection{from{transform:translateX(-100%) rotate(24deg)}to{transform:translateX(400%) rotate(24deg)}}
+@keyframes preloader-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes preloader-safety{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.preloader-glass,.preloader-logo,.preloader-line::after{animation:none!important}.preloader-glass::after{animation:none!important;display:none}.site-preloader{transition:none}}
+
+
+/* Warm glass keeps the black logo legible against the navy backdrop. */
+.preloader-glass{background:linear-gradient(135deg,rgba(255,239,183,.96),rgba(244,211,133,.90) 55%,rgba(225,181,91,.94));border-color:rgba(255,241,193,.8);box-shadow:inset 0 1px 0 #fff8,inset 0 -1px 0 #bd88394d,0 30px 80px #0005}
+.preloader-glass::before{border-color:rgba(117,78,21,.18)}
+.preloader-logo{filter:drop-shadow(0 5px 12px #76552126)}
+.preloader-name{color:var(--navy)}
+.preloader-caption{color:#624619}
+.preloader-line{background:rgba(98,70,25,.18)}
+.preloader-line::after{background:#79551d}
+
 </style>
 </head>
 <body>
+
+<div class="site-preloader" id="sitePreloader" hidden aria-hidden="true">
+  <div class="preloader-glass">
+    <img class="preloader-logo" src="../assets/navynonveglogo.png" alt="" width="140" height="162" fetchpriority="high">
+    <span class="preloader-name">Navy Non-Veg</span>
+    <span class="preloader-caption">Fresh Flavours. Bold Taste.</span>
+    <span class="preloader-line"></span>
+  </div>
+</div>
+<script>
+(() => {
+  const loader = document.getElementById('sitePreloader');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches) return;
+  const started = performance.now();
+  let dismissed = false, dismissTimer;
+  loader.hidden = false;
+  function dismiss() {
+    if (dismissed) return;
+    dismissed = true;
+    clearTimeout(dismissTimer);
+    loader.classList.add('is-leaving');
+    setTimeout(() => loader.remove(), 500);
+  }
+  function ready() {
+    if (dismissed) return;
+    dismissTimer = setTimeout(dismiss, Math.max(0, 1500 - (performance.now() - started)));
+  }
+  const logo = loader.querySelector('img');
+  const logoReady = logo.complete ? Promise.resolve() : new Promise(resolve => {
+    logo.addEventListener('load', resolve, { once:true });
+    logo.addEventListener('error', resolve, { once:true });
+  });
+  const pageReady = document.readyState !== 'loading' ? Promise.resolve() : new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve, { once:true }));
+  Promise.all([logoReady, pageReady]).then(ready);
+  setTimeout(dismiss, 3500);
+  // Keyboard and pointer users can get straight to the page.
+  document.addEventListener('keydown', dismiss, { once:true });
+  document.addEventListener('pointerdown', dismiss, { once:true });
+  document.addEventListener('focusin', dismiss, { once:true });
+  reduced.addEventListener('change', event => { if (event.matches) dismiss(); });
+})();
+</script>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="ic-fish" viewBox="0 0 48 48"><path d="M4 24c6-10 16-12 24-6l10-8v28l-10-8c-8 6-18 4-24-6z"/><circle cx="14" cy="22" r="1.4"/></symbol>
 <symbol id="ic-prawn" viewBox="0 0 48 48"><path d="M34 9c-10-2-20 4-22 14-1 6 2 11 8 13 6 2 12-1 14-7"/><path d="M34 9c3 1 5 4 5 7"/><path d="M34 29l7 3M33 34l6 5M20 36l-2 6"/><circle cx="36" cy="13" r="1.2"/></symbol>
