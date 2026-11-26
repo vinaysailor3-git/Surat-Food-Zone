@@ -3,8 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Navy Non-Veg — Fresh Flavours. Bold Taste.</title>
-<meta name="description" content="Digital menu of Navy Non-Veg — freshly prepared seafood, chicken, mutton and egg specialties. Select your dishes and order on WhatsApp.">
+<title>Navy Non-Veg</title>
+<meta name="description" content="">
+<!-- Link previews: update these absolute URLs if the hosting domain changes. -->
+<link rel="canonical" href="https://vinaysailor3-git.github.io/Surat-Food-Zone/menus/navy%20non-veg.html">
+<link rel="icon" type="image/png" href="../assets/navynonveglogo.png">
+<link rel="apple-touch-icon" href="../assets/navynonveglogo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Navy Non-Veg">
+<meta property="og:title" content="Navy Non-Veg">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://vinaysailor3-git.github.io/Surat-Food-Zone/menus/navy%20non-veg.html">
+<meta property="og:image" content="https://vinaysailor3-git.github.io/Surat-Food-Zone/assets/navynonveglogo.png">
+<meta property="og:image:secure_url" content="https://vinaysailor3-git.github.io/Surat-Food-Zone/assets/navynonveglogo.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1860">
+<meta property="og:image:height" content="2145">
+<meta property="og:image:alt" content="Navy Non-Veg logo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Navy Non-Veg">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://vinaysailor3-git.github.io/Surat-Food-Zone/assets/navynonveglogo.png">
+<meta name="twitter:image:alt" content="Navy Non-Veg logo">
 <meta name="theme-color" content="#0B1F3A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +169,7 @@ section{position:relative}
 @media (min-width:800px){.hl-grid{grid-template-columns:repeat(4,1fr);gap:18px}.hl{padding:26px 22px}}
 
 /* Featured */
-.feat-grid{display:grid;gap:16px;grid-template-columns:1fr}
+.feat-grid{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
 .feat{background:var(--white);border:1px solid var(--line-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s}
 .feat:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
 .feat:hover .imgbox img{transform:scale(1.07)}
@@ -163,6 +183,7 @@ section{position:relative}
 .feat-price{font-weight:700;color:var(--navy);font-size:1.1rem}
 .link-btn{color:var(--navy);font-weight:600;font-size:.9rem;min-height:44px;display:inline-flex;align-items:center;gap:6px;border-bottom:1.5px solid var(--gold);padding:0 2px}
 .link-btn:hover{color:#9a7433}
+@media (max-width:639px){.feat-grid{gap:12px}.feat{min-width:0}.feat-body{padding:12px 10px;overflow-wrap:anywhere}.feat-top,.feat-foot{flex-wrap:wrap;gap:6px}.feat h3{font-size:1rem}.feat p{font-size:.8rem}.feat .label{font-size:.6rem;padding:4px 7px;letter-spacing:.05em}.feat-price{font-size:1rem}.feat .link-btn{font-size:.8rem}}
 @media (min-width:640px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1000px){.feat-grid{grid-template-columns:repeat(3,1fr);gap:22px}}
 
@@ -398,7 +419,7 @@ section{position:relative}
 @media(prefers-reduced-motion:reduce){.captain-wheel{animation:none!important}}
 
 /* Featured dishes rotate inside the stationary circular crop. */
-.hero-frame .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;pointer-events:none}
+.hero-frame .hero-slide{position:absolute;inset:0;opacity:0;pointer-events:none}
 .hero-frame .hero-slide.is-active{opacity:1}
 @media(prefers-reduced-motion:reduce){.hero-frame .hero-slide{transition:none}}
 
@@ -475,6 +496,100 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 .items .item:hover .item-img img{transform:none}
 .items .item-body{margin:0;background:#0F2740;color:var(--cream);padding:12px 13px}
 @media(max-width:600px){.items .item-body{padding:10px 9px}}
+/* Pre-order invitation */
+#pre-order{background:var(--navy-2);padding-block:56px}
+.preorder-card{position:relative;isolation:isolate;display:grid;grid-template-columns:210px minmax(0,1fr);align-items:center;gap:42px;padding:44px 48px;border:1px solid rgba(214,168,92,.4);border-radius:28px;background:radial-gradient(ellipse at 0 0,rgba(214,168,92,.13),transparent 65%),linear-gradient(120deg,#183454,#0B1F3A);box-shadow:0 22px 60px #07172b40;color:var(--white);overflow:hidden}
+.preorder-card::after{content:"";position:absolute;inset:7px;border:1px solid rgba(214,168,92,.12);border-radius:22px;pointer-events:none;z-index:-1}
+.preorder-art{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:210px;color:var(--gold)}
+.preorder-orbit{position:absolute;width:200px;height:200px;border:1px solid rgba(214,168,92,.3);border-radius:50%;box-shadow:0 0 0 13px rgba(214,168,92,.035)}
+.preorder-art>svg{width:142px;height:142px;position:relative}
+.preorder-art-caption{text-align:center;font-size:.58rem;letter-spacing:.2em;line-height:1.8;position:relative;margin-top:-15px}
+.preorder-copy{min-width:0;overflow-wrap:anywhere}
+.preorder-kicker{display:inline-flex;align-items:center;gap:9px;color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+.preorder-copy h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.3rem);line-height:1.12;margin:14px 0 18px;color:var(--white)}
+.preorder-copy h2 em{color:var(--gold);font-weight:inherit}
+.preorder-copy p{max-width:580px;color:#c5cfdb;line-height:1.8;font-size:.96rem}
+.preorder-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px 24px;margin-top:26px}
+.preorder-actions .btn{white-space:normal;text-align:center;max-width:100%;padding-block:12px}
+.preorder-note{display:inline-flex;align-items:center;gap:7px;font-size:.75rem;color:#c5cfdb}
+.preorder-note svg{color:var(--gold)}
+@media(max-width:700px){#pre-order{padding-block:32px}.preorder-card{grid-template-columns:minmax(0,1fr);gap:22px;padding:28px 22px;text-align:center}.preorder-art{min-height:150px}.preorder-orbit{width:146px;height:146px}.preorder-art>svg{width:110px;height:110px}.preorder-art-caption{font-size:.5rem;margin-top:-12px}.preorder-actions{justify-content:center;gap:14px}.preorder-copy p{font-size:.88rem}.preorder-copy h2{margin-top:12px}}
+/* Google review invitation */
+.google-review-card{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:36px;align-items:center;margin:0 0 32px;padding:36px;border:1px solid rgba(214,168,92,.38);border-radius:26px;background:radial-gradient(ellipse at top left,rgba(214,168,92,.12),transparent 65%),var(--navy);box-shadow:0 16px 40px #07172b26}
+.google-review-copy{min-width:0;overflow-wrap:anywhere}
+.google-review-kicker{font-size:.65rem;font-weight:700;letter-spacing:.18em;color:var(--gold)}
+.google-review-stars{font-size:1.7rem;color:var(--gold);margin:12px 0;letter-spacing:.06em}
+.google-review-copy h3{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.3;color:white}
+.google-review-copy h3 em{color:var(--gold);font-weight:inherit}
+.google-review-copy p{color:#c5cfdb;font-size:.9rem;line-height:1.8;margin:16px 0 22px;max-width:520px}
+.google-review-copy .btn{max-width:100%;white-space:normal;text-align:center;padding-block:12px}
+.google-review-copy small{display:block;color:#c5cfdb;font-size:.73rem;margin-top:12px;line-height:1.6}
+.google-review-qr{display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border-radius:18px;padding:16px 12px;color:var(--navy);text-align:center;max-width:100%;justify-self:center}
+.google-review-qr img{display:block;width:180px;height:auto;max-width:100%;aspect-ratio:1}
+.google-review-qr strong{font-size:.95rem}
+.google-review-qr span{font-size:.65rem;color:#535d6b}
+@media(max-width:640px){.google-review-card{grid-template-columns:minmax(0,1fr);padding:26px 20px;gap:26px;text-align:center}.google-review-copy p{margin-inline:auto}.google-review-qr{width:210px}}
+
+
+/* Menu-only language control */
+.menu-heading{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.menu-heading>div:first-child{min-width:0}
+.menu-language{display:inline-flex;flex-shrink:0;gap:4px;padding:5px;border:1px solid rgba(11,31,58,.18);border-radius:999px;background:#fff;align-self:flex-start;margin-top:28px}
+.menu-language button{min-height:44px;padding:8px 18px;border-radius:999px;font-weight:600;font-size:.9rem;color:var(--navy)}
+.menu-language button[aria-pressed="true"]{background:var(--navy);color:var(--gold)}
+#menu[lang="gu"]{font-family:'Noto Sans Gujarati',var(--font);line-height:1.7}
+#menu[lang="gu"] h2,#menu[lang="gu"] h3,#menu[lang="gu"] h4{font-family:inherit;line-height:1.6}
+#menu[lang="gu"] .item-body h4{overflow-wrap:anywhere}
+@media(max-width:600px){.menu-heading{flex-wrap:wrap;gap:14px}.menu-language{margin-top:0;margin-left:auto}.menu-language button{padding-inline:16px}}
+
+
+/* Compact highlights below the hero actions. */
+.hero-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 12px;margin:22px 0 0;padding:0;max-width:470px;list-style:none}
+.hero-highlights li{display:flex;align-items:center;gap:8px;min-width:0;padding:9px 10px;border:1px solid rgba(214,168,92,.24);border-radius:10px;background:rgba(214,168,92,.07);color:#f4ead9;font-size:.76rem;font-weight:500;line-height:1.4;overflow-wrap:anywhere}
+.hero-highlight-icon{display:inline-flex;color:var(--gold);flex-shrink:0}
+.hero-highlight-icon .i{width:17px;height:17px}
+@media(max-width:380px){.hero-highlights{gap:7px}.hero-highlights li{font-size:.68rem;padding:8px;gap:6px}.hero-highlight-icon .i{width:15px;height:15px}}
+
+
+/* Local SVG illustrations: foreground accents stay inside the outer gutters. */
+#home,#featured,#menu,#pre-order,#about,#specialties,#reviews,#contact{position:relative;isolation:isolate}
+.food-foreground{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;border-radius:inherit}
+.food-accent{position:absolute;width:clamp(60px,7vw,100px);height:clamp(60px,7vw,100px);object-fit:contain;opacity:.85;animation:food-float var(--float-duration,10s) ease-in-out infinite;animation-delay:var(--float-delay,0s);animation-play-state:paused}
+.food-foreground.is-visible .food-accent{animation-play-state:running}
+.food-accent-1{left:clamp(1px,calc((100% - 1160px)/4),70px);top:18%;--tilt:-14deg}
+.food-accent-2{right:clamp(1px,calc((100% - 1160px)/4),70px);top:52%;--tilt:16deg}
+.food-accent-3{left:clamp(1px,calc((100% - 1160px)/4),70px);top:83%;--tilt:8deg}
+@keyframes food-float{0%,100%{transform:translateY(0) rotate(var(--tilt,0deg))}50%{transform:translateY(-9px) rotate(calc(var(--tilt,0deg) + 7deg))}}
+@media(max-width:1199px){.food-accent{width:52px;height:52px;opacity:.75}.food-accent-1,.food-accent-3{left:0}.food-accent-2{right:0}}
+@media(max-width:600px){.food-accent{width:40px;height:40px;opacity:.75}.food-accent-3{display:none}}
+@media(prefers-reduced-motion:reduce){.food-foreground .food-accent{animation:none!important;transform:rotate(var(--tilt,0deg))}}
+
+
+/* Selected menu favourites. */
+.bestseller-badge{position:absolute;top:9px;left:9px;z-index:1;display:inline-flex;align-items:center;gap:5px;max-width:calc(100% - 18px);padding:5px 9px;border:1px solid #f1d29a;border-radius:999px;background:linear-gradient(135deg,#f5d99e,#d6a85c);color:#0b1f3a;font-size:.65rem;font-weight:700;line-height:1.4;box-shadow:0 2px 8px #0002;pointer-events:none}
+@media(max-width:600px){.bestseller-badge{top:7px;left:7px;max-width:calc(100% - 14px);font-size:.58rem;padding:4px 7px;gap:4px}}
+
+
+/* A gentle travelling wave across the hero headline. */
+.hero-wave-word{display:inline-block;white-space:nowrap}
+.hero-wave-char{display:inline-block;animation:hero-text-wave 4.8s ease-in-out infinite;animation-delay:var(--wave-delay,0s);animation-play-state:paused}
+.hero-wave.is-visible .hero-wave-char{animation-play-state:running}
+@keyframes hero-text-wave{0%,12%,44%,100%{transform:translateY(0)}25%{transform:translateY(-.085em)}35%{transform:translateY(.025em)}}
+@media(prefers-reduced-motion:reduce){.hero-wave .hero-wave-char{animation:none!important;transform:none!important}}
+
+
+/* The incoming photograph is revealed by a travelling water-shaped edge. */
+.hero-frame .hero-slide.is-active{z-index:1}
+.hero-art .hero-frame .hero-slide.is-entering{opacity:1;z-index:2;animation:hero-photo-wave 1.1s linear both}
+@keyframes hero-photo-wave{
+0%{clip-path:polygon(0% 0%,-15.00% 0%,-9.12% 10%,-5.49% 20%,-5.49% 30%,-9.12% 40%,-15.00% 50%,-20.88% 60%,-24.51% 70%,-24.51% 80%,-20.88% 90%,-15.00% 100%,0% 100%)}
+25%{clip-path:polygon(0% 0%,26.41% 0%,27.98% 10%,25.74% 20%,20.54% 30%,14.37% 40%,9.59% 50%,8.02% 60%,10.26% 70%,15.46% 80%,21.63% 90%,26.41% 100%,0% 100%)}
+50%{clip-path:polygon(0% 0%,59.09% 0%,54.91% 10%,48.85% 20%,43.23% 30%,40.20% 40%,40.91% 50%,45.09% 60%,51.15% 70%,56.77% 80%,59.80% 90%,59.09% 100%,0% 100%)}
+75%{clip-path:polygon(0% 0%,83.41% 0%,77.32% 10%,73.02% 20%,72.15% 30%,75.04% 40%,80.59% 50%,86.68% 60%,90.98% 70%,91.85% 80%,88.96% 90%,83.41% 100%,0% 100%)}
+100%{clip-path:polygon(0% 0%,107.43% 0%,105.04% 10%,106.44% 20%,111.12% 30%,117.28% 40%,122.57% 50%,124.96% 60%,123.56% 70%,118.88% 80%,112.72% 90%,107.43% 100%,0% 100%)}
+}
+@media(prefers-reduced-motion:reduce){.hero-art .hero-frame .hero-slide.is-entering{animation:none!important;clip-path:none}}
+
 </style>
 </head>
 <body>
@@ -518,17 +633,14 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 <main>
 <!-- ============================ HERO ============================ -->
 <section class="hero" id="home">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%201.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-0s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%202.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-2s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%203.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-4s"></div>
   <span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span>
   <div class="container hero-grid">
     <div>
       <span class="eyebrow fade-in" style="--d:.05s">Navy Non-Veg</span>
-      <h1 class="fade-in" style="--d:.15s">Fresh Flavours.<br><em>Bold Taste.</em></h1>
+      <h1 class="fade-in hero-wave" style="--d:.15s" aria-label="Fresh Flavours. Bold Taste."><span aria-hidden="true"><span class="hero-wave-word"><span class="hero-wave-char" style="--wave-delay:0.00s">F</span><span class="hero-wave-char" style="--wave-delay:0.09s">r</span><span class="hero-wave-char" style="--wave-delay:0.18s">e</span><span class="hero-wave-char" style="--wave-delay:0.27s">s</span><span class="hero-wave-char" style="--wave-delay:0.36s">h</span></span> <span class="hero-wave-word"><span class="hero-wave-char" style="--wave-delay:0.45s">F</span><span class="hero-wave-char" style="--wave-delay:0.54s">l</span><span class="hero-wave-char" style="--wave-delay:0.63s">a</span><span class="hero-wave-char" style="--wave-delay:0.72s">v</span><span class="hero-wave-char" style="--wave-delay:0.81s">o</span><span class="hero-wave-char" style="--wave-delay:0.90s">u</span><span class="hero-wave-char" style="--wave-delay:0.99s">r</span><span class="hero-wave-char" style="--wave-delay:1.08s">s</span><span class="hero-wave-char" style="--wave-delay:1.17s">.</span></span><br><em><span class="hero-wave-word"><span class="hero-wave-char" style="--wave-delay:1.26s">B</span><span class="hero-wave-char" style="--wave-delay:1.35s">o</span><span class="hero-wave-char" style="--wave-delay:1.44s">l</span><span class="hero-wave-char" style="--wave-delay:1.53s">d</span></span> <span class="hero-wave-word"><span class="hero-wave-char" style="--wave-delay:1.62s">T</span><span class="hero-wave-char" style="--wave-delay:1.71s">a</span><span class="hero-wave-char" style="--wave-delay:1.80s">s</span><span class="hero-wave-char" style="--wave-delay:1.89s">t</span><span class="hero-wave-char" style="--wave-delay:1.98s">e</span><span class="hero-wave-char" style="--wave-delay:2.07s">.</span></span></em></span></h1>
       <p class="lead fade-in" style="--d:.25s">Experience the authentic taste of freshly prepared seafood, chicken, mutton and more. Every dish is prepared fresh, with flavour that brings you back.</p>
-      <div class="hero-btns fade-in" style="--d:.35s">
-        <a href="#menu" class="btn btn-gold">Explore Menu</a>
-        <a href="#contact" class="btn btn-ghost">Contact Us</a>
-      </div>
-      <div class="hero-line fade-in" style="--d:.45s"><span>Freshly Prepared</span><span>•</span><span>Seafood Specialties</span><span>•</span><span>Authentic Flavours</span></div>
+      <ul class="hero-highlights" aria-label="Restaurant highlights"><li><span class="hero-highlight-icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 4 6 6 6 10a6 6 0 0 1-12 0c0-2 1-3 2-5 1 1 2 1.5 2 1.5C10 7 11 5 12 3z"/></svg></span><span>Freshly Prepared</span></li><li><span class="hero-highlight-icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M3 12c3-5 8-6 12-3l4-3v12l-4-3c-4 3-9 2-12-3z"/><circle cx="9" cy="11" r=".8"/></svg></span><span>Seafood Specialties</span></li><li><span class="hero-highlight-icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><polygon points="12 3 14.8 9 21 9.7 16.3 14 17.7 20.5 12 17.2 6.3 20.5 7.7 14 3 9.7 9.2 9"/></svg></span><span>Authentic Flavours</span></li><li><span class="hero-highlight-icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Quality Ingredients</span></li></ul>
     </div>
     <div data-parallax="0.07"><div class="hero-art fade-in" style="--d:.3s"><img class="captain-wheel" src="../assets/navy-captain-wheel.svg" alt="" aria-hidden="true" width="1000" height="1000">
       <div class="imgbox hero-frame"><img id="heroImg" alt="Freshly prepared seafood and non-veg dishes" fetchpriority="high"></div>
@@ -540,20 +652,11 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
 
-<!-- ============================ HIGHLIGHTS ============================ -->
-<section class="highlights" aria-label="Restaurant highlights">
-  <div class="container">
-    <div class="hl-grid stagger">
-      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3c3 4 6 6 6 10a6 6 0 0 1-12 0c0-2 1-3 2-5 1 1 2 1.5 2 1.5C10 7 11 5 12 3z"/></svg></div><h3>Freshly Prepared</h3><p>Every dish cooked fresh to order.</p></article>
-      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M3 12c3-5 8-6 12-3l4-3v12l-4-3c-4 3-9 2-12-3z"/><circle cx="9" cy="11" r=".8"/></svg></div><h3>Seafood Specialties</h3><p>Fish, prawns, crabs and scampi.</p></article>
-      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><polygon points="12 3 14.8 9 21 9.7 16.3 14 17.7 20.5 12 17.2 6.3 20.5 7.7 14 3 9.7 9.2 9"/></svg></div><h3>Authentic Flavours</h3><p>Refined techniques, real taste.</p></article>
-      <article class="hl"><div class="ico"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Quality Ingredients</h3><p>Carefully selected, start to finish.</p></article>
-    </div>
-  </div>
-</section>
+
 
 <!-- ============================ FEATURED ============================ -->
 <section class="section" id="featured">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%202.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-1s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%203.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-3s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%204.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-5s"></div>
   <div class="waves featured-waves" aria-hidden="true"><svg class="w-back" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60C240 0 480 120 720 60S1200 0 1440 60 1680 120 2160 60 2640 0 2880 60V120H0Z"/></svg><svg class="w-front" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 75C240 25 480 125 720 75S1200 25 1440 75 1680 125 2160 75 2640 25 2880 75V120H0Z"/></svg></div>
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Favourites</span><h2>Featured Dishes</h2><p>A taste of what the kitchen is known for. Tap a dish to jump to it in the menu.</p></div>
@@ -563,8 +666,9 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <!-- ============================ MENU ============================ -->
 <section class="menu-section" id="menu">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%203.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-2s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%204.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-4s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%205.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-6s"></div>
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">Digital Menu</span><h2>Our Menu</h2><p>Browse our dishes by category, or search for your favourite.</p></div>
+    <div class="section-head reveal menu-heading"><div><span class="eyebrow" id="menuEyebrow">Digital Menu</span><h2 id="menuTitle">Our Menu</h2><p id="menuIntro">Browse our dishes by category, or search for your favourite.</p></div><div class="menu-language" role="group" aria-label="Menu language"><button type="button" data-menu-language="en" lang="en" aria-pressed="true">English</button><button type="button" data-menu-language="gu" lang="gu" aria-pressed="false">ગુજરાતી</button></div></div>
     <div class="menu-tools">
       <div class="search">
         <svg class="i s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -579,16 +683,29 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <!-- ============================ PRE-ORDER ============================ -->
 <section class="section on-navy2" id="pre-order" aria-labelledby="pre-order-title">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%204.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-3s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%205.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-5s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%206.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-7s"></div>
   <div class="container">
-    <div class="section-head" style="margin-bottom:0">
-      <span class="eyebrow">Made to order</span>
-      <h2 id="pre-order-title">PRE-ORDER MEN</h2>
-      <p style="color:var(--muted-cream)">Some of our special dishes are prepared only on pre-order. Please book in advance so we can prepare them fresh for you.</p>
+    <div class="preorder-card">
+      <div class="preorder-art" aria-hidden="true">
+        <span class="preorder-orbit"></span>
+        <svg viewBox="0 0 160 160" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 99h106M37 99a43 43 0 0 1 86 0M22 109h116l-10 10H32zM80 48v8"/><circle cx="80" cy="43" r="5"/><path d="M60 73a29 29 0 0 0-11 16M56 26l3-7M104 26l-3-7M80 19v-8"/></svg>
+        <span class="preorder-art-caption">FRESHLY PREPARED<br>JUST FOR YOU</span>
+      </div>
+      <div class="preorder-copy">
+        <span class="preorder-kicker"><span aria-hidden="true">✦</span> Made to order</span>
+        <h2 id="pre-order-title">Pre-order <em>Menu</em></h2>
+        <p>Some of our special dishes are prepared only on pre-order. Please book in advance so we can prepare them fresh for you.</p>
+        <div class="preorder-actions">
+          <a class="btn btn-gold" href="#contact">Enquire for pre-order <span aria-hidden="true">↗</span></a>
+          <span class="preorder-note"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Please book in advance</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <!-- ============================ ABOUT ============================ -->
 <section class="section on-dark" id="about">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%205.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-4s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%206.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-6s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%201.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-8s"></div>
   <div class="container about-grid">
     <div class="about-art reveal from-left"><div class="imgbox about-img"><img id="aboutImg" alt="Plated dish at Navy Non-Veg" loading="lazy"></div></div>
     <div class="about-text reveal from-right" style="--d:.1s">
@@ -604,6 +721,7 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <!-- ============================ SPECIALTIES ============================ -->
 <section class="section" id="specialties">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%206.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-5s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%201.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-7s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%202.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-9s"></div>
   <div class="container">
     <div class="section-head center reveal"><span class="eyebrow">Specialties</span><h2>What We Do Best</h2><p>Tap a card to jump straight to that part of the menu.</p></div>
     <div class="spec-grid stagger" id="specGrid"></div>
@@ -612,8 +730,24 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <!-- ============================ REVIEWS ============================ -->
 <section class="section on-navy2" id="reviews">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%201.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-6s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%202.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-8s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%203.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-10s"></div>
   <div class="container">
     <div class="section-head center reveal"><span class="eyebrow">Testimonials</span><h2>Loved by Our Guests</h2></div>
+    <div class="google-review-card" aria-labelledby="google-review-title">
+      <div class="google-review-copy">
+        <span class="google-review-kicker">YOUR EXPERIENCE MATTERS</span>
+        <div class="google-review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</div>
+        <h3 id="google-review-title">Enjoyed your meal?<br><em>Rate us on Google!</em></h3>
+        <p>Your feedback means a lot to us. Share your dining experience with an honest review.</p>
+        <a class="btn btn-gold" href="https://maps.app.goo.gl/wQpSPQ17XuCZsb5h8" target="_blank" rel="noopener noreferrer">Leave a Google Review <span aria-hidden="true">↗</span></a>
+        <small>Select “Write a review” on our Google listing.</small>
+      </div>
+      <a class="google-review-qr" href="https://maps.app.goo.gl/wQpSPQ17XuCZsb5h8" target="_blank" rel="noopener noreferrer" aria-label="Open Navy Non-Veg on Google to leave a review">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPHN2ZyB3aWR0aD0iMzdtbSIgaGVpZ2h0PSIzN21tIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzNyAzNyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNCw0SDVWNUg0ek01LDRINlY1SDV6TTYsNEg3VjVINnpNNyw0SDhWNUg3ek04LDRIOVY1SDh6TTksNEgxMFY1SDl6TTEwLDRIMTFWNUgxMHpNMTIsNEgxM1Y1SDEyek0xNiw0SDE3VjVIMTZ6TTE4LDRIMTlWNUgxOHpNMjAsNEgyMVY1SDIwek0yMSw0SDIyVjVIMjF6TTIyLDRIMjNWNUgyMnpNMjMsNEgyNFY1SDIzek0yNCw0SDI1VjVIMjR6TTI2LDRIMjdWNUgyNnpNMjcsNEgyOFY1SDI3ek0yOCw0SDI5VjVIMjh6TTI5LDRIMzBWNUgyOXpNMzAsNEgzMVY1SDMwek0zMSw0SDMyVjVIMzF6TTMyLDRIMzNWNUgzMnpNNCw1SDVWNkg0ek0xMCw1SDExVjZIMTB6TTEyLDVIMTNWNkgxMnpNMTQsNUgxNVY2SDE0ek0xNiw1SDE3VjZIMTZ6TTE3LDVIMThWNkgxN3pNMTgsNUgxOVY2SDE4ek0yMSw1SDIyVjZIMjF6TTIyLDVIMjNWNkgyMnpNMjYsNUgyN1Y2SDI2ek0zMiw1SDMzVjZIMzJ6TTQsNkg1VjdINHpNNiw2SDdWN0g2ek03LDZIOFY3SDd6TTgsNkg5VjdIOHpNMTAsNkgxMVY3SDEwek0xMyw2SDE0VjdIMTN6TTE2LDZIMTdWN0gxNnpNMTcsNkgxOFY3SDE3ek0xOCw2SDE5VjdIMTh6TTE5LDZIMjBWN0gxOXpNMjAsNkgyMVY3SDIwek0yNCw2SDI1VjdIMjR6TTI2LDZIMjdWN0gyNnpNMjgsNkgyOVY3SDI4ek0yOSw2SDMwVjdIMjl6TTMwLDZIMzFWN0gzMHpNMzIsNkgzM1Y3SDMyek00LDdINVY4SDR6TTYsN0g3VjhINnpNNyw3SDhWOEg3ek04LDdIOVY4SDh6TTEwLDdIMTFWOEgxMHpNMTIsN0gxM1Y4SDEyek0xNyw3SDE4VjhIMTd6TTE4LDdIMTlWOEgxOHpNMjAsN0gyMVY4SDIwek0yMSw3SDIyVjhIMjF6TTIyLDdIMjNWOEgyMnpNMjYsN0gyN1Y4SDI2ek0yOCw3SDI5VjhIMjh6TTI5LDdIMzBWOEgyOXpNMzAsN0gzMVY4SDMwek0zMiw3SDMzVjhIMzJ6TTQsOEg1VjlINHpNNiw4SDdWOUg2ek03LDhIOFY5SDd6TTgsOEg5VjlIOHpNMTAsOEgxMVY5SDEwek0xMyw4SDE0VjlIMTN6TTE1LDhIMTZWOUgxNXpNMTgsOEgxOVY5SDE4ek0yMCw4SDIxVjlIMjB6TTIzLDhIMjRWOUgyM3pNMjYsOEgyN1Y5SDI2ek0yOCw4SDI5VjlIMjh6TTI5LDhIMzBWOUgyOXpNMzAsOEgzMVY5SDMwek0zMiw4SDMzVjlIMzJ6TTQsOUg1VjEwSDR6TTEwLDlIMTFWMTBIMTB6TTEzLDlIMTRWMTBIMTN6TTE2LDlIMTdWMTBIMTZ6TTIxLDlIMjJWMTBIMjF6TTIyLDlIMjNWMTBIMjJ6TTIzLDlIMjRWMTBIMjN6TTI2LDlIMjdWMTBIMjZ6TTMyLDlIMzNWMTBIMzJ6TTQsMTBINVYxMUg0ek01LDEwSDZWMTFINXpNNiwxMEg3VjExSDZ6TTcsMTBIOFYxMUg3ek04LDEwSDlWMTFIOHpNOSwxMEgxMFYxMUg5ek0xMCwxMEgxMVYxMUgxMHpNMTIsMTBIMTNWMTFIMTJ6TTE0LDEwSDE1VjExSDE0ek0xNiwxMEgxN1YxMUgxNnpNMTgsMTBIMTlWMTFIMTh6TTIwLDEwSDIxVjExSDIwek0yMiwxMEgyM1YxMUgyMnpNMjQsMTBIMjVWMTFIMjR6TTI2LDEwSDI3VjExSDI2ek0yNywxMEgyOFYxMUgyN3pNMjgsMTBIMjlWMTFIMjh6TTI5LDEwSDMwVjExSDI5ek0zMCwxMEgzMVYxMUgzMHpNMzEsMTBIMzJWMTFIMzF6TTMyLDEwSDMzVjExSDMyek0xMiwxMUgxM1YxMkgxMnpNMTMsMTFIMTRWMTJIMTN6TTE1LDExSDE2VjEySDE1ek0xOCwxMUgxOVYxMkgxOHpNMTksMTFIMjBWMTJIMTl6TTIxLDExSDIyVjEySDIxek0yMiwxMUgyM1YxMkgyMnpNMjMsMTFIMjRWMTJIMjN6TTQsMTJINVYxM0g0ek02LDEySDdWMTNINnpNNywxMkg4VjEzSDd6TTksMTJIMTBWMTNIOXpNMTAsMTJIMTFWMTNIMTB6TTExLDEySDEyVjEzSDExek0xNSwxMkgxNlYxM0gxNXpNMTYsMTJIMTdWMTNIMTZ6TTIwLDEySDIxVjEzSDIwek0yMSwxMkgyMlYxM0gyMXpNMjIsMTJIMjNWMTNIMjJ6TTI2LDEySDI3VjEzSDI2ek0yOSwxMkgzMFYxM0gyOXpNMzEsMTJIMzJWMTNIMzF6TTMyLDEySDMzVjEzSDMyek00LDEzSDVWMTRINHpNOCwxM0g5VjE0SDh6TTEzLDEzSDE0VjE0SDEzek0xNSwxM0gxNlYxNEgxNXpNMTYsMTNIMTdWMTRIMTZ6TTE4LDEzSDE5VjE0SDE4ek0xOSwxM0gyMFYxNEgxOXpNMjAsMTNIMjFWMTRIMjB6TTIzLDEzSDI0VjE0SDIzek0yNSwxM0gyNlYxNEgyNXpNMjYsMTNIMjdWMTRIMjZ6TTI4LDEzSDI5VjE0SDI4ek0zMiwxM0gzM1YxNEgzMnpNNCwxNEg1VjE1SDR6TTcsMTRIOFYxNUg3ek05LDE0SDEwVjE1SDl6TTEwLDE0SDExVjE1SDEwek0xMiwxNEgxM1YxNUgxMnpNMTMsMTRIMTRWMTVIMTN6TTE0LDE0SDE1VjE1SDE0ek0xNiwxNEgxN1YxNUgxNnpNMjAsMTRIMjFWMTVIMjB6TTIyLDE0SDIzVjE1SDIyek0yNSwxNEgyNlYxNUgyNXpNMjYsMTRIMjdWMTVIMjZ6TTI4LDE0SDI5VjE1SDI4ek0zMCwxNEgzMVYxNUgzMHpNMzEsMTRIMzJWMTVIMzF6TTQsMTVINVYxNkg0ek04LDE1SDlWMTZIOHpNMTEsMTVIMTJWMTZIMTF6TTEzLDE1SDE0VjE2SDEzek0xNCwxNUgxNVYxNkgxNHpNMTcsMTVIMThWMTZIMTd6TTE4LDE1SDE5VjE2SDE4ek0yMiwxNUgyM1YxNkgyMnpNMjQsMTVIMjVWMTZIMjR6TTMyLDE1SDMzVjE2SDMyek00LDE2SDVWMTdINHpNOCwxNkg5VjE3SDh6TTksMTZIMTBWMTdIOXpNMTAsMTZIMTFWMTdIMTB6TTEzLDE2SDE0VjE3SDEzek0xNCwxNkgxNVYxN0gxNHpNMTcsMTZIMThWMTdIMTd6TTE4LDE2SDE5VjE3SDE4ek0xOSwxNkgyMFYxN0gxOXpNMjAsMTZIMjFWMTdIMjB6TTIzLDE2SDI0VjE3SDIzek0yNywxNkgyOFYxN0gyN3pNMjksMTZIMzBWMTdIMjl6TTMwLDE2SDMxVjE3SDMwek01LDE3SDZWMThINXpNNiwxN0g3VjE4SDZ6TTcsMTdIOFYxOEg3ek05LDE3SDEwVjE4SDl6TTExLDE3SDEyVjE4SDExek0xMywxN0gxNFYxOEgxM3pNMTQsMTdIMTVWMThIMTR6TTE1LDE3SDE2VjE4SDE1ek0xNywxN0gxOFYxOEgxN3pNMTgsMTdIMTlWMThIMTh6TTE5LDE3SDIwVjE4SDE5ek0yMCwxN0gyMVYxOEgyMHpNMjEsMTdIMjJWMThIMjF6TTIyLDE3SDIzVjE4SDIyek0yMywxN0gyNFYxOEgyM3pNMjYsMTdIMjdWMThIMjZ6TTMwLDE3SDMxVjE4SDMwek0zMSwxN0gzMlYxOEgzMXpNMzIsMTdIMzNWMThIMzJ6TTYsMThIN1YxOUg2ek0xMCwxOEgxMVYxOUgxMHpNMTEsMThIMTJWMTlIMTF6TTEzLDE4SDE0VjE5SDEzek0xNCwxOEgxNVYxOUgxNHpNMTUsMThIMTZWMTlIMTV6TTE3LDE4SDE4VjE5SDE3ek0yMCwxOEgyMVYxOUgyMHpNMjMsMThIMjRWMTlIMjN6TTI0LDE4SDI1VjE5SDI0ek0yNiwxOEgyN1YxOUgyNnpNMzAsMThIMzFWMTlIMzB6TTMxLDE4SDMyVjE5SDMxek0zMiwxOEgzM1YxOUgzMnpNNSwxOUg2VjIwSDV6TTksMTlIMTBWMjBIOXpNMTIsMTlIMTNWMjBIMTJ6TTEzLDE5SDE0VjIwSDEzek0xNSwxOUgxNlYyMEgxNXpNMTYsMTlIMTdWMjBIMTZ6TTE5LDE5SDIwVjIwSDE5ek0yMywxOUgyNFYyMEgyM3pNMjQsMTlIMjVWMjBIMjR6TTI4LDE5SDI5VjIwSDI4ek0zMSwxOUgzMlYyMEgzMXpNNiwyMEg3VjIxSDZ6TTcsMjBIOFYyMUg3ek04LDIwSDlWMjFIOHpNMTAsMjBIMTFWMjFIMTB6TTEyLDIwSDEzVjIxSDEyek0xMywyMEgxNFYyMUgxM3pNMTUsMjBIMTZWMjFIMTV6TTE3LDIwSDE4VjIxSDE3ek0xOCwyMEgxOVYyMUgxOHpNMTksMjBIMjBWMjFIMTl6TTIwLDIwSDIxVjIxSDIwek0yMiwyMEgyM1YyMUgyMnpNMjMsMjBIMjRWMjFIMjN6TTI0LDIwSDI1VjIxSDI0ek0yNSwyMEgyNlYyMUgyNXpNMjgsMjBIMjlWMjFIMjh6TTI5LDIwSDMwVjIxSDI5ek0zMSwyMEgzMlYyMUgzMXpNNywyMUg4VjIySDd6TTgsMjFIOVYyMkg4ek0xMiwyMUgxM1YyMkgxMnpNMTMsMjFIMTRWMjJIMTN6TTE2LDIxSDE3VjIySDE2ek0xOCwyMUgxOVYyMkgxOHpNMjIsMjFIMjNWMjJIMjJ6TTI0LDIxSDI1VjIySDI0ek0yNSwyMUgyNlYyMkgyNXpNMjcsMjFIMjhWMjJIMjd6TTI5LDIxSDMwVjIySDI5ek0zMCwyMUgzMVYyMkgzMHpNMzEsMjFIMzJWMjJIMzF6TTQsMjJINVYyM0g0ek02LDIySDdWMjNINnpNOCwyMkg5VjIzSDh6TTksMjJIMTBWMjNIOXpNMTAsMjJIMTFWMjNIMTB6TTExLDIySDEyVjIzSDExek0xMiwyMkgxM1YyM0gxMnpNMTQsMjJIMTVWMjNIMTR6TTE1LDIySDE2VjIzSDE1ek0xOSwyMkgyMFYyM0gxOXpNMjAsMjJIMjFWMjNIMjB6TTIyLDIySDIzVjIzSDIyek0yNCwyMkgyNVYyM0gyNHpNMjUsMjJIMjZWMjNIMjV6TTI3LDIySDI4VjIzSDI3ek0yOCwyMkgyOVYyM0gyOHpNMzAsMjJIMzFWMjNIMzB6TTYsMjNIN1YyNEg2ek03LDIzSDhWMjRIN3pNMTEsMjNIMTJWMjRIMTF6TTEzLDIzSDE0VjI0SDEzek0xNSwyM0gxNlYyNEgxNXpNMTgsMjNIMTlWMjRIMTh6TTE5LDIzSDIwVjI0SDE5ek0yMCwyM0gyMVYyNEgyMHpNMjEsMjNIMjJWMjRIMjF6TTIzLDIzSDI0VjI0SDIzek0yNywyM0gyOFYyNEgyN3pNMzAsMjNIMzFWMjRIMzB6TTUsMjRINlYyNUg1ek02LDI0SDdWMjVINnpNNywyNEg4VjI1SDd6TTksMjRIMTBWMjVIOXpNMTAsMjRIMTFWMjVIMTB6TTEzLDI0SDE0VjI1SDEzek0xNiwyNEgxN1YyNUgxNnpNMTcsMjRIMThWMjVIMTd6TTIyLDI0SDIzVjI1SDIyek0yMywyNEgyNFYyNUgyM3pNMjQsMjRIMjVWMjVIMjR6TTI1LDI0SDI2VjI1SDI1ek0yNiwyNEgyN1YyNUgyNnpNMjcsMjRIMjhWMjVIMjd6TTI4LDI0SDI5VjI1SDI4ek0yOSwyNEgzMFYyNUgyOXpNMzAsMjRIMzFWMjVIMzB6TTEyLDI1SDEzVjI2SDEyek0xMywyNUgxNFYyNkgxM3pNMTUsMjVIMTZWMjZIMTV6TTE3LDI1SDE4VjI2SDE3ek0yNCwyNUgyNVYyNkgyNHpNMjgsMjVIMjlWMjZIMjh6TTI5LDI1SDMwVjI2SDI5ek0zMCwyNUgzMVYyNkgzMHpNMzEsMjVIMzJWMjZIMzF6TTMyLDI1SDMzVjI2SDMyek00LDI2SDVWMjdINHpNNSwyNkg2VjI3SDV6TTYsMjZIN1YyN0g2ek03LDI2SDhWMjdIN3pNOCwyNkg5VjI3SDh6TTksMjZIMTBWMjdIOXpNMTAsMjZIMTFWMjdIMTB6TTEyLDI2SDEzVjI3SDEyek0xMywyNkgxNFYyN0gxM3pNMTQsMjZIMTVWMjdIMTR6TTE3LDI2SDE4VjI3SDE3ek0yMCwyNkgyMVYyN0gyMHpNMjMsMjZIMjRWMjdIMjN6TTI0LDI2SDI1VjI3SDI0ek0yNiwyNkgyN1YyN0gyNnpNMjgsMjZIMjlWMjdIMjh6TTI5LDI2SDMwVjI3SDI5ek0zMSwyNkgzMlYyN0gzMXpNNCwyN0g1VjI4SDR6TTEwLDI3SDExVjI4SDEwek0xMiwyN0gxM1YyOEgxMnpNMTMsMjdIMTRWMjhIMTN6TTE0LDI3SDE1VjI4SDE0ek0xNSwyN0gxNlYyOEgxNXpNMjAsMjdIMjFWMjhIMjB6TTIyLDI3SDIzVjI4SDIyek0yNCwyN0gyNVYyOEgyNHpNMjgsMjdIMjlWMjhIMjh6TTI5LDI3SDMwVjI4SDI5ek0zMSwyN0gzMlYyOEgzMXpNMzIsMjdIMzNWMjhIMzJ6TTQsMjhINVYyOUg0ek02LDI4SDdWMjlINnpNNywyOEg4VjI5SDd6TTgsMjhIOVYyOUg4ek0xMCwyOEgxMVYyOUgxMHpNMTUsMjhIMTZWMjlIMTV6TTE2LDI4SDE3VjI5SDE2ek0xOCwyOEgxOVYyOUgxOHpNMTksMjhIMjBWMjlIMTl6TTIwLDI4SDIxVjI5SDIwek0yNCwyOEgyNVYyOUgyNHpNMjUsMjhIMjZWMjlIMjV6TTI2LDI4SDI3VjI5SDI2ek0yNywyOEgyOFYyOUgyN3pNMjgsMjhIMjlWMjlIMjh6TTMwLDI4SDMxVjI5SDMwek0zMSwyOEgzMlYyOUgzMXpNMzIsMjhIMzNWMjlIMzJ6TTQsMjlINVYzMEg0ek02LDI5SDdWMzBINnpNNywyOUg4VjMwSDd6TTgsMjlIOVYzMEg4ek0xMCwyOUgxMVYzMEgxMHpNMTIsMjlIMTNWMzBIMTJ6TTEzLDI5SDE0VjMwSDEzek0xNCwyOUgxNVYzMEgxNHpNMTcsMjlIMThWMzBIMTd6TTE4LDI5SDE5VjMwSDE4ek0xOSwyOUgyMFYzMEgxOXpNMjEsMjlIMjJWMzBIMjF6TTIyLDI5SDIzVjMwSDIyek0yNSwyOUgyNlYzMEgyNXpNMjcsMjlIMjhWMzBIMjd6TTI4LDI5SDI5VjMwSDI4ek0yOSwyOUgzMFYzMEgyOXpNMzIsMjlIMzNWMzBIMzJ6TTQsMzBINVYzMUg0ek02LDMwSDdWMzFINnpNNywzMEg4VjMxSDd6TTgsMzBIOVYzMUg4ek0xMCwzMEgxMVYzMUgxMHpNMTIsMzBIMTNWMzFIMTJ6TTE1LDMwSDE2VjMxSDE1ek0xOCwzMEgxOVYzMUgxOHpNMjQsMzBIMjVWMzFIMjR6TTI1LDMwSDI2VjMxSDI1ek0yNywzMEgyOFYzMUgyN3pNMzAsMzBIMzFWMzFIMzB6TTMyLDMwSDMzVjMxSDMyek00LDMxSDVWMzJINHpNMTAsMzFIMTFWMzJIMTB6TTE0LDMxSDE1VjMySDE0ek0xNSwzMUgxNlYzMkgxNXpNMTYsMzFIMTdWMzJIMTZ6TTE3LDMxSDE4VjMySDE3ek0xOSwzMUgyMFYzMkgxOXpNMjIsMzFIMjNWMzJIMjJ6TTI0LDMxSDI1VjMySDI0ek0yNSwzMUgyNlYzMkgyNXpNMjcsMzFIMjhWMzJIMjd6TTI4LDMxSDI5VjMySDI4ek0yOSwzMUgzMFYzMkgyOXpNMzEsMzFIMzJWMzJIMzF6TTQsMzJINVYzM0g0ek01LDMySDZWMzNINXpNNiwzMkg3VjMzSDZ6TTcsMzJIOFYzM0g3ek04LDMySDlWMzNIOHpNOSwzMkgxMFYzM0g5ek0xMCwzMkgxMVYzM0gxMHpNMTIsMzJIMTNWMzNIMTJ6TTEzLDMySDE0VjMzSDEzek0xNiwzMkgxN1YzM0gxNnpNMTgsMzJIMTlWMzNIMTh6TTIwLDMySDIxVjMzSDIwek0yMSwzMkgyMlYzM0gyMXpNMjIsMzJIMjNWMzNIMjJ6TTI0LDMySDI1VjMzSDI0ek0yOCwzMkgyOVYzM0gyOHpNMzEsMzJIMzJWMzNIMzF6IiBpZD0icXItcGF0aCIgZmlsbD0iIzAwMDAwMCIgZmlsbC1vcGFjaXR5PSIxIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgLz48L3N2Zz4=" width="180" height="180" alt="QR code to open Navy Non-Veg on Google Maps" loading="lazy">
+        <strong>Scan to review</strong>
+        <span>Scan with your phone camera</span>
+      </a>
+    </div>
     <div class="rev-grid stagger" id="revGrid"></div>
     <p class="demo-note">Sample content for demonstration only — not real customer reviews. Replace in the <code>REVIEWS</code> list in the script.</p>
   </div>
@@ -621,6 +755,7 @@ body,.header,.header.scrolled,.nav-mobile,.footer{background:var(--navy);color:v
 
 <!-- ============================ CONTACT ============================ -->
 <section class="section" id="contact">
+  <div class="food-foreground" aria-hidden="true"><img class="food-accent food-accent-1" src="../assets/NAVYIMG/Asset%202.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:8s;--float-delay:-7s"><img class="food-accent food-accent-2" src="../assets/NAVYIMG/Asset%203.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:10s;--float-delay:-9s"><img class="food-accent food-accent-3" src="../assets/NAVYIMG/Asset%204.svg" alt="" width="48" height="48" loading="lazy" decoding="async" style="--float-duration:12s;--float-delay:-11s"></div>
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Visit Us</span><h2>Location &amp; Contact</h2></div>
     <div class="contact-grid">
@@ -837,6 +972,27 @@ MENU.forEach(cat => {
   cat.groups.forEach(g => g.items.forEach(it => { it.id = cat.id + '-' + (++n); it._cat = cat; ITEM_BY_REF[cat.id + '|' + it.name] = it; }));
 });
 
+const MENU_GU = {"Egg": "ઈંડા", "Chicken": "ચિકન", "Mutton": "મટન", "Extras": "અન્ય વાનગીઓ", "Soft Drinks": "ઠંડાં પીણાં", "Drinks": "પીણાં", "Indian Salmon (Dara Fish)": "દારા માછલી", "Dara Fish": "દારા માછલી", "Prawns": "ઝીંગા", "Crabs": "કરચલા", "Crab": "કરચલો", "Pomfret (Paplet)": "પાપલેટ", "Pomfret": "પાપલેટ", "Scampi": "સ્કેમ્પી", "Seasonal Fish": "મોસમી માછલી", "Seasonal": "મોસમી", "Boil": "બાફેલું ઈંડું", "Omlet": "ઓમલેટ", "Boil Green Fry": "બોઇલ ગ્રીન ફ્રાય", "Fry": "ફ્રાય", "Kachu": "કાચું", "Khima Red": "ખીમા રેડ", "Khima Green": "ખીમા ગ્રીન", "Fry Red": "ફ્રાય રેડ", "Fry Green": "ફ્રાય ગ્રીન", "Curry Red": "કરી રેડ", "Curry Green": "કરી ગ્રીન", "Rice Green": "રાઇસ ગ્રીન", "Preparation": "બનાવવાની રીત", "Butter Preparation": "બટરમાં બનાવવું", "Starter – Tandoor": "સ્ટાર્ટર – તંદૂર", "Starter – Fry": "સ્ટાર્ટર – ફ્રાય", "Tandoor starters coming soon — menu and prices are pending confirmation.": "તંદૂરી સ્ટાર્ટર ટૂંક સમયમાં આવશે — મેનુ અને ભાવની પુષ્ટિ બાકી છે.", "Fry (Boneless)": "ફ્રાય (બોનલેસ)", "Fry (With Bone)": "ફ્રાય (હાડકાં સાથે)", "Drumstick (Garlic/Patra) (3 pcs)": "ડ્રમસ્ટિક (ગાર્લિક/પાતરા) (૩ નંગ)", "Gravy": "ગ્રેવી", "Soup": "સૂપ", "Gravy (Boneless)": "ગ્રેવી (બોનલેસ)", "Gravy (With Bone)": "ગ્રેવી (હાડકાં સાથે)", "Lemon Chicken": "લેમન ચિકન", "Butter Chicken": "બટર ચિકન", "Gauthi Chicken": "ગાવઠી ચિકન", "Rice": "ભાત", "Rice (Boneless)": "રાઇસ (બોનલેસ)", "Rice (With Bone)": "રાઇસ (હાડકાં સાથે)", "Khichdi (Boneless)": "ખીચડી (બોનલેસ)", "Gravy Rice": "ગ્રેવી રાઇસ", "Mutton Bheja": "મટન ભેજા", "Mutton Gravy": "મટન ગ્રેવી", "Paya Soup": "પાયા સૂપ", "Pav (2 pcs)": "પાંઉ (૨ નંગ)", "Tandoori Nan Plain": "તંદૂરી નાન સાદી", "Tandoori Nan Butter": "તંદૂરી નાન બટર", "Garlic Nan": "ગાર્લિક નાન", "Tandoori Roti Plain": "તંદૂરી રોટલી સાદી", "Tandoori Roti Butter": "તંદૂરી રોટલી બટર", "Chapati": "રોટલી", "Chapati Butter": "બટર રોટલી", "Rotla": "રોટલો", "Rotla Butter": "બટર રોટલો", "Khichdi": "ખીચડી", "Rice (Half)": "ભાત (હાફ)", "Rice (Full)": "ભાત (ફુલ)", "Jeera Rice": "જીરા રાઇસ", "Green Chatani (Hot)": "લીલી ચટણી (તીખી)", "Green Chatani": "લીલી ચટણી", "Tomato Plate": "ટામેટાંની પ્લેટ", "Roasted Papad": "શેકેલો પાપડ", "Fry Papad": "તળેલો પાપડ", "Thumps Up": "થમ્સ અપ", "Coke": "કોક", "Sprite": "સ્પ્રાઇટ", "Maza": "માઝા", "Sosyo": "સોસ્યો", "Butter Milk (Chhas)": "છાશ", "Choose Half or Full before adding": "ઉમેરતા પહેલાં હાફ અથવા ફુલ પસંદ કરો", "Half / Full": "હાફ / ફુલ", "Half": "હાફ", "Full": "ફુલ", "Regular Fry": "રેગ્યુલર ફ્રાય", "Green Chatni Masala Fry": "લીલી ચટણી મસાલા ફ્રાય", "Semi Gravy": "સેમી ગ્રેવી", "Seafood": "સી ફૂડ", "Other": "અન્ય", "Full Gravy": "ફુલ ગ્રેવી", "Biryani": "બિરયાની", "Fish Tikka (Boneless)": "ફિશ ટિક્કા (બોનલેસ)", "Patra Fish": "પાતરા ફિશ", "Butter": "બટર", "Ghee": "ઘી", "Preparation time: approx. 15 minutes": "બનાવવાનો સમય: આશરે ૧૫ મિનિટ", "Semi Gravy Red": "સેમી ગ્રેવી રેડ", "Semi Gravy Green": "સેમી ગ્રેવી ગ્રીન", "Full Gravy Red": "ફુલ ગ્રેવી રેડ", "Garlic Butter": "ગાર્લિક બટર", "Price depends on size — final price confirmed by the restaurant": "ભાવ સાઇઝ પ્રમાણે — અંતિમ ભાવ રેસ્ટોરન્ટ દ્વારા નક્કી થશે", "Price according to size": "સાઇઝ પ્રમાણે ભાવ", "Gravy (Red)": "ગ્રેવી (રેડ)", "Semi Gravy (Red)": "સેમી ગ્રેવી (રેડ)", "Semi Gravy (Green)": "સેમી ગ્રેવી (ગ્રીન)", "Pre-order only": "માત્ર પ્રી-ઓર્ડર પર", "Khima": "ખીમા", "White Masala": "વ્હાઇટ મસાલા", "Green Paplet": "ગ્રીન પાપલેટ", "Green Paplet (extra)": "ગ્રીન પાપલેટ (વધારાનું)", "₹50 extra": "₹50 વધારાના", "2 pcs per dish": "દરેક ડિશમાં ૨ નંગ", "Preparation time: 20 minutes": "બનાવવાનો સમય: ૨૦ મિનિટ", "Final price confirmed by the restaurant": "અંતિમ ભાવ રેસ્ટોરન્ટ દ્વારા નક્કી થશે", "Dal Scampi": "દાળ સ્કેમ્પી", "Availability depends on the season — restaurant will confirm": "મોસમ પ્રમાણે ઉપલબ્ધ — રેસ્ટોરન્ટ પુષ્ટિ કરશે", "Modar": "મોદાર", "Bumla": "બુમલા", "Gariyu": "ગારિયું", "Levta": "લેવટા", "Chelyu": "ચેલિયું", "Surmay": "સુરમાઈ", "Alvo": "અલવો", "Baagro": "બાગરો", "Morva": "મોરવા", "Jipto": "જીપટો", "Coming soon": "ટૂંક સમયમાં", "* Price to be confirmed": "* ભાવની પુષ્ટિ બાકી છે"};
+
+let menuLanguage = 'en';
+try { menuLanguage = localStorage.getItem('navy-menu-language') === 'gu' ? 'gu' : 'en'; } catch {}
+const menuText = text => menuLanguage === 'gu' ? (MENU_GU[text] || text) : text;
+function setMenuLanguage(language) {
+  menuLanguage = language === 'gu' ? 'gu' : 'en';
+  try { localStorage.setItem('navy-menu-language', menuLanguage); } catch {}
+  const gu = menuLanguage === 'gu';
+  $('#menu').lang = menuLanguage;
+  $('#menuTitle').textContent = gu ? 'અમારું મેનુ' : 'Our Menu';
+  $('#menuEyebrow').textContent = gu ? 'ડિજિટલ મેનુ' : 'Digital Menu';
+  $('#menuIntro').textContent = gu ? 'કેટેગરી પ્રમાણે વાનગીઓ જુઓ અથવા તમારી મનપસંદ વાનગી શોધો.' : 'Browse our dishes by category, or search for your favourite.';
+  $('#search').placeholder = gu ? 'તમારી મનપસંદ વાનગી શોધો...' : 'Search your favourite dish...';
+  $('#search').setAttribute('aria-label', gu ? 'મેનુમાં શોધો' : 'Search menu');
+  $('#searchClear').setAttribute('aria-label', gu ? 'શોધ સાફ કરો' : 'Clear search');
+  $('#chips').setAttribute('aria-label', gu ? 'મેનુ કેટેગરી' : 'Menu categories');
+  $$('[data-menu-language]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.menuLanguage === menuLanguage)));
+  renderMenu(false);
+}
+
 let activeCat = MENU[0].id;
 let query = '';
 
@@ -845,18 +1001,28 @@ let query = '';
    ========================================================================== */
 function priceHTML(it) {
   if (it.price != null) return `<span class="price">${rupee(it.price)}${it.confirm ? '<sup>*</sup>' : ''}</span>`;
-  return `<span class="price txt">${esc(it.priceText || '')}</span>`;
+  return `<span class="price txt">${esc(menuText(it.priceText || ''))}</span>`;
 }
 function priceLine(it) {
   if (!it.options) return priceHTML(it);
   const sized = it.priceText === BY_SIZE;
-  const chips = it.options.choices.map(c => `<span class="vchip">${sized ? '' : `<em>${esc(c.label)}</em>`}${rupee(c.price)}</span>`).join('');
-  return (sized ? `<span class="size-note">${BY_SIZE}</span>` : '') + chips;
+  const chips = it.options.choices.map(c => `<span class="vchip">${sized ? '' : `<em>${esc(menuText(c.label))}</em>`}${rupee(c.price)}</span>`).join('');
+  return (sized ? `<span class="size-note">${esc(menuText(BY_SIZE))}</span>` : '') + chips;
 }
+// Selected promotional dishes; edit these references to change the badges.
+const BEST_SELLING_REFS = new Set([
+  'chicken|Butter Chicken',
+  'chicken|Fry (Boneless)',
+  'prawns|Garlic Butter',
+  'mutton|Mutton Gravy',
+  'dara|Regular Fry'
+]);
 function itemHTML(it, delay) {
-  const tags = (it.tags || []).map(t => `<span class="tag${t === 'Seafood' ? ' soft' : ''}">${esc(t)}</span>`).join('');
+  const bestseller = BEST_SELLING_REFS.has(it._cat.id + '|' + it.name)
+    ? `<span class="bestseller-badge"><span aria-hidden="true">★</span> ${menuLanguage === 'gu' ? 'સૌથી વધુ વેચાતી' : 'Best Selling'}</span>` : '';
+  const tags = (it.tags || []).map(t => `<span class="tag${t === 'Seafood' ? ' soft' : ''}">${esc(menuText(t))}</span>`).join('');
   const src = it.img || it._cat.img;
-  return `<li class="item" id="item-${it.id}" style="--d:${delay}s"><div class="imgbox item-img"><img src="${src}" alt="${esc(it.name)}" loading="lazy"></div><div class="item-body"><h4>${esc(it.name)}</h4>${it.desc ? `<p class="desc">${esc(it.desc)}</p>` : ''}${tags ? `<div class="tags">${tags}</div>` : ''}<div class="price-line">${priceLine(it)}</div></div></li>`;
+  return `<li class="item" id="item-${it.id}" style="--d:${delay}s"><div class="imgbox item-img">${bestseller}<img src="${src}" alt="${esc(menuText(it.name))}" loading="lazy"></div><div class="item-body"><h4>${esc(menuText(it.name))}</h4>${it.desc ? `<p class="desc">${esc(menuText(it.desc))}</p>` : ''}${tags ? `<div class="tags">${tags}</div>` : ''}<div class="price-line">${priceLine(it)}</div></div></li>`;
 }
 // Category thumbnails: assets/NAVYIMG/EGG.PNG, CHICKEN.PNG, etc.
 function categoryImagePaths(cat) {
@@ -868,15 +1034,15 @@ function categoryImage(cat) {
 }
 function renderCategory(cat) {
   let d = 0;
-  const notes = cat.notes.map(n => `<span class="note gold">${esc(n)}</span>`).join('');
+  const notes = cat.notes.map(n => `<span class="note gold">${esc(menuText(n))}</span>`).join('');
   const hasConfirm = cat.groups.some(g => g.items.some(i => i.confirm));
-  const confirmNote = hasConfirm && CONFIG.showPriceConfirmNote ? `<span class="note">* Price to be confirmed</span>` : '';
+  const confirmNote = hasConfirm && CONFIG.showPriceConfirmNote ? `<span class="note">${esc(menuText('* Price to be confirmed'))}</span>` : '';
   const groups = cat.groups.map(g => {
-    const title = g.title ? `<div class="group-title">${esc(g.title)}</div>` : '';
-    const body = g.items.length ? `<ul class="items">${g.items.map(it => itemHTML(it, Math.min((d++) * .03, .45))).join('')}</ul>` : `<div class="placeholder">${esc(g.placeholder || 'Coming soon')}</div>`;
+    const title = g.title ? `<div class="group-title">${esc(menuText(g.title))}</div>` : '';
+    const body = g.items.length ? `<ul class="items">${g.items.map(it => itemHTML(it, Math.min((d++) * .03, .45))).join('')}</ul>` : `<div class="placeholder">${esc(menuText(g.placeholder || 'Coming soon'))}</div>`;
     return title + body;
   }).join('');
-  return `<div class="cat-head"><div class="imgbox cat-thumb">${categoryImage(cat)}</div><div><h3>${esc(cat.name)}</h3><div class="cat-notes">${notes}${confirmNote}</div></div></div>${groups}`;
+  return `<div class="cat-head"><div class="imgbox cat-thumb">${categoryImage(cat)}</div><div><h3>${esc(menuText(cat.name))}</h3><div class="cat-notes">${notes}${confirmNote}</div></div></div>${groups}`;
 }
 function renderSearch(q) {
   const needle = q.trim().toLowerCase();
@@ -884,13 +1050,13 @@ function renderSearch(q) {
   MENU.forEach(cat => {
     const out = [];
     cat.groups.forEach(g => g.items.forEach(it => {
-      const hay = (it.name + ' ' + cat.name + ' ' + cat.short + ' ' + (g.title || '')).toLowerCase();
+      const hay = (MENU_GU[it.name] + ' ' + MENU_GU[cat.name] + ' ' + (MENU_GU[g.title] || '') + ' ' + it.name + ' ' + cat.name + ' ' + cat.short + ' ' + (g.title || '')).toLowerCase();
       if (needle.split(/\s+/).every(w => hay.includes(w))) out.push(it);
     }));
-    if (out.length) { hits += out.length; html += `<div class="group-title">${esc(cat.name)}</div><ul class="items">${out.map(it => itemHTML(it, Math.min((d++) * .03, .4))).join('')}</ul>`; }
+    if (out.length) { hits += out.length; html += `<div class="group-title">${esc(menuText(cat.name))}</div><ul class="items">${out.map(it => itemHTML(it, Math.min((d++) * .03, .4))).join('')}</ul>`; }
   });
-  if (!hits) return `<div class="empty-search"><h3>No dishes found</h3><p>Nothing matches “${esc(q)}”. Try another name or clear the search.</p></div>`;
-  return `<p class="results-head">${hits} dish${hits > 1 ? 'es' : ''} found for “${esc(q)}”</p>${html}`;
+  if (!hits) return `<div class="empty-search"><h3>${menuLanguage === 'gu' ? 'કોઈ વાનગી મળી નથી' : 'No dishes found'}</h3><p>${menuLanguage === 'gu' ? 'બીજું નામ શોધો અથવા શોધ સાફ કરો.' : 'Try another name or clear the search.'}</p></div>`;
+  return `<p class="results-head">${hits} ${menuLanguage === 'gu' ? 'વાનગીઓ મળી' : 'dishes found'} — “${esc(q)}”</p>${html}`;
 }
 function renderMenu(scrollIntoView) {
   const panel = $('#menuPanel');
@@ -907,7 +1073,7 @@ function renderChips() {
   const searching = !!query.trim();
   $('#chips').innerHTML = MENU.map(c => {
     const on = !searching && c.id === activeCat;
-    return `<button class="chip${on ? ' active' : ''}" role="tab" aria-selected="${on}" data-cat="${c.id}" type="button" aria-controls="menuPanel"><span class="category-photo">${categoryImage(c)}</span><span class="category-label">${esc(c.name)}</span></button>`;
+    return `<button class="chip${on ? ' active' : ''}" role="tab" aria-selected="${on}" data-cat="${c.id}" type="button" aria-controls="menuPanel"><span class="category-photo">${categoryImage(c)}</span><span class="category-label">${esc(menuText(c.name))}</span></button>`;
   }).join('');
   const act = $('.chip.active');
   if (act) { const strip = $('#chips'); strip.scrollTo({ left: act.offsetLeft - strip.clientWidth / 2 + act.offsetWidth / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
@@ -962,7 +1128,7 @@ function buildFx(host) {
   const dark = host.classList.contains('on-dark') || host.classList.contains('on-navy2') || host.id === 'home';
   const fx = document.createElement('div'); fx.className = 'fx ' + (dark ? 'dark' : 'light'); fx.setAttribute('aria-hidden', 'true');
   let html = '';
-  const nb = Math.max(5, Math.min(small ? 9 : 20, Math.round(h / (small ? 240 : 210))));
+  const nb = Math.max(small ? 10 : 14, Math.min(small ? 20 : 40, Math.round(h / (small ? 110 : 90))));
   for (let i = 0; i < nb; i++) {
     const sz = rnd(8, 30), dur = Math.max(9, (h + 60) / rnd(30, 55));
     html += `<span class="bub" style="left:${rnd(2, 98).toFixed(1)}%;width:${sz.toFixed(0)}px;height:${sz.toFixed(0)}px;--dx:${rnd(-30, 30).toFixed(0)}px;--h:${h + 60}px;animation-duration:${dur.toFixed(1)}s;animation-delay:-${rnd(0, dur).toFixed(1)}s"></span>`;
@@ -1096,33 +1262,64 @@ function setupHeroCarousel() {
     slides.push(img);
   });
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let paused = motion.matches, active = 0, timer;
+  let paused = motion.matches, active = 0, timer, transitionTimer, entering = null;
+  function finishTransition() {
+    if (entering === null) return;
+    clearTimeout(transitionTimer);
+    slides[active].classList.remove('is-active');
+    slides[active].setAttribute('aria-hidden', 'true');
+    slides[entering].classList.remove('is-entering');
+    slides[entering].classList.add('is-active');
+    slides[entering].removeAttribute('aria-hidden');
+    active = entering;
+    entering = null;
+  }
+  slides.forEach(slide => slide.addEventListener('animationend', event => {
+    if (event.animationName === 'hero-photo-wave' && slide === slides[entering]) finishTransition();
+  }));
   function advance() {
+    if (entering !== null) return;
     for (let offset = 1; offset < slides.length; offset++) {
       const next = (active + offset) % slides.length;
       if (!slides[next].complete || !slides[next].naturalWidth) continue;
-      slides[active].classList.remove('is-active');
-      slides[active].setAttribute('aria-hidden', 'true');
-      slides[next].classList.add('is-active');
-      slides[next].removeAttribute('aria-hidden');
-      active = next;
+      entering = next;
+      slides[next].classList.add('is-entering');
+      // Keep the current photograph visible beneath the wave until it completes.
+      transitionTimer = setTimeout(finishTransition, 1200);
       break;
     }
   }
   function sync() {
     clearInterval(timer);
-    if (!paused && !document.hidden) timer = setInterval(advance, 2000);
+    if (paused || document.hidden) finishTransition();
+    if (!paused && !document.hidden) timer = setInterval(advance, 3200);
   }
   document.addEventListener('visibilitychange', sync);
   motion.addEventListener('change', () => { paused = motion.matches; sync(); });
   sync();
 }
 
+
+function setupFoodForeground() {
+  const layers = $$('.food-foreground, .hero-wave');
+  const visible = new Set();
+  const sync = () => layers.forEach(layer => layer.classList.toggle('is-visible', visible.has(layer) && !document.hidden));
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target));
+      sync();
+    });
+    layers.forEach(layer => observer.observe(layer));
+  } else { layers.forEach(layer => visible.add(layer)); sync(); }
+  document.addEventListener('visibilitychange', sync);
+}
+
 function init() {
+  setupFoodForeground();
   $('#heroImg').src = IMAGES.hero; $('#aboutImg').src = IMAGES.about;
   setupHeroCarousel();
   renderFeatured(); renderSpecialties(); renderReviews(); renderSocial(); fillContact();
-  renderMenu(false);
+  setMenuLanguage(menuLanguage);
   $$('img').forEach(i => { if (i.complete && i.naturalWidth === 0 && i.getAttribute('src')) imgFail(i); });
 
   // stagger indices
@@ -1141,6 +1338,7 @@ function init() {
   // click delegation
   document.addEventListener('click', e => {
     const t = e.target.closest('button, a'); if (!t) return;
+    if (t.dataset.menuLanguage) return setMenuLanguage(t.dataset.menuLanguage);
     if (t.dataset.cat) return setCategory(t.dataset.cat);
     if (t.dataset.catGo) { setCategory(t.dataset.catGo, false); document.getElementById('menu').scrollIntoView(); return; }
     if (t.dataset.goto) { const [c, i] = t.dataset.goto.split('|'); return goToItem(c, i); }
