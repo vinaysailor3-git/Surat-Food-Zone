@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WOK &amp; WAVE | Chinese &amp; Indo-Chinese Restaurant, Surat (Demo)</title>
+<meta name="description" content="WOK & WAVE is a demo Chinese and Indo-Chinese restaurant website: wok-fired noodles, rice, dim sum, starters and chef's signatures. Heat. Flavour. Harmony.">
+<meta name="theme-color" content="#0d2530">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%230d2530'/%3E%3Cpath d='M8 26h32c0 9-7 15-16 15S8 35 8 26z' fill='%23ff5a1f'/%3E%3Cpath d='M10 16c4-6 8-6 12 0s8 6 12 0 6-3 6-3' fill='none' stroke='%23f2b84b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>
+  /* 'js' enables reveal styles; 'is-loading' holds the hero until the preloader lifts.
+     The timeout is a failsafe so the page can never stay held back. */
+  document.documentElement.classList.add('js','is-loading');
+  setTimeout(function(){document.documentElement.classList.remove('is-loading');},6500);
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   WOK & WAVE: design tokens
+   Palette: deep harbour teal at night, wok-flame orange, sesame gold.
+   ========================================================================== */
+:root{
+  --ink:#0d2530;        /* harbour night */
+  --ink-deep:#081a22;   /* footer */
+  --tide:#16404f;       /* mid teal */
+  --mist:#e3ede9;       /* pale celadon (light sections) */
+  --steam:#f5f9f7;
+  --flame:#ff5a1f;      /* wok flame */
+  --flame-hi:#ff7a45;
+  --gold:#f2b84b;       /* sesame gold */
+  --chili:#a8341a;      /* flame, darkened for text on light */
+
+  --on-dark:#eaf2f0;
+  --on-dark-mute:#a8c0bf;
+  --on-light:#0d2530;
+  --on-light-mute:#3b5860;
+  --line-dark:rgba(234,242,240,.16);
+  --line-light:rgba(13,37,48,.18);
+
+  --f-display:"Unbounded","Arial Black","Segoe UI",system-ui,sans-serif;
+  --f-body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+
+  --hdr:68px;
+  --gutter:clamp(1.1rem,4vw,2.5rem);
+  --wrap:1200px;
+
+  --fs-body:clamp(1rem,.96rem + .2vw,1.0625rem);
+  --fs-small:.875rem;
+  --fs-h2:clamp(1.85rem,1.1rem + 3.3vw,3.5rem);
+  --ease:cubic-bezier(.22,.8,.28,1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--ink);color:var(--on-dark);font:400 var(--fs-body)/1.65 var(--f-body);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+h1,h2,h3,h4,p,figure,blockquote,ul,dl,dd{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{width:min(100% - 2*var(--gutter),var(--wrap));margin-inline:auto}
+
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.on-light :focus-visible{outline-color:var(--ink)}
+
+.skip{position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--gold);color:var(--ink);padding:.7rem 1rem;border-radius:8px;font-weight:700;text-decoration:none;transition:top .2s}
+.skip:focus{top:1rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ==========================================================================
+   Section scaffolding + wave edge
+   Each section sets --bg/--fg; its wave (first child) rises over the section above.
+   ========================================================================== */
+.sec{position:relative;background:var(--bg);color:var(--fg);padding-block:clamp(5rem,10vw,8.5rem);scroll-margin-top:var(--hdr)}
+.sec--ink{--bg:var(--ink);--fg:var(--on-dark);--mute:var(--on-dark-mute);--line:var(--line-dark);--accent:var(--gold)}
+.sec--tide{--bg:var(--tide);--fg:var(--on-dark);--mute:#b7cfcd;--line:var(--line-dark);--accent:var(--gold)}
+.sec--mist{--bg:var(--mist);--fg:var(--on-light);--mute:var(--on-light-mute);--line:var(--line-light);--accent:var(--chili)}
+.sec--deep{--bg:var(--ink-deep);--fg:var(--on-dark);--mute:var(--on-dark-mute);--line:var(--line-dark);--accent:var(--gold)}
+
+.wave{position:absolute;left:0;right:0;top:0;width:100%;height:clamp(26px,4.5vw,60px);transform:translateY(calc(-100% + 1px));display:block;pointer-events:none}
+.wave path{fill:var(--bg)}
+
+.label{display:inline-flex;align-items:center;gap:.7em;font:600 .78rem/1.2 var(--f-body);letter-spacing:.14em;color:var(--accent)}
+.label::before{content:"";width:26px;height:2px;background:currentColor;border-radius:2px;flex:none}
+.h2{font:700 var(--fs-h2)/1.1 var(--f-display);letter-spacing:-.018em;margin:1rem 0 1.1rem;text-wrap:balance}
+.lead{color:var(--mute);max-width:56ch}
+.sec-head{max-width:46rem}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:48px;padding:.85em 1.6em;border-radius:999px;border:2px solid transparent;font:700 .8rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn--flame{background:var(--flame);color:var(--ink)}
+.btn--flame:hover{background:var(--flame-hi)}
+.btn--line{border-color:rgba(234,242,240,.55);color:var(--on-dark)}
+.btn--line:hover{background:rgba(234,242,240,.12);border-color:var(--on-dark)}
+.btn--ink{background:var(--ink);color:var(--steam)}
+.btn--ink:hover{background:var(--tide)}
+.btn--sm{min-height:42px;padding:.7em 1.3em;font-size:.74rem}
+.btn-row{display:flex;flex-wrap:wrap;gap:.8rem}
+
+/* Scroll reveal (only when JS is on) */
+.js [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.js [data-reveal].in{opacity:1;transform:none}
+
+/* ==========================================================================
+   Image slots with graceful fallback
+   ========================================================================== */
+.ph{position:relative;overflow:hidden;background:
+  radial-gradient(120% 90% at 15% 0%,rgba(255,90,31,.24),transparent 60%),
+  linear-gradient(150deg,#1d4a5a,#0d2530)}
+.ph::before{content:"";position:absolute;inset:0;opacity:.9;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='30'%3E%3Cpath d='M0 15C15 0 30 0 45 15S75 30 90 15' fill='none' stroke='white' stroke-opacity='.1' stroke-width='1.5'/%3E%3C/svg%3E");background-size:90px 30px}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease,transform .9s var(--ease)}
+.ph.is-loaded>img{opacity:1}
+.ph.is-failed>img{opacity:0}
+.ph.is-failed::after{content:attr(data-label);position:absolute;left:1rem;right:1rem;bottom:1rem;font:600 .85rem/1.3 var(--f-display);color:var(--on-dark-mute)}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--hdr);transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+.hdr.is-scrolled,.hdr.menu-open{background:rgba(13,37,48,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line-dark)}
+.hdr-in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;width:min(100% - 2*var(--gutter),1320px);margin-inline:auto}
+
+.logo{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--on-dark)}
+.logo svg{width:38px;height:38px;flex:none}
+.logo-word{font:800 1.02rem/1 var(--f-display);letter-spacing:-.01em;white-space:nowrap}
+.logo-word i{font-style:normal;color:var(--flame);padding-inline:.12em}
+
+.burger{width:46px;height:46px;border:0;background:transparent;border-radius:50%;cursor:pointer;display:grid;place-content:center;gap:5px}
+.burger span{display:block;width:22px;height:2px;background:var(--on-dark);border-radius:2px;transition:transform .3s var(--ease),opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.nav{position:absolute;top:var(--hdr);left:0;right:0;background:var(--ink);padding:.5rem var(--gutter) 1.6rem;border-bottom:1px solid var(--line-dark);visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .25s var(--ease),visibility .25s}
+.nav.is-open{visibility:visible;opacity:1;transform:none}
+.nav ul{display:grid}
+.nav li a{display:block;padding:.95rem 0;font:600 1.05rem var(--f-body);text-decoration:none;border-bottom:1px solid var(--line-dark)}
+.nav li a:hover{color:var(--gold)}
+.nav .btn{margin-top:1.2rem;width:100%}
+
+@media (min-width:1060px){
+  .burger{display:none}
+  .nav{position:static;background:none;border:0;padding:0;visibility:visible;opacity:1;transform:none;display:flex;align-items:center;gap:1.6rem}
+  .nav ul{display:flex;gap:1.5rem}
+  .nav li a{padding:.4rem 0;font:500 .92rem var(--f-body);border:0;position:relative}
+  .nav li a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--flame);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+  .nav li a:hover{color:var(--on-dark)}
+  .nav li a:hover::after{transform:scaleX(1)}
+  .nav .btn{margin:0;width:auto;min-height:42px;padding:.7em 1.3em;font-size:.74rem}
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;background:var(--ink);overflow:hidden;padding:calc(var(--hdr) + 3rem) 0 clamp(5.5rem,13vh,8.5rem);scroll-margin-top:0}
+.hero>.ph{position:absolute;inset:0}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(8,26,34,.9) 0%,rgba(8,26,34,.62) 55%,rgba(8,26,34,.3) 100%),
+  linear-gradient(0deg,rgba(8,26,34,.85) 0%,transparent 45%)}
+.hero-in{position:relative;z-index:2}
+.hero .label{color:var(--gold);font-size:.74rem;letter-spacing:.13em}
+.hero h1{margin:1.3rem 0 1.5rem;font:700 clamp(2.2rem,.8rem + 7.2vw,6.2rem)/1.04 var(--f-display);letter-spacing:-.025em;max-width:15ch;text-wrap:balance}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.hero h1 .w>span{display:inline-block}
+.hero-sub{max-width:52ch;color:#d3e2e0;font-size:clamp(1.02rem,.96rem + .35vw,1.2rem)}
+.hero .btn-row{margin-top:2rem}
+.hero-tags{margin-top:2.2rem;font:600 .74rem/1.4 var(--f-body);letter-spacing:.14em;color:var(--on-dark-mute)}
+.scroll-cue{position:absolute;z-index:2;right:var(--gutter);bottom:clamp(5rem,12vh,7.5rem);width:44px;height:84px;display:grid;place-items:center;text-decoration:none}
+.scroll-cue::before{content:"";position:absolute;inset:6px auto 6px 50%;width:1px;background:rgba(234,242,240,.4)}
+.scroll-cue::after{content:"";position:absolute;left:50%;top:6px;width:7px;height:7px;margin-left:-3px;border-radius:50%;background:var(--flame)}
+@media (max-width:640px){.scroll-cue{display:none}}
+
+@media (prefers-reduced-motion:no-preference){
+  /* The one orchestrated moment: label, headline words, then copy rise in sequence */
+  .hero h1 .w>span{transform:translateY(108%);animation:rise .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i)*.09s)}
+  .hero .label,.hero-sub,.hero .btn-row,.hero-tags{opacity:0;animation:fade .8s ease forwards}
+  .hero .label{animation-delay:.1s}
+  .hero-sub{animation-delay:.85s}
+  .hero .btn-row{animation-delay:1s}
+  .hero-tags{animation-delay:1.15s}
+  .hero>.ph>img{transform:scale(1.06);animation:settle 2.4s var(--ease) forwards}
+  .scroll-cue::after{animation:cue 2.2s ease-in-out infinite}
+}
+@keyframes rise{to{transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes settle{to{transform:scale(1)}}
+@keyframes cue{0%{top:6px;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:calc(100% - 13px);opacity:0}}
+
+/* ==========================================================================
+   Our Story
+   ========================================================================== */
+.story{display:grid;gap:3rem;align-items:center}
+.story-img{aspect-ratio:4/5;border-radius:0 clamp(90px,24vw,260px) 0 0;max-height:640px;width:100%}
+.story-copy p+p{margin-top:1.1rem}
+.story-copy .lead{max-width:52ch}
+.story-copy .btn{margin-top:2rem}
+@media (min-width:860px){.story{grid-template-columns:5fr 6fr;gap:clamp(3rem,7vw,7rem)}}
+
+/* ==========================================================================
+   Menu
+   ========================================================================== */
+.filters{display:flex;gap:.55rem;overflow-x:auto;padding:.4rem .35rem;margin:2.2rem -.35rem 2.2rem;scrollbar-width:thin}
+.chip{flex:none;min-height:44px;padding:.55rem 1.25rem;border-radius:999px;border:1.5px solid var(--line-dark);background:transparent;font:600 .92rem var(--f-body);cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.chip:hover{border-color:var(--on-dark)}
+.chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+@media (min-width:900px){.filters{flex-wrap:wrap;overflow:visible}}
+
+.menu-layout{display:grid;gap:2rem}
+.menu-photo{aspect-ratio:16/10;border-radius:22px 22px 22px 90px}
+.menu-photo figcaption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:2.6rem 1.3rem 1.1rem;background:linear-gradient(0deg,rgba(8,26,34,.88),transparent);font-size:.92rem;color:var(--on-dark)}
+.menu-photo.is-failed::after{display:none}
+@media (min-width:900px){
+  .menu-layout{grid-template-columns:5fr 7fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:start}
+  .menu-photo{aspect-ratio:4/5;position:sticky;top:calc(var(--hdr) + 1.5rem);border-radius:26px 26px 26px 120px}
+}
+
+.menu-group+.menu-group{margin-top:2.8rem}
+.group-title{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding-bottom:.85rem;border-bottom:1px solid var(--accent);font:600 1.1rem/1.2 var(--f-display)}
+.group-title span{font:500 .82rem var(--f-body);color:var(--mute)}
+.dish{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.dish-top{display:flex;align-items:baseline;gap:.7rem}
+.dish-name{display:flex;align-items:center;gap:.6rem;font:600 1.08rem/1.3 var(--f-body)}
+.dish-lead{flex:1;min-width:.8rem;border-bottom:1px dotted var(--mute);opacity:.55;transform:translateY(-.3em)}
+.dish-price{font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dish-desc{margin-top:.3rem;color:var(--mute);font-size:.95rem;line-height:1.55;max-width:50ch}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.tag{padding:.28rem .55rem;border-radius:4px;font:700 .66rem/1 var(--f-body);letter-spacing:.1em;border:1px solid currentColor}
+.tag--best{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.tag--pick{color:var(--on-dark)}
+.tag--spicy{color:#ff8a5c}
+
+.veg{flex:none;width:14px;height:14px;border:1.5px solid;border-radius:2px;display:grid;place-items:center}
+.veg::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.veg--v{color:#47c06a}
+.veg--n{color:#ee5b4a}
+
+@media (prefers-reduced-motion:no-preference){
+  .menu-list.swap .menu-group{animation:fade .45s ease both}
+  .menu-list.swap .dish{animation:dishIn .5s var(--ease) both;animation-delay:calc(var(--i)*.03s)}
+}
+@keyframes dishIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ==========================================================================
+   Chef's signature
+   ========================================================================== */
+.sig{display:grid;grid-template-columns:minmax(0,1fr);gap:3rem;align-items:center}
+.sig-wrap{position:relative;width:min(100%,512px);padding:26px;margin-inline:auto;overflow:clip} /* clip: the spinning ring's square box would otherwise widen the page */
+.sig-wrap::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(242,184,75,.55);animation:spin 50s linear infinite}
+.sig-img{width:100%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 10px var(--tide),0 0 0 12px var(--flame)}
+.sig-img.is-failed::after{left:12%;right:12%;bottom:46%;text-align:center}
+.badge{display:inline-block;padding:.5rem .9rem;border-radius:4px;background:var(--flame);color:var(--ink);font:800 .72rem/1 var(--f-body);letter-spacing:.14em}
+.sig-title{margin:1.4rem 0 1.3rem;font:800 clamp(1.75rem,.7rem + 5.6vw,4.4rem)/1.02 var(--f-display);letter-spacing:-.03em}
+.sig-title span{display:block}
+.sig-title span:nth-child(2){color:var(--gold);padding-left:.6em}
+.sig p.lead{color:#cfe0de;font-size:clamp(1.05rem,1rem + .3vw,1.2rem);max-width:46ch}
+.sig .btn{margin-top:2rem}
+@media (min-width:900px){.sig{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(3rem,7vw,7rem)}.sig-wrap{margin:0}}
+
+/* ==========================================================================
+   Kitchen
+   ========================================================================== */
+.kitchen{display:grid;gap:3rem}
+.kitchen-img{aspect-ratio:5/4;border-radius:120px 20px 20px 20px}
+.k-list{margin-top:2rem}
+.k-item{padding:1.4rem 0;border-top:1px solid var(--line)}
+.k-item:last-child{border-bottom:1px solid var(--line)}
+.k-item h3{font:600 1.15rem/1.3 var(--f-display);letter-spacing:-.01em;margin-bottom:.4rem}
+.k-item p{color:var(--mute);max-width:44ch}
+@media (min-width:900px){.kitchen{grid-template-columns:6fr 5fr;gap:clamp(3rem,7vw,6rem);align-items:center}.kitchen-img{aspect-ratio:4/5;max-height:660px}}
+
+/* ==========================================================================
+   Gallery
+   ========================================================================== */
+.gallery-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(130px,38vw,200px);grid-auto-flow:dense;gap:.6rem;margin-top:2.6rem}
+.tile{position:relative;padding:0;border:0;cursor:zoom-in;border-radius:14px;display:block;text-align:left}
+.tile:nth-child(1){grid-column:span 2;grid-row:span 2}
+.tile:nth-child(4){grid-row:span 2}
+.tile:nth-child(5),.tile:nth-child(8){grid-column:span 2}
+.tile>img{transition:opacity .7s ease,transform .9s var(--ease)}
+.tile-cap{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:2rem .9rem .8rem;background:linear-gradient(0deg,rgba(8,26,34,.85),transparent);font:500 .85rem/1.3 var(--f-body);color:var(--on-dark);transition:transform .35s var(--ease),opacity .35s}
+.tile.is-failed::after,.lb-fig.is-failed::after{display:none}
+@media (hover:hover){
+  .tile:hover>img{transform:scale(1.06)}
+  .tile-cap{transform:translateY(100%);opacity:0}
+  .tile:hover .tile-cap,.tile:focus-visible .tile-cap{transform:none;opacity:1}
+}
+@media (min-width:860px){
+  .g-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(190px,18vw,240px);gap:.8rem}
+  .tile:nth-child(8){grid-column:span 4}
+}
+
+.lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:4rem 1rem 3rem;background:rgba(5,16,22,.94)}
+.lb.is-open{display:flex}
+.lb-fig{width:min(100%,1100px);height:min(100%,78vh);border-radius:12px;display:flex;flex-direction:column}
+.lb-fig>img{object-fit:contain}
+.lb-fig figcaption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:1rem;text-align:center;background:linear-gradient(0deg,rgba(5,16,22,.8),transparent);font-size:.95rem}
+.lb-close,.lb-nav{position:absolute;z-index:3;width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(234,242,240,.5);background:rgba(13,37,48,.8);cursor:pointer;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.lb-close:hover,.lb-nav:hover{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.lb-close{top:1rem;right:1rem}
+.lb-prev{left:.6rem;top:50%;margin-top:-24px}
+.lb-next{right:.6rem;top:50%;margin-top:-24px}
+.lb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:640px){.lb-prev{top:auto;bottom:.8rem;left:1rem;margin:0}.lb-next{top:auto;bottom:.8rem;right:1rem;margin:0}.lb{padding-bottom:5rem}}
+
+/* ==========================================================================
+   Reviews
+   ========================================================================== */
+.reviews{display:grid;gap:2.4rem;margin-top:3.2rem}
+.rev{padding-left:1.4rem;border-left:3px solid var(--chili)}
+.stars{display:flex;gap:3px;color:var(--chili)}
+.star{width:20px;height:20px;fill:currentColor}
+.rev blockquote{margin:1rem 0 1.1rem;font:500 clamp(1.1rem,1rem + .5vw,1.3rem)/1.5 var(--f-body)}
+.rev figcaption{font-weight:700}
+.rev figcaption small{display:block;font-weight:400;font-size:.8rem;color:var(--mute)}
+.rev-foot{margin-top:3.4rem;display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2rem}
+.rev-foot p{font-size:.85rem;color:var(--mute);max-width:36ch}
+@media (min-width:860px){
+  .reviews{grid-template-columns:repeat(3,1fr);gap:clamp(2rem,4vw,4rem);align-items:start}
+  .rev:nth-child(2){margin-top:3.5rem}
+  .rev:nth-child(3){margin-top:1.5rem}
+}
+
+/* ==========================================================================
+   Contact + hours
+   ========================================================================== */
+.contact{display:grid;gap:4rem}
+.details{margin-top:2rem;display:grid;gap:1.3rem}
+.details dt{font:600 .74rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.details dd{font-size:1.05rem}
+.details a{text-decoration:none;border-bottom:1px solid var(--line-dark);transition:border-color .2s,color .2s}
+.details a:hover{color:var(--gold);border-color:var(--gold)}
+.socials{display:flex;gap:1.2rem}
+.contact .btn-row{margin-top:2.2rem}
+
+.status{display:inline-flex;align-items:center;gap:.7rem;margin-top:1.4rem;padding:.55rem 1rem;border-radius:999px;border:1px solid var(--line-dark);font-size:.92rem}
+.status .dot{width:10px;height:10px;border-radius:50%;background:var(--on-dark-mute)}
+.status.is-open .dot{background:#47c06a;box-shadow:0 0 0 4px rgba(71,192,106,.2)}
+.status.is-closed .dot{background:#ee5b4a}
+.status strong{letter-spacing:.08em;font-size:.8rem}
+.status .sub{color:var(--on-dark-mute)}
+.hours{margin-top:1.8rem;border-top:1px solid var(--line-dark)}
+.hours li{display:flex;justify-content:space-between;gap:1rem;padding:.95rem .8rem;border-bottom:1px solid var(--line-dark);font-variant-numeric:tabular-nums;position:relative}
+.hours li.is-today{background:rgba(255,90,31,.12);font-weight:700;box-shadow:inset 3px 0 0 var(--flame)}
+.hours li.is-today .day::after{content:"Today";margin-left:.7rem;padding:.2rem .5rem;border-radius:4px;background:var(--flame);color:var(--ink);font:800 .64rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;vertical-align:middle}
+.hours-note{margin-top:1rem;font-size:.8rem;color:var(--on-dark-mute)}
+@media (min-width:900px){.contact{grid-template-columns:1fr 1fr;gap:clamp(3rem,8vw,8rem)}}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.foot{padding-block:clamp(4rem,8vw,6rem) 2rem}
+.foot-grid{display:grid;gap:2.6rem}
+.foot-brand p{margin-top:1rem;color:var(--mute);max-width:30ch}
+.foot h2{font:600 .78rem/1.2 var(--f-body);letter-spacing:.14em;color:var(--gold);margin-bottom:1rem;text-transform:uppercase}
+.foot li+li{margin-top:.5rem}
+.foot a{text-decoration:none;color:var(--on-dark)}
+.foot a:hover{color:var(--gold)}
+.foot address{font-style:normal;color:var(--mute)}
+.foot-hours{color:var(--mute);font-size:.95rem}
+.foot-hours strong{color:var(--on-dark);font-weight:600}
+.foot-bar{margin-top:3.4rem;padding-top:1.6rem;border-top:1px solid var(--line-dark);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;font-size:.82rem;color:var(--mute)}
+.foot-bar .demo{letter-spacing:.08em}
+.totop{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;padding:.5rem 1.1rem;border-radius:999px;border:1.5px solid var(--line-dark);background:transparent;cursor:pointer;font:600 .82rem var(--f-body);color:var(--on-dark);transition:background .2s,color .2s,border-color .2s}
+.totop:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.totop svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:640px){.foot-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.foot-grid{grid-template-columns:1.4fr 1fr 1.2fr 1.2fr;gap:3rem}}
+
+/* ==========================================================================
+   Reduced motion safety net
+   ========================================================================== */
+/* ==========================================================================
+   Preloader: wok draws, steam wave follows, wordmark rises, curtain lifts
+   ========================================================================== */
+.pre{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:var(--ink);transition:transform .95s cubic-bezier(.77,0,.18,1)}
+.pre::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 45% at 50% 46%,rgba(255,90,31,.17),transparent 70%)}
+.pre.is-done{transform:translateY(-104%)}
+.pre-wave{position:absolute;left:0;right:0;top:100%;width:100%;height:clamp(26px,4.5vw,60px);margin-top:-1px}
+.pre-wave path{fill:var(--ink)}
+.pre-in{position:relative;display:grid;justify-items:center;gap:1.2rem;text-align:center;padding:0 1rem}
+.pre-mark{width:clamp(92px,24vw,132px);height:auto;overflow:visible}
+.pre-mark path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transform-box:fill-box}
+.pm-wok{stroke:var(--flame);stroke-width:2.2;fill:var(--flame)!important;fill-opacity:0;animation:draw .8s .15s ease forwards,fillin .55s .85s ease forwards}
+.pm-handle{stroke:var(--flame);stroke-width:3;animation:draw .35s .75s ease forwards}
+.pm-wave{stroke:var(--gold);stroke-width:3;animation:draw .7s .9s ease forwards,waft 1.8s 1.7s ease-in-out infinite}
+.pre-word{display:flex;gap:.04em;overflow:hidden;padding:.18em .12em;font:800 clamp(1.6rem,7.4vw,2.7rem)/1 var(--f-display);letter-spacing:-.01em}
+.pre-word span,.pre-word i{display:inline-block;transform:translateY(120%);animation:rise .7s var(--ease) forwards;animation-delay:calc(1.05s + var(--i)*.055s)}
+.pre-word i{font-style:normal;color:var(--flame);padding-inline:.18em}
+.pre-tag{font:600 .78rem/1 var(--f-body);letter-spacing:.18em;color:var(--on-dark-mute);opacity:0;animation:fade .6s 1.65s ease forwards}
+.pre-bar{width:min(220px,58vw);height:2px;border-radius:2px;background:rgba(234,242,240,.14);overflow:hidden}
+.pre-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--flame),var(--gold));transform:scaleX(0);transform-origin:left;animation:bar 2.2s .1s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fillin{to{fill-opacity:1}}
+@keyframes waft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes bar{to{transform:scaleX(1)}}
+
+/* Hero waits for the curtain */
+html.is-loading .hero *,html.is-loading .hero *::before,html.is-loading .hero *::after{animation-play-state:paused!important}
+
+/* ==========================================================================
+   A little extra motion
+   ========================================================================== */
+.btn{position:relative;overflow:hidden}
+.btn--flame::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-130%)}
+.btn--flame:hover::after{transform:translateX(130%);transition:transform .75s var(--ease)}
+.logo:hover svg{animation:toss .7s var(--ease)}
+.totop:hover svg{animation:nudge .6s var(--ease)}
+.dish{transition:padding-left .35s var(--ease)}
+.dish-name{transition:color .25s}
+@media (hover:hover){.dish:hover{padding-left:.6rem}.dish:hover .dish-name{color:var(--gold)}}
+.status.is-open .dot{animation:pulse 2s ease-out infinite}
+.stars .star:nth-child(2){--s:1}.stars .star:nth-child(3){--s:2}.stars .star:nth-child(4){--s:3}.stars .star:nth-child(5){--s:4}
+
+.embers{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.embers i{position:absolute;bottom:-12px;left:var(--x);width:5px;height:5px;border-radius:50%;background:var(--flame);box-shadow:0 0 8px 2px rgba(255,90,31,.55);opacity:0}
+
+@media (prefers-reduced-motion:no-preference){
+  .embers i{animation:ember var(--t) linear infinite;animation-delay:var(--d)}
+  .js [data-reveal] .label::before{transform:scaleX(0);transform-origin:left;transition:transform .9s .3s var(--ease)}
+  .js [data-reveal].in .label::before{transform:scaleX(1)}
+  .js .rev .star{opacity:0;transform:scale(.3) rotate(-35deg)}
+  .js .rev.in .star{animation:pop .55s var(--ease) forwards;animation-delay:calc(.35s + var(--s,0)*.09s)}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ember{0%{transform:translate(0,0) scale(1);opacity:0}8%{opacity:.9}100%{transform:translate(var(--dx,20px),-85vh) scale(.3);opacity:0}}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(71,192,106,.55)}100%{box-shadow:0 0 0 10px rgba(71,192,106,0)}}
+@keyframes toss{30%{transform:rotate(-14deg) translateY(-2px)}60%{transform:rotate(8deg)}100%{transform:none}}
+@keyframes nudge{50%{transform:translateY(-4px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .pre{display:none}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .js [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================== PRELOADER ============================== -->
+<div class="pre" id="pre" role="status" aria-label="Loading WOK &amp; WAVE">
+  <svg class="pre-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V40C1320 72 1200 72 1080 40S840 8 720 40 480 72 360 40 120 8 0 40Z"/></svg>
+  <div class="pre-in">
+    <svg class="pre-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <path class="pm-wok" pathLength="1" d="M7 26h34c0 9.5-7.5 15.5-17 15.5S7 35.5 7 26z"/>
+      <path class="pm-handle" pathLength="1" d="M40 28l6.5-4"/>
+      <path class="pm-wave" pathLength="1" d="M9 17c3.5-6 7.5-6 11 0s7.5 6 11 0 6-4 9-3"/>
+    </svg>
+    <div class="pre-word" aria-hidden="true">
+      <span style="--i:0">W</span><span style="--i:1">O</span><span style="--i:2">K</span><i style="--i:3">&amp;</i><span style="--i:4">W</span><span style="--i:5">A</span><span style="--i:6">V</span><span style="--i:7">E</span>
+    </div>
+    <p class="pre-tag" aria-hidden="true">Heat. Flavour. Harmony.</p>
+    <div class="pre-bar" aria-hidden="true"><span></span></div>
+  </div>
+</div>
+
+<a class="skip" href="#story">Skip to content</a>
+
+<!-- Shared SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+  <symbol id="logo-mark" viewBox="0 0 48 48">
+    <path d="M7 26h34c0 9.5-7.5 15.5-17 15.5S7 35.5 7 26z" fill="#ff5a1f"/>
+    <path d="M40 28l6.5-4" stroke="#ff5a1f" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M9 17c3.5-6 7.5-6 11 0s7.5 6 11 0 6-4 9-3" fill="none" stroke="#f2b84b" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ============================== HEADER ============================== -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="#home" aria-label="WOK &amp; WAVE, home">
+      <svg aria-hidden="true"><use href="#logo-mark"/></svg>
+      <span class="logo-word">WOK<i>&amp;</i>WAVE</span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#specials">Chef&rsquo;s Specials</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a class="btn btn--flame" href="#menu">Explore Menu</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <div class="ph" data-label="Wok-fired noodles"><img data-img="hero" data-w="1800" fetchpriority="high" alt=""></div>
+  <div class="embers" aria-hidden="true">
+    <i style="--x:8%;--t:9s;--d:0s;--dx:30px"></i><i style="--x:22%;--t:11s;--d:2.5s;--dx:-20px"></i>
+    <i style="--x:38%;--t:8s;--d:1s;--dx:25px"></i><i style="--x:55%;--t:12s;--d:4s;--dx:-35px"></i>
+    <i style="--x:70%;--t:9.5s;--d:1.8s;--dx:20px"></i><i style="--x:84%;--t:10.5s;--d:3.4s;--dx:-25px"></i>
+    <i style="--x:93%;--t:8.5s;--d:5s;--dx:15px"></i>
+  </div>
+  <div class="wrap hero-in">
+    <p class="label">WOK-FIRED · FRESHLY PREPARED · FULL OF FLAVOUR</p>
+    <h1 id="hero-title">
+      <span class="w"><span style="--i:0">WHERE</span></span>
+      <span class="w"><span style="--i:1">EVERY</span></span>
+      <span class="w"><span style="--i:2">FLAVOUR</span></span>
+      <span class="w"><span style="--i:3">TAKES</span></span>
+      <span class="w"><span style="--i:4">FLIGHT.</span></span>
+    </h1>
+    <p class="hero-sub">From sizzling wok favourites to comforting bowls and delicate dumplings, discover a delicious mix of tradition and bold new flavours.</p>
+    <div class="btn-row">
+      <a class="btn btn--flame" href="#menu">Explore the menu</a>
+      <a class="btn btn--line" href="#story">Our story</a>
+    </div>
+    <p class="hero-tags">NOODLES · DUMPLINGS · RICE · WOK SPECIALS</p>
+  </div>
+  <a class="scroll-cue" href="#story" aria-label="Scroll to Our Story"></a>
+</section>
+
+<!-- ============================== STORY ============================== -->
+<section class="sec sec--mist on-light" id="story" aria-labelledby="story-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C120 8 240 8 360 40S600 72 720 40 960 8 1080 40s240 32 360 0V80H0Z"/></svg>
+  <div class="wrap story">
+    <figure class="story-img ph" data-label="The WOK &amp; WAVE kitchen" data-reveal>
+      <img data-img="story" data-w="1000" loading="lazy" alt="">
+    </figure>
+    <div class="story-copy" data-reveal style="--d:.1s">
+      <p class="label">OUR STORY</p>
+      <h2 class="h2" id="story-title">A little tradition. A lot of fire.</h2>
+      <p class="lead">At WOK &amp; WAVE, we celebrate the art of the wok—the quick flame, fresh ingredients, bold sauces, and the perfect balance of flavour. We bring familiar favourites and new discoveries together, made fresh and served with warmth.</p>
+      <p class="lead">Good food tastes better shared. Order a few plates for the middle of the table, pass the noodles around, and stay for one more round of dumplings. That is how we like to eat, and how we like to cook.</p>
+      <a class="btn btn--ink" href="#menu">See what&rsquo;s cooking</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== MENU ============================== -->
+<section class="sec sec--ink" id="menu" aria-labelledby="menu-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C120 72 240 72 360 40S600 8 720 40s240 32 360 0 240-32 360 0V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="label">EXPLORE OUR MENU</p>
+      <h2 class="h2" id="menu-title">Find your flavour.</h2>
+      <p class="lead">Comforting classics, sizzling favourites, and something new to try.</p>
+    </div>
+
+    <div class="filters" id="filters" role="group" aria-label="Filter menu by category"></div>
+
+    <div class="menu-layout">
+      <figure class="menu-photo ph" id="menuPhoto" data-label="Menu">
+        <img id="menuPhotoImg" alt="">
+        <figcaption id="menuPhotoCap"></figcaption>
+      </figure>
+      <div class="menu-list" id="menuList"></div>
+    </div>
+    <p class="sr-only" id="menuStatus" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ============================== CHEF'S SIGNATURE ============================== -->
+<section class="sec sec--tide" id="specials" aria-labelledby="sig-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C180 8 300 8 480 40s300 32 480 0 300-32 480 0V80H0Z"/></svg>
+  <div class="wrap sig">
+    <div class="sig-wrap" data-reveal>
+      <div class="sig-img ph" data-label="Firecracker Schezwan Noodles">
+        <img data-img="signature" data-w="1000" loading="lazy" alt="">
+      </div>
+    </div>
+    <div data-reveal style="--d:.1s">
+      <span class="badge">CHEF&rsquo;S SIGNATURE</span>
+      <h2 class="sig-title" id="sig-title"><span>FIRECRACKER</span><span>SCHEZWAN</span><span>NOODLES</span></h2>
+      <p class="lead">A fiery wok, springy noodles, crunchy vegetables, and our bold house Schezwan sauce—made for those who like their flavour turned up.</p>
+      <a class="btn btn--flame" href="#menu" data-filter="noodles">View the menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== KITCHEN ============================== -->
+<section class="sec sec--mist on-light" id="kitchen" aria-labelledby="kitchen-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C120 8 240 8 360 40S600 72 720 40 960 8 1080 40s240 32 360 0V80H0Z"/></svg>
+  <div class="wrap kitchen">
+    <figure class="kitchen-img ph" data-label="Cooking over high heat" data-reveal>
+      <img data-img="kitchen" data-w="1000" loading="lazy" alt="">
+    </figure>
+    <div data-reveal style="--d:.1s">
+      <p class="label">THE WOK EXPERIENCE</p>
+      <h2 class="h2" id="kitchen-title">Fast hands. High heat.</h2>
+      <p class="lead">Behind the pass, it&rsquo;s all movement: a roaring flame, a tossing wok, and a few seconds that decide how a dish tastes.</p>
+      <div class="k-list">
+        <div class="k-item"><h3>Fresh prep, every day</h3><p>Ingredients prepared for flavour, texture, and freshness.</p></div>
+        <div class="k-item"><h3>Wok-fired flavour</h3><p>Quick, high-heat cooking brings out the character of every ingredient.</p></div>
+        <div class="k-item"><h3>Sauces with personality</h3><p>From mellow and savoury to fiery and bold, there&rsquo;s a flavour for every mood.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== GALLERY ============================== -->
+<section class="sec sec--ink" id="gallery" aria-labelledby="gallery-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C120 72 240 72 360 40S600 8 720 40s240 32 360 0 240-32 360 0V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="gallery-head" data-reveal>
+      <div class="sec-head">
+        <p class="label">GALLERY</p>
+        <h2 class="h2" id="gallery-title">A feast in every frame.</h2>
+      </div>
+    </div>
+    <div class="g-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ============================== REVIEWS ============================== -->
+<section class="sec sec--mist on-light" id="reviews" aria-labelledby="reviews-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C180 8 300 8 480 40s300 32 480 0 300-32 480 0V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="label">GOOD FOOD. GOOD COMPANY.</p>
+      <h2 class="h2" id="reviews-title">A little love from our table.</h2>
+    </div>
+
+    <div class="reviews">
+      <figure class="rev" data-reveal>
+        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg></div>
+        <blockquote>The noodles have the perfect wok flavour, and the chilli paneer is a must-order for our table.</blockquote>
+        <figcaption>Kavya<small>Demo testimonial</small></figcaption>
+      </figure>
+      <figure class="rev" data-reveal style="--d:.1s">
+        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg></div>
+        <blockquote>Really enjoyed the dumplings and the atmosphere. Great place to catch up with friends.</blockquote>
+        <figcaption>Arjun<small>Demo testimonial</small></figcaption>
+      </figure>
+      <figure class="rev" data-reveal style="--d:.2s">
+        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg><svg class="star" aria-hidden="true"><use href="#star"/></svg></div>
+        <blockquote>So many flavours to choose from. The Schezwan rice is my comfort-food favourite now.</blockquote>
+        <figcaption>Neha<small>Demo testimonial</small></figcaption>
+      </figure>
+    </div>
+
+    <div class="rev-foot" data-reveal>
+      <a class="btn btn--ink" href="https://www.google.com/search?q=WOK+%26+WAVE+Surat+reviews" target="_blank" rel="noopener noreferrer">See us on Google Reviews</a>
+      <p>These are sample testimonials from fictional guests for a demo website, not verified reviews.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT + HOURS ============================== -->
+<section class="sec sec--ink" id="contact" aria-labelledby="contact-title">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C120 72 240 72 360 40S600 8 720 40s240 32 360 0 240-32 360 0V80H0Z"/></svg>
+  <div class="wrap contact">
+    <div data-reveal>
+      <p class="label">FIND US</p>
+      <h2 class="h2" id="contact-title">Come hungry. Leave happy.</h2>
+      <dl class="details">
+        <div><dt>Address</dt><dd>12 Dragon Lane, City Centre,<br>Surat, Gujarat, India</dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+919876543210">+91 98765 43210</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:hello@wokandwave.example">hello@wokandwave.example</a></dd></div>
+        <div><dt>Social</dt><dd class="socials"><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></dd></div>
+      </dl>
+      <div class="btn-row">
+        <a class="btn btn--flame" href="tel:+919876543210">Call us</a>
+        <a class="btn btn--line" href="https://www.google.com/maps/dir/?api=1&amp;destination=12%20Dragon%20Lane%2C%20City%20Centre%2C%20Surat%2C%20Gujarat%2C%20India" target="_blank" rel="noopener noreferrer">Get directions</a>
+      </div>
+    </div>
+
+    <div id="hours" data-reveal style="--d:.1s">
+      <p class="label">OPENING HOURS</p>
+      <h2 class="h2">The wok is waiting.</h2>
+      <p class="status" data-status role="status"><span class="dot" aria-hidden="true"></span><strong>CHECKING</strong><span class="sub"></span></p>
+      <ul class="hours" id="hoursList"></ul>
+      <p class="hours-note">Sample hours for this demo. Open or closed status uses your device&rsquo;s local time.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="sec sec--deep foot">
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C180 8 300 8 480 40s300 32 480 0 300-32 480 0V80H0Z"/></svg>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#home" aria-label="WOK &amp; WAVE, back to top of page"><svg aria-hidden="true"><use href="#logo-mark"/></svg><span class="logo-word">WOK<i>&amp;</i>WAVE</span></a>
+        <p>Heat. Flavour. Harmony.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#specials">Chef&rsquo;s Specials</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Visit</h2>
+        <address>
+          12 Dragon Lane, City Centre,<br>Surat, Gujarat, India<br>
+          <a href="tel:+919876543210">+91 98765 43210</a><br>
+          <a href="mailto:hello@wokandwave.example">hello@wokandwave.example</a>
+        </address>
+        <ul class="socials" style="margin-top:1rem">
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <p class="foot-hours"><strong>Mon to Thu</strong><br>12:00 PM to 10:30 PM</p>
+        <p class="foot-hours" style="margin-top:.6rem"><strong>Fri to Sun</strong><br>12:00 PM to 11:00 PM</p>
+        <p class="status" data-status><span class="dot" aria-hidden="true"></span><strong>CHECKING</strong><span class="sub"></span></p>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <div>
+        <p>&copy; 2026 WOK &amp; WAVE. All rights reserved.</p>
+        <p class="demo">DEMO RESTAURANT WEBSITE · SURAT FOOD ZONE</p>
+      </div>
+      <button class="totop" id="toTop" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Back to top</button>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================== LIGHTBOX ============================== -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <figure class="lb-fig ph" id="lbFig" data-label="">
+    <img id="lbImg" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+
+<script>
+/* Preloader: shows for at least 2.4s (so the logo animation can finish), then
+   lifts once the page has loaded. Kept separate so a problem elsewhere in the
+   scripts can never leave the curtain on screen. */
+(() => {
+  'use strict';
+  const pre = document.getElementById('pre'), root = document.documentElement;
+  if (!pre) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.remove('is-loading'); pre.remove(); return;
+  }
+  const MIN = 2400, t0 = performance.now();
+  let done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    pre.classList.add('is-done');
+    setTimeout(() => root.classList.remove('is-loading'), 350); // hero animates in as the curtain rises
+    setTimeout(() => pre.remove(), 1100);
+  };
+  const queue = () => setTimeout(finish, Math.max(0, MIN - (performance.now() - t0)));
+  if (document.readyState === 'complete') queue(); else window.addEventListener('load', queue, { once: true });
+  setTimeout(finish, 5000); // failsafe on very slow connections
+})();
+</script>
+
+<script>
+/* ==========================================================================
+   WOK & WAVE: scripts
+   Sections: 1 content data · 2 images · 3 header/nav · 4 menu · 5 gallery +
+   lightbox · 6 hours · 7 reveal + misc
+   ========================================================================== */
+(() => {
+  'use strict';
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. CONTENT DATA (edit here) ---------------------------------- */
+
+  // Photos. Each id is the part after "photo-" in an Unsplash URL.
+  // To swap a photo: replace its id (or put a full https URL in `url`).
+  const IMG_BASE = 'https://images.unsplash.com/photo-';
+  const IMAGES = {
+    hero:      { id: '1585032226651-759b368d7246', alt: 'Noodles tossed in a hot wok' },
+    story:     { id: '1556910103-1c02745aae4d',    alt: 'Cooks working together in a busy restaurant kitchen' },
+    spread:    { id: '1504674900247-0877df9cc836', alt: 'A table of shared dishes' },
+    signature: { id: '1563245372-f21724e3856d',    alt: 'Spicy Schezwan noodles in a bowl' },
+    kitchen:   { id: '1577106263724-2c8e03bfe9cf', alt: 'A chef cooking over high heat' },
+    starters:  { id: '1555939594-58d7cb561ad1',    alt: 'Crispy starters fresh from the kitchen' },
+    noodles:   { id: '1569718212165-3a8278d5f624', alt: 'A bowl of noodles with vegetables' },
+    rice:      { id: '1512058564366-18510be2db19', alt: 'Wok-tossed fried rice with vegetables' },
+    main:      { id: '1565557623262-b51c2513a641', alt: 'A saucy main course dish' },
+    dimsum:    { id: '1496116218417-1a781b1c416c', alt: 'Steamed dumplings in a bamboo basket' },
+    drinks:    { id: '1544145945-f90425340c7e',    alt: 'A cool citrus drink with ice' },
+    paneer:    { id: '1567188040759-fb8a883dc6b8', alt: 'Chilli paneer with peppers and onion' },
+    interior:  { id: '1517248135467-4c7edcad34c4', alt: 'A warmly lit restaurant interior' },
+    flames:    { id: '1590846406792-0adc7f938f1d', alt: 'Flames rising from a wok' },
+    sauce:     { id: '1476224203421-9ac39bcb3327', alt: 'Close-up of a glossy dark sauce' }
+  };
+
+  // Menu. v: true = vegetarian. tags: best | pick | spicy
+  const MENU = [
+    { id:'starters', name:'Starters', image:'starters', blurb:'Crisp, hot and made for sharing.', items:[
+      { n:'Crispy Chilli Potato', p:229, v:1, tags:['best','spicy'], d:'Crispy potato tossed in a bold chilli-garlic glaze.' },
+      { n:'Veg Spring Rolls', p:199, v:1, d:'Crunchy rolls filled with seasoned vegetables.' },
+      { n:'Chicken Lollipop', p:299, v:0, tags:['spicy'], d:'Indo-Chinese favourite with a spicy house coating.' },
+      { n:'Chilli Paneer', p:279, v:1, tags:['best'], d:'Paneer, peppers, and onion in a tangy chilli sauce.' },
+      { n:'Chicken Manchurian', p:299, v:0, d:'Savoury chicken bites with a classic Manchurian sauce.' }
+    ]},
+    { id:'noodles', name:'Noodles', image:'noodles', blurb:'Tossed over the flame until they sing.', items:[
+      { n:'Classic Veg Hakka Noodles', p:229, v:1, tags:['best'], d:'Wok-tossed noodles with fresh vegetables.' },
+      { n:'Schezwan Noodles', p:249, v:1, tags:['spicy'], d:'Spicy noodles with house Schezwan flavour.' },
+      { n:'Chicken Hakka Noodles', p:279, v:0, d:'Chicken and vegetables tossed over a hot wok.' },
+      { n:'Chilli Garlic Noodles', p:259, v:1, tags:['spicy'], d:'Garlic-forward noodles with a lively chilli kick.' }
+    ]},
+    { id:'rice', name:'Rice', image:'rice', blurb:'Comfort in a wok-fired bowl.', items:[
+      { n:'Veg Fried Rice', p:229, v:1, d:'Rice wok-tossed with vegetables and seasoning.' },
+      { n:'Schezwan Fried Rice', p:249, v:1, tags:['spicy'], d:'Spicy rice with signature Schezwan sauce.' },
+      { n:'Chicken Fried Rice', p:279, v:0, d:'Chicken, rice, vegetables, and wok seasoning.' },
+      { n:'Triple Schezwan Rice', p:329, v:1, tags:['pick'], d:'A hearty layered Indo-Chinese favourite with rice, noodles, and sauce.' }
+    ]},
+    { id:'main', name:'Main Course', image:'main', blurb:'Rich sauces, best with rice or noodles.', items:[
+      { n:'Veg Manchurian Gravy', p:269, v:1, d:'Vegetable dumplings in a savoury sauce.' },
+      { n:'Paneer in Hot Garlic Sauce', p:299, v:1, tags:['spicy'], d:'Paneer in a spicy garlic-forward sauce.' },
+      { n:'Kung Pao Chicken', p:349, v:0, tags:['pick'], d:'Chicken with bold sauce and crunchy accents.' },
+      { n:'Chicken in Black Pepper Sauce', p:349, v:0, d:'Savoury chicken with aromatic black pepper.' }
+    ]},
+    { id:'dimsum', name:'Dim Sum', image:'dimsum', blurb:'Soft, juicy and folded by hand.', items:[
+      { n:'Veg Steamed Momos', p:199, v:1, tags:['best'], d:'Soft dumplings filled with seasoned vegetables.' },
+      { n:'Pan-Fried Veg Dumplings', p:229, v:1, tags:['pick'], d:'Crisp-bottom dumplings with a juicy filling.' },
+      { n:'Chicken Steamed Momos', p:249, v:0, d:'Steamed dumplings with a savoury chicken filling.' },
+      { n:'Chicken Chilli Momos', p:279, v:0, tags:['spicy'], d:'Dumplings finished in a spicy chilli sauce.' }
+    ]},
+    { id:'drinks', name:'Drinks', image:'drinks', blurb:'Cool and bright, to calm the heat.', items:[
+      { n:'Classic Lemon Iced Tea', p:129, v:1 },
+      { n:'Fresh Lime Soda', p:119, v:1 },
+      { n:'Blue Citrus Cooler', p:149, v:1, tags:['pick'] },
+      { n:'Virgin Mojito', p:159, v:1 }
+    ]}
+  ];
+  const MENU_ALL = { image:'spread', name:'All', blurb:'Everything from the wok, in one place.' };
+  const TAGS = { best:['BESTSELLER','tag--best'], pick:['CHEF’S PICK','tag--pick'], spicy:['SPICY','tag--spicy'] };
+
+  // Gallery order matters: layout sizes are set in CSS by position.
+  const GALLERY = [
+    { img:'hero',      cap:'Wok-tossed noodles' },
+    { img:'dimsum',    cap:'Steamed momos, fresh from the basket' },
+    { img:'rice',      cap:'Fried rice, wok-fired' },
+    { img:'paneer',    cap:'Chilli paneer' },
+    { img:'interior',  cap:'The dining room' },
+    { img:'flames',    cap:'Flames at the wok' },
+    { img:'sauce',     cap:'House sauce, up close' },
+    { img:'spread',    cap:'A shared table spread' }
+  ];
+
+  // Sample opening hours. Index 0 = Sunday (matches Date#getDay).
+  const HOURS = [
+    { day:'Sunday',    open:'12:00', close:'23:00' },
+    { day:'Monday',    open:'12:00', close:'22:30' },
+    { day:'Tuesday',   open:'12:00', close:'22:30' },
+    { day:'Wednesday', open:'12:00', close:'22:30' },
+    { day:'Thursday',  open:'12:00', close:'22:30' },
+    { day:'Friday',    open:'12:00', close:'23:00' },
+    { day:'Saturday',  open:'12:00', close:'23:00' }
+  ];
+
+  /* ---------- 2. IMAGES WITH FALLBACK -------------------------------------- */
+  const imgUrl = (key, w) => `${IMG_BASE}${IMAGES[key].id}?auto=format&fit=crop&w=${w}&q=75`;
+
+  // Capture-phase listeners (image load/error events do not bubble).
+  document.addEventListener('load', e => {
+    if (e.target.tagName !== 'IMG') return;
+    const ph = e.target.closest('.ph');
+    if (ph) { ph.classList.remove('is-failed'); ph.classList.add('is-loaded'); }
+  }, true);
+  document.addEventListener('error', e => {
+    if (e.target.tagName !== 'IMG') return;
+    const ph = e.target.closest('.ph');
+    if (ph) { ph.classList.remove('is-loaded'); ph.classList.add('is-failed'); }
+  }, true);
+
+  function setImg(img, key, w) {
+    const ph = img.closest('.ph');
+    if (ph) ph.classList.remove('is-loaded', 'is-failed');
+    img.alt = IMAGES[key].alt;
+    img.src = imgUrl(key, w);
+  }
+  $$('img[data-img]').forEach(img => setImg(img, img.dataset.img, +img.dataset.w || 900));
+
+  /* ---------- 3. HEADER + MOBILE NAV --------------------------------------- */
+  const hdr = $('#hdr'), nav = $('#nav'), burger = $('#burger');
+  const onScroll = () => hdr.classList.toggle('is-scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  function setNav(open) {
+    nav.classList.toggle('is-open', open);
+    hdr.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', () => setNav(burger.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) setNav(false); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setNav(false); burger.focus(); }
+  });
+  window.matchMedia('(min-width:1060px)').addEventListener('change', () => setNav(false));
+
+  /* ---------- 4. MENU + FILTERS -------------------------------------------- */
+  const filters = $('#filters'), list = $('#menuList'), photo = $('#menuPhoto');
+  const photoImg = $('#menuPhotoImg'), photoCap = $('#menuPhotoCap'), statusEl = $('#menuStatus');
+  let active = 'all';
+
+  const price = n => '₹' + n;
+  const dishHTML = (d, i) => `
+    <article class="dish" style="--i:${i}">
+      <div class="dish-top">
+        <h4 class="dish-name"><span class="veg ${d.v ? 'veg--v' : 'veg--n'}" role="img" aria-label="${d.v ? 'Vegetarian' : 'Non-vegetarian'}"></span>${d.n}</h4>
+        <span class="dish-lead" aria-hidden="true"></span>
+        <span class="dish-price">${price(d.p)}</span>
+      </div>
+      ${d.d ? `<p class="dish-desc">${d.d}</p>` : ''}
+      ${d.tags ? `<ul class="tags">${d.tags.map(t => `<li class="tag ${TAGS[t][1]}">${TAGS[t][0]}</li>`).join('')}</ul>` : ''}
+    </article>`;
+
+  function buildFilters() {
+    const items = [{ id:'all', name:'All' }, ...MENU];
+    filters.innerHTML = items.map(c =>
+      `<button type="button" class="chip" data-cat="${c.id}" aria-pressed="false">${c.name}</button>`).join('');
+  }
+
+  function renderMenu(cat, animate = true) {
+    active = cat;
+    const groups = cat === 'all' ? MENU : MENU.filter(c => c.id === cat);
+    let n = 0;
+    list.innerHTML = groups.map(c => `
+      <section class="menu-group" aria-labelledby="g-${c.id}">
+        <h3 class="group-title" id="g-${c.id}">${c.name}<span>${c.items.length} dishes</span></h3>
+        ${c.items.map(d => dishHTML(d, n++)).join('')}
+      </section>`).join('');
+
+    $$('.chip', filters).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)));
+
+    const meta = cat === 'all' ? MENU_ALL : MENU.find(c => c.id === cat);
+    photo.dataset.label = meta.name === 'All' ? 'Our full menu' : meta.name;
+    setImg(photoImg, meta.image, 900);
+    photoCap.textContent = meta.blurb;
+    statusEl.textContent = `Showing ${meta.name === 'All' ? 'all categories' : meta.name}, ${n} dishes.`;
+
+    if (animate && !reduceMotion) {
+      list.classList.remove('swap'); void list.offsetWidth; list.classList.add('swap');
+    }
+  }
+
+  filters.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b && b.dataset.cat !== active) renderMenu(b.dataset.cat);
+  });
+  // Links elsewhere can pre-select a category (e.g. the signature dish).
+  $$('[data-filter]').forEach(a => a.addEventListener('click', () => renderMenu(a.dataset.filter)));
+
+  buildFilters();
+  renderMenu('all', false);
+
+  /* ---------- 5. GALLERY + LIGHTBOX ---------------------------------------- */
+  const grid = $('#galleryGrid');
+  grid.innerHTML = GALLERY.map((g, i) => `
+    <button type="button" class="tile ph" data-i="${i}" data-label="${g.cap}" aria-label="Open photo: ${g.cap}" data-reveal style="--d:${(i % 4) * 0.07}s">
+      <img loading="lazy" alt="">
+      <span class="tile-cap">${g.cap}</span>
+    </button>`).join('');
+  $$('.tile', grid).forEach((t, i) => setImg($('img', t), GALLERY[i].img, 800));
+
+  const lb = $('#lightbox'), lbFig = $('#lbFig'), lbImg = $('#lbImg'), lbCap = $('#lbCap');
+  const lbClose = $('#lbClose'), lbPrev = $('#lbPrev'), lbNext = $('#lbNext');
+  let lbIndex = 0, lastFocus = null;
+
+  function showPhoto(i) {
+    lbIndex = (i + GALLERY.length) % GALLERY.length;
+    const g = GALLERY[lbIndex];
+    lbFig.dataset.label = g.cap;
+    setImg(lbImg, g.img, 1600);
+    lbImg.alt = g.cap + '. ' + IMAGES[g.img].alt;
+    lbCap.textContent = g.cap;
+  }
+  function openLightbox(i) {
+    lastFocus = document.activeElement;
+    showPhoto(i);
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+  function closeLightbox() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  grid.addEventListener('click', e => {
+    const t = e.target.closest('.tile');
+    if (t) openLightbox(+t.dataset.i);
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => showPhoto(lbIndex - 1));
+  lbNext.addEventListener('click', () => showPhoto(lbIndex + 1));
+  // Outside click: anything that is not the photo, caption or a control
+  lb.addEventListener('click', e => { if (!e.target.closest('.lb-fig, .lb-nav, .lb-close')) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
+    else if (e.key === 'ArrowRight') showPhoto(lbIndex + 1);
+    else if (e.key === 'Tab') {            // keep focus inside the dialog
+      const f = [lbClose, lbPrev, lbNext];
+      const i = f.indexOf(document.activeElement);
+      e.preventDefault();
+      f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+    }
+  });
+
+  /* ---------- 6. OPENING HOURS + OPEN/CLOSED ------------------------------- */
+  const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+  const fmt = t => {
+    const [h, m] = t.split(':').map(Number);
+    return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
+  };
+
+  // Handles closing times after midnight (close earlier than open).
+  function getStatus(now) {
+    const mins = now.getHours() * 60 + now.getMinutes(), d = now.getDay();
+    const today = HOURS[d], yest = HOURS[(d + 6) % 7], tom = HOURS[(d + 1) % 7];
+    if (toMin(yest.close) < toMin(yest.open) && mins < toMin(yest.close)) return { open: true, closes: yest.close };
+    const o = toMin(today.open); let c = toMin(today.close);
+    if (c <= o) c += 1440;
+    if (mins >= o && mins < c) return { open: true, closes: today.close };
+    return mins < o ? { open: false, text: `Opens today at ${fmt(today.open)}` }
+                    : { open: false, text: `Opens tomorrow at ${fmt(tom.open)}` };
+  }
+
+  function renderHours() {
+    const now = new Date(), s = getStatus(now);
+    // Display Monday first
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    $('#hoursList').innerHTML = order.map(i => {
+      const h = HOURS[i];
+      return `<li${i === now.getDay() ? ' class="is-today" aria-current="date"' : ''}><span class="day">${h.day}</span><span>${fmt(h.open)} to ${fmt(h.close)}</span></li>`;
+    }).join('');
+    $$('[data-status]').forEach(el => {
+      el.classList.toggle('is-open', s.open);
+      el.classList.toggle('is-closed', !s.open);
+      $('strong', el).textContent = s.open ? 'OPEN NOW' : 'CLOSED NOW';
+      $('.sub', el).textContent = s.open ? `Closes at ${fmt(s.closes)}` : s.text;
+    });
+  }
+  renderHours();
+  setInterval(renderHours, 60000);
+
+  /* ---------- 7. SCROLL REVEAL + BACK TO TOP ------------------------------- */
+  const revealEls = $$('[data-reveal]');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  $('#toTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    $('#home').setAttribute('tabindex', '-1');
+    $('#home').focus({ preventScroll: true });
+  });
+})();
+</script>
+</body>
+</html>
